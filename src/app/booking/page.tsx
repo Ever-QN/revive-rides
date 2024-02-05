@@ -20,3 +20,4 @@ const BookingPage: NextPage = () => {
 };
 
 export default BookingPage;
+
