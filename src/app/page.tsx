@@ -1,9 +1,12 @@
-import Image from "next/image";
+import type { NextPage } from "next";
+import Nav from "./navbar/NavBar";
 
-export default function Home() {
+const AppPage: NextPage = () => {
   return (
     <div>
-      <h1>Home</h1>
+      <Nav />
+      <h1>app Page, page 2</h1>
     </div>
   );
-}
+};
+export default AppPage;
