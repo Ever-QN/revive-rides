@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link'; 
 
 const BookingPage: NextPage = () => {
   return (
@@ -7,17 +8,62 @@ const BookingPage: NextPage = () => {
       <Head>
         <title>Booking System</title>
       </Head>
-      <main style={{ backgroundColor: 'black', color: 'white', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-        <h1 style={{ fontSize: '2.5em', marginBottom: '0.5em' }}>BOOKING SYSTEM OF S&D</h1>
-        <div style={{ display: 'flex', gap: '1em' }}>
-          <button style={{ backgroundColor: 'red', color: 'white', padding: '1em 2em', border: 'none', borderRadius: '10px' }}>BOOK AN APPOINTMENT</button>
-          <button style={{ backgroundColor: 'red', color: 'white', padding: '1em 2em', border: 'none', borderRadius: '10px' }}>EDIT BOOKING</button>
-          <button style={{ backgroundColor: 'red', color: 'white', padding: '1em 2em', border: 'none', borderRadius: '10px' }}>REQUEST A QUOTE</button>
+      <main style={{
+        backgroundImage: 'url(/images/bookingpage_bg.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        color: 'white',
+        minHeight: 'calc(100vh)', // Adjust the minHeight if needed since the header is removed. 'calc(100vh - 30px)'
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        padding: '0',
+        margin: '0',
+      }}>
+        <h1 style={{
+          fontSize: '4em',
+          fontWeight: 'bold',
+          textTransform: 'uppercase',
+          margin: '0.5em 0',
+        }}>
+          Booking System of S&D
+        </h1>
+        <div style={{
+          display: 'flex',
+          gap: '1em',
+          marginTop: '2em',
+        }}>
+          <Link href="/booking/appointment" passHref>
+            <div style={buttonStyle}>Book an Appointment</div>
+          </Link>
+          <Link href="/booking/edit" passHref>
+            <div style={buttonStyle}>Edit Booking</div>
+          </Link>
+          <Link href="/booking/quote" passHref>
+            <div style={buttonStyle}>Request a Quote</div>
+          </Link>
         </div>
       </main>
     </>
   );
 };
 
-export default BookingPage;
+// Style for the main buttons remains the same
+const buttonStyle = {
+  backgroundColor: '#E10600',
+  color: 'white',
+  padding: '1em 2em',
+  border: 'none',
+  borderRadius: '25px',
+  fontWeight: 'bold',
+  fontSize: '1em',
+  textDecoration: 'none',
+  display: 'inline-block',
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)',
+  cursor: 'pointer',
+};
 
+export default BookingPage;
