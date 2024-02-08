@@ -56,10 +56,10 @@ export default function GlobalHeader() {
                 <div className='nav-item'>Services</div>
             </Link>
             <Link href='/reviews'>
-                <div className='nav-item'>Review us Online</div>
+                <div className='nav-item'>Reviews </div>
             </Link>
             <Link href='/contact'>
-                <div className='nav-item'>Contact us</div>
+                <div className='nav-item'>Contact Us</div>
             </Link>
 
             <Link href='/booking'>
