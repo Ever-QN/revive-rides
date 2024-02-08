@@ -13,7 +13,7 @@ export default function GlobalHeader() {
 
   return (
     
-    <header className='bg-gray-900 text-white p-2 border-b-2 border-zinc-800 relative max-h-24'>
+    <header className='bg-gray-900 text-white p-2 border-b-2 border-zinc-800 max-h-24 w-full fixed'>
       <div className='container flex justify-between items-center overflow-hidden'>
         <div className=''>
           <Link href='/'>
