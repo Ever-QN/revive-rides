@@ -1,9 +1,9 @@
-.macbook-pro{
+.macbook-pro {
     background-color: #ffffff;
-    display:flex;
+    display: flex;
     flex-direction: row;
-    justify-content:center;
-    width:100%;
+    justify-content: center;
+    width: 100%;
 }
 
 .macbook-pro .element-wrapper{
@@ -11,4 +11,27 @@
     height: 982px;
     overflow: hidden;
     width: 1512px;
+}
+
+.macbook-pro .element-wrapper .screen {
+    background-color: #0f0f0f;
+    height: 100%;
+    width: 100%;
+}
+
+.macbook-pro .element-wrapper .screen .container {
+    background-color: #ffffff;
+    height: 100%;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1920px;
+}
+
+.macbook-pro .element-wrapper .screen .container .book {
+    background-image: url("macbook-pro.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 600px;
+    width: 1200px;
 }
