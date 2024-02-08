@@ -35,15 +35,16 @@ export default function GlobalHeader() {
         {/* Overlay for Mobile Menu */}
         {isMobileMenuOpen && (
           <div
-            className='fixed top-0 left-0 w-full h-full bg-black opacity-100 z-50'
+            className='fixed top-0 left-0 w-full h-full bg-black opacity-100 z-50 p-4 flex items-center justify-center'
             onClick={toggleMobileMenu}
+            
           />
         )}
 
         {/* Navigation Menu */}
         <nav
-          className={`lg:flex space-x-4 gap-4 z-50 bg-gray-900 items-center ${
-            isMobileMenuOpen ? 'flex flex-col' : 'hidden'
+          className={`lg:flex space-x-4 gap-4 z-50 items-center ${
+            isMobileMenuOpen ? 'flex flex-col w-full' : 'hidden'
           }`}
         >
             <Link href='/'>

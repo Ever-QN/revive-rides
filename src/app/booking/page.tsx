@@ -29,7 +29,7 @@ const BookingPage: NextPage = () => {
           textTransform: 'uppercase',
           margin: '0.5em 0',
         }}>
-          Book Your Visit at S&D
+          Book Your Visit at S&D Autobody
         </h1>
         <div style={{
           display: 'flex',
