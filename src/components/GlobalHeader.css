@@ -12,12 +12,12 @@
     transform: translateX(-50%);
     width: 0;
     height: 2px;
-    background-color: #009EE3; /* Color of the line */
+    background-color: #ffffff; /* Color of the line */
     transition: width 0.3s ease; /* Add smooth width transition */
 }
 
 .nav-item:hover {
-    color: #009EE3; /* Change text color on hover */
+    color: #c8c8c8; /* Change text color on hover */
 }
 
 .nav-item:hover::after {
