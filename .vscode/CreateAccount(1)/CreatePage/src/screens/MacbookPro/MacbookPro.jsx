@@ -1,3 +1,5 @@
+import 'tailwindcss/tailwind.css'
+import 'daisyui/dist/daisyui.css'
 import React from "react";
 import "./style.css";
 
@@ -1013,8 +1015,7 @@ export const MacbookPro= () =>{
                 </div>
             </div>
         </div>
-    </div>
-    );
-};
-    );
-}
+        );
+    };
+
+export default About;
