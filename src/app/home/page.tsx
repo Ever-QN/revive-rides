@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { NextPage } from "next";
 
 const HomePage: NextPage = () => {
@@ -17,7 +17,7 @@ const HomePage: NextPage = () => {
 
         
         <div className="book-button">
-            <Link to="/booking">
+            <Link href="/booking">
                 <button>Let&apos;s book</button>
             </Link>
         </div>
