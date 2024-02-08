@@ -11,4 +11,5 @@ body {
 }
 /* a blue color as a generic focus style */
 button:focus-visible {
-    outline: 2px solid #4a90a
+    outline: 2px solid #4a90aa
+}

@@ -1009,9 +1009,6 @@ export const MacbookPro= () =>{
                     src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-196@2x.png"
                     />
                 </div>
-            )
-        }
-
                 </div>
                 </div>
             </div>
@@ -1019,3 +1016,5 @@ export const MacbookPro= () =>{
     </div>
     );
 };
+    );
+}
