@@ -1,0 +1,14 @@
+.macbook-pro{
+    background-color: #ffffff;
+    display:flex;
+    flex-direction: row;
+    justify-content:center;
+    width:100%;
+}
+
+.macbook-pro .element-wrapper{
+    background-color: #ffffff;
+    height: 982px;
+    overflow: hidden;
+    width: 1512px;
+}

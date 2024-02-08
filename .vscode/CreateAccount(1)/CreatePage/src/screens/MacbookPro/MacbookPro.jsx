@@ -1,9 +1,9 @@
 import React from "react";
 import "./style.css";
 
-export const MacbookPro= () => {
-    return (
-        <div className="macbook-pro">
+export const MacbookPro= () =>{
+    return(
+    <div className="macbook-pro">
             <div className="element-wrapper">
                 <div className="element">
                     <div className="overlap-group">
@@ -486,143 +486,536 @@ export const MacbookPro= () => {
                     src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-76@2x.png"
                     />
                     
-<img
-/>
-className="group-79"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-77@2x.png"
-/>
-<img
-className="group-80"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-78@2x.png"
-/>
-<img
-className="group-81"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-79@2x.png"
-/>
+                    <img
+                    className="group-79"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-77@2x.png"
+                    />
+                    <img
+                    className="group-80"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-78@2x.png"
+                    />
+                    <img
+                    className="group-81"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-79@2x.png"
+                    />
 
-<img
-className="group-82"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-80@2x.png"
-/>
+                    <img
+                    className="group-82"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-80@2x.png"
+                    />
 
-<img
-className="group-83"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-81@2x.png"
-/>
+                    <img
+                    className="group-83"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-81@2x.png"
+                    />
 
-<img
-className="group-84"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-82@2x.png"
-/>
+                    <img
+                    className="group-84"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-82@2x.png"
+                    />
 
-<img
-className="group-85"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-83@2x.png"
-/>
-<img
-className="group-86"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-84@2x.png"
-/>
-<img
-className="group-87"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-85@2x.png"
-/>
- <img
-className="group-88"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-86@2x.png"
-/>
- <img
-className="group-89"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-87@2x.png"
-/> 
-<img
-className="group-90"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-88@2x.png"
-/>
-<img
-className="group-100"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-98@2x.png"
-/>
-<img
-className="group-101"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-99@2x.png"
-/>
-<img
-className="group-102"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-100@2x.png"
-/>
-<img
-className="group-103"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-101@2x.png"
-/>
-<img
-className="group-104"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-102@2x.png"
-/>
-<img
-className="clip-path-group-7" alt="Clip path group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/clip-path-group-6@2x.png"
-/>
-<img
-className="group-105"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-103@2x.png"
-/>
-<img
-className="group-106"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-104@2x.png"
-/>
-<img
-className="group-107"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-105@2x.png"
-/>
-<img
-className="group-108"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-106@2x.png"
-/>
-<img
-className="group-109"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-107@2x.png"
-/>
-<img
-className="group-110"
-alt="Group"
-src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-108@2x.png"
-/>
-
+                    <img
+                    className="group-85"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-83@2x.png"
+                    />
+                    <img
+                    className="group-86"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-84@2x.png"
+                    />
+                    <img
+                    className="group-87"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-85@2x.png"
+                    />
+                    <img
+                    className="group-88"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-86@2x.png"
+                    />
+                    <img
+                    className="group-89"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-87@2x.png"
+                    /> 
+                    <img
+                    className="group-90"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-88@2x.png"
+                    />
+                    <img
+                    className="group-100"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-98@2x.png"
+                    />
+                    <img
+                    className="group-101"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-99@2x.png"
+                    />
+                    <img
+                    className="group-102"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-100@2x.png"
+                    />
+                    <img
+                    className="group-103"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-101@2x.png"
+                    />
+                    <img
+                    className="group-104"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-102@2x.png"
+                    />
+                    <img
+                    className="clip-path-group-7" alt="Clip path group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/clip-path-group-6@2x.png"
+                    />
+                    <img
+                    className="group-105"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-103@2x.png"
+                    />
+                    <img
+                    className="group-106"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-104@2x.png"
+                    />
+                    <img
+                    className="group-107"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-105@2x.png"
+                    />
+                    <img
+                    className="group-108"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-106@2x.png"
+                    />
+                    <img
+                    className="group-109"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-107@2x.png"
+                    />
+                    <img
+                    className="group-110"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-108@2x.png"
+                    />
+                    <img
+                    className="clip-path-group-8" alt="Clip path group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/clip-path-group-7@2x.png"
+                    />
+                    <img
+                    className="clip-path-group-9" alt="Clip path group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/clip-path-group-8@2x.png"
+                    />
+                    <img
+                    className="group-123"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-121@2x.png"
+                    />
+                    <img
+                    className="group-124"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-122@2x.png"
+                    />
+                    <img
+                    className="group-125"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-123@2x.png"
+                    />
+                    <img
+                    className="group-126"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-124@2x.png"
+                    /> 
+                    <img
+                    className="group-127"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-125@2x.png"
+                    />
+                    <img
+                    className="group-128"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-126@2x.png"
+                    /> 
+                    <img
+                    className="group-129"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-127@2x.png"
+                    />
+                    <img
+                    className="group-130"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-128@2x.png"
+                    /> 
+                    <img
+                    className="group-131"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-129@2x.png"
+                    />
+                    <img
+                    className="group-132"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-130@2x.png"
+                    />
+                    <img
+                    className="group-133"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-131@2x.png"
+                    />
+                    <img
+                    className="group-134"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-132@2x.png"
+                    />
+                    <img
+                    className="group-135"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-133@2x.png"
+                    />
+                    <img
+                    className="group-136"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-134@2x.png"
+                    />
+                    <img
+                    className="group-137"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-135@2x.png"
+                    />
+                    <img
+                    className="group-138"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-136@2x.png"
+                    />
+                    <img
+                    className="group-139" alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-137@2x.png"
+                    />
+                    <img
+                    className="group-140" alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-138@2x.png"
+                    /> 
+                    <img
+                    className="group-141" alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-139@2x.png"
+                    />
+                    <img
+                    className="group-142" alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-140@2x.png"
+                    />
+                    <img
+                    className="clip-path-group-10" alt="Clip path group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/clip-path-group-9@2x.png"
+                    />
+                    <img
+                    className="clip-path-group-11" alt="Clip path group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/clip-path-group-10@2x.png"
+                    />
+                    <img
+                    className="group-143"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-141@2x.png"
+                    />
+                    <img
+                    className="group-144"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-142@2x.png"
+                    />
+                    <img
+                    className="group-145"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-143@2x.png"
+                    />
+                    <img
+                    className="group-146"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-144@2x.png"
+                    />
+                    <img
+                    className="group-147"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-145@2x.png"
+                    />
+                    <img
+                    className="group-148"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-146@2x.png"
+                    />
+                    <img
+                    className="group-149"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-147@2x.png"
+                    />
+                    <img
+                    className="group-150"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-148@2x.png"
+                    /> 
+                    <img
+                    className="group-151"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-149@2x.png"
+                    />
+                    <img
+                    className="group-152"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-150@2x.png"
+                    /> 
+                    <img
+                    className="group-153"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-144@2x.png"
+                    />
+                    <img
+                    className="group-154"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-152@2x.png"
+                    />
+                    <img
+                    className="group-155"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-153@2x.png"
+                    />
+                    <img
+                    className="group-156"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-154@2x.png"
+                    />
+                    <img
+                    className="group-157"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-155@2x.png"
+                    />
+                    <img
+                    className="group-158"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-156@2x.png"
+                    />
+                    <img
+                    className="group-159"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-157@2x.png"
+                    />
+                    <img
+                    className="clip-path-group-12" alt="Clip path group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/clip-path-group-11@2x.png"
+                    />
+                    <img
+                    className="group-160"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-158@2x.png"
+                    />
+                    <img
+                    className="group-161"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-159@2x.png"
+                    />
+                    <img
+                    className="group-162"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-160@2x.png"
+                    />
+                    <img
+                    className="group-163"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-161@2x.png"
+                    />
+                    <img
+                    className="group-164"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-162@2x.png"
+                    />
+                    <img
+                    className="group-165"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-163@2x.png"
+                    />
+                    <img
+                    className="group-166"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-164@2x.png"
+                    />
+                    <img
+                    className="group-167"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd84/releases/65c3046ab22a476955a95ecb/img/group-165@2x.png"
+                    />
+                    <img
+                    className="group-168"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-166@2x.png"
+                    />
+                    <img
+                    className="group-169"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-167@2x.png"
+                    />
+                    <img
+                    className="group-170"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-161@2x.png"
+                    />
+                    <img
+                    className="group-171"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd84/releases/65c3046ab22a476955a95ecb/img/group-169@2x.png"
+                    />
+                    <img
+                    className="group-172"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-170@2x.png"
+                    /> 
+                    <img
+                    className="group-173"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-171@2x.png"
+                    /> 
+                    <img
+                    className="group-174"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-172@2x.png"
+                    />
+                    <img
+                    className="group-175"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-173@2x.png"
+                    />
+                    <img
+                    className="group-176"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-174@2x.png"
+                    /> 
+                    <img
+                    className="group-177"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-175@2x.png"
+                    />
+                    <img
+                    className="clip-path-group-13" alt="Clip path group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/clip-path-group-12@2x.png"
+                    />
+                    <img
+                    className="group-178"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-176@2x.png"
+                    />
+                    <img
+                    className="group-179"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-177@2x.png"
+                    />
+                    <img
+                    className="group-180"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-178@2x.png"
+                    />
+                    <img
+                    className="group-181"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-179@2x.png"
+                    />
+                    <img
+                    className="group-182"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-180@2x.png"
+                    />
+                    <img
+                    className="group-183"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-181@2x.png"
+                    />
+                    <img
+                    className="group-184"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-182@2x.png"
+                    />
+                    <img
+                    className="group-185"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-183@2x.png"
+                    />
+                    <img
+                    className="group-186"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-184@2x.png"
+                    /> 
+                    <img
+                    className="group-187"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-185@2x.png"
+                    />
+                    <img
+                    className="group-188"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-186@2x.png"
+                    />
+                    <img
+                    className="group-189"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-187@2x.png"
+                    />
+                    <img
+                    className="group-190"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-188@2x.png"
+                    />
+                    <img
+                    className="group-191"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-189@2x.png"
+                    />
+                    <img
+                    className="group-192"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-190@2x.png"
+                    />
+                    <img
+                    className="group-193"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-191@2x.png"
+                    />
+                    <img
+                    className="group-194"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-192@2x.png"
+                    />
+                    <img
+                    className="group-195" alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-193@2x.png"
+                    />
+                    <img
+                    className="group-196"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-194@2x.png"
+                    />
+                    <img
+                    className="group-197"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-195@2x.png"
+                    /> 
+                    <img
+                    className="group-198"
+                    alt="Group"
+                    src="https://cdn.animaapp.com/projects/65c30421b77185cd73cafd04/releases/65c3046ab22a476955a95ecb/img/group-196@2x.png"
+                    />
+                </div>
+            )
+        }
 
                 </div>
-                    
-
+                </div>
+            </div>
+        </div>
     </div>
-
-
-
-
-
-                            
-                        </div>
-                    </div>
-                </div>
-            
+    );
+};
