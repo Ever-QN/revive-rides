@@ -1,0 +1,30 @@
+.home-title {
+    font-size: 5rem;
+    text-transform: uppercase;
+    color: white;
+    
+}
+
+.bg-image {
+    background-image: url(./background.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-button {
+    border-radius: 25px;
+    background-color: #e10600;
+    color: #ffffff;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,12 +1,17 @@
+import Link from "next/link";
 import type { NextPage } from "next";
-import Nav from "./navbar/NavBar";
 
 const AppPage: NextPage = () => {
   return (
     <div>
-      <Nav />
-      <h1>app Page, page 2</h1>
+      <h1>Content</h1>
+      <nav>
+        <Link href="home">
+          Home Page
+        </Link>
+      </nav>
     </div>
   );
 };
+
 export default AppPage;
