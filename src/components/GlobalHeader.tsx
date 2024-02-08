@@ -13,16 +13,18 @@ export default function GlobalHeader() {
 
   return (
     
-    <header className='bg-gray-900 text-white p-2 border-b-2 border-zinc-800 relative'>
-      <div className='container flex justify-between items-center'>
-        <Link href='/'>
-          <img
-            src='/images/logo.png'  // We need to update this path to our actual logo
-            alt='S&D Autobody Logo'
-            className='logo'
-            style={{ width: '100px', height: '25px'}}
-          />
-        </Link>
+    <header className='bg-gray-900 text-white p-2 border-b-2 border-zinc-800 relative max-h-24'>
+      <div className='container flex justify-between items-center overflow-hidden'>
+        <div className=''>
+          <Link href='/'>
+            <img
+              src='/images/logo2.png'  // We need to update this path to our actual logo
+              alt='S&D Autobody Logo'
+              className='w-128 h-16 object-cover cursor-pointer hover:opacity-80 transition duration-300 ease-in-out'
+            />
+          </Link>
+        </div>
+      
 
         {/* Mobile Menu Toggle Button */}
         <button
@@ -35,7 +37,7 @@ export default function GlobalHeader() {
         {/* Overlay for Mobile Menu */}
         {isMobileMenuOpen && (
           <div
-            className='fixed top-0 left-0 w-full h-full bg-black opacity-100 z-50 p-4 flex items-center justify-center'
+            className='fixed top-0 left-0 w-full h-full bg-black opacity-75 z-50 p-4 flex items-center justify-center'
             onClick={toggleMobileMenu}
             
           />
@@ -57,7 +59,7 @@ export default function GlobalHeader() {
                 <div className='nav-item'>Services</div>
             </Link>
             <Link href='/reviews'>
-                <div className='nav-item'>Reviews </div>
+                <div className='nav-item'>Reviews</div>
             </Link>
             <Link href='/contact'>
                 <div className='nav-item'>Contact Us</div>
