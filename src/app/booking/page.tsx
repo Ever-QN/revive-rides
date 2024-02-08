@@ -1,3 +1,4 @@
+"use client"
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link'; 
@@ -37,33 +38,38 @@ const BookingPage: NextPage = () => {
           marginTop: '2em',
         }}>
           <Link href="/booking/appointment" passHref>
-            <div style={buttonStyle}>Book an Appointment</div>
+            <p className="button">Book an Appointment</p>
           </Link>
           <Link href="/booking/edit" passHref>
-            <div style={buttonStyle}>Edit Booking</div>
+            <p className="button">Edit Booking</p>
           </Link>
           <Link href="/booking/quote" passHref>
-            <div style={buttonStyle}>Request a Quote</div>
+            <p className="button">Request a Quote</p>
           </Link>
         </div>
       </main>
+      <style jsx>{`
+        .button {
+          background-color: #E10600;
+          color: white;
+          padding: 1em 2em;
+          border: none;
+          border-radius: 25px;
+          font-weight: bold;
+          font-size: 1em;
+          text-decoration: none;
+          display: inline-block;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+          cursor: pointer;
+          transition: text-decoration 0.3s;
+        }
+        
+        .button:hover {
+          text-decoration: underline;
+        }
+      `}</style>
     </>
   );
-};
-
-// Style for the main buttons remains the same
-const buttonStyle = {
-  backgroundColor: '#E10600',
-  color: 'white',
-  padding: '1em 2em',
-  border: 'none',
-  borderRadius: '25px',
-  fontWeight: 'bold',
-  fontSize: '1em',
-  textDecoration: 'none',
-  display: 'inline-block',
-  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)',
-  cursor: 'pointer',
 };
 
 export default BookingPage;
