@@ -13,11 +13,11 @@ export default function GlobalHeader() {
 
   return (
     
-    <header className='bg-gray-900 text-white p-4 relative'>
+    <header className='bg-gray-900 text-white p-2 border-b-2 border-zinc-800 relative'>
       <div className='container flex justify-between items-center'>
         <Link href='/'>
           <img
-            src='/images/logo.png'  // Update the path to your actual logo
+            src='/images/logo.png'  // We need to update this path to our actual logo
             alt='S&D Autobody Logo'
             className='logo'
             style={{ width: '100px', height: '25px'}}
@@ -42,7 +42,7 @@ export default function GlobalHeader() {
 
         {/* Navigation Menu */}
         <nav
-          className={`lg:flex space-x-4 gap-4 z-50 bg-gray-900 ${
+          className={`lg:flex space-x-4 gap-4 z-50 bg-gray-900 items-center ${
             isMobileMenuOpen ? 'flex flex-col' : 'hidden'
           }`}
         >
@@ -56,14 +56,14 @@ export default function GlobalHeader() {
                 <div className='nav-item'>Services</div>
             </Link>
             <Link href='/reviews'>
-                <div className='nav-item'>Review us online</div>
+                <div className='nav-item'>Review us Online</div>
             </Link>
             <Link href='/contact'>
                 <div className='nav-item'>Contact us</div>
             </Link>
 
             <Link href='/booking'>
-                <div className='nav-item'>Book an Appointment</div>
+                <div className='nav-item bg-red-500 rounded-full py-2 px-4'>Book an Appointment</div>
             </Link>
         </nav>
       </div>
