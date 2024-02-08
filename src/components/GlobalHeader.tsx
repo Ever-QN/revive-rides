@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import './GlobalHeader.css';
 
 export default function GlobalHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -11,6 +12,7 @@ export default function GlobalHeader() {
   };
 
   return (
+    
     <header className='bg-gray-900 text-white p-4 relative'>
       <div className='container flex justify-between items-center'>
         <Link href='/'>
@@ -40,29 +42,29 @@ export default function GlobalHeader() {
 
         {/* Navigation Menu */}
         <nav
-          className={`lg:flex space-x-4 gap-4 z-50 absolute w-full h-full bg-gray-900 ${
+          className={`lg:flex space-x-4 gap-4 z-50 bg-gray-900 ${
             isMobileMenuOpen ? 'flex flex-col' : 'hidden'
           }`}
         >
-          <Link href='/'>
-            <div className='hover:text-gray-300 cursor-pointer'>Home</div>
-          </Link>
-          <Link href='/about'>
-            <div className='hover:text-gray-300 cursor-pointer'>About Us</div>
-          </Link>
-          <Link href='/services'>
-            <div className='hover:text-gray-300 cursor-pointer'>Services</div>
-          </Link>
-          <Link href='/reviews'>
-            <div className='hover:text-gray-300 cursor-pointer'>Review us online</div>
-          </Link>
-          <Link href='/contact'>
-            <div className='hover:text-gray-300 cursor-pointer'>Contact us</div>
-          </Link>
+            <Link href='/'>
+                <div className='nav-item'>Home</div>
+            </Link>
+            <Link href='/about'>
+                <div className='nav-item'>About Us</div>
+            </Link>
+            <Link href='/services'>
+                <div className='nav-item'>Services</div>
+            </Link>
+            <Link href='/reviews'>
+                <div className='nav-item'>Review us online</div>
+            </Link>
+            <Link href='/contact'>
+                <div className='nav-item'>Contact us</div>
+            </Link>
 
-          <Link href='/booking'>
-            <div className='hover:text-gray-300 cursor-pointer gap-4'>Book an Appointment</div>
-          </Link>
+            <Link href='/booking'>
+                <div className='nav-item'>Book an Appointment</div>
+            </Link>
         </nav>
       </div>
     </header>
