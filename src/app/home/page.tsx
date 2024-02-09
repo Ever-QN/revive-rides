@@ -9,7 +9,7 @@ const HomePage: NextPage = () => {
         position: 'relative',
         minHeight: "100vh",
         color: 'white',
-        backgroundImage: `url(/images/background.png)`, //doesn't work, also need to replace image with the right one for home page
+        backgroundImage: 'url(/images/home_background.png)',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
@@ -47,10 +47,7 @@ const HomePage: NextPage = () => {
               marginLeft: "0"
             }}>on the road to serve you</h2>
         </div>
-        
-        {/*background img*/}
-        <div className="bg-image"></div>
-        
+      
         {/*booking button*/}
         <div style={{
           position: 'absolute',
@@ -94,6 +91,10 @@ const HomePage: NextPage = () => {
                 transition: background-color 0.2s ease;
                 display: inline-flex;
                 align-items: center;
+                @media (max-width:768px) {
+                  font-size: 1.2rem;
+                  padding: 0.6rem 1.2rem;
+                }
               }
 
               .button-hover:hover {
