@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import Link from "next/link";
 import { NextPage } from "next";
@@ -13,6 +14,7 @@ const HomePage: NextPage = () => {
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
       }}>
+
         {/*title*/}
         <div style={{
           position: "absolute",
@@ -30,18 +32,18 @@ const HomePage: NextPage = () => {
               overflow: "hidden",
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
-              marginBottom: "5px"
+              marginBottom: "2px"
             }}>S&D Autobody</h1>
             <h2 style={{
               textTransform: "uppercase",
               fontSize: '3vw',
-              fontWeight: '700',
+              fontWeight: '900',
               color: "#dc2626",
               textAlign: "left",
               overflow: "hidden",
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
-              marginTop: "-20px",
+              marginTop: "-10px",
               marginLeft: "0"
             }}>on the road to serve you</h2>
         </div>
@@ -53,24 +55,16 @@ const HomePage: NextPage = () => {
         <div style={{
           position: 'absolute',
           bottom: '110px',
-          right: '120px'
+          right: '150px'
         }}>
             <Link href="/booking">
-                <button style={{
-                  borderRadius: "9999px", 
-                  padding: "10px 20px",
-                  fontSize: "1.5rem",
-                  backgroundColor: "#dc2626",
-                  color: 'white',
-                  border: 'none',
-                  display: 'flex',
-                  alignItems: 'center'
-                }}>Let&apos;s book
+                <button className={'button-hover'}>Let&apos;s book
                 <svg style={{
                   transform: 'rotate(0deg)',
-                  width: '0.8rem', 
-                  height: '0.8rem',
-                  marginLeft: '0.5rem'
+                  width: '1rem', 
+                  height: '1rem',
+                  marginLeft: '0.5rem',
+                  verticalAlign: 'middle'
                 }} 
                 aria-hidden='true'
                 xmlns="http://www.w3.org/2000/svg"
@@ -86,6 +80,27 @@ const HomePage: NextPage = () => {
                 </svg>
                 </button>
             </Link>
+
+            <style jsx>{`
+              .button-hover {
+                border-radius: 9999px; 
+                padding: 0.8rem 1.6rem;
+                font-size: 1.5rem;
+                font-weight: 600;
+                background-color: #dc2626;
+                color: white;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.2s ease;
+                display: inline-flex;
+                align-items: center;
+              }
+
+              .button-hover:hover {
+                background-color: #991b1b;
+                color: #d1d5db;
+              }
+            `}</style>
         </div> 
     </section>
   );
