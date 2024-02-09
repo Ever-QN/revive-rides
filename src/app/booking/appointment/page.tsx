@@ -2,69 +2,65 @@
 
 import type { NextPage } from 'next';
 import { useState } from 'react';
+import Link from 'next/link';
+import Head from 'next/head';
 
-const NewAppointment = () => {
-
-  const services = ['Service A', 'Service B', 'Service C'];
+const NewAppointments: NextPage = () => {
   const [selectedService, setSelectedService] = useState('');
-  const [selectedDate, setSelectedDate] = useState('');
-  const [selectedTime, setSelectedTime] = useState('');
 
-  const handleBooking = () => {
-    // Implement booking logic (e.g., show a confirmation message). This is just a placeholder for now
-    alert(`Booking confirmed for ${selectedService} on ${selectedDate} at ${selectedTime}`);
+  const handleServiceChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedService(event.target.value);
   };
 
   return (
-    <div>
-      <h1>Book Your Appointment</h1>
+    <>
+      {/* Head component for setting page title */}
+      <Head>
+        <title>Booking System - New Appointments</title>
+      </Head>
 
-      {/* Services Section */}
-      <div>
-        <h2>Select a Service</h2>
-        <select
-          value={selectedService}
-          onChange={(e) => setSelectedService(e.target.value)}
+      {/* Main content of the New Appointments page */}
+      <main className="bg-red-600 text-white min-h-screen flex flex-col items-center justify-center text-center p-8">
+        <h1 className="text-2xl font-bold uppercase mb-4">BOOK AN APPOINTMENT</h1>
+
+        {/* Service Selection Dropdown */}
+        <div className="mb-4">
+          <label
+            htmlFor="serviceDropdown"
+            className="block text-lg mb-1"
+          >
+            Select a Service:
+          </label>
+          <select
+            id="serviceDropdown"
+            value={selectedService}
+            onChange={handleServiceChange}
+            className="p-2 text-lg rounded"
+          >
+            <option value="">Choose a service</option>
+            <option value="haircut">Haircut</option>
+            <option value="coloring">Coloring</option>
+            <option value="styling">Styling</option>
+            {/* Add more services as needed */}
+          </select>
+        </div>
+
+        {/* Calendar and Time Selection (Replace with your preferred calendar/time component) */}
+        <div className="mb-4">
+          {/*We need to add our calendar and time selection component here. Not sure what to use yet */}
+          <p>Select Date and Time: [Your Calendar Component]</p>
+        </div>
+
+        {/* Button to confirm the appointment (Replace with our booking logic WIP) */}
+        <button
+          className="bg-white text-red-600 p-2 rounded font-bold text-lg uppercase transition duration-300 hover:bg-red-600 hover:text-white"
         >
-          <option value="">Select a service</option>
-          {services.map((service) => (
-            <option key={service} value={service}>
-              {service}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* Date Section */}
-      <div>
-        <h2>Select a Date</h2>
-        <input
-          type="date"
-          value={selectedDate}
-          onChange={(e) => setSelectedDate(e.target.value)}
-        />
-      </div>
-
-      {/* Time Section */}
-      <div>
-        <h2>Select a Time</h2>
-        <select
-          value={selectedTime}
-          onChange={(e) => setSelectedTime(e.target.value)}
-        >
-          <option value="">Select a time</option>
-          <option value="10:00 AM">10:00 AM</option>
-          <option value="2:00 PM">2:00 PM</option>
-          <option value="5:00 PM">5:00 PM</option>
-        </select>
-      </div>
-
-      {/* Book Appointment Button */}
-      <button onClick={handleBooking} disabled={!selectedService || !selectedDate || !selectedTime}>
-        Book Appointment
-      </button>
-    </div>
+          Confirm Appointment
+        </button>
+      </main>
+    </>
   );
 };
 
-export default NewAppointment;
+// Exporting the NewAppointments component
+export default NewAppointments;
