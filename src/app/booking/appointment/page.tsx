@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 
-const NewAppointments: NextPage = () => {
+const NewAppointmentPage  = () => {
   const [selectedService, setSelectedService] = useState('');
 
   const handleServiceChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -63,4 +63,4 @@ const NewAppointments: NextPage = () => {
 };
 
 // Exporting the NewAppointments component
-export default NewAppointments;
+export default NewAppointmentPage;
