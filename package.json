@@ -1,8 +1,22 @@
 {
   "dependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
-    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/forms": "^0.5.7"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.17",
     "daisyui": "^4.6.2",
+    "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1"
-  }
+  },
+  "name": "revive-rides",
+  "description": "S&D Autobody is a car service business managed by Dalbir and Sukhbir Bachhal, offering a comprehensive range of services including painting, bodywork, detailing, and various mechanical repairs. This GitHub repository contains the codebase for the web application.",
+  "version": "1.0.0",
+  "main": "postcss.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
