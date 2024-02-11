@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Center the form on the page */
+        .background-image {
+            background-image: url('images/background.png'); /* Replace with the actual path to your background image */
+            background-size: cover;
+            background-position: center;
+            height:   100vh;
+            display: grid;
+            grid-template-columns:   auto  1fr; /* Set aside  1 fraction of the viewport width for the form */
+        }
+    
+        .container {
+            grid-column:   1 /   2; /* Place the form in the first grid column */
+            align-self: center; /* Vertically center the form */
+            max-width:   300px; /* Set a maximum width for the form */
+        }
+    </style>
+</head>
+<body class="background-image">
+    <div class="container mx-auto px-4 py-8 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <h1 class="text-2xl font-bold mb-4 text-center">Login</h1>
+        <form action="/login" method="post">
+            <!-- Username Field -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                    Username
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" name="username" placeholder="Username" required>
+            </div>
+            
+            <!-- Email Field -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                    Email
+                </label>
+                <div class="relative">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" name="email" placeholder="Email" required>
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500" viewBox="0   0   24   24" fill="currentColor" preserveAspectRatio="xMidYMid meet">
+                            <path d="M4   4h16c1.1   0   2 .9   2   2v12c0   1.1-.9   2-2   2H4c-1.1   0-2-.9-2-2V6c0-1.1.9-2   2-2zm9   14l-5-5   1.41-1.41L10   14.17l7.59-7.59L19   8l-9   9z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Password Field -->
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                    Password
+                </label>
+                <div class="relative">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" name="password" placeholder="Password" required>
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500" viewBox="0   0   24   24" fill="currentColor" preserveAspectRatio="xMidYMid meet">
+                            <path d="M12   12s8.5   4   16   4s8.5-4   16-4s-8.5-4-16-4zm0   18c1.1   0   2-.9   2-2h-4c0   1.1-.9   2-2   2zm0-8c1.1   0   2-.9   2-2h-4c0   1.1-.9   2-2   2zm0-10c1.1   0   2-.9   2-2h-4c0   1.1-.9   2-2   2z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sign in Buttons -->
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Login
+                </button>
+            </div>
+            
+            <!-- Social Sign in Options -->
+            <div class="mt-4">
+                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
+                    Continue with Google
+                </button>
+            </div>
+            <div class="mt-4">
+                <button class="bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
+                    Continue with Apple
+                </button>
+            </div>
+            <div class="mt-4">
+                <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
+                    Continue with Phone Number
+                </button>
+            </div>
+            
+            <!-- Remember me checkbox -->
+            <div class="form-check mt-4">
+                <input class="form-checkbox" type="checkbox" id="rememberMe">
+                <label class="ml-2 text-gray-700" for="rememberMe">Remember me</label>
+            </div>
+            
+            <!-- Registration link -->
+            <div class="text-center mt-4">
+                <a class="text-blue-500 hover:text-blue-700" href="register.html">
+                    Don't have an account? Register
+                </a>
+            </div>
+                </a>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Existing jQuery and AJAX script -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('form').on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '/login',
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        if (response.success) {
+                            window.location.href = '/dashboard';
+                        } else {
+                            alert('Login failed. Please check your username, email, and password.');
+                        }
+                    },
+                    error: function() {
+                        alert('An error occurred. Please try again later.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
