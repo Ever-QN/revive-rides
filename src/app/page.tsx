@@ -11,6 +11,9 @@ const AppPage: NextPage = () => {
         <Link href="home">
           Home Page
         </Link>
+        <Link href="/home/services">
+          Services Page
+        </Link>
       </nav>
     </div>
   );
