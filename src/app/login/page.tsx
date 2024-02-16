@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, FormEvent } from 'react';
-import '../styles/global.css'; // Import global styles if needed
+import '/styles/global.css'; // Import global styles if needed
 
 interface LoginFormProps {}
 
