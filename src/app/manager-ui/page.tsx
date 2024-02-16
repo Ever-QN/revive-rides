@@ -30,7 +30,7 @@ const LoginPage: React.FC = () => {
                     backgroundPosition: 'bottom',
                     backgroundSize: 'cover',
                     color: 'white',
-                    height: '87vh',
+                    height: '100vh',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
