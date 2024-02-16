@@ -19,8 +19,8 @@ const LoginForm: React.FC<LoginFormProps> = () => {
 
   return (
     <div className='background-image min-h-screen flex items-center justify-center'>
-      <div className='container mx-auto py-8 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
-        <h1 className='text-2xl font-bold mb-4 text-center'>Login</h1>
+      <div className='bg-white shadow-md rounded p-8'>
+        <h1 className='text-2xl font-bold mb-4 text-center text-black'>Login</h1>
         <form onSubmit={handleSubmit}>
           {/* Username Field */}
           <div className='mb-4'>
@@ -28,7 +28,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
               Username
             </label>
             <input
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline'
               id='username'
               type='text'
               name='username'
@@ -44,7 +44,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
               Email
             </label>
             <input
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline'
               id='email'
               type='email'
               name='email'
@@ -60,7 +60,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
               Password
             </label>
             <input
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline'
               id='password'
               type='password'
               name='password'
