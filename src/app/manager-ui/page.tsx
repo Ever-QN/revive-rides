@@ -64,7 +64,7 @@ const LoginPage: React.FC = () => {
                                 </Link>
                             </div>
 
-                            <ul className="text-s text-center text-white mt-4 dm-sans">Forgot Password?</ul>
+                            <ul className="text-s text-center text-black mt-4 dm-sans">Forgot Password?</ul>
                         </form>
                     </div>
                 </div>
