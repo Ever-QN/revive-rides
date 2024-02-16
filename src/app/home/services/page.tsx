@@ -10,7 +10,8 @@ const ServicePage: NextPage = () => {
             <section style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                marginBottom: '2rem'
             }}>
                 <div style={{
                     textTransform: 'uppercase',
@@ -25,67 +26,84 @@ const ServicePage: NextPage = () => {
             </section>
 
             <section style={{
-                paddingTop: '2rem'
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
             }}>
                 <div style={{
                     textTransform: 'uppercase',
                     fontSize: '1.5vw',
+                    textAlign: 'center',
                     color: 'white',
                     display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginBottom: '3rem'
+                    paddingBottom: '3rem'
                     }}>
-                    <div style={{ 
-                        marginRight: '3rem', 
-                        textAlign: 'center' 
+                    <div style={{
+                        alignItems: 'center',
+                        width: '33.333%' 
                     }}>
-                        <img src="/images/estimate_icon.png" alt="Icon 1" style={{ 
-                            width: '5rem', 
-                            marginBottom: '1rem' }} />
+                        <img src="/images/services/services1.png" alt="Icon 1" style={{ 
+                            alignItems: 'center',
+                            height: '9rem',
+                            width: '9rem'
+                        }} />
                         <h2>Complimentary Repair Estimates</h2>
                     </div>
-                </div>
 
                     <div style={{ 
-                        marginRight: '3rem', 
-                        textAlign: 'center' 
+                        alignItems: 'center',
+                        width: '33.333%'
                     }}>
-                        <img src="/images/wgrepair_icon.png" alt="Icon 2" style={{ 
-                            width: '5rem', 
-                            marginBottom: '1rem' }} />
+                        <img src="/images/services/services2.png" alt="Icon 2" style={{ 
+                            height: '9rem',
+                            width: '9rem'
+                        }} />
                         <h2>Windshield & Glass Repair</h2>
                     </div>
 
                     <div style={{ 
-                        marginRight: '3rem', 
-                        textAlign: 'center' 
+                        alignItems: 'center',
+                        width: '33.333%'
                         }}>
-                        <img src="/images/paint_icon.png" alt="Icon 3" style={{ 
-                            width: '5rem', 
-                            marginBottom: '1rem' }} />
+                        <img src="/images/services/services3.png" alt="Icon 3" style={{ 
+                            height: '9rem',
+                            width: '9rem'
+                        }} />
                         <h2>Paint Refinishing</h2>
                     </div>
-
-                    <div style={{
+                </div>
+                            
+                <div style={{
                     textTransform: 'uppercase',
                     fontSize: '1.5vw',
+                    textAlign: 'center',
                     color: 'white',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'center'
+                    display: 'flex'
                 }}>
-                    <div style={{ marginRight: '3rem', textAlign: 'center' }}>
-                        <img src="/path/to/icon4.png" alt="Icon 4" style={{ width: '5rem', marginBottom: '1rem' }} />
+                    <div style={{ 
+                        marginRight: '3rem', 
+                        textAlign: 'center',
+                        alignItems: 'center',
+                        width: '50%'
+                    }}>
+                        <img src="/images/services/services4.png" alt="Icon 4" style={{ 
+                            height: '9rem',
+                            width: '9rem'
+                        }} />
                         <h2>Interior/Exterior Details</h2>
                     </div>
 
-                    <div style={{ textAlign: 'center' }}>
-                        <img src="/path/to/icon5.png" alt="Icon 5" style={{ width: '5rem', marginBottom: '1rem' }} />
+                    <div style={{ 
+                        textAlign: 'center',
+                        width: '50%'
+                    }}>
+                        <img src="/images/services/services5.png" alt="Icon 5" style={{
+                            height: '9rem',
+                            width: '9rem'
+                        }} />
                         <h2>Dent Removal</h2>
                     </div>
-                </div>
-                    
+                </div>  
                 
             </section>
         </main>
