@@ -59,7 +59,7 @@ const LoginPage: React.FC = () => {
                             </div>
 
                             <div className="flex justify-center items-center">
-                                <Link href="/manager-ui/manager-home">
+                                <Link href="/manager-ui/dashboard">
                                     <div className="w-72 bg-black text-white px-3 py-3 rounded-lg text-s font-bold underline text-center">Log in</div>
                                 </Link>
                             </div>
