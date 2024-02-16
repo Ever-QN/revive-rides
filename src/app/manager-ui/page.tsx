@@ -23,10 +23,6 @@ const LoginPage: React.FC = () => {
 
     return (
         <>
-            <header className="header bg-color">
-                <img src="/images/logo2.png" alt="Logo2" />
-            </header>
-
             <main>
                 <div style={{
                     backgroundImage: `url('/images/booking-page.png')`,
@@ -68,7 +64,7 @@ const LoginPage: React.FC = () => {
                                 </Link>
                             </div>
 
-                            <ul className="text-s text-center text-gray-400 mt-2 dm-sans">Forget Password?</ul>
+                            <ul className="text-s text-center text-white mt-4 dm-sans">Forgot Password?</ul>
                         </form>
                     </div>
                 </div>
