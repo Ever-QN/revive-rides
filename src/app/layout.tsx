@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import Link from "next/link";
-import GlobalHeader from "../components/GlobalHeader";
-
+import './globals.css';
 const inter = Inter({ subsets: ["latin"] });
+import { ThemeProvider } from "../components/ui/theme-provider"
 
 export const metadata: Metadata = {
   title: "S&D Autobody",
@@ -20,7 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <GlobalHeader />
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+        />
         {children}
       </body>
     </html>
