@@ -16,7 +16,7 @@ const NewAppointmentPage  = () => {
     <>
       {/* Head component for setting page title */}
       <Head>
-        <title>Booking System - New Appointments</title>
+        <title>S&D Autobody - New Appointment</title>
       </Head>
 
       {/* Main content of the New Appointments page */}
