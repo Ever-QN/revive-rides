@@ -14,7 +14,7 @@ export default function GlobalHeader() {
         <img alt="S&D Autobody Logo" className="h-12 w-48" src="../images/logo2.png" />
       </Link>
 
-      <nav className="hidden lg:flex md:flex items-center space-x-4 mr-16">
+      <nav className="hidden lg:flex md:flex items-center space-x-12">
         <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500" href="/home">
           Home
         </Link>
@@ -24,14 +24,22 @@ export default function GlobalHeader() {
         <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500" href="/reviews">
           Reviews
         </Link>
+        <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500" href="/booking">
+          Book Online
+        </Link>
         <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500" href="/contact">
-          Contact
+          Contact Us
         </Link>
       </nav>
       <div className="hidden md:flex items-center space-x-4">
         <Link href="/booking">
           <Button size="lg" variant="outline">
-            Book Online
+            Login
+          </Button>
+        </Link>
+        <Link href="/signup">
+          <Button size="lg" variant="outline">
+            Sign Up
           </Button>
         </Link>
       </div>
@@ -75,6 +83,18 @@ export default function GlobalHeader() {
                   href="/booking"
                 >
                   Book Online
+                </Link>
+                <Link
+                  className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
+                  href="/booking"
+                >
+                  Login
+                </Link>
+                <Link
+                  className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
+                  href="/booking"
+                >
+                  Sign Up
                 </Link>
               </div>
             </div>
