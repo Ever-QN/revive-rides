@@ -1,8 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-/**
- * @see https://v0.dev/t/Dterm7GA3RV
- */
-
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { PopoverTrigger, Popover, PopoverContent } from "@/components/ui/popover"
