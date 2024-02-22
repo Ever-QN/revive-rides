@@ -6,7 +6,6 @@ import GlobalHeader from "../components/global-header";
 const AppPage: NextPage = () => {
   return (
     <>
-      <GlobalHeader />
     </>
   );
 };
