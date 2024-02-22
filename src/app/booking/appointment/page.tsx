@@ -1,7 +1,5 @@
 /**
- * v0 by Vercel.
- * @see https://v0.dev/t/TzGNqrwV4iY
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
+ * refer https://v0.dev/t/TzGNqrwV4iY
  */
 import { Calendar } from "@/components/ui/calendar"
 import { Button } from "@/components/ui/button"
