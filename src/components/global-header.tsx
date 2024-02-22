@@ -15,23 +15,25 @@ export default function GlobalHeader() {
       </Link>
 
       <nav className="hidden lg:flex md:flex items-center space-x-4 mr-16">
-        <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500" href="#">
+        <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500" href="/home">
           Home
         </Link>
-        <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500" href="#">
+        <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500" href="/services">
           Services
         </Link>
-        <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500" href="#">
+        <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500" href="/reviews">
           Reviews
         </Link>
-        <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500" href="#">
+        <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500" href="/contact">
           Contact
         </Link>
       </nav>
       <div className="hidden md:flex items-center space-x-4">
-        <Button size="sm" variant="outline">
-          Book Online
-        </Button>
+        <Link href="/booking">
+          <Button size="lg" variant="outline">
+            Book Online
+          </Button>
+        </Link>
       </div>
       <div className="md:hidden flex items-center">
         <Popover>
