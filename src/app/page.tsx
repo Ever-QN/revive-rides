@@ -1,18 +1,12 @@
-
-import Link from "next/link";
-import type { NextPage } from "next";
+import Link from 'next/link';
+import type { NextPage } from 'next';
+import './globals.css';
+import GlobalHeader from "../components/global-header";
 
 const AppPage: NextPage = () => {
-
   return (
-    <div>
-      <h1>Content</h1>
-      <nav>
-        <Link href="home">
-          Home Page
-        </Link>
-      </nav>
-    </div>
+    <>
+    </>
   );
 };
 
