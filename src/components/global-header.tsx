@@ -48,31 +48,33 @@ export default function GlobalHeader() {
               <div className="flex flex-col space-y-2 p-2">
                 <Link
                   className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
-                  href="#"
+                  href="/home"
                 >
-                  <img alt="Home" className="w-4 h-4" src="/placeholder.svg" />
                   Home
                 </Link>
                 <Link
                   className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
-                  href="#"
+                  href="/services"
                 >
-                  <img alt="Features" className="w-4 h-4" src="/placeholder.svg" />
-                  Features
+                  Services
                 </Link>
                 <Link
                   className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
-                  href="#"
+                  href="/reviews"
                 >
-                  <img alt="Pricing" className="w-4 h-4" src="/placeholder.svg" />
-                  Pricing
+                  Reviews
                 </Link>
                 <Link
                   className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
-                  href="#"
+                  href="/contact"
                 >
-                  <img alt="Team" className="w-4 h-4" src="/placeholder.svg" />
-                  Team
+                  Contact
+                </Link>
+                <Link
+                  className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
+                  href="/booking"
+                >
+                  Book Online
                 </Link>
               </div>
             </div>
