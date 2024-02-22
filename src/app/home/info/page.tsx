@@ -27,7 +27,7 @@ const InfoPage: NextPage = () => {
         </div>
         <div style={{ 
             width: '50%', 
-            paddingRight: '40px', 
+            padding: '40px',
             marginLeft: 'auto',
             alignItems: 'center'
         }}>
