@@ -6,7 +6,7 @@ const BookingPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Booking System</title>
+        <title>S&D Autobody New Appointment</title>
       </Head>
       <main style={{
         backgroundImage: 'url(/images/bookingpage_bg.png)',
