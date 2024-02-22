@@ -7,7 +7,7 @@ const BookingPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Booking System</title>
+        <title>S&D Autobody New Appointment</title>
       </Head>
       <main style={{
         backgroundImage: 'url(/images/bookingpage_bg.png)',
@@ -30,7 +30,7 @@ const BookingPage: NextPage = () => {
           textTransform: 'uppercase',
           margin: '0.5em 0',
         }}>
-          Book Your Visit at S&D
+          Book Your Visit at S&D Autobody
         </h1>
         <div style={{
           display: 'flex',
