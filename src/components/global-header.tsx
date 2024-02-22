@@ -32,7 +32,7 @@ export default function GlobalHeader() {
         </Link>
       </nav>
       <div className="hidden md:flex items-center space-x-4">
-        <Link href="/booking">
+        <Link href="/login">
           <Button size="lg" variant="outline">
             Login
           </Button>
@@ -74,15 +74,15 @@ export default function GlobalHeader() {
                 </Link>
                 <Link
                   className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
-                  href="/contact"
-                >
-                  Contact
-                </Link>
-                <Link
-                  className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
                   href="/booking"
                 >
                   Book Online
+                </Link>
+                <Link
+                  className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
+                  href="/contact"
+                >
+                  Contact Us
                 </Link>
                 <Link
                   className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
