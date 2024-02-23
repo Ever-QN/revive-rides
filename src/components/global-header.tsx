@@ -1,12 +1,19 @@
+/* eslint-disable @next/next/no-img-element */
+import React from 'react'
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { PopoverTrigger, Popover, PopoverContent } from "@/components/ui/popover"
 
 export default function GlobalHeader() {
+
   return (
-    <header className="flex items-center justify-between w-full p-6 border-b">
+    <header className="flex items-center justify-between w-full p-6 border-b bg-slate-950 sticky top-0">
       <Link className="flex items-center space-x-2" href="#">
-        <img alt="S&D Autobody Logo" className="h-12 w-48" src="../images/logo2.png" />
+        <img 
+          alt="S&D Autobody Logo" 
+          className={`h-12 w-48`}
+          src="../images/logo2.png"
+        />
       </Link>
 
       <nav className="hidden lg:flex md:flex items-center space-x-12">
