@@ -11,7 +11,6 @@ const ServicePage: NextPage = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: '2rem'
             }}>
                 <div style={{
                     textTransform: 'uppercase',
@@ -22,7 +21,6 @@ const ServicePage: NextPage = () => {
                 }}>
                     <h1>Our services</h1>
                 </div>
-
             </section>
 
             <section style={{
@@ -37,16 +35,22 @@ const ServicePage: NextPage = () => {
                     color: 'white',
                     display: 'flex',
                     paddingBottom: '3rem'
-                    }}>
+                }}>
                     <div style={{
                         alignItems: 'center',
                         width: '33.333%' 
                     }}>
-                        <img src="/images/services/services1.png" alt="Icon 1" style={{ 
-                            alignItems: 'center',
-                            height: '9rem',
-                            width: '9rem'
-                        }} />
+                        <div style={{
+                            margin: 'auto',
+                            height: '12rem',
+                            width: '12rem'
+                        }}>
+                            <img src="/images/services/service1.png" alt="Service 1" style={{ 
+                                height: '100%',
+                                width: '100%',
+                                objectFit: 'contain'
+                            }}/>
+                        </div>
                         <h2>Complimentary Repair Estimates</h2>
                     </div>
 
@@ -54,21 +58,35 @@ const ServicePage: NextPage = () => {
                         alignItems: 'center',
                         width: '33.333%'
                     }}>
-                        <img src="/images/services/services2.png" alt="Icon 2" style={{ 
-                            height: '9rem',
-                            width: '9rem'
-                        }} />
+                        <div style={{
+                            margin: 'auto',
+                            height: '12rem',
+                            width: '12rem'
+                        }}>
+                            <img src="/images/services/service2.png" alt="Service 2" style={{ 
+                                height: '100%',
+                                width: '100%',
+                                objectFit: 'contain'
+                            }} />
+                        </div>
                         <h2>Windshield & Glass Repair</h2>
                     </div>
 
                     <div style={{ 
                         alignItems: 'center',
                         width: '33.333%'
+                    }}>
+                        <div style={{
+                            margin: 'auto',
+                            height: '12rem',
+                            width: '12rem'
                         }}>
-                        <img src="/images/services/services3.png" alt="Icon 3" style={{ 
-                            height: '9rem',
-                            width: '9rem'
-                        }} />
+                            <img src="/images/services/service3.png" alt="Service 3" style={{ 
+                                height: '100%',
+                                width: '100%',
+                                objectFit: 'contain'
+                            }} />
+                        </div>
                         <h2>Paint Refinishing</h2>
                     </div>
                 </div>
@@ -78,18 +96,25 @@ const ServicePage: NextPage = () => {
                     fontSize: '1.5vw',
                     textAlign: 'center',
                     color: 'white',
-                    display: 'flex'
+                    display: 'flex',
+                    paddingBottom: '3rem'
                 }}>
                     <div style={{ 
                         marginRight: '3rem', 
                         textAlign: 'center',
-                        alignItems: 'center',
                         width: '50%'
                     }}>
-                        <img src="/images/services/services4.png" alt="Icon 4" style={{ 
-                            height: '9rem',
-                            width: '9rem'
-                        }} />
+                        <div style={{
+                            margin: 'auto',
+                            height: '12rem',
+                            width: '12rem'
+                        }}>
+                            <img src="/images/services/service4.png" alt="Service 4" style={{ 
+                                height: '100%',
+                                width: '100%',
+                                objectFit: 'contain'
+                            }}/>
+                        </div>
                         <h2>Interior/Exterior Details</h2>
                     </div>
 
@@ -97,14 +122,20 @@ const ServicePage: NextPage = () => {
                         textAlign: 'center',
                         width: '50%'
                     }}>
-                        <img src="/images/services/services5.png" alt="Icon 5" style={{
-                            height: '9rem',
-                            width: '9rem'
-                        }} />
+                        <div style={{
+                            margin: 'auto',
+                            height: '12rem',
+                            width: '12rem'
+                        }}>
+                            <img src="/images/services/service5.png" alt="Service 5" style={{
+                                height: '100%',
+                                width: '100%',
+                                objectFit: 'contain'
+                            }} />
+                        </div>
                         <h2>Dent Removal</h2>
                     </div>
-                </div>  
-                
+                </div>      
             </section>
         </main>
     );
