@@ -6,7 +6,7 @@ import ServicePage from "./services/page";
 
 const HomePage: React.FC = () => {
   return (
-    <div className="overflow-y-scroll h-screen">
+    <div className="h-screen">
       <MainPage />
       <InfoPage />
       <ServicePage />
