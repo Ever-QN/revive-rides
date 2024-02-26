@@ -43,8 +43,7 @@ const MainPage: NextPage = () => {
             marginBottom: "25px"
           }}>on the road to serve you</h2>
       </div>
-    
-      {/*booking button*/}
+
       <div style={{
         position: 'absolute',
         bottom: '110px',

@@ -3,14 +3,14 @@ import { NextPage } from "next";
 
 const InfoPage: NextPage = () => {
   return (
-    <section style={{
+    <main style={{
         backgroundColor: 'white',
         minHeight: '100vh',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
     }}>
-        <div style={{
+        <section style={{
             width: '50%', 
             paddingLeft: '40px', 
             marginRight: 'auto',
@@ -18,35 +18,37 @@ const InfoPage: NextPage = () => {
             flexDirection: 'column',
             alignItems: 'center'
         }}>
-            <img src='/images/guy.png' alt='mechanic' style={{
+            <div style={{
                 width: '100%',
                 maxWidth: '600px',
                 height: 'auto',
                 marginBottom: '1rem'
-            }} />
-        </div>
-        <div style={{ 
+            }}>
+                <img src='/images/guy.png' alt='mechanic' />
+            </div>
+        </section>
+        <section style={{
             width: '50%', 
             padding: '10px',
             alignItems: 'center'
         }}>
-            <h1 style={{
-                textTransform: 'uppercase',
-                fontSize: '3vw',
-                fontWeight: 700,
+            <div style={{
                 color: 'black',
-                textAlign: 'left',
-                marginBottom: '1rem'
-            }}>Why S&D Autobody?</h1>
-            <h2 style={{
-                fontSize: '1.5vw',
-                fontWeight: 400,
-                color: 'black',
-                textAlign: 'left',
-                lineHeight: '1.5'
-            }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h2>
-        </div>
-    </section>
+                textAlign: 'left'
+            }}>
+                <h1 style={{
+                    textTransform: 'uppercase',
+                    fontSize: '3vw',
+                    fontWeight: '700',
+                    marginBottom: '1rem'
+                }}>Why S&D Autobody?</h1>
+                <h2 style={{
+                    fontSize: '1.5vw',
+                    fontWeight: '400'
+                }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h2>
+            </div>
+        </section>
+    </main>
   );
 };
 
