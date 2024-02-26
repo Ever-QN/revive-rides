@@ -51,7 +51,10 @@ const MainPage: NextPage = () => {
         right: '150px'
       }}>
           <Link href="/booking">
-              <button className={'button-hover'}>Let&apos;s book
+              <button className={'button-hover'}>
+                <span style={{
+                  marginRight: '3rem'
+                }}>Let&apos;s book</span>
               <svg style={{
                 transform: 'rotate(0deg)',
                 width: '1rem', 
@@ -77,7 +80,7 @@ const MainPage: NextPage = () => {
           <style jsx>{`
             .button-hover {
               border-radius: 9999px; 
-              padding: 0.8rem 1.6rem;
+              padding: 0.8rem 1.8rem;
               font-size: 1.5rem;
               font-weight: 600;
               background-color: #dc2626;
