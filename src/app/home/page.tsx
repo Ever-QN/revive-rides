@@ -68,12 +68,12 @@ export default function Component() {
           }}
           className="z-50 flex flex-col justify-center items-center"
         >
-        <motion.p className="font-bold text-xl md:text-6xl text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 py-4">
-          S&D Autobody
-        </motion.p>
-        <motion.p className="text-4xl bg-gradient-to-r from-red-400 to-red-700 text-transparent bg-clip-text">
-          Discover excellence in auto body repair services.
-        </motion.p>
+          <motion.p className="font-bold text-xl md:text-6xl text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 py-4">
+            S&D Autobody
+          </motion.p>
+          <motion.p className="text-4xl bg-gradient-to-r from-red-400 to-red-700 text-transparent bg-clip-text">
+            Discover excellence in auto body repair services.
+          </motion.p>
           <button className="px-4 py-2 backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white mx-auto text-center rounded-full relative mt-4">
             <span>Join now →</span>
             <div className="absolute inset-x-0  h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
