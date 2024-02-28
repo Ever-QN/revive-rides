@@ -85,7 +85,7 @@ export default function Home() {
         </ImagesSlider>
       </div>
 
-      <div className="p-3 flex justify-around w-full py-12 md:py-24">
+      <div className="p-3 flex justify-around w-full py-12 md:py-24 scroll-mt-10" id="about">
           <div className="flex flex-row-reverse gap-8 items-start">
             <div className="h-[20rem] relative">
               <DirectionAwareHover imageUrl={ownerImageUrl}>
@@ -93,7 +93,7 @@ export default function Home() {
                 <p className="font-normal text-sm">Pictured in front of the Golden Temple in Amritsar, Punjab</p>
               </DirectionAwareHover>
           </div>  
-          <div className="flex flex-col space-y-2 md:overflow-hidden lg:overflow-hidden sm:overflow-y-scroll max-h-76 ">
+          <div className="flex flex-col space-y-2 md:overflow-hidden lg:overflow-hidden sm:overflow-y-scroll max-h-76">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Us</h2>
               <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -102,117 +102,114 @@ export default function Home() {
       </div>
     </div>
 
-      <div className="bg-gray-300 w-full py-12 md:py-24">
-          <div className="container grid items-start gap-6 px-4 md:gap-10 xl:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Services</h2>
-                <p className="max-w-4xl text-lg text-gray-500 md:text-xl/95 dark:text-gray-400">
-                  From minor dents to major collision damage, we offer a full range of auto body repair services.
-                </p>
+      <div className="bg-gray-300 w-full py-12 md:py-24 scroll-mt-10" id="services">
+          <div className="flex flex-col items-center justify-center space-y-4 text-center">
+            <div className="space-y-2">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Services</h2>
+              <p className="max-w-4xl text-lg text-gray-500 md:text-xl/95 dark:text-gray-400">
+                From minor dents to major collision damage, we offer a full range of auto body repair services.
+              </p>
+          </div>
+          <div className="grid max-w-sm gap-6 min-[400px]:grid-cols-2 md:max-w-none md:grid-cols-3 md:gap-4 lg:grid-cols-3xl xl:gap-8">
+            <div className="flex flex-col items-center justify-center space-y-2 text-center">
+              <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
+                <Image
+                  src="/images/services/checklist.png"
+                  width={500}
+                  height={500}
+                  alt="Picture of the a clipboard with a checklist"
+                  className="ml-2 p-4"
+                />
+              </div>
+              <h3 className="text-xl font-bold">Auto Body Repair</h3>
+              <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
-            <div className="grid max-w-sm gap-6 min-[400px]:grid-cols-2 md:max-w-none md:grid-cols-3 md:gap-4 lg:grid-cols-3xl xl:gap-8">
-              <div className="flex flex-col items-center justify-center space-y-2 text-center">
-                <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
-                  <Image
-                    src="/images/services/checklist.png"
+            <div className="flex flex-col items-center justify-center space-y-2 text-center">
+              <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
+                <Image
+                    src="/images/services/dent-car.png"
                     width={500}
                     height={500}
-                    alt="Picture of the a clipboard with a checklist"
-                    className="ml-2 p-4"
+                    alt="A picture of a car getting dented in an accident"
+                    className="p-4"
                   />
-                </div>
-                <h3 className="text-xl font-bold">Auto Body Repair</h3>
-                <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
-              <div className="flex flex-col items-center justify-center space-y-2 text-center">
-                <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
-                  <Image
-                      src="/images/services/dent-car.png"
-                      width={500}
-                      height={500}
-                      alt="A picture of a car getting dented in an accident"
-                      className="p-4"
-                    />
-                </div>
-                <h3 className="text-xl font-bold">Paintless Dent Repair</h3>
-                <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h3 className="text-xl font-bold">Paintless Dent Repair</h3>
+              <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div className="flex flex-col items-center justify-center space-y-2 text-center">
+              <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
+                <Image
+                    src="/images/services/car-wash.png"
+                    width={500}
+                    height={500}
+                    alt="Picture of a car being washed at a car wash"
+                    className="p-4"
+                  />
               </div>
-              <div className="flex flex-col items-center justify-center space-y-2 text-center">
-                <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
-                  <Image
-                      src="/images/services/car-wash.png"
-                      width={500}
-                      height={500}
-                      alt="Picture of a car being washed at a car wash"
-                      className="p-4"
-                    />
-                </div>
-                <h3 className="text-xl font-bold">Auto Detailing</h3>
-                <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h3 className="text-xl font-bold">Auto Detailing</h3>
+              <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div className="flex flex-col items-center justify-center space-y-2 text-center">
+              <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
+                <Image
+                    src="/images/services/ruler.png"
+                    width={500}
+                    height={500}
+                    alt="Picture of a ruler"
+                    className="p-2"
+                  />
               </div>
-              <div className="flex flex-col items-center justify-center space-y-2 text-center">
-                <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
-                  <Image
-                      src="/images/services/ruler.png"
-                      width={500}
-                      height={500}
-                      alt="Picture of a ruler"
-                      className="p-2"
-                    />
-                </div>
-                <h3 className="text-xl font-bold">Frame Straightening</h3>
-                <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h3 className="text-xl font-bold">Frame Straightening</h3>
+              <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div className="flex flex-col items-center justify-center space-y-2 text-center">
+              <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
+                <Image
+                    src="/images/services/sticker.png"
+                    width={500}
+                    height={500}
+                    alt="Picture of a sticker"
+                    className="p-2"
+                  />
               </div>
-              <div className="flex flex-col items-center justify-center space-y-2 text-center">
-                <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
-                  <Image
-                      src="/images/services/sticker.png"
-                      width={500}
-                      height={500}
-                      alt="Picture of a sticker"
-                      className="p-2"
-                    />
-                </div>
-                <h3 className="text-xl font-bold">Graphics and Decals</h3>
-                <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h3 className="text-xl font-bold">Graphics and Decals</h3>
+              <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div className="flex flex-col items-center justify-center space-y-2 text-center">
+              <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
+                <Image
+                    src="/images/services/wrench.png"
+                    width={500}
+                    height={500}
+                    alt="Picture of a wrench"
+                    className="p-2"
+                  />
               </div>
-              <div className="flex flex-col items-center justify-center space-y-2 text-center">
-                <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
-                  <Image
-                      src="/images/services/wrench.png"
-                      width={500}
-                      height={500}
-                      alt="Picture of a wrench"
-                      className="p-2"
-                    />
-                </div>
-                <h3 className="text-xl font-bold">Custom Paint Jobs</h3>
-                <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
+              <h3 className="text-xl font-bold">Custom Paint Jobs</h3>
+              <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
           </div>
         </div>
       </div>
       
-      <div className="w-full py-12 md:py-24">
+      <div className="w-full py-12 md:py-24" id="reviews" >
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Customer Testimonials</h2>
-              <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
-                See what our customers have to say about our auto body repair services.
-              </p>
-              <div className="items-center justify-center relative overflow-hidden">
-                <InfiniteMovingCards
-                items={testimonials}
-                direction="left"
-                speed="slow"
-                />
-              </div>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Customer Testimonials</h2>
+          <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
+            See what our customers have to say about our auto body repair services.
+          </p>
+          <div className="items-center justify-center relative overflow-hidden">
+            <InfiniteMovingCards
+            items={testimonials}
+            direction="left"
+            speed="slow"
+            />
+          </div>
         </div>
       </div>
       
-      <div>
-        <div className="w-full py-12 md:py-24 bg-gray-300">
+        <div className="w-full py-12 md:py-24 bg-gray-300 " id="contact">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Contact Us</h2>
@@ -263,7 +260,6 @@ export default function Home() {
             </form>
           </div>
         </div>
-      </div>
       
       <footer className="w-full py-6 bg-gray-900 text-gray-50 text-center">
         <p>© 2024 S&D Autobody. All rights reserved.</p>
