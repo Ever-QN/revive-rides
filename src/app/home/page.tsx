@@ -45,9 +45,9 @@ const testimonials = [
 ];
 
 const images = [
-  "/images/slider/redcarrear.jpg",
+  "/images/slider/blackcarsunset.jpg",
   "/images/slider/truck.jpg",
-  "/images/slider/brokengaragecar.jpg",
+  "/images/slider/brokentruck.jpg",
 ];
 
 export default function Home() {
@@ -85,7 +85,7 @@ export default function Home() {
         </ImagesSlider>
       </div>
 
-      <div className="p-3 border border-b-2 border-b-blue-700 flex justify-around w-full py-12 md:py-24">
+      <div className="p-3 flex justify-around w-full py-12 md:py-24">
           <div className="flex flex-row-reverse gap-8 items-start">
             <div className="h-[20rem] relative">
               <DirectionAwareHover imageUrl={ownerImageUrl}>
@@ -109,7 +109,7 @@ export default function Home() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Services</h2>
-                <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
+                <p className="max-w-4xl text-lg text-gray-500 md:text-xl/95 dark:text-gray-400">
                   From minor dents to major collision damage, we offer a full range of auto body repair services.
                 </p>
             </div>
@@ -197,76 +197,72 @@ export default function Home() {
         </div>
       </div>
       
-      <div>
-        <div className="w-full py-12 md:py-24 bg-gray-700">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Customer Testimonials</h2>
-                <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
-                  See what our customers have to say about our auto body repair services.
-                </p>
-                <div className="items-center justify-center relative overflow-hidden">
+      <div className="w-full py-12 md:py-24">
+        <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Customer Testimonials</h2>
+              <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
+                See what our customers have to say about our auto body repair services.
+              </p>
+              <div className="items-center justify-center relative overflow-hidden">
                 <InfiniteMovingCards
                 items={testimonials}
                 direction="left"
                 speed="slow"
                 />
               </div>
-          </div>
         </div>
       </div>
       
       <div>
-        <div className="w-full py-12 md:py-24">
-          <div className="container grid items-start gap-6 px-4 md:gap-10 xl:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Contact Us</h2>
-                <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
-                  Have a question? Ready to schedule an appointment? Contact us today!
-                </p>
-              </div>
-              <form className="grid max-w-sm gap-4 min-[400px]:grid-cols-2 md:gap-6 md:max-w-4xl lg:gap-8 lg:max-w-5xl xl:gap-10">
-                <div className="flex flex-col space-y-1">
-                  <label
-                    className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
-                    htmlFor="name"
-                  >
-                    Full Name
-                  </label>
-                  <Input className="h-10 peer-accent-0" id="name" placeholder="Enter your full name" type="text" />
-                </div>
-                <div className="flex flex-col space-y-1">
-                  <label
-                    className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
-                    htmlFor="email"
-                  >
-                    Email Address
-                  </label>
-                  <Input className="h-10 peer-accent-0" id="email" placeholder="Enter your email" type="email" />
-                </div>
-                <div className="flex flex-col space-y-1">
-                  <label
-                    className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
-                    htmlFor="phone"
-                  >
-                    Phone Number
-                  </label>
-                  <Input className="h-10 peer-accent-0" id="phone" placeholder="Enter your phone number" type="tel" />
-                </div>
-                <div className="flex flex-col space-y-1 col-span-2">
-                  <label
-                    className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
-                    htmlFor="message"
-                  >
-                    Your Message
-                  </label>
-                  <Textarea className="min-h-[100px] peer-accent-0" id="message" placeholder="Enter your message" />
-                </div>
-                <Button className="w-full justify-center" type="submit">
-                  Submit
-                </Button>
-              </form>
+        <div className="w-full py-12 md:py-24 bg-gray-300">
+          <div className="flex flex-col items-center justify-center space-y-4 text-center">
+            <div className="space-y-2">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Contact Us</h2>
+              <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
+                Have a question? Contact us today!
+              </p>
             </div>
+            <form className="grid max-w-sm gap-4 min-[400px]:grid-cols-2 md:gap-6 md:max-w-4xl lg:gap-8 lg:max-w-5xl xl:gap-10">
+              <div className="flex flex-col space-y-1">
+                <label
+                  className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
+                  htmlFor="name"
+                >
+                  Full Name
+                </label>
+                <Input className="h-10 peer-accent-0" id="name" placeholder="Enter your full name" type="text" />
+              </div>
+              <div className="flex flex-col space-y-1">
+                <label
+                  className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
+                  htmlFor="email"
+                >
+                  Email Address
+                </label>
+                <Input className="h-10 peer-accent-0" id="email" placeholder="Enter your email" type="email" />
+              </div>
+              <div className="flex flex-col space-y-1">
+                <label
+                  className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
+                  htmlFor="phone"
+                >
+                  Phone Number
+                </label>
+                <Input className="h-10 peer-accent-0" id="phone" placeholder="Enter your phone number" type="tel" />
+              </div>
+              <div className="flex flex-col space-y-1 col-span-2">
+                <label
+                  className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
+                  htmlFor="message"
+                >
+                  Your Message
+                </label>
+                <Textarea className="min-h-[100px] peer-accent-0" id="message" placeholder="Enter your message" />
+              </div>
+              <Button className="w-full justify-center" type="submit">
+                Submit
+              </Button>
+            </form>
           </div>
         </div>
       </div>
