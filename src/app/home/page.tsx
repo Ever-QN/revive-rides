@@ -70,10 +70,10 @@ export default function Home() {
             }}
             className="z-50 flex flex-col justify-center items-center p-4"
           >
-            <motion.p className="font-bold text-xl md:text-6xl text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 py-4">
+            <motion.p className="font-bold text-2xl md:text-6xl text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 py-4">
               S&D Autobody
             </motion.p>
-            <motion.p className="text-4xl bg-gradient-to-r from-red-500 to-red-800 text-transparent bg-clip-text">
+            <motion.p className="text-2xl md:text-4xl bg-gradient-to-r from-red-500 to-red-800 text-transparent bg-clip-text">
               Discover excellence in auto body repair services.
             </motion.p>
             <Link className="px-4 py-2 backdrop-blur-sm border bg-red-300/10 border-red-500/20 text-white mx-auto text-center rounded-full relative mt-4 hover:scale-110 active:scale-125 transition-all duration-100" href="/booking">
