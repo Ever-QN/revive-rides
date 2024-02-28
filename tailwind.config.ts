@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss"
+const { fontFamily } = require("tailwindcss/defaultTheme")
 const defaultTheme = require("tailwindcss/defaultTheme");
  
 const colors = require("tailwindcss/colors");
@@ -37,6 +38,9 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -78,6 +82,14 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        shimmer: {
+          from: {
+            "backgroundPosition": "0 0"
+          },
+          to: {
+            "backgroundPosition": "-200% 0"
+          }
+        },
         scroll: {
           to: {
             transform: "translate(calc(-50% - 0.5rem))",
@@ -93,6 +105,7 @@ const config = {
         },
       },
       animation: {
+        shimmer: "shimmer 2s linear infinite",
         scroll: "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
