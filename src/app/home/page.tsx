@@ -114,7 +114,7 @@ export default function Home() {
             <div className="flex flex-col items-center justify-center space-y-2 text-center">
               <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
                 <Image
-                  src="/images/services/checklist.png"
+                  src="/images/service-icons/checklist.png"
                   width={500}
                   height={500}
                   alt="Picture of the a clipboard with a checklist"
@@ -127,7 +127,7 @@ export default function Home() {
             <div className="flex flex-col items-center justify-center space-y-2 text-center">
               <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
                 <Image
-                    src="/images/services/dent-car.png"
+                    src="/images/service-icons/dent-car.png"
                     width={500}
                     height={500}
                     alt="A picture of a car getting dented in an accident"
@@ -140,7 +140,7 @@ export default function Home() {
             <div className="flex flex-col items-center justify-center space-y-2 text-center">
               <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
                 <Image
-                    src="/images/services/car-wash.png"
+                    src="/images/service-icons/car-wash.png"
                     width={500}
                     height={500}
                     alt="Picture of a car being washed at a car wash"
@@ -153,7 +153,7 @@ export default function Home() {
             <div className="flex flex-col items-center justify-center space-y-2 text-center">
               <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
                 <Image
-                    src="/images/services/ruler.png"
+                    src="/images/service-icons/ruler.png"
                     width={500}
                     height={500}
                     alt="Picture of a ruler"
@@ -166,7 +166,7 @@ export default function Home() {
             <div className="flex flex-col items-center justify-center space-y-2 text-center">
               <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
                 <Image
-                    src="/images/services/sticker.png"
+                    src="/images/service-icons/sticker.png"
                     width={500}
                     height={500}
                     alt="Picture of a sticker"
@@ -179,7 +179,7 @@ export default function Home() {
             <div className="flex flex-col items-center justify-center space-y-2 text-center">
               <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
                 <Image
-                    src="/images/services/wrench.png"
+                    src="/images/service-icons/wrench.png"
                     width={500}
                     height={500}
                     alt="Picture of a wrench"
