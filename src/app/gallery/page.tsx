@@ -82,8 +82,18 @@ export default function Gallery() {
             </Image>
           </div>
           <div className="relative group overflow-hidden rounded-lg">
-            <video muted width="200" height="300" src="/videos/redcarfixed.mp4" controls preload="none" />
+            <Image
+              alt="Fixed red sedan in a garage"
+              className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
+              height="400"
+              src="/images/gallery-images/redcarfixed.jpg"
+              width="600"
+              >
+            </Image>
           </div>
+          {/* <div className="relative group overflow-hidden rounded-lg">
+            <video muted width="200" height="300" src="/videos/redcarfixed.mp4" controls preload="auto" />
+          </div> */}
         </div>
         
       </div>
