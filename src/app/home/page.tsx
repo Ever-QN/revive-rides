@@ -4,11 +4,12 @@ import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import Image from 'next/image'
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ImagesSlider } from "@/components/ui/images-slider";
+import { DirectionAwareHover } from "@/components/ui/direction-aware-hover";
 
 
 const testimonials = [
@@ -49,7 +50,8 @@ const images = [
   "/images/slider/brokengaragecar.jpg",
 ];
 
-export default function Component() {
+export default function Home() {
+  const ownerImageUrl = "/images/dalbir-and-sukhbir.jpg";
   return (
     <>
       <div className="w-full pt-24">
@@ -83,14 +85,19 @@ export default function Component() {
         </ImagesSlider>
       </div>
       <div className="w-full py-12 md:py-24">
-        <div className="container grid items-start gap-6 px-4 md:gap-10 xl:px-6">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Us</h2>
-              <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
-                Placeholder
-              </p>
-            </div>
+        <div className="container grid items-center gap-6 px-4 md:gap-10 xl:px-6">
+          <div className="flex items-center mr-4">
+          <div className="h-[40rem] relative  flex items-center justify-center">
+          <DirectionAwareHover imageUrl={ownerImageUrl}>
+            <p className="font-bold text-xl">Dalbir and Sukhbir</p>
+            <p className="font-normal text-sm">Pictured in front of the Golden Temple in Amritsar, Punjab</p>
+          </DirectionAwareHover>
+        </div>  
+          <div className="flex flex-col space-y-2">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Us</h2>
+            <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
+              Placeholder
+            </p>
           </div>
         </div>
       </div>
@@ -212,6 +219,7 @@ export default function Component() {
               />
             </div>
         </div>
+      </div>
     </div>
       <div className="w-full py-12 md:py-24">
         <div className="container grid items-start gap-6 px-4 md:gap-10 xl:px-6">
