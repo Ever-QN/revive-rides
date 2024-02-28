@@ -1,7 +1,16 @@
-export const metadata = {
-  title: 'S&D Autobody Login',
-  description: 'S&D Autobody Login Page',
-}
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import './globals.css';
+import { ThemeProvider } from "../components/ui/theme-provider"
+import GlobalHeader from "../components/global-header";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "S&D Autobody Login",
+  description: "S&D Autobody Login Page",
+};
+
 
 export default function RootLayout({
   children,
@@ -10,7 +19,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={inter.className}>
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+        />
+        <GlobalHeader />
+        {children}
+      </body>
     </html>
   )
 }

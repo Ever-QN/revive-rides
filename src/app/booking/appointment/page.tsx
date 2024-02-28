@@ -1,11 +1,10 @@
-import Link from 'next/link';
 import type { NextPage } from 'next';
-import './globals.css';
 
 const AppPage: NextPage = () => {
   return (
-    <>
-    </>
+    <div>
+      <h1>Book An Appointment</h1>
+    </div>
   );
 };
 
