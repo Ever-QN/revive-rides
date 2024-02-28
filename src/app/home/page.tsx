@@ -260,10 +260,6 @@ export default function Home() {
             </form>
           </div>
         </div>
-      
-      <footer className="w-full py-6 bg-gray-900 text-gray-50 text-center">
-        <p>© 2024 S&D Autobody. All rights reserved.</p>
-      </footer>
     </>
   )
 }
