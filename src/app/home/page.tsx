@@ -44,9 +44,9 @@ const testimonials = [
 ];
 
 const images = [
-  "https://images.unsplash.com/photo-1485433592409-9018e83a1f0d?q=80&w=1814&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1483982258113-b72862e6cff6?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1482189349482-3defd547e0e9?q=80&w=2848&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "/images/slider/redcarrear.jpg",
+  "/images/slider/truck.jpg",
+  "/images/slider/brokengaragecar.jpg",
 ];
 
 export default function Component() {
@@ -66,18 +66,18 @@ export default function Component() {
             transition={{
               duration: 0.6,
             }}
-            className="z-50 flex flex-col justify-center items-center"
+            className="z-50 flex flex-col justify-center items-center p-4"
           >
             <motion.p className="font-bold text-xl md:text-6xl text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 py-4">
               S&D Autobody
             </motion.p>
-            <motion.p className="text-4xl bg-gradient-to-r from-red-400 to-red-700 text-transparent bg-clip-text">
+            <motion.p className="text-4xl bg-gradient-to-r from-red-500 to-red-800 text-transparent bg-clip-text">
               Discover excellence in auto body repair services.
             </motion.p>
-            <Button className="px-4 py-2 backdrop-blur-sm border bg-red-300/10 border-red-500/20 text-white mx-auto text-center rounded-full relative mt-4" variant={"link"}>
+            <Link className="px-4 py-2 backdrop-blur-sm border bg-red-300/10 border-red-500/20 text-white mx-auto text-center rounded-full relative mt-4 hover:scale-110 active:scale-125 transition-all duration-100" href="/booking">
               <span>Book an Appointment →</span>
               <div className="absolute inset-x-0  h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-red-500 to-transparent" />
-            </Button>
+            </Link>
 
           </motion.div>
         </ImagesSlider>
