@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import type { NextPage } from 'next';
 import './globals.css';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 const AppPage: NextPage = () => {
