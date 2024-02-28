@@ -115,11 +115,11 @@ export default function Home() {
               <div className="flex flex-col items-center justify-center space-y-2 text-center">
                 <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
                   <Image
-                    src="/images/services/service1.png"
+                    src="/images/services/checklist.png"
                     width={500}
                     height={500}
-                    alt="Picture of the author"
-                    className="invert"
+                    alt="Picture of the a clipboard with a checklist"
+                    className="ml-2 p-4"
                   />
                 </div>
                 <h3 className="text-xl font-bold">Auto Body Repair</h3>
@@ -128,11 +128,11 @@ export default function Home() {
               <div className="flex flex-col items-center justify-center space-y-2 text-center">
                 <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
                   <Image
-                      src="/images/services/service2.png"
+                      src="/images/services/dent-car.png"
                       width={500}
                       height={500}
-                      alt="Picture of the author"
-                      className="invert"
+                      alt="A picture of a car getting dented in an accident"
+                      className="p-4"
                     />
                 </div>
                 <h3 className="text-xl font-bold">Paintless Dent Repair</h3>
@@ -141,11 +141,11 @@ export default function Home() {
               <div className="flex flex-col items-center justify-center space-y-2 text-center">
                 <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
                   <Image
-                      src="/images/services/service3.png"
+                      src="/images/services/car-wash.png"
                       width={500}
                       height={500}
-                      alt="Picture of the author"
-                      className="invert"
+                      alt="Picture of a car being washed at a car wash"
+                      className="p-4"
                     />
                 </div>
                 <h3 className="text-xl font-bold">Auto Detailing</h3>
@@ -154,11 +154,11 @@ export default function Home() {
               <div className="flex flex-col items-center justify-center space-y-2 text-center">
                 <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
                   <Image
-                      src="/images/services/service4.png"
+                      src="/images/services/ruler.png"
                       width={500}
                       height={500}
-                      alt="Picture of the author"
-                      className="invert"
+                      alt="Picture of a ruler"
+                      className="p-2"
                     />
                 </div>
                 <h3 className="text-xl font-bold">Frame Straightening</h3>
@@ -167,11 +167,11 @@ export default function Home() {
               <div className="flex flex-col items-center justify-center space-y-2 text-center">
                 <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
                   <Image
-                      src="/images/services/service5.png"
+                      src="/images/services/sticker.png"
                       width={500}
                       height={500}
-                      alt="Picture of the author"
-                      className="invert"
+                      alt="Picture of a sticker"
+                      className="p-2"
                     />
                 </div>
                 <h3 className="text-xl font-bold">Graphics and Decals</h3>
@@ -180,11 +180,11 @@ export default function Home() {
               <div className="flex flex-col items-center justify-center space-y-2 text-center">
                 <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
                   <Image
-                      src="/images/services/service1.png"
+                      src="/images/services/wrench.png"
                       width={500}
                       height={500}
-                      alt="Picture of the author"
-                      className="invert"
+                      alt="Picture of a wrench"
+                      className="p-2"
                     />
                 </div>
                 <h3 className="text-xl font-bold">Custom Paint Jobs</h3>
