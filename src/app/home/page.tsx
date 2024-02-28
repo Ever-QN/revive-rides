@@ -87,7 +87,7 @@ export default function Home() {
 
       <div className="p-3 flex justify-around w-full py-12 md:py-24 scroll-mt-10" id="about">
           <div className="flex flex-row-reverse gap-8 items-start">
-            <div className="h-[20rem] relative">
+            <div className="relative">
               <DirectionAwareHover imageUrl={ownerImageUrl}>
                 <p className="font-bold text-xl">Sukhbir and Dalbir</p>
                 <p className="font-normal text-sm">Pictured in front of the Golden Temple in Amritsar, Punjab</p>
@@ -198,7 +198,7 @@ export default function Home() {
       </div>
       
       <div className="w-full py-12 md:py-24" id="reviews" >
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
+        <div className="lg:flex flex-col items-center justify-center space-y-4 text-center">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Customer Testimonials</h2>
           <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
             See what our customers have to say about our auto body repair services.
