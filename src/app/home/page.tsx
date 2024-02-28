@@ -84,10 +84,10 @@ export default function Home() {
           </motion.div>
         </ImagesSlider>
       </div>
-      <div className="w-full py-12 md:py-24">
-        <div className="container grid items-center gap-6 px-4 md:gap-10 xl:px-6">
-          <div className="flex items-center mr-4">
-            <div className="h-[40rem] relative  flex items-center justify-center">
+
+      <div className="p-3 border border-b-2 border-b-blue-700 flex justify-around w-full py-12 md:py-24">
+          <div className="flex flex-row-reverse gap-8 items-start">
+            <div className="h-[20rem] relative">
               <DirectionAwareHover imageUrl={ownerImageUrl}>
                 <p className="font-bold text-xl">Dalbir and Sukhbir</p>
                 <p className="font-normal text-sm">Pictured in front of the Golden Temple in Amritsar, Punjab</p>
@@ -95,185 +95,182 @@ export default function Home() {
           </div>  
           <div className="flex flex-col space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Us</h2>
-            <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
-              Placeholder
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="w-full py-12 md:py-24">
-        <div className="container grid items-start gap-6 px-4 md:gap-10 xl:px-6">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Why S&D Autobody?</h2>
               <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
-                Placeholder
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <br/> <br/>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
               </p>
-            </div>
           </div>
-        </div>
       </div>
-      <div className="w-full py-12 md:py-24">
-        <div className="container grid items-start gap-6 px-4 md:gap-10 xl:px-6">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Services</h2>
-              <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
-                From minor dents to major collision damage, we offer a full range of auto body repair services.
-              </p>
+    </div>
+
+      <div className="bg-gray-300 w-full py-12 md:py-24">
+          <div className="container grid items-start gap-6 px-4 md:gap-10 xl:px-6">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Services</h2>
+                <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
+                  From minor dents to major collision damage, we offer a full range of auto body repair services.
+                </p>
             </div>
-          </div>
-          <div className="grid max-w-sm gap-6 min-[400px]:grid-cols-2 md:max-w-none md:grid-cols-3 md:gap-4 lg:grid-cols-3xl xl:gap-8">
-            <div className="flex flex-col items-center justify-center space-y-2 text-center">
-              <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
-                <Image
-                  src="/images/services/service1.png"
-                  width={500}
-                  height={500}
-                  alt="Picture of the author"
-                  className="invert"
-                />
-              </div>
-              <h3 className="text-xl font-bold">Auto Body Repair</h3>
-              <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div className="flex flex-col items-center justify-center space-y-2 text-center">
-              <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
-                <Image
-                    src="/images/services/service2.png"
-                    width={500}
-                    height={500}
-                    alt="Picture of the author"
-                    className="invert"
-                  />
-              </div>
-              <h3 className="text-xl font-bold">Paintless Dent Repair</h3>
-              <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div className="flex flex-col items-center justify-center space-y-2 text-center">
-              <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
-                <Image
-                    src="/images/services/service3.png"
-                    width={500}
-                    height={500}
-                    alt="Picture of the author"
-                    className="invert"
-                  />
-              </div>
-              <h3 className="text-xl font-bold">Auto Detailing</h3>
-              <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div className="flex flex-col items-center justify-center space-y-2 text-center">
-              <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
-                <Image
-                    src="/images/services/service4.png"
-                    width={500}
-                    height={500}
-                    alt="Picture of the author"
-                    className="invert"
-                  />
-              </div>
-              <h3 className="text-xl font-bold">Frame Straightening</h3>
-              <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div className="flex flex-col items-center justify-center space-y-2 text-center">
-              <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
-                <Image
-                    src="/images/services/service5.png"
-                    width={500}
-                    height={500}
-                    alt="Picture of the author"
-                    className="invert"
-                  />
-              </div>
-              <h3 className="text-xl font-bold">Graphics and Decals</h3>
-              <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div className="flex flex-col items-center justify-center space-y-2 text-center">
-              <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
-                <Image
+            <div className="grid max-w-sm gap-6 min-[400px]:grid-cols-2 md:max-w-none md:grid-cols-3 md:gap-4 lg:grid-cols-3xl xl:gap-8">
+              <div className="flex flex-col items-center justify-center space-y-2 text-center">
+                <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
+                  <Image
                     src="/images/services/service1.png"
                     width={500}
                     height={500}
                     alt="Picture of the author"
                     className="invert"
                   />
+                </div>
+                <h3 className="text-xl font-bold">Auto Body Repair</h3>
+                <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
-              <h3 className="text-xl font-bold">Custom Paint Jobs</h3>
-              <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <div className="flex flex-col items-center justify-center space-y-2 text-center">
+                <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
+                  <Image
+                      src="/images/services/service2.png"
+                      width={500}
+                      height={500}
+                      alt="Picture of the author"
+                      className="invert"
+                    />
+                </div>
+                <h3 className="text-xl font-bold">Paintless Dent Repair</h3>
+                <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+              <div className="flex flex-col items-center justify-center space-y-2 text-center">
+                <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
+                  <Image
+                      src="/images/services/service3.png"
+                      width={500}
+                      height={500}
+                      alt="Picture of the author"
+                      className="invert"
+                    />
+                </div>
+                <h3 className="text-xl font-bold">Auto Detailing</h3>
+                <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+              <div className="flex flex-col items-center justify-center space-y-2 text-center">
+                <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
+                  <Image
+                      src="/images/services/service4.png"
+                      width={500}
+                      height={500}
+                      alt="Picture of the author"
+                      className="invert"
+                    />
+                </div>
+                <h3 className="text-xl font-bold">Frame Straightening</h3>
+                <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+              <div className="flex flex-col items-center justify-center space-y-2 text-center">
+                <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
+                  <Image
+                      src="/images/services/service5.png"
+                      width={500}
+                      height={500}
+                      alt="Picture of the author"
+                      className="invert"
+                    />
+                </div>
+                <h3 className="text-xl font-bold">Graphics and Decals</h3>
+                <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+              <div className="flex flex-col items-center justify-center space-y-2 text-center">
+                <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
+                  <Image
+                      src="/images/services/service1.png"
+                      width={500}
+                      height={500}
+                      alt="Picture of the author"
+                      className="invert"
+                    />
+                </div>
+                <h3 className="text-xl font-bold">Custom Paint Jobs</h3>
+                <p className="text-sm text-gray-500/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="w-full py-12 md:py-24 bg-gray-700">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Customer Testimonials</h2>
-              <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
-                See what our customers have to say about our auto body repair services.
-              </p>
-              <div className="items-center justify-center relative overflow-hidden">
-              <InfiniteMovingCards
-              items={testimonials}
-              direction="left"
-              speed="slow"
-              />
-            </div>
-        </div>
-      </div>
-    </div>
-      <div className="w-full py-12 md:py-24">
-        <div className="container grid items-start gap-6 px-4 md:gap-10 xl:px-6">
+      
+      <div>
+        <div className="w-full py-12 md:py-24 bg-gray-700">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Contact Us</h2>
-              <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
-                Have a question? Ready to schedule an appointment? Contact us today!
-              </p>
-            </div>
-            <form className="grid max-w-sm gap-4 min-[400px]:grid-cols-2 md:gap-6 md:max-w-4xl lg:gap-8 lg:max-w-5xl xl:gap-10">
-              <div className="flex flex-col space-y-1">
-                <label
-                  className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
-                  htmlFor="name"
-                >
-                  Full Name
-                </label>
-                <Input className="h-10 peer-accent-0" id="name" placeholder="Enter your full name" type="text" />
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Customer Testimonials</h2>
+                <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
+                  See what our customers have to say about our auto body repair services.
+                </p>
+                <div className="items-center justify-center relative overflow-hidden">
+                <InfiniteMovingCards
+                items={testimonials}
+                direction="left"
+                speed="slow"
+                />
               </div>
-              <div className="flex flex-col space-y-1">
-                <label
-                  className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
-                  htmlFor="email"
-                >
-                  Email Address
-                </label>
-                <Input className="h-10 peer-accent-0" id="email" placeholder="Enter your email" type="email" />
-              </div>
-              <div className="flex flex-col space-y-1">
-                <label
-                  className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
-                  htmlFor="phone"
-                >
-                  Phone Number
-                </label>
-                <Input className="h-10 peer-accent-0" id="phone" placeholder="Enter your phone number" type="tel" />
-              </div>
-              <div className="flex flex-col space-y-1 col-span-2">
-                <label
-                  className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
-                  htmlFor="message"
-                >
-                  Your Message
-                </label>
-                <Textarea className="min-h-[100px] peer-accent-0" id="message" placeholder="Enter your message" />
-              </div>
-              <Button className="w-full justify-center" type="submit">
-                Submit
-              </Button>
-            </form>
           </div>
         </div>
       </div>
+      
+      <div>
+        <div className="w-full py-12 md:py-24">
+          <div className="container grid items-start gap-6 px-4 md:gap-10 xl:px-6">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Contact Us</h2>
+                <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
+                  Have a question? Ready to schedule an appointment? Contact us today!
+                </p>
+              </div>
+              <form className="grid max-w-sm gap-4 min-[400px]:grid-cols-2 md:gap-6 md:max-w-4xl lg:gap-8 lg:max-w-5xl xl:gap-10">
+                <div className="flex flex-col space-y-1">
+                  <label
+                    className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
+                    htmlFor="name"
+                  >
+                    Full Name
+                  </label>
+                  <Input className="h-10 peer-accent-0" id="name" placeholder="Enter your full name" type="text" />
+                </div>
+                <div className="flex flex-col space-y-1">
+                  <label
+                    className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
+                    htmlFor="email"
+                  >
+                    Email Address
+                  </label>
+                  <Input className="h-10 peer-accent-0" id="email" placeholder="Enter your email" type="email" />
+                </div>
+                <div className="flex flex-col space-y-1">
+                  <label
+                    className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
+                    htmlFor="phone"
+                  >
+                    Phone Number
+                  </label>
+                  <Input className="h-10 peer-accent-0" id="phone" placeholder="Enter your phone number" type="tel" />
+                </div>
+                <div className="flex flex-col space-y-1 col-span-2">
+                  <label
+                    className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
+                    htmlFor="message"
+                  >
+                    Your Message
+                  </label>
+                  <Textarea className="min-h-[100px] peer-accent-0" id="message" placeholder="Enter your message" />
+                </div>
+                <Button className="w-full justify-center" type="submit">
+                  Submit
+                </Button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <footer className="w-full py-6 bg-gray-900 text-gray-50 text-center">
         <p>© 2024 S&D Autobody. All rights reserved.</p>
       </footer>
