@@ -44,7 +44,7 @@ export default function GlobalHeader() {
       <div className="md:hidden flex items-center">
         <Popover>
           <PopoverTrigger asChild>
-            <Button size="icon" variant="ghost" className="bg-slate-400">
+            <Button size="icon" variant="default" className='hover:bg-slate-700'>
               <img alt="Menu" className="w-6 h-6" src="../svg/hamburger.svg" />
               <span className="sr-only">Toggle menu</span>
             </Button>
