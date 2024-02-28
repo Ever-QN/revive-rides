@@ -33,6 +33,26 @@ export default function Gallery() {
           </div>
           <div className="relative group overflow-hidden rounded-lg">
             <Image
+              alt="Broken red sedan in a scrapyard outside"
+              className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
+              height="400"
+              src="/images/gallery-images/brokenredcar.jpg"
+              width="600"
+              >
+            </Image>
+          </div>
+          <div className="relative group overflow-hidden rounded-lg">
+            <Image
+              alt="Fixed red sedan in a garage"
+              className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
+              height="400"
+              src="/images/gallery-images/redcarfixed.jpg"
+              width="600"
+              >
+            </Image>
+          </div>
+          <div className="relative group overflow-hidden rounded-lg">
+            <Image
               alt="Broken SUV in a garage beside a white truck"
               className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
               height="400"
@@ -67,26 +87,6 @@ export default function Gallery() {
               className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
               height="400"
               src="/images/gallery-images/fixedtruck.jpg"
-              width="600"
-              >
-            </Image>
-          </div>
-          <div className="relative group overflow-hidden rounded-lg">
-            <Image
-              alt="Broken red sedan in a scrapyard outside"
-              className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
-              height="400"
-              src="/images/gallery-images/brokenredcar.jpg"
-              width="600"
-              >
-            </Image>
-          </div>
-          <div className="relative group overflow-hidden rounded-lg">
-            <Image
-              alt="Fixed red sedan in a garage"
-              className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
-              height="400"
-              src="/images/gallery-images/redcarfixed.jpg"
               width="600"
               >
             </Image>
