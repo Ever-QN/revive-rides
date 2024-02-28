@@ -7,7 +7,7 @@ import { PopoverTrigger, Popover, PopoverContent } from "@/components/ui/popover
 export default function GlobalHeader() {
 
   return (
-    <header className="flex items-center justify-between w-full p-6 overflow fixed bg-primary text-primary-foreground z-50">
+    <header className="flex items-center justify-between w-full p-6 overflow fixed bg-primary text-primary-foreground z-50 text-nowrap ">
       <Link className="flex items-center space-x-2" href="/home">
         <img alt="S&D Autobody Logo" className="h-12 w-48 hover:scale-110 active:scale-125 hover:duration-200" src="../images/logo2.png" />
       </Link>
@@ -45,51 +45,49 @@ export default function GlobalHeader() {
               <span className="sr-only">Toggle menu</span>
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="mt-2 w-screen overflow-scroll overflow-x-hidden  bg-slate-900">
-            <div className="flex flex-col space-y-2">
+          <PopoverContent className="mt-2 w-screen overflow-x-hidden">
               <Link
-                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
+                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
                 href="/home"
               >
                 Home
               </Link>
               <Link
-                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
+                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
                 href="/services"
+              >
+                About Us
+              </Link>
+              <Link
+                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
+                href="/reviews"
               >
                 Services
               </Link>
               <Link
-                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
-                href="/reviews"
-              >
-                Reviews
-              </Link>
-              <Link
-                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
+                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
                 href="/booking"
               >
-                Book Online
+                Gallery
               </Link>
               <Link
-                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
+                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
                 href="/contact"
               >
                 Contact Us
               </Link>
               <Link
-                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
+                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
                 href="/booking"
               >
-                Login
+                Login or Sign Up
               </Link>
               <Link
-                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-800"
+                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
                 href="/booking"
               >
-                Sign Up
+                Book Online
               </Link>
-            </div>
           </PopoverContent>
         </Popover>
       </div>
