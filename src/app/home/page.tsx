@@ -87,12 +87,12 @@ export default function Home() {
       <div className="w-full py-12 md:py-24">
         <div className="container grid items-center gap-6 px-4 md:gap-10 xl:px-6">
           <div className="flex items-center mr-4">
-          <div className="h-[40rem] relative  flex items-center justify-center">
-          <DirectionAwareHover imageUrl={ownerImageUrl}>
-            <p className="font-bold text-xl">Dalbir and Sukhbir</p>
-            <p className="font-normal text-sm">Pictured in front of the Golden Temple in Amritsar, Punjab</p>
-          </DirectionAwareHover>
-        </div>  
+            <div className="h-[40rem] relative  flex items-center justify-center">
+              <DirectionAwareHover imageUrl={ownerImageUrl}>
+                <p className="font-bold text-xl">Dalbir and Sukhbir</p>
+                <p className="font-normal text-sm">Pictured in front of the Golden Temple in Amritsar, Punjab</p>
+              </DirectionAwareHover>
+          </div>  
           <div className="flex flex-col space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Us</h2>
             <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
