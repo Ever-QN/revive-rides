@@ -7,12 +7,12 @@ import { PopoverTrigger, Popover, PopoverContent } from "@/components/ui/popover
 export default function GlobalHeader() {
 
   return (
-    <header className="flex items-center justify-between w-full p-6 overflow fixed bg-primary text-primary-foreground z-50">
+    <header className="flex items-center justify-between w-full max-h-24 p-6 overflow fixed bg-primary text-primary-foreground z-50">
       <Link className="flex items-center space-x-2" href="/home">
-        <img alt="S&D Autobody Logo" className="h-12 w-48 hover:scale-110 active:scale-125 hover:duration-200" src="../images/logo2.png" />
+        <img alt="S&D Autobody Logo" className="h-12 w-48 md:min-h-12 md:min-w-48 hover:scale-110 active:scale-125 hover:duration-200" src="../images/logo2.png" />
       </Link>
 
-      <nav className="hidden lg:flex md:flex ml-44 items-center space-x-12">
+      <nav className="hidden lg:flex text-nowrap ml-40 items-center space-x-8">
         <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500 transform hover:-translate-y-1 transition duration-400 active:-translate-y-3" href="/home">
           Home
         </Link>
@@ -29,7 +29,7 @@ export default function GlobalHeader() {
           Contact Us
         </Link>
       </nav>
-      <div className="hidden md:flex items-center space-x-4 ">
+      <div className="hidden lg:flex items-center space-x-4 ">
         <Link href="/login" className='text-white font-semibold transform hover:-translate-y-1 transition duration-400 active:-translate-y-3 hover:text-blue-500 dark:hover:text-blue-500'>
             Login or Sign Up
         </Link>
@@ -37,7 +37,7 @@ export default function GlobalHeader() {
             Book an Appointment
         </Link>
       </div>
-      <div className="md:hidden flex items-center">
+      <div className="lg:hidden flex items-center">
         <Popover>
           <PopoverTrigger asChild>
             <Button size="icon" variant="default" className='hover:bg-slate-700'>
