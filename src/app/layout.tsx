@@ -1,38 +1,29 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import './globals.css';
-import GlobalHeader from "@/components/global-header";
-import "./globals.css"
-import { Inter as FontSans } from "next/font/google"
-import { cn } from "@/lib/utils"
+import GlobalHeader from "../components/global-header";
+import GlobalFooter from "../components/global-footer";
 
-export const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-})
-
+const inter = Inter({ subsets: ["latin"] });
+ 
 export const metadata: Metadata = {
-  title: "S&D Autobody Login",
-  description: "S&D Autobody Login Page",
+  title: "S&D Autobody",
+  description: "Discover excellence in automotive care at S&D Autobody",
 };
 
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
-        )}
-      >
+      <body className={inter.className}>
         <GlobalHeader />
         {children}
+        <GlobalFooter />
       </body>
     </html>
-  )
+  );
 }
