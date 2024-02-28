@@ -73,20 +73,20 @@ export default function Gallery() {
           </div>
           <div className="relative group overflow-hidden rounded-lg">
             <Image
-              alt="White truck with a crushed front end in a garage with the hood up"
+              alt="Red truck with a crushed front end in a garage with the hood up"
               className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
               height="400"
-              src="/images/gallery-images/brokentruck.jpg"
+              src="/images/gallery-images/brokenredtruck.jpg"
               width="600"
               >
             </Image>
           </div>
           <div className="relative group overflow-hidden rounded-lg">
             <Image
-              alt="Fixed truck outside"
+              alt="Fixed red truck outside"
               className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
               height="400"
-              src="/images/gallery-images/fixedtruck.jpg"
+              src="/images/gallery-images/fixedredtruck.jpg"
               width="600"
               >
             </Image>
