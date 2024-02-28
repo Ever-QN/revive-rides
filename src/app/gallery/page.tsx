@@ -33,46 +33,6 @@ export default function Gallery() {
           </div>
           <div className="relative group overflow-hidden rounded-lg">
             <Image
-              alt="Broken SUV in a garage beside a white truck"
-              className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
-              height="400"
-              src="/images/gallery-images/brokensuv.jpg"
-              width="600"
-              >
-            </Image>
-          </div>
-          <div className="relative group overflow-hidden rounded-lg">
-            <Image
-              alt="Fixed SUV outside"
-              className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
-              height="400"
-              src="/images/gallery-images/fixedsuv.jpg"
-              width="600"
-              >
-            </Image>
-          </div>
-          <div className="relative group overflow-hidden rounded-lg">
-            <Image
-              alt="White truck with a crushed front end in a garage with the hood up"
-              className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
-              height="400"
-              src="/images/gallery-images/brokentruck.jpg"
-              width="600"
-              >
-            </Image>
-          </div>
-          <div className="relative group overflow-hidden rounded-lg">
-            <Image
-              alt="Fixed truck outside"
-              className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
-              height="400"
-              src="/images/gallery-images/fixedtruck.jpg"
-              width="600"
-              >
-            </Image>
-          </div>
-          <div className="relative group overflow-hidden rounded-lg">
-            <Image
               alt="Broken red sedan in a scrapyard outside"
               className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
               height="400"
@@ -91,6 +51,46 @@ export default function Gallery() {
               >
             </Image>
           </div>
+          <div className="relative group overflow-hidden rounded-lg">
+            <Image
+              alt="Red truck with a crushed front end in a garage with the hood up"
+              className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
+              height="400"
+              src="/images/gallery-images/brokenredtruck.jpg"
+              width="600"
+              >
+            </Image>
+          </div>
+          <div className="relative group overflow-hidden rounded-lg">
+            <Image
+              alt="Fixed red truck outside"
+              className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
+              height="400"
+              src="/images/gallery-images/fixedredtruck.jpg"
+              width="600"
+              >
+            </Image>
+          </div>
+          {/* <div className="relative group overflow-hidden rounded-lg">
+            <Image
+              alt="Broken SUV in a garage beside a white truck"
+              className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
+              height="400"
+              src="/images/gallery-images/brokensuv.jpg"
+              width="600"
+              >
+            </Image>
+          </div>
+          <div className="relative group overflow-hidden rounded-lg">
+            <Image
+              alt="Fixed SUV outside"
+              className="object-cover w-full aspect-[3/2] group-hover:scale-105 group-hover:transition-transform transition-transform rounded-lg"
+              height="400"
+              src="/images/gallery-images/fixedsuv.jpg"
+              width="600"
+              >
+            </Image>
+          </div> */}
           {/* <div className="relative group overflow-hidden rounded-lg">
             <video muted width="200" height="300" src="/videos/redcarfixed.mp4" controls preload="auto" />
           </div> */}
