@@ -1,19 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import './globals.css';
-import { ThemeProvider } from "../components/ui/theme-provider"
 import GlobalHeader from "../components/global-header";
-import { Inter as FontSans } from "next/font/google"
-import { cn } from "@/lib/utils"
+import GlobalFooter from "../components/global-footer";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-})
  
-
 export const metadata: Metadata = {
   title: "S&D Autobody",
   description: "Discover excellence in automotive care at S&D Autobody",
@@ -30,6 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <GlobalHeader />
         {children}
+        <GlobalFooter />
       </body>
     </html>
   );
