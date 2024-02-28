@@ -52,62 +52,36 @@ const images = [
 export default function Component() {
   return (
     <>
-      <div className="w-full pt-24 pb-48">
-      <ImagesSlider className="h-[40rem]" images={images}>
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: -80,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 0.6,
-          }}
-          className="z-50 flex flex-col justify-center items-center"
-        >
-          <motion.p className="font-bold text-xl md:text-6xl text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 py-4">
-            S&D Autobody
-          </motion.p>
-          <motion.p className="text-4xl bg-gradient-to-r from-red-400 to-red-700 text-transparent bg-clip-text">
-            Discover excellence in auto body repair services.
-          </motion.p>
-          <button className="px-4 py-2 backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white mx-auto text-center rounded-full relative mt-4">
-            <span>Join now →</span>
-            <div className="absolute inset-x-0  h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
-          </button>
-        </motion.div>
-    </ImagesSlider>
-          <div className="container grid items-center gap-6 px-4 pt-6 md:pt-12 md:gap-10 xl:px-6 relative z-10">
-            
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h1 className="text-4xl font-bold tracking-tighter lg:text-6xl xl:text-7xl/75 bg-gradient-to-r from-red-500 to-red-900 text-transparent bg-clip-text">
-                  S&D Autobody
-                </h1>
-                <p className="">
-                  Discover excellence in auto body repair services.
-                </p>
-              </div>
-              <div className="grid max-w-sm gap-4 min-[400px]:grid-cols-2">
-                <Link
-                  className="inline-flex items-center justify-center rounded-md border border-gray-20 bg-white px-4 py-2 text-sm font-medium shadow-sm gap-1 transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50  dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-950 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
-                  href="#"
-                >
-                  Contact Us
-                </Link>
-                <Link
-                  className="inline-flex items-center justify-center rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
-                  href="#"
-                >
-                  Get a Quote
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="w-full pt-24">
+        <ImagesSlider className="h-[50rem]" images={images}>
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: -80,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.6,
+            }}
+            className="z-50 flex flex-col justify-center items-center"
+          >
+            <motion.p className="font-bold text-xl md:text-6xl text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 py-4">
+              S&D Autobody
+            </motion.p>
+            <motion.p className="text-4xl bg-gradient-to-r from-red-400 to-red-700 text-transparent bg-clip-text">
+              Discover excellence in auto body repair services.
+            </motion.p>
+            <Button className="px-4 py-2 backdrop-blur-sm border bg-red-300/10 border-red-500/20 text-white mx-auto text-center rounded-full relative mt-4" variant={"link"}>
+              <span>Book an Appointment →</span>
+              <div className="absolute inset-x-0  h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-red-500 to-transparent" />
+            </Button>
+
+          </motion.div>
+        </ImagesSlider>
+      </div>
       <div className="w-full py-12 md:py-24">
         <div className="container grid items-start gap-6 px-4 md:gap-10 xl:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
@@ -293,7 +267,7 @@ export default function Component() {
         </div>
       </div>
       <footer className="w-full py-6 bg-gray-900 text-gray-50 text-center">
-        <p>© 2024 Auto Body Repair Inc. All rights reserved.</p>
+        <p>© 2024 S&D Autobody. All rights reserved.</p>
       </footer>
     </>
   )
