@@ -165,7 +165,7 @@ export default function Home() {
                   />
               </div>
               <h3 className="text-xl font-bold">Frame Straightening</h3>
-              <p className="text-sm text-gray-500/90">Corrects misalignments or bends in your vehicle's chassis (frame) caused by accidents or collisions, ensuring proper wheel alignment and safe driving.</p>
+              <p className="text-sm text-gray-500/90">Corrects misalignments or bends in your vehicle&apos;s chassis (frame) caused by accidents or collisions, ensuring proper wheel alignment and safe driving.</p>
             </div>
             <div className="flex flex-col items-center justify-center space-y-2 text-center">
               <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gray-100/70">
