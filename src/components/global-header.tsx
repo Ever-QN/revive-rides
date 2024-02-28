@@ -17,13 +17,13 @@ export default function GlobalHeader() {
           Home
         </Link>
         <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500" href="/services">
-          Services
+          About Us
         </Link>
         <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500" href="/reviews">
-          Reviews
+          Services
         </Link>
         <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500" href="/booking">
-          Book Online
+          Gallery
         </Link>
         <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500" href="/contact">
           Contact Us
