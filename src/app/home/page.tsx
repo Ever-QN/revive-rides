@@ -91,11 +91,11 @@ export default function Home() {
               <DirectionAwareHover imageUrl={ownerImageUrl}>
                 <p className="font-bold text-xl">Sukhbir and Dalbir</p>
                 <p className="font-normal text-sm">Pictured in front of the Golden Temple in Amritsar, Punjab</p>
-              </DirectionAwareHover>
+              </DirectionAwareHover> 
           </div>  
-          <div className="flex flex-col space-y-2 md:overflow-hidden lg:overflow-hidden sm:overflow-y-scroll max-h-76">
+          <div className="flex flex-col space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Us</h2>
-              <p className="max-w-3xl text-gray-700 md:text-xl/95 dark:text-gray-500">
+              <p className="max-w-3xl text-gray-700 dark:text-gray-500 overflow-y-scroll lg:overflow-hidden max-h-52 md:max-h-72 lg:max-h-full">
                 Driven by a Vision, S&amp;D Autobody Takes Root <br/><br/>
 
                 Sukhbir and Dalbir Bachhal&apos;s journey started in Victoria, British Columbia, where they witnessed a need for reliable and affordable auto body repair services. This ignited a passion to create a company that not only delivered high-quality vehicle work, but also treated every customer with respect, honesty, and offered competitive prices.<br/><br/>
