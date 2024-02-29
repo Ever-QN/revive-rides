@@ -70,13 +70,13 @@ export default function Home() {
             }}
             className="z-50 flex flex-col justify-center items-center p-4"
           >
-            <motion.p className="font-bold text-2xl md:text-6xl text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 py-4">
+            <motion.p className="font-bold md:text-8xl text-6xl bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-cyan-700 via-neutral-100 to-sky-500 bg-clip-text text-transparent text-center py-4 dark:text-white">
               S&D Autobody
             </motion.p>
-            <motion.p className="text-2xl md:text-4xl bg-gradient-to-r from-red-500 to-red-800 text-transparent bg-clip-text">
+            <motion.p className="text-4xl text-center md:text-4xl bg-gradient-to-r from-red-500 to-red-800 text-transparent bg-clip-text dark:text-red-400">
               Discover excellence in auto body repair services.
             </motion.p>
-            <Link className="px-4 py-2 backdrop-blur-sm border bg-red-300/10 border-red-500/20 text-white mx-auto text-center rounded-full relative mt-4 hover:scale-110 active:scale-125 transition-all duration-100" href="/booking">
+            <Link className="px-4 py-2 backdrop-blur-sm border bg-red-700 md:bg-red-300/10 border-red-500/20 text-white mx-auto text-center rounded-full relative mt-4 hover:scale-110 active:scale-125 transition-all duration-100" href="/booking">
               <span>Book an Appointment →</span>
               <div className="absolute inset-x-0  h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-red-500 to-transparent" />
             </Link>
