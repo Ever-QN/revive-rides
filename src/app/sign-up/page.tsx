@@ -29,7 +29,7 @@ export default function SignUp() {
           className="brightness-[0.4]"
         />
       </div>
-      <div className="rounded-[22px] max-w-8xl mt-6 p-8 sm:p-10 bg-white dark:bg-zinc-900 z-10 border border-black">
+      <div className="rounded-[22px] max-w-8xl mt-8 p-8 sm:p-10 bg-white dark:bg-zinc-900 z-10 border border-black">
             <div className="space-y-2 text-center">
               <h1 className="text-3xl font-bold">Sign Up</h1>
               <p className="text-gray-500 dark:text-gray-400 pb-4">Create a new account</p>
