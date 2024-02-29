@@ -32,8 +32,8 @@ export default function GlobalHeader() {
         <Link href="/login" className='text-white font-semibold transform hover:-translate-y-1 transition duration-400 active:-translate-y-3 hover:text-blue-500 dark:hover:text-blue-500'>
             Login or Sign Up
         </Link>
-        <Link href="/book-appointment" className='max-w-64 inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-200 transition-colors hover:border-slate-500 active:scale-110 hover:scale-105 transition-transform duration-800'>
-            Book an Appointment
+        <Link href="/book-appointment" className='max-w-64 inline-flex h-12 hover:animate-shimmer items-center justify-center rounded-full border border-red-400 bg-[linear-gradient(110deg,#FF0000,45%,#8B0000,55%,#FF0000)] bg-[length:200%_100%] px-6 font-medium text-slate-200 transition-colors hover:border-slate-500 active:scale-110 hover:scale-105 transition-transform duration-800 '>
+            Book an Appointment →
         </Link>
       </div>
       <div className="lg:hidden flex items-center">
