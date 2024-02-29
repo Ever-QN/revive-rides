@@ -32,7 +32,7 @@ export default function GlobalHeader() {
         <Link href="/login" className='text-white font-semibold transform hover:-translate-y-1 transition duration-400 active:-translate-y-3 hover:text-blue-500 dark:hover:text-blue-500'>
             Login or Sign Up
         </Link>
-        <Link href="/booking" className='max-w-64 inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 hover:border-slate-500'>
+        <Link href="/book-appointment" className='max-w-64 inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 hover:border-slate-500'>
             Book an Appointment
         </Link>
       </div>
@@ -83,7 +83,7 @@ export default function GlobalHeader() {
               </Link>
               <Link
                 className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
-                href="/booking"
+                href="/book-appointment"
               >
                 Book Online
               </Link>
