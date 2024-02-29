@@ -9,7 +9,7 @@ import Link from "next/link"
 
 export default function Login() {
   return (
-    <div className="relative flex items-center justify-center bg-gray-500 py-12 -mb-16 h-[99.1vh]">
+    <div className="relative flex items-center justify-center bg-gray-500 py-12 h-screen -mb-16">
       <div className="absolute inset-0">
         <Image
           src="/images/fixedtruck.jpg"

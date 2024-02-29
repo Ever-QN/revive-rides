@@ -20,99 +20,98 @@ export default function SignUp() {
   };
 
   return (
-    <div className="relative flex items-center justify-center bg-gray-300 py-12 -mb-16 h-[99.1vh]">
+    <div className="relative flex items-center justify-center bg-gray-300 py-12 h-screen -mb-16">
       <div className="absolute inset-0">
         <Image
-          src="/images/fixedtruck.jpg"
+          src="/images/dualbrokencars2.jpg"
           alt="Background Image"
           layout="fill"
           objectFit="cover"
           className="brightness-[0.4]"
         />
       </div>
-      <BackgroundGradient className="rounded-[22px] max-w-xl p-4 sm:p-10 bg-white dark:bg-zinc-900">
-        <div className="mx-auto w-full max-w-md space-y-6 lg:px-12">
-          <div className="space-y-2 text-center">
-            <h1 className="text-3xl font-bold">Sign Up</h1>
-            <p className="text-gray-500 dark:text-gray-400">Create a new account</p>
-          </div>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="firstName">First Name</Label>
-              <Input
-                id="firstName"
-                type="text"
-                placeholder="Enter your first name"
-                {...register("firstName", { required: true })}
-              />
-              {errors.firstName && <span className="text-red-500">First name is required</span>}
+      <div className="pt-8">
+        <BackgroundGradient className="rounded-[22px] max-w-8xl p-4 sm:p-10 bg-white dark:bg-zinc-900">
+            <div className="space-y-2 text-center p-4">
+              <h1 className="text-3xl font-bold">Sign Up</h1>
+              <p className="text-gray-500 dark:text-gray-400">Create a new account</p>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="lastName">Last Name</Label>
-              <Input
-                id="lastName"
-                type="text"
-                placeholder="Enter your last name"
-                {...register("lastName", { required: true })}
-              />
-              {errors.lastName && <span className="text-red-500">Last name is required</span>}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Enter your email"
-                {...register("email", { required: true })}
-              />
-              {errors.email && <span className="text-red-500">Email is required</span>}
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <Link className="ml-auto text-sm underline" href="#">
-                  Forgot your password?
-                </Link>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="firstName">First Name</Label>
+                <Input
+                  id="firstName"
+                  type="text"
+                  placeholder="Enter your first name"
+                  {...register("firstName", { required: true })}
+                />
+                {errors.firstName && <span className="text-red-500">First name is required</span>}
               </div>
-              <Input
-                id="password"
-                type="password"
-                {...register("password", { required: true })}
-              />
-              {errors.password && <span className="text-red-500">Password is required</span>}
+              <div className="space-y-2">
+                <Label htmlFor="lastName">Last Name</Label>
+                <Input
+                  id="lastName"
+                  type="text"
+                  placeholder="Enter your last name"
+                  {...register("lastName", { required: true })}
+                />
+                {errors.lastName && <span className="text-red-500">Last name is required</span>}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  {...register("email", { required: true })}
+                />
+                {errors.email && <span className="text-red-500">Email is required</span>}
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center">
+                  <Label htmlFor="password">Password</Label>
+                </div>
+                <Input
+                  id="password"
+                  type="password"
+                  {...register("password", { required: true })}
+                  placeholder="Enter your password"
+                />
+                {errors.password && <span className="text-red-500">Password is required</span>}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <Input
+                  id="confirmPassword"
+                  type="password"
+                  {...register("confirmPassword", { required: true })}
+                  placeholder="Confirm your password"
+                />
+                {errors.confirmPassword && <span className="text-red-500">Confirm password is required</span>}
+              </div>
+              <Button className="w-full" type="submit" disabled={isLoading}>
+                {isLoading ? "Signing up..." : "Sign Up"}
+              </Button>
+            </form>
+            <div className="flex justify-center space-x-4 p-4">
+              <Button variant="outline">
+                <ChromeIcon className="h-6 w-6" />
+              </Button>
+              <Button variant="outline">
+                <AppleIcon className="h-6 w-6" />
+              </Button>
+              <Button variant="outline">
+                <FacebookIcon className="h-6 w-6" />
+              </Button>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Confirm Password</Label>
-              <Input
-                id="confirmPassword"
-                type="password"
-                {...register("confirmPassword", { required: true })}
-              />
-              {errors.confirmPassword && <span className="text-red-500">Confirm password is required</span>}
+            <div className="text-center text-sm">
+              Already have an account?{" "}
+              <Link className="underline text-red-600" href="/login">
+                Log in
+              </Link>
             </div>
-            <Button className="w-full" type="submit" disabled={isLoading}>
-              {isLoading ? "Signing up..." : "Sign Up"}
-            </Button>
-          </form>
-          <div className="flex justify-center space-x-4">
-            <Button variant="outline">
-              <ChromeIcon className="h-6 w-6" />
-            </Button>
-            <Button variant="outline">
-              <AppleIcon className="h-6 w-6" />
-            </Button>
-            <Button variant="outline">
-              <FacebookIcon className="h-6 w-6" />
-            </Button>
-          </div>
-          <div className="text-center text-sm">
-            Already have an account?{" "}
-            <Link className="underline text-red-600" href="/login">
-              Log in
-            </Link>
-          </div>
-        </div>
-      </BackgroundGradient>
+        </BackgroundGradient>
+      </div>
     </div>
   );
 }
