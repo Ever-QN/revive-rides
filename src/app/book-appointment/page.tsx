@@ -10,7 +10,7 @@ export default function BookAppointment() {
       <div className="grid gap-4">
         <Link
           className="flex items-center justify-between w-full p-4 rounded-lg border border-gray-500 bg-white shadow-sm gap-4 hover:-translate-y-2 transition-all duration-400 active:invert"
-          href="/new-appointment"
+          href="/book-appointment/new-appointment"
         >
           <div className="space-y-1.5">
             <h2 className="text-base font-semibold tracking-wider text-gray-900">New Appointment</h2>
@@ -20,7 +20,7 @@ export default function BookAppointment() {
         </Link>
         <Link
           className="flex items-center justify-between w-full p-4 rounded-lg border border-gray-500 bg-white shadow-sm gap-4 hover:-translate-y-2 transition-all duration-400 active:invert"
-          href="/edit-appointment"
+          href="/book-appointment/edit-appointment"
         >
           <div className="space-y-1.5">
             <h2 className="text-base font-semibold tracking-wider text-gray-900">Edit Appointment</h2>
