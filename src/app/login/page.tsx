@@ -12,7 +12,7 @@ export default function Login() {
     <div className="relative flex items-center justify-center bg-gray-500 py-12 h-screen -mb-16 p-8">
       <div className="absolute inset-0">
         <Image
-          src="/images/fixedtruck.jpg"
+          src="/images/login-bg.jpg"
           alt="Background Image"
           layout="fill"
           objectFit="cover"
