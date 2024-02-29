@@ -1,0 +1,10 @@
+/* styles/global.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.background-image {
+  background-image: url('/images/background.png');
+  background-size: cover;
+  background-position: center;
+}
