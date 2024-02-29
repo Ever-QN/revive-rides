@@ -22,7 +22,7 @@ export default function SignUp() {
     <div className="relative flex items-center justify-center bg-gray-300 py-12 h-screen -mb-16">
       <div className="absolute inset-0">
         <Image
-          src="/images/dualbrokencars2.jpg"
+          src="/images/sign-up-bg.jpg"
           alt="Background Image"
           layout="fill"
           objectFit="cover"
