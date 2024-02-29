@@ -7,7 +7,7 @@ export default function EditAppointment() {
     <div className="relative flex items-center justify-center bg-gray-300 py-12 pt-24 z-0 h-screen -mb-16">
         <div className="absolute inset-0">
         <Image
-          src="/images/wheel.jpg"
+          src="/images/edit-appointment-bg.jpg"
           alt="Background Image"
           layout="fill"
           objectFit="cover"
