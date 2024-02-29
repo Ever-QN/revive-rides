@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { BackgroundGradient } from "@/components/ui/background-gradient"
 import Image from "next/image"
 import Link from "next/link"
 import { useForm } from "react-hook-form";
@@ -30,11 +29,10 @@ export default function SignUp() {
           className="brightness-[0.4]"
         />
       </div>
-      <div className="pt-8">
-        <BackgroundGradient className="rounded-[22px] max-w-8xl p-4 sm:p-10 bg-white dark:bg-zinc-900">
-            <div className="space-y-2 text-center p-4">
+      <div className="rounded-[22px] max-w-8xl mt-6 p-8 sm:p-10 bg-white dark:bg-zinc-900 z-10 border border-black">
+            <div className="space-y-2 text-center">
               <h1 className="text-3xl font-bold">Sign Up</h1>
-              <p className="text-gray-500 dark:text-gray-400">Create a new account</p>
+              <p className="text-gray-500 dark:text-gray-400 pb-4">Create a new account</p>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="space-y-2">
@@ -110,7 +108,6 @@ export default function SignUp() {
                 Log in
               </Link>
             </div>
-        </BackgroundGradient>
       </div>
     </div>
   );

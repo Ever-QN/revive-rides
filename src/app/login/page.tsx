@@ -19,8 +19,7 @@ export default function Login() {
           className="brightness-[0.4]"
         />
       </div>
-      <BackgroundGradient className="rounded-[22px] max-w-xl p-4 sm:p-10 bg-white dark:bg-zinc-900">
-        <div className="mx-auto w-full max-w-md space-y-6 lg:px-12">
+        <div className="mx-auto w-full space-y-6 lg:px-12 rounded-[22px] max-w-xl p-4 sm:p-10 bg-white dark:bg-zinc-900 z-10 border-2 border-black">
           <div className="space-y-2 text-center">
             <h1 className="text-3xl font-bold">Login</h1>
             <p className="text-gray-500 dark:text-gray-400">Enter your credentials to access your account</p>
@@ -59,7 +58,6 @@ export default function Login() {
             </Link>
           </div>
         </div>
-      </BackgroundGradient>
     </div>
     
   )
