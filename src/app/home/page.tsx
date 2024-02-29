@@ -70,13 +70,13 @@ export default function Home() {
             }}
             className="z-50 flex flex-col justify-center items-center p-4"
           >
-            <motion.p className="font-bold text-2xl md:text-6xl text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 py-4">
+            <motion.p className="font-bold text-4xl text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 py-4 md:text-6xl">
               S&D Autobody
             </motion.p>
-            <motion.p className="text-2xl md:text-4xl bg-gradient-to-r from-red-500 to-red-800 text-transparent bg-clip-text">
+            <motion.p className="text-2xl md:text-4xl bg-gradient-to-b from-red-500 to-red-800 text-transparent bg-clip-text">
               Discover excellence in auto body repair services.
             </motion.p>
-            <Link className="px-4 py-2 backdrop-blur-sm border bg-red-300/10 border-red-500/20 text-white mx-auto text-center rounded-full relative mt-4 hover:scale-110 active:scale-125 transition-all duration-100" href="/booking">
+            <Link className="px-4 py-2 backdrop-blur-sm border bg-red-600 md:bg-red-300/10 border-red-500/20 text-white mx-auto text-center rounded-full relative mt-4 hover:scale-110 active:scale-125 transition-all duration-100" href="/booking">
               <span>Book an Appointment →</span>
               <div className="absolute inset-x-0  h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-red-500 to-transparent" />
             </Link>
@@ -93,7 +93,7 @@ export default function Home() {
                 <p className="font-normal text-sm">Pictured in front of the Golden Temple in Amritsar, Punjab</p>
               </DirectionAwareHover> 
           </div>  
-          <div className="flex flex-col space-y-2">
+          <div className="flex flex-col space-y-2 p-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Us</h2>
               <p className="max-w-3xl text-gray-700 dark:text-gray-500 overflow-y-scroll lg:overflow-hidden max-h-52 md:max-h-72 lg:max-h-full">
                 Driven by a Vision, S&amp;D Autobody Takes Root <br/><br/>
