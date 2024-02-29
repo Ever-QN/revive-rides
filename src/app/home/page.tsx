@@ -246,7 +246,7 @@ export default function Home() {
                 >
                   Your Message
                 </label>
-                <Textarea className="min-h-[100px] peer-accent-0" id="message" placeholder="Enter your message" />
+                <Textarea className="min-h-[100px] max-h-[300px] peer-accent-0" id="message" placeholder="Enter your message" />
                 <Button className="w-full justify-center" type="submit">
                   Submit
                 </Button>
