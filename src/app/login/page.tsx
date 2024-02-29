@@ -3,24 +3,22 @@
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { BackgroundGradient } from "@/components/ui/background-gradient"
 import Image from "next/image"
 import Link from "next/link"
 
 export default function Login() {
   return (
-    <div className="relative flex items-center justify-center bg-gray-500 py-12 h-screen -mb-16">
+    <div className="relative flex items-center justify-center bg-gray-500 py-12 h-screen -mb-16 p-8">
       <div className="absolute inset-0">
         <Image
-          src="/images/fixedtruck.jpg"
+          src="/images/login-bg.jpg"
           alt="Background Image"
           layout="fill"
           objectFit="cover"
           className="brightness-[0.4]"
         />
       </div>
-      <BackgroundGradient className="rounded-[22px] max-w-xl p-4 sm:p-10 bg-white dark:bg-zinc-900">
-        <div className="mx-auto w-full max-w-md space-y-6 lg:px-12">
+        <div className="mx-auto w-full space-y-6 lg:px-12 rounded-[22px] max-w-xl p-4 sm:p-10 bg-white dark:bg-zinc-900 z-10 border-2 border-black">
           <div className="space-y-2 text-center">
             <h1 className="text-3xl font-bold">Login</h1>
             <p className="text-gray-500 dark:text-gray-400">Enter your credentials to access your account</p>
@@ -28,7 +26,7 @@ export default function Login() {
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="username">Email</Label>
-              <Input id="username" placeholder="Enter your email" />
+              <Input id="username" className="border border-gray-500" placeholder="Enter your email" />
             </div>
             <div className="space-y-2">
               <div className="flex items-center">
@@ -37,7 +35,7 @@ export default function Login() {
                   Forgot your password?
                 </Link>
               </div>
-              <Input id="password" type="password" placeholder="Enter your password"/>
+              <Input id="password" type="password" className="border border-gray-500" placeholder="Enter your password"/>
             </div>
             <Button className="w-full">Login</Button>
           </div>
@@ -59,7 +57,6 @@ export default function Login() {
             </Link>
           </div>
         </div>
-      </BackgroundGradient>
     </div>
     
   )
