@@ -2,24 +2,25 @@ import Link from "next/link"
 
 export default function BookAppointment() {
   return (
-    <div className="mx-auto max-w-3xl space-y-4">
+    <>
+    <div className="flex flex-col justify-center mx-auto max-w-3xl h-screen space-y-4">
       <div className="flex items-center space-x-4">
         <h1 className="text-3xl font-bold tracking-tighter">Book an Appointment</h1>
       </div>
       <div className="grid gap-4">
         <Link
           className="flex items-center justify-between w-full p-4 rounded-lg border border-gray-200 bg-white shadow-sm gap-4"
-          href="#"
+          href="/new-appointment"
         >
           <div className="space-y-1.5">
             <h2 className="text-base font-semibold tracking-wider text-gray-900">New Appointment</h2>
-            <p className="text-sm font-normal text-gray-500">Book a new appointment</p>
+            <p className="text-sm font-normal text-gray-500">Book a new appointment or quote</p>
           </div>
           <CalendarCheckIcon className="w-6 h-6" />
         </Link>
         <Link
           className="flex items-center justify-between w-full p-4 rounded-lg border border-gray-200 bg-white shadow-sm gap-4"
-          href="#"
+          href="/edit-appointment"
         >
           <div className="space-y-1.5">
             <h2 className="text-base font-semibold tracking-wider text-gray-900">Edit Appointment</h2>
@@ -29,6 +30,7 @@ export default function BookAppointment() {
         </Link>
       </div>
     </div>
+    </>
   )
 }
 
