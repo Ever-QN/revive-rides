@@ -93,7 +93,7 @@ export default function Home() {
                 <p className="font-normal text-sm">Pictured in front of the Golden Temple in Amritsar, Punjab</p>
               </DirectionAwareHover> 
           </div>  
-          <div className="flex flex-col space-y-2">
+          <div className="flex flex-col space-y-2 p-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Us</h2>
               <p className="max-w-3xl text-gray-700 dark:text-gray-500 overflow-y-scroll lg:overflow-hidden max-h-52 md:max-h-72 lg:max-h-full">
                 Driven by a Vision, S&amp;D Autobody Takes Root <br/><br/>
