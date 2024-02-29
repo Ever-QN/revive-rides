@@ -9,7 +9,7 @@ import Link from "next/link"
 
 export default function Login() {
   return (
-    <div className="relative flex items-center justify-center bg-gray-500 py-12 h-screen -mb-16">
+    <div className="relative flex items-center justify-center bg-gray-500 py-12 h-screen -mb-16 p-8">
       <div className="absolute inset-0">
         <Image
           src="/images/fixedtruck.jpg"
@@ -27,7 +27,7 @@ export default function Login() {
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="username">Email</Label>
-              <Input id="username" placeholder="Enter your email" />
+              <Input id="username" className="border border-gray-500" placeholder="Enter your email" />
             </div>
             <div className="space-y-2">
               <div className="flex items-center">
@@ -36,7 +36,7 @@ export default function Login() {
                   Forgot your password?
                 </Link>
               </div>
-              <Input id="password" type="password" placeholder="Enter your password"/>
+              <Input id="password" type="password" className="border border-gray-500" placeholder="Enter your password"/>
             </div>
             <Button className="w-full">Login</Button>
           </div>
