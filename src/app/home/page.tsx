@@ -73,19 +73,18 @@ export default function Home() {
             <motion.p className="font-bold md:text-8xl text-6xl bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-cyan-700 via-neutral-100 to-sky-500 bg-clip-text text-transparent text-center py-4 dark:text-white">
               S&D Autobody
             </motion.p>
-            <motion.p className="text-4xl text-center md:text-4xl bg-gradient-to-r from-red-500 to-red-800 text-transparent bg-clip-text dark:text-red-400">
+            <motion.p className="text-4xl text-center md:text-4xl text-red-500 text-transparent bg-clip-text dark:text-gray-300">
               Discover excellence in auto body repair services.
             </motion.p>
-            <Link className="px-4 py-2 backdrop-blur-sm border bg-red-700 md:bg-red-300/10 border-red-500/20 text-white mx-auto text-center rounded-full relative mt-4 hover:scale-110 active:scale-125 transition-all duration-100" href="/booking">
+            <Link className="px-4 py-2 border border-red-400 bg-red-700 text-white mx-auto text-center rounded-full relative mt-4 hover:scale-110 active:scale-125 transition-all duration-100" href="/booking">
               <span>Book an Appointment →</span>
-              <div className="absolute inset-x-0  h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-red-500 to-transparent" />
             </Link>
 
           </motion.div>
         </ImagesSlider>
       </div>
 
-      <div className="p-3 flex justify-around w-full py-12 md:py-24 scroll-mt-10" id="about">
+      <div className="p-4 flex justify-around w-full py-12 md:py-24 scroll-mt-10" id="about">
           <div className="flex flex-row-reverse gap-8 items-start">
             <div className="relative">
               <DirectionAwareHover imageUrl={ownerImageUrl}>
@@ -93,7 +92,7 @@ export default function Home() {
                 <p className="font-normal text-sm">Pictured in front of the Golden Temple in Amritsar, Punjab</p>
               </DirectionAwareHover> 
           </div>  
-          <div className="flex flex-col space-y-2 p-6">
+          <div className="flex flex-col space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Us</h2>
               <p className="max-w-3xl text-gray-700 dark:text-gray-500 overflow-y-scroll lg:overflow-hidden max-h-52 md:max-h-72 lg:max-h-full">
                 Driven by a Vision, S&amp;D Autobody Takes Root <br/><br/>
@@ -106,7 +105,7 @@ export default function Home() {
       </div>
     </div>
 
-      <div className="bg-gray-300 w-full py-12 md:py-24 scroll-mt-10" id="services">
+      <div className="p-4 bg-gray-300 w-full py-12 md:py-24 scroll-mt-10" id="services">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Services</h2>
@@ -240,16 +239,7 @@ export default function Home() {
                 </label>
                 <Input className="h-10 peer-accent-0" id="email" placeholder="Enter your email" type="email" />
               </div>
-              <div className="flex flex-col space-y-1">
-                <label
-                  className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
-                  htmlFor="phone"
-                >
-                  Phone Number
-                </label>
-                <Input className="h-10 peer-accent-0" id="phone" placeholder="Enter your phone number" type="tel" />
-              </div>
-              <div className="flex flex-col space-y-1 col-span-2">
+              <div className="flex flex-col space-y-1 col-span-2 gap-4">
                 <label
                   className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
                   htmlFor="message"
@@ -257,10 +247,10 @@ export default function Home() {
                   Your Message
                 </label>
                 <Textarea className="min-h-[100px] peer-accent-0" id="message" placeholder="Enter your message" />
+                <Button className="w-full justify-center" type="submit">
+                  Submit
+                </Button>
               </div>
-              <Button className="w-full justify-center" type="submit">
-                Submit
-              </Button>
             </form>
           </div>
         </div>
