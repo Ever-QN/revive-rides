@@ -7,14 +7,14 @@ export default function BookAppointment() {
         <div className="flex flex-col justify-center mx-auto max-w-3xl h-screen space-y-4 px-8 z-0">
             {/* <div className="absolute inset-0">
                 <Image
-                src="/images/new-appointment-bg.jpg"
+                src="/images/sidebyside.jpg"
                 alt="Background Image"
                 layout="fill"
                 objectFit="cover"
                 className="brightness-[0.4]"
                 />
             </div> */}
-            <div className="z-10 bg-white">
+            <div className="z-10 bg-white p-3">
                 <div className="flex items-center space-x-4">
                     <h1 className="text-3xl font-bold tracking-tighter">Book an Appointment</h1>
                 </div>
