@@ -3,7 +3,6 @@
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { BackgroundGradient } from "@/components/ui/background-gradient"
 import Image from "next/image"
 import Link from "next/link"
 
