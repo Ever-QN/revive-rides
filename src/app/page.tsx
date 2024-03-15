@@ -1,13 +1,21 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import LoginPage from './manager-ui/page';
+"use client";
 
-export default function HomePage() {
+import Link from 'next/link';
+import type { NextPage } from 'next';
+import './globals.css';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+
+const AppPage: NextPage = () => {
+  const router = useRouter();
+  useEffect(() => {
+    router.push('/home');
+  }, []);
   return (
-    <div>
-      <ul>
-        <Link href="manager-ui">Go to Login Page</Link>
-      </ul>
+    <div className='flex w-full h-full justify-center items-center'>
+      <h1 className='text-black'>Loading...</h1>
     </div>
   );
-}
+};
+
+export default AppPage;
