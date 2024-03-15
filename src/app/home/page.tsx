@@ -84,15 +84,15 @@ export default function Home() {
         </ImagesSlider>
       </div>
 
-      <div className="p-4 flex justify-around w-full py-12 md:py-24 scroll-mt-10" id="about">
-          <div className="flex flex-row-reverse gap-8 items-start">
+      <div className="p-4 flex flex-nowrap overflow-auto justify-around w-full py-12 md:py-24 scroll-mt-10" id="about">
+          <div className="flex-shrink-0 flex flex-row-reverse gap-8 items-start min-w-[50%]">
             <div className="relative">
               <DirectionAwareHover imageUrl={ownerImageUrl}>
                 <p className="font-bold text-xl">Sukhbir and Dalbir</p>
                 <p className="font-normal text-sm">Pictured in front of the Golden Temple in Amritsar, Punjab</p>
               </DirectionAwareHover> 
           </div>  
-          <div className="flex flex-col space-y-2">
+          <div className="flex flex-col space-y-2 min-w-[50%]">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Us</h2>
               <p className="max-w-3xl text-gray-700 dark:text-gray-500 overflow-y-scroll lg:overflow-hidden max-h-52 md:max-h-72 lg:max-h-full">
                 Driven by a Vision, S&amp;D Autobody Takes Root <br/><br/>
