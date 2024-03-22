@@ -1,20 +1,12 @@
-import React from 'react';
+"use client"
 
-const AdminDashboard = () => {
+import Sidebar from "@/components/sidebar"
+import Link from "next/link"
 
-  // Redirect to admin/dashboard immediately on page load
-
-  // Check for authorized user before rendering the layout (commented out for now)
-  //if (!isAuthenticated()) {
-  //  router.push('/login');
-  //  return null;
-  //}
-
+export default function AdminDashboard() {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100">
-      {/* Admin header and content will not be rendered due to redirect */}
+    <div className="">
+      <Sidebar />
     </div>
-  );
-};
-
-export default AdminDashboard;
+  )
+}
