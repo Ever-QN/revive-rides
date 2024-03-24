@@ -29,7 +29,7 @@ export default function GlobalHeader() {
         </Link>
       </nav>
       <div className="hidden lg:flex items-center space-x-4 ">
-        <Link href="/login-or-sign-up" className='text-white font-semibold transform hover:-translate-y-1 transition duration-400 active:-translate-y-3 hover:text-blue-500 dark:hover:text-blue-500'>
+        <Link href="/login" className='text-white font-semibold transform hover:-translate-y-1 transition duration-400 active:-translate-y-3 hover:text-blue-500 dark:hover:text-blue-500'>
             Login or Sign Up
         </Link>
         <Link href="/book-appointment" className='max-w-64 inline-flex h-12 hover:animate-shimmer items-center justify-center rounded-full border border-red-400 bg-[linear-gradient(110deg,#FF0000,45%,#8B0000,55%,#FF0000)] bg-[length:200%_100%] px-6 font-medium text-slate-200 transition-colors hover:border-slate-500 active:scale-110 hover:scale-105 transition-transform duration-800 '>
