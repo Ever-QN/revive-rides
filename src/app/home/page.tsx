@@ -53,8 +53,8 @@ const sliderImages = [
 export default function Home() {
   const ownerImageUrl = "/images/sukhbir-and-dalbir.jpg";
   return (
-    <div>
-      <div className="relative min-h-screen w-full">
+    <>
+      <div className="w-full pt-24">
         <ImagesSlider className="h-[50rem]" images={sliderImages}>
           <motion.div
             initial={{
@@ -254,6 +254,6 @@ export default function Home() {
             </form>
           </div>
         </div>
-    </div>
+    </>
   )
 }
