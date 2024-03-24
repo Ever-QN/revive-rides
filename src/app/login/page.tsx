@@ -5,16 +5,32 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import Link from "next/link"
-import { createClient } from '@supabase/supabase-js'
-import { Auth } from '@supabase/auth-ui-react'
-import {
-  ThemeSupa,
-} from '@supabase/auth-ui-shared'
+import { login, signup } from './actions'
 import { Card, CardHeader, CardContent, CardFooter, CardDescription, CardTitle } from "@/components/ui/card"
+import { useState } from "react"
+import * as z from 'zod';
+import { useForm  } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL ?? '', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '')
+const formSchema = z.object({
+  email: z.string().email(),
+  password: z.string(),
+});
 
 export default function Login() {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: ""
+    }
+  })
+
+  const handleSubmit = () => {
+
+  }
+
   return (
       <div className="relative flex items-center justify-center py-12 h-screen p-8">
           <div className="absolute inset-0">
@@ -33,22 +49,48 @@ export default function Login() {
                                   <h1 className="text-3xl font-bold">Login</h1>
                                   <p className="text-gray-500 dark:text-gray-400">Enter your credentials to access your account</p>
                               </div>
-                              <div className="space-y-4">
-                                  <div className="space-y-2">
-                                      <Label htmlFor="username">Email</Label>
-                                      <Input id="username" placeholder="Enter your email" />
-                                  </div>
-                                  <div className="space-y-2">
-                                      <div className="flex items-center">
-                                          <Label htmlFor="password">Password</Label>
-                                          <Link className="ml-auto text-sm underline" href="/forgot-password">
-                                              Forgot your password?
-                                          </Link>
-                                      </div>
-                                      <Input id="password" placeholder="Enter your password" type="password" />
-                                  </div>
-                                  <Button className="w-full">Login</Button>
-                              </div>
+                              <Form {...form}>
+                                <form 
+                                  onSubmit={form.handleSubmit(handleSubmit)}
+                                  className="max-w-md w-full flex flex-col gap-4"
+                                >
+                                  <FormField control={form.control} name="email" render={({field}) => {
+                                    return (
+                                      <FormItem>
+                                        <FormLabel>Email</FormLabel>
+                                        <FormControl>
+                                          <Input 
+                                          placeholder="Enter your email" 
+                                          type="email" 
+                                          {...field} 
+                                          />
+                                        </FormControl>
+                                        <FormMessage />
+                                      </FormItem>
+                                      )
+                                    }}
+                                  />
+                                  <FormField control={form.control} name="password" render={({field}) => {
+                                    return (
+                                      <FormItem>
+                                        <FormLabel>Password</FormLabel>
+                                        <FormControl>
+                                          <Input 
+                                          placeholder="Enter your password" 
+                                          type="password" 
+                                          {...field} 
+                                          />
+                                        </FormControl>
+                                        <FormMessage />
+                                      </FormItem>
+                                      )
+                                    }}
+                                  />
+                                  <Button type="submit" className="w-full" >Login</Button>
+
+                                </form>
+                              </Form>
+                              {/*
                               <div className="flex justify-center space-x-4">
                                   <Button variant="outline">
                                       <ChromeIcon className="h-6 w-6" />
@@ -65,7 +107,7 @@ export default function Login() {
                                   <Link className="underline text-red-600" href="/sign-up">
                                       Sign up
                                   </Link>
-                              </div>
+                              </div> */}
                           </div>
                       </Card>
                   </div>
