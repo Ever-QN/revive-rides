@@ -87,27 +87,25 @@ export default function Login() {
                                     }}
                                   />
                                   <Button type="submit" className="w-full" >Login</Button>
-
+                                  <div className="flex justify-center space-x-4">
+                                    <Button variant="outline">
+                                        <ChromeIcon className="h-6 w-6" />
+                                    </Button>
+                                    <Button variant="outline">
+                                        <AppleIcon className="h-6 w-6" />
+                                    </Button>
+                                    <Button variant="outline">
+                                        <FacebookIcon className="h-6 w-6" />
+                                    </Button>
+                                  </div>
+                                  <div className="text-center text-sm">
+                                      Don&apos;t have an account?{" "}
+                                      <Link className="underline text-red-600" href="/sign-up">
+                                          Sign up
+                                      </Link>
+                                  </div>
                                 </form>
                               </Form>
-                              {/*
-                              <div className="flex justify-center space-x-4">
-                                  <Button variant="outline">
-                                      <ChromeIcon className="h-6 w-6" />
-                                  </Button>
-                                  <Button variant="outline">
-                                      <AppleIcon className="h-6 w-6" />
-                                  </Button>
-                                  <Button variant="outline">
-                                      <FacebookIcon className="h-6 w-6" />
-                                  </Button>
-                              </div>
-                              <div className="text-center text-sm">
-                                  Don&apos;t have an account?{" "}
-                                  <Link className="underline text-red-600" href="/sign-up">
-                                      Sign up
-                                  </Link>
-                              </div> */}
                           </div>
                       </Card>
                   </div>
