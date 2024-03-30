@@ -40,15 +40,13 @@ export default function SignUp() {
         },
     });
 
-    const [isLoading, setIsLoading] = useState(false);
-
     const handleSubmit = () => {
 
     }
 
     return (
         
-        <div className="relative flex items-center justify-center py-12 h-screen p-8">
+        <div className="flex items-center justify-center py-12 h-screen p-8">
             
             <div className="absolute inset-0">
                 <Image
@@ -58,111 +56,109 @@ export default function SignUp() {
                     objectFit="cover"
                     className="brightness-[0.4]"
                 />
-                <div className="z-50 mt-36 scale-95">
-                    <div className="px-24">
-                        <Card className="w-full max-w-md mx-auto border-2 border-black scale-110 p-8">
-                            <div className="mx-auto w-full max-w-md space-y-6 lg:px-12">
-                                <div className="space-y-2 text-center">
-                                    <h1 className="text-3xl font-bold">Sign Up</h1>
-                                    <p className="text-gray-500 dark:text-gray-400">Create a new account</p>
-                                </div>
-                                <Form {...form}>
-                                    <form 
-                                    onSubmit={form.handleSubmit(handleSubmit)}
-                                    className="max-w-md w-full flex flex-col gap-4"
-                                    >
-                                        <FormField control={form.control} name="firstName" render={({field}) => {
-                                            return (
-                                            <FormItem>
-                                                <FormLabel>First Name</FormLabel>
-                                                <FormControl>
-                                                <Input 
-                                                placeholder="Enter your first name" 
-                                                type="text" 
-                                                {...field} 
-                                                />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                            )
-                                        }}
-                                        />
-                                        <FormField control={form.control} name="lastName" render={({field}) => {
-                                            return (
-                                            <FormItem>
-                                                <FormLabel>Last Name</FormLabel>
-                                                <FormControl>
-                                                <Input 
-                                                placeholder="Enter your last name" 
-                                                type="text" 
-                                                {...field} 
-                                                />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                            )
-                                        }}
-                                        />
-                                        <FormField control={form.control} name="email" render={({field}) => {
-                                            return (
-                                            <FormItem>
-                                                <FormLabel>Email</FormLabel>
-                                                <FormControl>
-                                                <Input 
-                                                placeholder="Enter your email" 
-                                                type="email" 
-                                                {...field} 
-                                                />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                            )
-                                            }}
-                                        />
-                                        <FormField control={form.control} name="password" render={({field}) => {
-                                            return (
-                                            <FormItem>
-                                                <FormLabel>Password</FormLabel>
-                                                <FormControl>
-                                                <Input 
-                                                placeholder="Enter your password" 
-                                                type="password" 
-                                                {...field} 
-                                                />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                            )
-                                            }}
-                                        />
-                                        <FormField control={form.control} name="confirmPassword" render={({field}) => {
-                                            return (
-                                            <FormItem>
-                                                <FormLabel>Confirm Password</FormLabel>
-                                                <FormControl>
-                                                <Input 
-                                                placeholder="Confirm your password" 
-                                                type="password" 
-                                                {...field} 
-                                                />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                            )
-                                            }}
-                                        />
-                                  <Button type="submit" className="w-full" >Sign Up</Button>
-                                    <div className="text-center text-sm">
-                                        Already have an account?{" "}
-                                        <Link className="underline text-red-600" href="/login">
-                                            Log in
-                                        </Link>
-                                    </div>
-                                </form>
-                              </Form>
+                <div className="z-50 mt-36">
+                    <Card className="w-full max-w-md mx-auto border-2 border-black scale-110 p-8">
+                        <div className="mx-auto w-full max-w-md space-y-6 lg:px-12">
+                            <div className="space-y-2 text-center">
+                                <h1 className="text-3xl font-bold">Sign Up</h1>
+                                <p className="text-gray-500 dark:text-gray-400">Create a new account</p>
                             </div>
-                        </Card>
-                    </div>
+                            <Form {...form}>
+                                <form 
+                                onSubmit={form.handleSubmit(handleSubmit)}
+                                className="max-w-md w-full flex flex-col gap-4"
+                                >
+                                    <FormField control={form.control} name="firstName" render={({field}) => {
+                                        return (
+                                        <FormItem>
+                                            <FormLabel>First Name</FormLabel>
+                                            <FormControl>
+                                            <Input 
+                                            placeholder="Enter your first name" 
+                                            type="text" 
+                                            {...field} 
+                                            />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                        )
+                                    }}
+                                    />
+                                    <FormField control={form.control} name="lastName" render={({field}) => {
+                                        return (
+                                        <FormItem>
+                                            <FormLabel>Last Name</FormLabel>
+                                            <FormControl>
+                                            <Input 
+                                            placeholder="Enter your last name" 
+                                            type="text" 
+                                            {...field} 
+                                            />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                        )
+                                    }}
+                                    />
+                                    <FormField control={form.control} name="email" render={({field}) => {
+                                        return (
+                                        <FormItem>
+                                            <FormLabel>Email</FormLabel>
+                                            <FormControl>
+                                            <Input 
+                                            placeholder="Enter your email" 
+                                            type="email" 
+                                            {...field} 
+                                            />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                        )
+                                        }}
+                                    />
+                                    <FormField control={form.control} name="password" render={({field}) => {
+                                        return (
+                                        <FormItem>
+                                            <FormLabel>Password</FormLabel>
+                                            <FormControl>
+                                            <Input 
+                                            placeholder="Enter your password" 
+                                            type="password" 
+                                            {...field} 
+                                            />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                        )
+                                        }}
+                                    />
+                                    <FormField control={form.control} name="confirmPassword" render={({field}) => {
+                                        return (
+                                        <FormItem>
+                                            <FormLabel>Confirm Password</FormLabel>
+                                            <FormControl>
+                                            <Input 
+                                            placeholder="Confirm your password" 
+                                            type="password" 
+                                            {...field} 
+                                            />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                        )
+                                        }}
+                                    />
+                                <Button type="submit" className="w-full" >Sign Up</Button>
+                                <div className="text-center text-sm">
+                                    Already have an account?{" "}
+                                    <Link className="underline text-red-600" href="/login">
+                                        Log in
+                                    </Link>
+                                </div>
+                            </form>
+                            </Form>
+                        </div>
+                    </Card>
                 </div>
             </div>
         </div>
