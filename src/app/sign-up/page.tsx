@@ -1,19 +1,21 @@
 "use client"
 
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { createClient } from '@supabase/supabase-js';
-import { Auth } from '@supabase/auth-ui-react';
-import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { Card, CardHeader, CardContent, CardFooter, CardDescription, CardTitle } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+
+const NEXT_PUBLIC_SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const NEXT_PUBLIC_SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+const supabase = createClient(NEXT_PUBLIC_SUPABASE_URL!, NEXT_PUBLIC_SUPABASE_ANON_KEY!);
 
 const formSchema: any = z.object({
     firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -29,19 +31,29 @@ const formSchema: any = z.object({
 })
 
 export default function SignUp() {
+
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            firstName: "",
-            lastName: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword,
         },
     });
 
-    const handleSubmit = () => {
-
+    async function handleSubmit() {
+        const { data, error } = await supabase.auth.signUp({
+            email: email,
+            password: password,
+        });
     }
 
     return (
@@ -70,17 +82,21 @@ export default function SignUp() {
                                 >
                                     <FormField control={form.control} name="firstName" render={({field}) => {
                                         return (
-                                        <FormItem>
-                                            <FormLabel>First Name</FormLabel>
-                                            <FormControl>
-                                            <Input 
-                                            placeholder="Enter your first name" 
-                                            type="text" 
-                                            {...field} 
-                                            />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
+                                            <FormItem>
+                                                <FormLabel>First Name</FormLabel>
+                                                <FormControl>
+                                                    <Input 
+                                                        placeholder="Enter your first name" 
+                                                        type="text" 
+                                                        {...field} 
+                                                        onChange={(e) => {
+                                                            field.onChange(e);
+                                                            setFirstName(e.target.value);
+                                                        }}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
                                         )
                                     }}
                                     />
@@ -93,6 +109,10 @@ export default function SignUp() {
                                             placeholder="Enter your last name" 
                                             type="text" 
                                             {...field} 
+                                            onChange={(e) => {
+                                                field.onChange(e);
+                                                setLastName(e.target.value);
+                                            }}
                                             />
                                             </FormControl>
                                             <FormMessage />
@@ -109,6 +129,10 @@ export default function SignUp() {
                                             placeholder="Enter your email" 
                                             type="email" 
                                             {...field} 
+                                            onChange={(e) => {
+                                                field.onChange(e);
+                                                setEmail(e.target.value);
+                                            }}
                                             />
                                             </FormControl>
                                             <FormMessage />
@@ -125,6 +149,10 @@ export default function SignUp() {
                                             placeholder="Enter your password" 
                                             type="password" 
                                             {...field} 
+                                            onChange={(e) => {
+                                                field.onChange(e);
+                                                setPassword(e.target.value);
+                                            }}
                                             />
                                             </FormControl>
                                             <FormMessage />
@@ -141,6 +169,10 @@ export default function SignUp() {
                                             placeholder="Confirm your password" 
                                             type="password" 
                                             {...field} 
+                                            onChange={(e) => {
+                                                field.onChange(e);
+                                                setConfirmPassword(e.target.value);
+                                            }}
                                             />
                                             </FormControl>
                                             <FormMessage />
