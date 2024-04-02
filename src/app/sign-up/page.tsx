@@ -21,7 +21,7 @@ const formSchema: any = z.object({
     firstName: z.string().min(2, "First name must be at least 2 characters"),
     lastName: z.string().min(2, "Last name must be at least 2 characters"),
     email: z.string().email("Invalid email"),
-    password: z.string().min(8, "Password must be at least 8 characters"),
+    password: z.string().min(3, "Password must be at least 8 characters"),
     confirmPassword: z.string()
 }).refine((data) => {
     return data.password === data.confirmPassword;
@@ -31,29 +31,33 @@ const formSchema: any = z.object({
 })
 
 export default function SignUp() {
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
 
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password,
-            confirmPassword: confirmPassword,
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
         },
     });
 
     async function handleSubmit() {
-        const { data, error } = await supabase.auth.signUp({
-            email: email,
-            password: password,
+        const formData = form.getValues();
+        let { data, error } = await supabase.auth.signUp({
+            email: formData.email,
+            password: formData.password,
         });
+        if (error) {
+            setErrorMessage(error.message);
+        }
+        else if (data) {
+            setSuccessMessage("Account created successfully! Please check your inbox or junk to verify your account.");
+        }
     }
 
     return (
@@ -89,10 +93,8 @@ export default function SignUp() {
                                                         placeholder="Enter your first name" 
                                                         type="text" 
                                                         {...field} 
-                                                        onChange={(e) => {
-                                                            field.onChange(e);
-                                                            setFirstName(e.target.value);
-                                                        }}
+                                                        
+                                                        onChange={(e) => field.onChange(e.target.value)}
                                                     />
                                                 </FormControl>
                                                 <FormMessage />
@@ -109,10 +111,7 @@ export default function SignUp() {
                                             placeholder="Enter your last name" 
                                             type="text" 
                                             {...field} 
-                                            onChange={(e) => {
-                                                field.onChange(e);
-                                                setLastName(e.target.value);
-                                            }}
+                                            onChange={(e) => field.onChange(e.target.value)}
                                             />
                                             </FormControl>
                                             <FormMessage />
@@ -129,10 +128,7 @@ export default function SignUp() {
                                             placeholder="Enter your email" 
                                             type="email" 
                                             {...field} 
-                                            onChange={(e) => {
-                                                field.onChange(e);
-                                                setEmail(e.target.value);
-                                            }}
+                                            onChange={(e) => field.onChange(e.target.value)}
                                             />
                                             </FormControl>
                                             <FormMessage />
@@ -149,10 +145,7 @@ export default function SignUp() {
                                             placeholder="Enter your password" 
                                             type="password" 
                                             {...field} 
-                                            onChange={(e) => {
-                                                field.onChange(e);
-                                                setPassword(e.target.value);
-                                            }}
+                                            onChange={(e) => field.onChange(e.target.value)}
                                             />
                                             </FormControl>
                                             <FormMessage />
@@ -169,10 +162,7 @@ export default function SignUp() {
                                             placeholder="Confirm your password" 
                                             type="password" 
                                             {...field} 
-                                            onChange={(e) => {
-                                                field.onChange(e);
-                                                setConfirmPassword(e.target.value);
-                                            }}
+                                            onChange={(e) => field.onChange(e.target.value)}
                                             />
                                             </FormControl>
                                             <FormMessage />
@@ -181,6 +171,8 @@ export default function SignUp() {
                                         }}
                                     />
                                 <Button type="submit" className="w-full" >Sign Up</Button>
+                                {errorMessage && <div className="text-red-600">{errorMessage}</div>}
+                                {successMessage && <div className="text-green-600">{successMessage}</div>}
                                 <div className="text-center text-sm">
                                     Already have an account?{" "}
                                     <Link className="underline text-red-600" href="/login">
