@@ -54,7 +54,7 @@ export default function Home() {
   const ownerImageUrl = "/images/sukhbir-and-dalbir.jpg";
   return (
     <>
-      <div className="w-full pt-24">
+      <div className="w-full">
         <ImagesSlider className="h-[50rem]" images={sliderImages}>
           <motion.div
             initial={{
