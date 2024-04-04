@@ -32,85 +32,72 @@ export default function Login() {
   }
 
   return (
-      <div className="relative flex items-center justify-center py-12 h-screen p-8">
-          <div className="absolute inset-0">
-              <Image
-                  src="/images/login-bg.jpg"
-                  alt="Background Image"
-                  layout="fill"
-                  objectFit="cover"
-                  className="brightness-[0.4]"
-              />
-              <div className="z-50 mt-40">
-                  <div className="bg-gray-500 px-24">
-                      <Card className="w-full max-w-md mx-auto border-2 border-black scale-110 p-8">
-                          <div className="mx-auto w-full max-w-md space-y-6 lg:px-12">
-                              <div className="space-y-2 text-center">
-                                  <h1 className="text-3xl font-bold">Login</h1>
-                                  <p className="text-gray-500 dark:text-gray-400">Enter your credentials to access your account</p>
-                              </div>
-                              <Form {...form}>
-                                <form 
-                                  onSubmit={form.handleSubmit(handleSubmit)}
-                                  className="max-w-md w-full flex flex-col gap-4"
-                                >
-                                  <FormField control={form.control} name="email" render={({field}) => {
-                                    return (
-                                      <FormItem>
-                                        <FormLabel>Email</FormLabel>
-                                        <FormControl>
-                                          <Input 
-                                          placeholder="Enter your email" 
-                                          type="email" 
-                                          {...field} 
-                                          />
-                                        </FormControl>
-                                        <FormMessage />
-                                      </FormItem>
-                                      )
-                                    }}
-                                  />
-                                  <FormField control={form.control} name="password" render={({field}) => {
-                                    return (
-                                      <FormItem>
-                                        <FormLabel>Password</FormLabel>
-                                        <FormControl>
-                                          <Input 
-                                          placeholder="Enter your password" 
-                                          type="password" 
-                                          {...field} 
-                                          />
-                                        </FormControl>
-                                        <FormMessage />
-                                      </FormItem>
-                                      )
-                                    }}
-                                  />
-                                  <Button type="submit" className="w-full" >Login</Button>
-                                  <div className="flex justify-center space-x-4">
-                                    <Button variant="outline">
-                                        <ChromeIcon className="h-6 w-6" />
-                                    </Button>
-                                    <Button variant="outline">
-                                        <AppleIcon className="h-6 w-6" />
-                                    </Button>
-                                    <Button variant="outline">
-                                        <FacebookIcon className="h-6 w-6" />
-                                    </Button>
-                                  </div>
-                                  <div className="text-center text-sm">
-                                      Don&apos;t have an account?{" "}
-                                      <Link className="underline text-red-600" href="/sign-up">
-                                          Sign up
-                                      </Link>
-                                  </div>
-                                </form>
-                              </Form>
-                          </div>
-                      </Card>
-                  </div>
-              </div>
-          </div>
+    <div className="p-8 h-screen">
+      <Card className="w-full max-w-sm mx-auto border-2 border-black p-8">
+        <CardHeader>
+            <CardTitle className="text-xl">S&D Autobody Sign In</CardTitle>
+            <CardDescription>
+                Login to S&D Autobody to book an appointment
+            </CardDescription>
+        </CardHeader>
+            <Form {...form}>
+              <form 
+                onSubmit={form.handleSubmit(handleSubmit)}
+                className="max-w-md w-full flex flex-col gap-4"
+              >
+                <FormField control={form.control} name="email" render={({field}) => {
+                  return (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input 
+                        placeholder="Enter your email" 
+                        type="email" 
+                        {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                    )
+                  }}
+                />
+                <FormField control={form.control} name="password" render={({field}) => {
+                  return (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input 
+                        placeholder="Enter your password" 
+                        type="password" 
+                        {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                    )
+                  }}
+                />
+                <Button type="submit" className="w-full mt-4" >Login</Button>
+                <div className="flex justify-center space-x-4">
+                  <Button variant="outline">
+                      <ChromeIcon className="h-6 w-6" />
+                  </Button>
+                  <Button variant="outline">
+                      <AppleIcon className="h-6 w-6" />
+                  </Button>
+                  <Button variant="outline">
+                      <FacebookIcon className="h-6 w-6" />
+                  </Button>
+                </div>
+                <div className="text-center text-sm">
+                    Don&apos;t have an account?{" "}
+                    <Link className="underline text-red-600" href="/sign-up">
+                        Sign up
+                    </Link>
+                </div>
+              </form>
+            </Form>
+          </Card>
       </div>
   );
 }
