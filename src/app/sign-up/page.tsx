@@ -11,6 +11,7 @@ import { useState } from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import GlobalFooter from "@/components/global-footer";
 
 const NEXT_PUBLIC_SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const NEXT_PUBLIC_SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -33,6 +34,7 @@ const formSchema: any = z.object({
 export default function SignUp() {
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -57,40 +59,37 @@ export default function SignUp() {
         }
         else if (data) {
             setSuccessMessage("Account created successfully! Please check your inbox or junk to verify your account.");
+            setIsSubmitted(true);
         }
     }
 
     return (
-        
-        <div className="flex items-center justify-center py-12 h-screen p-8">
-            
-            <div className="absolute inset-0">
-                <Image
-                    src="/images/login-bg.jpg"
-                    alt="Background Image"
-                    layout="fill"
-                    objectFit="cover"
-                    className="brightness-[0.4]"
-                />
-                <div className="z-50 mt-36">
-                    <Card className="w-full max-w-md mx-auto border-2 border-black scale-110 p-8">
-                        <div className="mx-auto w-full max-w-md space-y-6 lg:px-12">
-                            <div className="space-y-2 text-center">
-                                <h1 className="text-3xl font-bold">Sign Up</h1>
-                                <p className="text-gray-500 dark:text-gray-400">Create a new account</p>
-                            </div>
-                            <Form {...form}>
-                                <form 
-                                onSubmit={form.handleSubmit(handleSubmit)}
-                                className="max-w-md w-full flex flex-col gap-4"
-                                >
+        <div className="p-8 h-screen">
+            {!isSubmitted ? (
+                
+<Card className="w-full max-w-sm mx-auto border-2 border-black p-8">
+                <CardHeader>
+                    <CardTitle className="text-xl">S&D Autobody Sign Up</CardTitle>
+                    <CardDescription>
+                        Enter your information to create an account
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Form {...form}>
+                        <form 
+                        onSubmit={form.handleSubmit(handleSubmit)}
+                        className="max-w-md w-full flex flex-col gap-4 m"
+                        >
+                            <div className="grid gap-4">
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid gap-2">
                                     <FormField control={form.control} name="firstName" render={({field}) => {
                                         return (
                                             <FormItem>
                                                 <FormLabel>First Name</FormLabel>
                                                 <FormControl>
                                                     <Input 
-                                                        placeholder="Enter your first name" 
+                                                        placeholder="John" 
                                                         type="text" 
                                                         {...field} 
                                                         
@@ -102,89 +101,114 @@ export default function SignUp() {
                                         )
                                     }}
                                     />
-                                    <FormField control={form.control} name="lastName" render={({field}) => {
-                                        return (
-                                        <FormItem>
-                                            <FormLabel>Last Name</FormLabel>
-                                            <FormControl>
-                                            <Input 
-                                            placeholder="Enter your last name" 
-                                            type="text" 
-                                            {...field} 
-                                            onChange={(e) => field.onChange(e.target.value)}
-                                            />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                        )
+                                    </div>
+                                    <div className="grid gap-2">
+                                        <FormField control={form.control} name="lastName" render={({field}) => {
+                                            return (
+                                            <FormItem>
+                                                <FormLabel>Last Name</FormLabel>
+                                                <FormControl>
+                                                <Input 
+                                                placeholder="Doe" 
+                                                type="text" 
+                                                {...field} 
+                                                onChange={(e) => field.onChange(e.target.value)}
+                                                />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                            )
+                                        }}
+                                        />
+                                    </div>
+                                </div>
+                                
+                                <div className="grid gap-2">
+                                    <FormField control={form.control} name="email" render={({field}) => {
+                                    return (
+                                    <FormItem>
+                                        <FormLabel>Email</FormLabel>
+                                        <FormControl>
+                                        <Input 
+                                        placeholder="Enter your email" 
+                                        type="email" 
+                                        {...field} 
+                                        onChange={(e) => field.onChange(e.target.value)}
+                                        />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                    )
                                     }}
                                     />
-                                    <FormField control={form.control} name="email" render={({field}) => {
-                                        return (
-                                        <FormItem>
-                                            <FormLabel>Email</FormLabel>
-                                            <FormControl>
-                                            <Input 
-                                            placeholder="Enter your email" 
-                                            type="email" 
-                                            {...field} 
-                                            onChange={(e) => field.onChange(e.target.value)}
-                                            />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                        )
-                                        }}
-                                    />
-                                    <FormField control={form.control} name="password" render={({field}) => {
-                                        return (
-                                        <FormItem>
-                                            <FormLabel>Password</FormLabel>
-                                            <FormControl>
-                                            <Input 
-                                            placeholder="Enter your password" 
-                                            type="password" 
-                                            {...field} 
-                                            onChange={(e) => field.onChange(e.target.value)}
-                                            />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                        )
-                                        }}
-                                    />
-                                    <FormField control={form.control} name="confirmPassword" render={({field}) => {
-                                        return (
-                                        <FormItem>
-                                            <FormLabel>Confirm Password</FormLabel>
-                                            <FormControl>
-                                            <Input 
-                                            placeholder="Confirm your password" 
-                                            type="password" 
-                                            {...field} 
-                                            onChange={(e) => field.onChange(e.target.value)}
-                                            />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                        )
-                                        }}
-                                    />
-                                <Button type="submit" className="w-full" >Sign Up</Button>
-                                {errorMessage && <div className="text-red-600">{errorMessage}</div>}
-                                {successMessage && <div className="text-green-600">{successMessage}</div>}
-                                <div className="text-center text-sm">
-                                    Already have an account?{" "}
-                                    <Link className="underline text-red-600" href="/login">
-                                        Log in
-                                    </Link>
                                 </div>
-                            </form>
-                            </Form>
+                                <div className="grid gap-2">
+                                    <FormField control={form.control} name="password" render={({field}) => {
+                                    return (
+                                    <FormItem>
+                                        <FormLabel>Password</FormLabel>
+                                        <FormControl>
+                                        <Input 
+                                        placeholder="Enter your password" 
+                                        type="password" 
+                                        {...field} 
+                                        onChange={(e) => field.onChange(e.target.value)}
+                                        />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                    )
+                                    }}
+                                    />
+                                </div>
+                                <div className="grid gap-2">
+                                    <FormField control={form.control} name="confirmPassword" render={({field}) => {
+                                    return (
+                                    <FormItem>
+                                        <FormLabel>Confirm Password</FormLabel>
+                                        <FormControl>
+                                        <Input 
+                                        placeholder="Confirm your password" 
+                                        type="password" 
+                                        {...field} 
+                                        onChange={(e) => field.onChange(e.target.value)}
+                                        />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                    )
+                                    }}
+                                    />
+                                </div>
+                            </div>
+                            
+                        <Button type="submit" className="w-full" >Sign Up</Button>
+                        {errorMessage && <div className="text-red-600">{errorMessage}</div>}
+                        {successMessage && <div className="text-green-600">{successMessage}</div>}
+                        <div className="text-center text-sm">
+                            Already have an account?{" "}
+                            <Link className="underline text-red-600" href="/login">
+                                Log in
+                            </Link>
                         </div>
-                    </Card>
+                    </form>
+                    </Form>
+                </CardContent>
+            </Card>
+            ) : (
+                <div className="flex items-center justify-center">
+                    <div className="max-w-md text-center">
+                        <h2 className="text-2xl font-semibold mb-4">Success!</h2>
+                        <p className="text-green-600">{successMessage}</p>
+                        <p className="mt-4">
+                            You can login by clicking here:{" "}
+                            <Link href="/login" className="underline text-red-600">Log in</Link>
+                        </p>
+                    </div>
                 </div>
-            </div>
+            )}
+            
         </div>
+    
     );
 }
