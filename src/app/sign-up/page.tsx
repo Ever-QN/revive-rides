@@ -81,7 +81,7 @@ export default function SignUp() {
                         <Form {...form}>
                             <form 
                             onSubmit={form.handleSubmit(handleSubmit)}
-                            className="max-w-md w-full flex flex-col gap-4 m"
+                            className="max-w-md w-full flex flex-col gap-4"
                             >
                                 <div className="grid gap-4">
                                     <div className="grid grid-cols-2 gap-4">
