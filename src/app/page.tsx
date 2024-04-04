@@ -12,7 +12,7 @@ const AppPage: NextPage = () => {
     router.push('/home');
   }, []);
   return (
-    <div className='flex w-full h-full justify-center items-center'>
+    <div className='flex w-full h-full justify-center items-center h-screen'>
       <h1 className='text-black'>Loading...</h1>
     </div>
   );
