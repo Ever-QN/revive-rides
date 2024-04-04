@@ -40,65 +40,65 @@ export default function Login() {
                 Login to S&D Autobody to book an appointment
             </CardDescription>
         </CardHeader>
-            <Form {...form}>
-              <form 
-                onSubmit={form.handleSubmit(handleSubmit)}
-                className="max-w-md w-full flex flex-col gap-4"
-              >
-                <FormField control={form.control} name="email" render={({field}) => {
-                  return (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input 
-                        placeholder="Enter your email" 
-                        type="email" 
-                        {...field} 
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                    )
-                  }}
-                />
-                <FormField control={form.control} name="password" render={({field}) => {
-                  return (
-                    <FormItem>
-                      <FormLabel>Password</FormLabel>
-                      <FormControl>
-                        <Input 
-                        placeholder="Enter your password" 
-                        type="password" 
-                        {...field} 
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                    )
-                  }}
-                />
-                <Button type="submit" className="w-full mt-4" >Login</Button>
-                <div className="flex justify-center space-x-4">
-                  <Button variant="outline">
-                      <ChromeIcon className="h-6 w-6" />
-                  </Button>
-                  <Button variant="outline">
-                      <AppleIcon className="h-6 w-6" />
-                  </Button>
-                  <Button variant="outline">
-                      <FacebookIcon className="h-6 w-6" />
-                  </Button>
-                </div>
-                <div className="text-center text-sm">
-                    Don&apos;t have an account?{" "}
-                    <Link className="underline text-red-600" href="/sign-up">
-                        Sign up
-                    </Link>
-                </div>
-              </form>
-            </Form>
-          </Card>
-      </div>
+        <Form {...form}>
+          <form 
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className="max-w-md w-full flex flex-col gap-4"
+          >
+            <FormField control={form.control} name="email" render={({field}) => {
+              return (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input 
+                    placeholder="Enter your email" 
+                    type="email" 
+                    {...field} 
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+                )
+              }}
+            />
+            <FormField control={form.control} name="password" render={({field}) => {
+              return (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input 
+                    placeholder="Enter your password" 
+                    type="password" 
+                    {...field} 
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+                )
+              }}
+            />
+            <Button type="submit" className="w-full mt-4" >Login</Button>
+            <div className="flex justify-center space-x-4">
+              <Button variant="outline">
+                  <ChromeIcon className="h-6 w-6" />
+              </Button>
+              <Button variant="outline">
+                  <AppleIcon className="h-6 w-6" />
+              </Button>
+              <Button variant="outline">
+                  <FacebookIcon className="h-6 w-6" />
+              </Button>
+            </div>
+            <div className="text-center text-sm">
+                Don&apos;t have an account?{" "}
+                <Link className="underline text-red-600" href="/sign-up">
+                    Sign up
+                </Link>
+            </div>
+          </form>
+        </Form>
+      </Card>
+    </div>
   );
 }
 
