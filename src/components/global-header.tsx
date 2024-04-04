@@ -6,7 +6,7 @@ import { PopoverTrigger, Popover, PopoverContent } from "@/components/ui/popover
 export default function GlobalHeader() {
 
   return (
-    <header className="flex items-center justify-between w-full p-6 overflow fixed bg-primary text-primary-foreground z-50 text-nowrap ">
+    <header className="flex items-center justify-between w-full p-6 overflow bg-primary text-primary-foreground z-50 text-nowrap ">
       <Link className="flex items-center space-x-2" href="/home">
         <img alt="S&D Autobody Logo" className="h-12 w-48 md:min-h-12 md:min-w-48 hover:scale-110 active:scale-125 hover:duration-200" src="/images/header-logo.png" />
       </Link>
