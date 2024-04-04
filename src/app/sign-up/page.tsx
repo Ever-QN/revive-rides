@@ -50,15 +50,18 @@ export default function SignUp() {
 
     async function handleSubmit() {
         const formData = form.getValues();
-        let { data, error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
             email: formData.email,
             password: formData.password,
+            options: {
+                emailRedirectTo: window.location.origin
+            }
         });
         if (error) {
             setErrorMessage(error.message);
         }
         else if (data) {
-            setSuccessMessage("Account created successfully! Please check your inbox or junk to verify your account.");
+            setSuccessMessage("Account created successfully! Please check your inbox to verify your account! If nothing is in your inbox, check your junk folder!");
             setIsSubmitted(true);
         }
     }
@@ -67,134 +70,134 @@ export default function SignUp() {
         <div className="p-8 h-screen">
             {!isSubmitted ? (
                 
-<Card className="w-full max-w-sm mx-auto border-2 border-black p-8">
-                <CardHeader>
-                    <CardTitle className="text-xl">S&D Autobody Sign Up</CardTitle>
-                    <CardDescription>
-                        Enter your information to create an account
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <Form {...form}>
-                        <form 
-                        onSubmit={form.handleSubmit(handleSubmit)}
-                        className="max-w-md w-full flex flex-col gap-4 m"
-                        >
-                            <div className="grid gap-4">
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div className="grid gap-2">
-                                    <FormField control={form.control} name="firstName" render={({field}) => {
-                                        return (
-                                            <FormItem>
-                                                <FormLabel>First Name</FormLabel>
-                                                <FormControl>
+                <Card className="w-full max-w-sm mx-auto border-2 border-black p-8">
+                    <CardHeader>
+                        <CardTitle className="text-xl">S&D Autobody Sign Up</CardTitle>
+                        <CardDescription>
+                            Enter your information to create an account
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <Form {...form}>
+                            <form 
+                            onSubmit={form.handleSubmit(handleSubmit)}
+                            className="max-w-md w-full flex flex-col gap-4 m"
+                            >
+                                <div className="grid gap-4">
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="grid gap-2">
+                                        <FormField control={form.control} name="firstName" render={({field}) => {
+                                            return (
+                                                <FormItem>
+                                                    <FormLabel>First Name</FormLabel>
+                                                    <FormControl>
+                                                        <Input 
+                                                            placeholder="John" 
+                                                            type="text" 
+                                                            {...field} 
+                                                            
+                                                            onChange={(e) => field.onChange(e.target.value)}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )
+                                        }}
+                                        />
+                                        </div>
+                                        <div className="grid gap-2">
+                                            <FormField control={form.control} name="lastName" render={({field}) => {
+                                                return (
+                                                <FormItem>
+                                                    <FormLabel>Last Name</FormLabel>
+                                                    <FormControl>
                                                     <Input 
-                                                        placeholder="John" 
-                                                        type="text" 
-                                                        {...field} 
-                                                        
-                                                        onChange={(e) => field.onChange(e.target.value)}
+                                                    placeholder="Doe" 
+                                                    type="text" 
+                                                    {...field} 
+                                                    onChange={(e) => field.onChange(e.target.value)}
                                                     />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                                )
+                                            }}
+                                            />
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="grid gap-2">
+                                        <FormField control={form.control} name="email" render={({field}) => {
+                                        return (
+                                        <FormItem>
+                                            <FormLabel>Email</FormLabel>
+                                            <FormControl>
+                                            <Input 
+                                            placeholder="Enter your email" 
+                                            type="email" 
+                                            {...field} 
+                                            onChange={(e) => field.onChange(e.target.value)}
+                                            />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
                                         )
-                                    }}
-                                    />
+                                        }}
+                                        />
                                     </div>
                                     <div className="grid gap-2">
-                                        <FormField control={form.control} name="lastName" render={({field}) => {
-                                            return (
-                                            <FormItem>
-                                                <FormLabel>Last Name</FormLabel>
-                                                <FormControl>
-                                                <Input 
-                                                placeholder="Doe" 
-                                                type="text" 
-                                                {...field} 
-                                                onChange={(e) => field.onChange(e.target.value)}
-                                                />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                            )
+                                        <FormField control={form.control} name="password" render={({field}) => {
+                                        return (
+                                        <FormItem>
+                                            <FormLabel>Password</FormLabel>
+                                            <FormControl>
+                                            <Input 
+                                            placeholder="Enter your password" 
+                                            type="password" 
+                                            {...field} 
+                                            onChange={(e) => field.onChange(e.target.value)}
+                                            />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                        )
+                                        }}
+                                        />
+                                    </div>
+                                    <div className="grid gap-2">
+                                        <FormField control={form.control} name="confirmPassword" render={({field}) => {
+                                        return (
+                                        <FormItem>
+                                            <FormLabel>Confirm Password</FormLabel>
+                                            <FormControl>
+                                            <Input 
+                                            placeholder="Confirm your password" 
+                                            type="password" 
+                                            {...field} 
+                                            onChange={(e) => field.onChange(e.target.value)}
+                                            />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                        )
                                         }}
                                         />
                                     </div>
                                 </div>
                                 
-                                <div className="grid gap-2">
-                                    <FormField control={form.control} name="email" render={({field}) => {
-                                    return (
-                                    <FormItem>
-                                        <FormLabel>Email</FormLabel>
-                                        <FormControl>
-                                        <Input 
-                                        placeholder="Enter your email" 
-                                        type="email" 
-                                        {...field} 
-                                        onChange={(e) => field.onChange(e.target.value)}
-                                        />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                    )
-                                    }}
-                                    />
-                                </div>
-                                <div className="grid gap-2">
-                                    <FormField control={form.control} name="password" render={({field}) => {
-                                    return (
-                                    <FormItem>
-                                        <FormLabel>Password</FormLabel>
-                                        <FormControl>
-                                        <Input 
-                                        placeholder="Enter your password" 
-                                        type="password" 
-                                        {...field} 
-                                        onChange={(e) => field.onChange(e.target.value)}
-                                        />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                    )
-                                    }}
-                                    />
-                                </div>
-                                <div className="grid gap-2">
-                                    <FormField control={form.control} name="confirmPassword" render={({field}) => {
-                                    return (
-                                    <FormItem>
-                                        <FormLabel>Confirm Password</FormLabel>
-                                        <FormControl>
-                                        <Input 
-                                        placeholder="Confirm your password" 
-                                        type="password" 
-                                        {...field} 
-                                        onChange={(e) => field.onChange(e.target.value)}
-                                        />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                    )
-                                    }}
-                                    />
-                                </div>
+                            <Button type="submit" className="w-full" >Sign Up</Button>
+                            {errorMessage && <div className="text-red-600">{errorMessage}</div>}
+                            {successMessage && <div className="text-green-600">{successMessage}</div>}
+                            <div className="text-center text-sm">
+                                Already have an account?{" "}
+                                <Link className="underline text-red-600" href="/login">
+                                    Log in
+                                </Link>
                             </div>
-                            
-                        <Button type="submit" className="w-full" >Sign Up</Button>
-                        {errorMessage && <div className="text-red-600">{errorMessage}</div>}
-                        {successMessage && <div className="text-green-600">{successMessage}</div>}
-                        <div className="text-center text-sm">
-                            Already have an account?{" "}
-                            <Link className="underline text-red-600" href="/login">
-                                Log in
-                            </Link>
-                        </div>
-                    </form>
+                        </form>
                     </Form>
                 </CardContent>
-            </Card>
+            </Card> 
             ) : (
                 <div className="flex items-center justify-center">
                     <div className="max-w-md text-center">
