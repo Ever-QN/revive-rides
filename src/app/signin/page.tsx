@@ -12,11 +12,15 @@ import * as z from 'zod';
 import { useForm  } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { createClient } from '@/app/utils/supabase/server';
-import { cookies } from 'next/headers';
+import { createClient } from "../utils/supabase/client"
 import { redirect } from 'next/navigation';
+import { redirectToPath } from "../utils/auth-helpers/server"
 
 export default function SignIn() {
+
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const formSchema = z.object({
     email: z.string().email(),
@@ -31,8 +35,21 @@ export default function SignIn() {
     }
   })
 
-  const handleSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log({values})
+  async function handleSubmit (values: z.infer<typeof formSchema>) {
+    const formData = form.getValues();
+    const supabase = createClient();
+
+    const {error, data} = await supabase.auth.signInWithPassword({
+      email: formData.email,
+      password: formData.password,
+    });
+
+    if (error) {
+      setErrorMessage(error.message);
+    } else {
+      console.log(data)
+      redirectToPath("/dashboard")
+    }
   }
 
 
