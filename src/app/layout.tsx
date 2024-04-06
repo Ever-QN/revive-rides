@@ -13,13 +13,11 @@ export const metadata: Metadata = {
   description: "Discover excellence in automotive care at S&D Autobody",
 };
 
-
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
-
+}>) { 
   
   const supabase = createClient();
 
@@ -30,7 +28,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
+        <Navbar user={user}/>
           {children}
         <Footer />
       </body>
