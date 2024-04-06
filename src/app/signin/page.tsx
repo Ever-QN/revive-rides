@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
@@ -17,10 +17,6 @@ import { redirect } from 'next/navigation';
 import { redirectToPath } from "../utils/auth-helpers/server"
 
 export default function SignIn() {
-
-
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
 
   const formSchema = z.object({
     email: z.string().email(),
@@ -45,7 +41,7 @@ export default function SignIn() {
     });
 
     if (error) {
-      setErrorMessage(error.message);
+      console.log(error)
     } else {
       console.log(data)
       redirectToPath("/dashboard")
