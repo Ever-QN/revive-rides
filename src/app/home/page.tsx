@@ -85,7 +85,7 @@ export default function Home() {
       </div>
 
       <div className="p-4 flex justify-around w-full py-12 md:py-24 scroll-mt-10" id="about">
-          <div className="flex flex-row-reverse gap-8 items-start">
+          <div className="flex flex-col-reverse items-center md:flex-row-reverse md:items-start gap-8 ">
             <div className="relative">
               <DirectionAwareHover imageUrl={ownerImageUrl}>
                 <p className="font-bold text-xl">Sukhbir and Dalbir</p>
@@ -93,7 +93,7 @@ export default function Home() {
               </DirectionAwareHover> 
           </div>  
           <div className="flex flex-col space-y-2">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Us</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-slate-900 border-b">About Us</h2>
               <p className="max-w-3xl text-gray-700 dark:text-gray-500 overflow-y-scroll lg:overflow-hidden max-h-52 md:max-h-72 lg:max-h-full">
                 Driven by a Vision, S&amp;D Autobody Takes Root <br/><br/>
 
@@ -220,7 +220,7 @@ export default function Home() {
                 Have a question? Contact us today!
               </p>
             </div>
-            <form className="grid max-w-sm gap-4 min-[400px]:grid-cols-2 md:gap-6 md:max-w-4xl lg:gap-8 lg:max-w-5xl xl:gap-10 p-4 ">
+            <form className="grid max-w-sm gap-4 min-[400px]:grid-cols-2 md:gap-6 md:max-w-4xl lg:gap-8 lg:max-w-5xl xl:gap-10 p-4">
               <div className="flex flex-col space-y-1">
                 <label
                   className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
