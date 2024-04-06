@@ -1,14 +1,23 @@
+import { redirectToPath } from '@/app/utils/auth-helpers/server';
 import { createClient } from '@/app/utils/supabase/client';
 import React, { useState, useRef, useEffect } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { set } from 'date-fns';
+
 
 type UserDropdownProps = {
     user: any;
   };  
 
 export default function UserDropdown({ user }: UserDropdownProps) {
+    const supabase = createClient();
     const [isOpen, setIsOpen] = useState(false);
     const userDropdownRef = useRef<HTMLDivElement>(null);
-    
+
+    async function handleSignOut() {
+        const { error } = await supabase.auth.signOut()
+        redirectToPath("/");
+    }
     
     const handleClickOutside = (e: any) => {
         if (userDropdownRef.current && !userDropdownRef.current.contains(e.target as Node)) {
@@ -23,16 +32,18 @@ export default function UserDropdown({ user }: UserDropdownProps) {
 
     return (
         <div className="relative">
-        <button
-            id="avatarButton"
-            type="button"
+            <Avatar
+            className="cursor-pointer"
             data-dropdown-toggle="userDropdown"
             data-dropdown-placement="bottom-start"
-            className="w-10 h-10 rounded-full cursor-pointer focus:outline-none"
-            onClick={() => setIsOpen(!isOpen)}
-        >
-            <img src="" alt="User avatar" />
-        </button>
+            onClick={() => {
+                setIsOpen(!isOpen);
+            }}
+            
+            >
+                <AvatarImage src="../../../images/avatar.jpg" />
+                <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
 
         {isOpen && (
             <div
