@@ -9,13 +9,13 @@ import { getRedirectMethod } from '@/app/utils/auth-helpers/settings'
 import { usePathname, useRouter } from 'next/navigation';
 import { handleRequest } from '@/app/utils/auth-helpers/client'
 import { SignOut } from '@/app/utils/auth-helpers/server';
+import UserDropdown from './UserDropdown'
 
 interface NavlinksProps {
   user?: any;
 }
 
 export default function Navlinks({ user }: NavlinksProps) {
-  const router = getRedirectMethod() === 'client' ? useRouter() : null;
 
   return (
     <div className="relative flex flex-row py-4 align-center md:py-6">
@@ -40,28 +40,7 @@ export default function Navlinks({ user }: NavlinksProps) {
               Contact Us
             </Link>
             {user ? (
-                <div id="userDropdown" className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                  <div>First Last</div>
-                  <div className="font-medium truncate">{user.email}</div>
-                </div>
-                <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
-                  <li>
-                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                  </li>
-                  <li>
-                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                  </li>
-                </ul>
-                <div className="py-1">
-                  <form onSubmit={(e) => handleRequest(e, SignOut, router)}>
-                  <input type="hidden" name="pathName" value={usePathname()} />
-                    <button type="submit" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                      Sign out
-                    </button>
-                  </form>
-                </div>
-              </div>
+                <UserDropdown user={user}/>
             ) : ( 
               <Link href="/signin" className='shadow-[0_4px_14px_0_rgb(0,118,255,39%)] hover:shadow-[0_6px_20px_rgba(0,118,255,23%)] hover:bg-[rgba(0,118,255,0.9)] px-8 py-2 bg-[#0070f3] rounded-md text-white font-light transition duration-200 ease-linear hover:scale-110 active:scale-125 hover:duration-200'>
                 Login or Sign-Up
