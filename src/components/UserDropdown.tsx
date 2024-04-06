@@ -2,26 +2,19 @@ import { redirectToPath } from '@/app/utils/auth-helpers/server';
 import { createClient } from '@/app/utils/supabase/client';
 import React, { useState, useRef, useEffect } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { set } from 'date-fns';
+import { useRouter } from 'next/navigation';
 
-
-type UserDropdownProps = {
-    user: any;
-  };  
-
-export default function UserDropdown({ user }: UserDropdownProps) {
+export default function UserDropdown({ user }: any) {
     const supabase = createClient();
     const [isOpen, setIsOpen] = useState(false);
     const userDropdownRef = useRef<HTMLDivElement>(null);
+    const router = useRouter();
 
-    async function handleSignOut() {
-        const { error } = await supabase.auth.signOut()
-        redirectToPath("/");
-    }
     
     const handleClickOutside = (e: any) => {
         if (userDropdownRef.current && !userDropdownRef.current.contains(e.target as Node)) {
             setIsOpen(false);
+            return;
         }
     };
 
@@ -34,9 +27,7 @@ export default function UserDropdown({ user }: UserDropdownProps) {
         <div className="relative">
             <Avatar
             className="cursor-pointer"
-            data-dropdown-toggle="userDropdown"
-            data-dropdown-placement="bottom-start"
-            onClick={() => {
+            onClick={(e: any) => {
                 setIsOpen(!isOpen);
             }}
             
@@ -57,20 +48,33 @@ export default function UserDropdown({ user }: UserDropdownProps) {
             </div>
             <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                 <li>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <a href="/dashboard" className="block px-4 py-2 hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">
                     Dashboard
                 </a>
                 </li>
                 <li>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <a href="#" className="block px-4 py-2 hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">
                     Settings
                 </a>
                 </li>
             </ul>
             <div className="py-1">
-                <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                Sign out
-                </a>
+                <form>
+                <button
+                    onClick={async () => {
+                        const { error } = await supabase.auth.signOut();
+                        if (error) {
+                            console.log(error.message)
+                        } else {
+                            redirectToPath("/home")
+                        }
+                    }}
+                    className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    
+                > 
+                    Sign out
+                </button>
+                </form>
             </div>
             </div>
         )}
