@@ -7,6 +7,8 @@ import { PopoverTrigger, Popover, PopoverContent } from "@/components/ui/popover
 import Image from 'next/image'
 import { getRedirectMethod } from '@/app/utils/auth-helpers/settings'
 import { usePathname, useRouter } from 'next/navigation';
+import { handleRequest } from '@/app/utils/auth-helpers/client'
+import { SignOut } from '@/app/utils/auth-helpers/server';
 
 interface NavlinksProps {
   user?: any;
@@ -37,7 +39,7 @@ export default function Navlinks({ user }: NavlinksProps) {
             <Link className="font-medium hover:text-blue-500 dark:hover:text-blue-500 transform hover:-translate-y-1 transition duration-400 active:-translate-y-3" href="/home#contact">
               Contact Us
             </Link>
-            {user && (
+            {user ? (
                 <div id="userDropdown" className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                 <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
                   <div>First Last</div>
@@ -52,13 +54,20 @@ export default function Navlinks({ user }: NavlinksProps) {
                   </li>
                 </ul>
                 <div className="py-1">
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                  <form onSubmit={(e) => handleRequest(e, SignOut, router)}>
+                  <input type="hidden" name="pathName" value={usePathname()} />
+                    <button type="submit" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                      Sign out
+                    </button>
+                  </form>
                 </div>
               </div>
-            )}
-              <Link href="/login" className='shadow-[0_4px_14px_0_rgb(0,118,255,39%)] hover:shadow-[0_6px_20px_rgba(0,118,255,23%)] hover:bg-[rgba(0,118,255,0.9)] px-8 py-2 bg-[#0070f3] rounded-md text-white font-light transition duration-200 ease-linear hover:scale-110 active:scale-125 hover:duration-200'>
+            ) : ( 
+              <Link href="/signin" className='shadow-[0_4px_14px_0_rgb(0,118,255,39%)] hover:shadow-[0_6px_20px_rgba(0,118,255,23%)] hover:bg-[rgba(0,118,255,0.9)] px-8 py-2 bg-[#0070f3] rounded-md text-white font-light transition duration-200 ease-linear hover:scale-110 active:scale-125 hover:duration-200'>
                 Login or Sign-Up
               </Link>
+            )}
+
           </nav>
       </div>
         
