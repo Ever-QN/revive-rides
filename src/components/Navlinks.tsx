@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { PopoverTrigger, Popover, PopoverContent } from "@/components/ui/popover"
@@ -11,11 +11,8 @@ import { handleRequest } from '@/app/utils/auth-helpers/client'
 import { SignOut } from '@/app/utils/auth-helpers/server';
 import UserDropdown from './UserDropdown'
 
-interface NavlinksProps {
-  user?: any;
-}
 
-export default function Navlinks({ user }: NavlinksProps) {
+export default function Navlinks({ user } : any) {
 
   return (
     <div className="relative flex flex-row py-4 align-center md:py-6">
