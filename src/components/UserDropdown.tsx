@@ -24,9 +24,22 @@ export default function UserDropdown({ user }: any) {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="cursor-pointer hover:bg-slate-200">Dashboard</DropdownMenuItem>
           <DropdownMenuItem 
-          className="cursor-pointer hover:bg-slate-200">Settings</DropdownMenuItem>
+          className="cursor-pointer hover:bg-slate-200"
+          onClick={async () => {
+            redirectToPath("/dashboard");
+        }}
+          >
+            Dashboard
+          </DropdownMenuItem>
+          <DropdownMenuItem 
+          className="cursor-pointer hover:bg-slate-200"
+          onClick={async () => {
+            redirectToPath("/account/settings");
+        }}
+          >
+            Settings
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem 
           className="cursor-pointer hover:bg-slate-200"
