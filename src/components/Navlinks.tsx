@@ -56,7 +56,7 @@ export default function Navlinks({ user } : any) {
       <Sheet>
             <SheetTrigger asChild>
               <Button
-                variant="transparent"
+                variant="default"
                 size="icon"
                 className="shrink-0 md:hidden"
               >
