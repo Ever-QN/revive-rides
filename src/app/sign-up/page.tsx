@@ -189,7 +189,7 @@ export default function SignUp() {
                             {successMessage && <div className="text-green-600">{successMessage}</div>}
                             <div className="text-center text-sm">
                                 Already have an account?{" "}
-                                <Link className="underline text-red-600" href="/login">
+                                <Link className="underline text-red-600" href="/signin">
                                     Log in
                                 </Link>
                             </div>
