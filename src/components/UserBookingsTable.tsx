@@ -21,7 +21,8 @@ import {
 } from "@/components/ui/table"
 
 type Booking = {
-    id: string
+    booking_id: string
+    booking_type: string
     booking_date: string
     booking_time: string
     booking_status: "pending" | "processing" | "success" | "failed"
@@ -30,19 +31,40 @@ type Booking = {
 
 export default function UserBookingsTable({ user }: any) {
 
+  const [bookings, setBookings] = useState<Booking[]>([]);
+
+  useEffect(() => {
+    fetchData();
+  }, [user]);
+
   async function fetchData() {
     const supabase = createClient();
 
-    const { data, error } = await supabase.schema('public').from('user_bookings').select('*');
-  
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      console.error("User not found.");
+      return;
+    }
+
+    const { data: bookings, error } = await supabase
+      .from('user_bookings')
+      .select('*')
+      .eq('email', user.email);
+
     if (error) {
       console.error(error);
       return;
     }
-  
-    console.log(data);
-    }
 
+      if (bookings) {
+        setBookings(bookings);
+        console.log(bookings)
+      }
+
+  }
 
     return (
       <Card>
@@ -62,56 +84,25 @@ export default function UserBookingsTable({ user }: any) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow className="">
-              <TableCell>
-                <div className="font-medium">Liam Johnson</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  liam@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">Paint Job</TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="secondary">
-                  Fulfilled
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-23</TableCell>
-              <TableCell className="text-right">12:00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Olivia Smith</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  olivia@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">Decal</TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="outline">
-                  Declined
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-24</TableCell>
-              <TableCell className="text-right">18:00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Noah Williams</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  noah@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">
-                Quote
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="secondary">
-                  Fulfilled
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-25</TableCell>
-              <TableCell className="text-right">21:00</TableCell>
-            </TableRow>
+            {bookings.map((booking) => (
+              <TableRow key={booking.booking_id}>
+                <TableCell>
+                    {booking.booking_id}
+                </TableCell>
+                <TableCell className="hidden sm:table-cell">
+                    {booking.booking_type}
+                </TableCell>
+                <TableCell className="hidden sm:table-cell">
+                    {booking.booking_time}
+                </TableCell>
+                <TableCell className="hidden sm:table-cell">
+                    {booking.booking_date}
+                </TableCell>
+                <TableCell className="hidden sm:table-cell text-right">
+                    {booking.booking_status}
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </CardContent>
