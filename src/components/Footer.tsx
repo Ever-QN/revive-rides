@@ -4,19 +4,15 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="mx-auto max-w-[1920px] px-6 bg-slate-900">
-      <div className="grid grid-cols-1 gap-8 py-12 text-white transition-colors duration-150 border-b lg:grid-cols-12 border-zinc-600 bg-slate-900">
-        <div className="col-span-1 lg:col-span-2">
-          <Link
-            href="/"
-            className="flex items-center flex-initial font-bold md:mr-24"
-          >
-            <span className="mr-2 border-zinc-700">
-                <Image alt="S&D Autobody Logo" width={48} height={48} unoptimized={true} className="h-12 w-48 md:min-h-12 md:min-w-48 hover:scale-110 active:scale-125 hover:duration-200" src="/images/header-logo.png" />
-            </span>
-          </Link>
+    <footer className="mx-auto max-w-[1920px] px-6 bg-slate-900 text-center md:text-left">
+      <div className="flex flex-col items-center md:justify-around md:flex-row gap-8 py-12 text-white transition-colors duration-150 border-b lg:grid-cols-12 border-zinc-600 bg-slate-900">
+        <div className="">
+          <span className="mr-2 border-zinc-700">
+              <Image alt="S&D Autobody Logo" width={48} height={48} unoptimized={true} className="h-12 w-48 md:min-h-12 md:min-w-48 hover:scale-110 active:scale-125 hover:duration-200" src="/images/header-logo.png" />
+          </span>
         </div>
-        <div className="col-span-1 lg:col-span-2">
+
+        <div className="">
           <ul className="flex flex-col flex-initial md:flex-1">
             <li className="py-3 md:py-0 md:pb-4">
               <Link
@@ -39,7 +35,7 @@ export default function Footer() {
                 href="/home#services"
                 className="text-white transition duration-150 ease-in-out hover:text-zinc-400"
               >
-                Frequently Asked Questions
+                FAQ
               </Link>
             </li>
             <li className="py-3 md:py-0 md:pb-4">
@@ -52,8 +48,9 @@ export default function Footer() {
             </li>
           </ul>
         </div>
-        <div className="col-span-1 lg:col-span-2">
-          <ul className="flex flex-col flex-initial md:flex-1">
+
+        <div className="text-center">
+          <ul className="flex flex-col items-center md:items-start flex-initial md:flex-1 text-left">
             <li className="py-3 md:py-0 md:pb-4">
               <p className="font-bold text-white transition duration-150 ease-in-out">
                 LEGAL
@@ -77,12 +74,14 @@ export default function Footer() {
             </li>
           </ul>
         </div>
-        <div className="flex items-start col-span-1 text-white lg:col-span-6 lg:justify-end">
+
+        <div className="flex items-start text-white lg:justify-end">
           <div className="flex items-center h-10 space-x-6">
               <Image alt="Menu" width={250} height={250} src="../svg/sait-logo_horz.svg" />
           </div>
         </div>
       </div>
+
       <div className="flex flex-col items-center justify-center py-4 space-y-4 md:flex-row bg-slate-900 text-white">
         <div>
           <span>
