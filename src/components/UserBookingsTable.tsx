@@ -37,6 +37,7 @@ type Booking = {
 export default function UserBookingsTable({ user }: any) {
 
   const [bookings, setBookings] = useState<Booking[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchData();
@@ -66,6 +67,7 @@ export default function UserBookingsTable({ user }: any) {
 
       if (bookings) {
         setBookings(bookings);
+        setLoading(false);
         console.log(bookings)
       }
 
@@ -88,10 +90,11 @@ export default function UserBookingsTable({ user }: any) {
 
     return (
       <>
-      {bookings.length === 0 ? (
-        <div
-            className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
-        >
+      {loading ? (
+        <p className="flex justify-center font-bold">Loading Appointments...</p>
+      ) : (  
+      bookings.length === 0 ? (
+        <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
           <div className="flex flex-col items-center gap-1 text-center">
             <h3 className="text-2xl font-bold tracking-tight">
               You have no appointments
@@ -153,8 +156,7 @@ export default function UserBookingsTable({ user }: any) {
             </Table>
           </CardContent>
         </Card>
-      ) 
-      }
+      ) )}
       
 
       </>
