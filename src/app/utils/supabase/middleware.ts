@@ -1,7 +1,7 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-export async function middleware(request: NextRequest) {
+export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({
     request: {
       headers: request.headers,
@@ -54,27 +54,7 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  const {
-    data: { user: isAuthenticated },
-  } = await supabase.auth.getUser();
+  await supabase.auth.getUser()
 
-  if (isAuthenticated) {
-    return NextResponse.next();
-  }
-
-  const redirectUrl = request.nextUrl.clone();
-  redirectUrl.pathname = '/';
-  redirectUrl.searchParams.set(`redirectedFrom`, request.nextUrl.pathname);
-}
-
-export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * Feel free to modify this pattern to include more paths.
-     */
-  ],
+  return response
 }
