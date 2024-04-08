@@ -5,14 +5,19 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { PopoverTrigger, Popover, PopoverContent } from "@/components/ui/popover"
 import Image from 'next/image'
-import { getRedirectMethod } from '@/app/utils/auth-helpers/settings'
+import { createClient } from '@/app/utils/supabase/client';
 import { usePathname, useRouter } from 'next/navigation';
 import { handleRequest } from '@/app/utils/auth-helpers/client'
-import { SignOut } from '@/app/utils/auth-helpers/server';
+import { SignOut, redirectToPath } from '@/app/utils/auth-helpers/server';
 import UserDropdown from './UserDropdown'
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from './ui/sheet'
+import { Menu, Package2, Home, ShoppingCart, Badge, Package, SeparatorHorizontal } from 'lucide-react'
+import { Separator } from './ui/separator'
 
 
 export default function Navlinks({ user } : any) {
+
+  const supabase = createClient();
 
   return (
     <div className="relative flex flex-row py-4 align-center md:py-6">
@@ -48,58 +53,89 @@ export default function Navlinks({ user } : any) {
       </div>
         
       <div className="lg:hidden flex items-center">
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button size="icon" variant="default" className='hover:bg-slate-700'>
-              <img alt="Menu" className="w-6 h-6" src="../svg/hamburger.svg" />
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="mt-2 w-screen overflow-x-hidden">
-              <Link
-                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
-                href="/home"
+      <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                variant="transparent"
+                size="icon"
+                className="shrink-0 md:hidden"
               >
-                Home
-              </Link>
-              <Link
-                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
-                href="/home#about"
-              >
-                About Us
-              </Link>
-              <Link
-                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
-                href="/home#services"
-              >
-                Services
-              </Link>
-              <Link
-                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
-                href="/gallery"
-              >
-                Gallery
-              </Link>
-              <Link
-                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
-                href="/home#contact"
-              >
-                Contact Us
-              </Link>
-              <Link
-                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
-                href="/login-or-sign-up"
-              >
-                Login or Sign Up
-              </Link>
-              <Link
-                className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
-                href="/book-appointment"
-              >
-                Book Online
-              </Link>
-          </PopoverContent>
-        </Popover>
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle navigation menu</span>
+              </Button>
+            </SheetTrigger>
+
+            <SheetContent side="top" className="flex flex-col">
+              {user && (
+                <div className='flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 border border-b-2'>Signed in as {user.email}</div>
+              )}
+              <nav className="grid gap-2 text-lg font-medium">
+                <SheetClose asChild>
+                  <Link
+                    href="/home"
+                    className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
+                  >
+                    Home
+                  </Link>
+                </SheetClose>
+                {user && (
+                  <SheetClose asChild>
+                    <Link
+                    className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
+                    href="/dashboard"
+                    >
+                      Dashboard
+                    </Link>
+                  </SheetClose>
+                )}
+                <SheetClose asChild>
+                  <Link
+                    href="/gallery"
+                    className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
+                  >
+                    Gallery
+                  </Link>
+                </SheetClose>
+                {user && (
+                  <SheetClose asChild>
+                    <Link
+                    href="#"
+                    className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
+                    >
+                    Settings
+                    </Link>
+                  </SheetClose>
+                )}
+
+                {user ? (
+                <SheetClose asChild>
+                    <Button
+                    className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
+                    variant="secondary"
+                    size="icon"
+                    onClick={ async () => {
+                      await supabase.auth.signOut();
+                      redirectToPath("/home")
+                        }
+                      }
+                    >
+                    Sign Out
+                  </Button>
+                </SheetClose>
+              ) : (
+                <SheetClose asChild>
+                  <Link
+                  className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
+                    href={"/sign-in"}
+                  >
+                  Sign in or Sign up
+                  </Link>
+                </SheetClose>
+              )}
+              </nav>
+            </SheetContent>
+          </Sheet>
+
       </div>
     </div>
   )
