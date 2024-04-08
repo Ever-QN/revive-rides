@@ -29,6 +29,7 @@ type Booking = {
     booking_date: string
     booking_time: string
     booking_status: "pending" | "confirmed" | "completed" | "cancelled"
+    booking_notes: string
     email: string
     car_info: string
   }
