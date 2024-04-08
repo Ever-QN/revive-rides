@@ -15,7 +15,7 @@ export default async function Dashboard() {
     return (
         <div className='flex w-full justify-center items-center h-screen'>
             <h1 className='text-black'>Loading...</h1>
-            {!user && redirectToPath('/signin')}
+            {!user && redirectToPath('/sign-in')}
             {user && redirectToPath('/dashboard/overview')
             }
         </div>
