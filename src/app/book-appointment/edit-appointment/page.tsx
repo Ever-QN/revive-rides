@@ -23,10 +23,6 @@ export default function EditAppointment() {
   const [message, setMessage] = useState("");
   const [isAppointmentIDEntered, setIsAppointmentIDEntered] = useState(false);
 
-  const handleInputChange = (e) => {
-    setAppointmentID(e.target.value);
-  };
-
   const handleProceed = async () => {
     setIsLoading(true);
     try {
@@ -113,7 +109,7 @@ export default function EditAppointment() {
           </CardHeader>
           <CardContent className="flex items-center space-y-4">
               <form className="w-full space-y-4">
-                <Input placeholder="Enter appointment ID" type="text" value={appointmentID} onChange={handleInputChange}/>
+                <Input placeholder="Enter appointment ID" type="text" value={appointmentID}/>
                 <Button className="w-full" onClick={handleProceed} disabled={isLoading}>
                   {isLoading ? "Loading..." : "Proceed"}
                 </Button>
