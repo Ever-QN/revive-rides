@@ -3,7 +3,7 @@
 S&D Autobody is a car service business managed by Dalbir and Sukhbir Bachhal, offering a comprehensive range of services including painting, bodywork, detailing, and various mechanical repairs. This GitHub repository contains the codebase for the web application.
 
 ## Project Overview
-Previously, S&D Autobody primarily sold cars through their Facebook page. Recognizing the importance of having a dedicated online presence, the project aims to build a comprehensive website. This website will serve as a central pillar for establishing the business's identity, allowing customers to explore services, browse completed projects in a gallery, and conveniently make bookings.
+Previously, S&D Autobody primarily sold cars through local connections and using sites like Kijiji. As time passed, the owners began to recognize the importance of having a dedicated online presence, the project aims to build a comprehensive website. This website will serve as a central pillar for establishing the business's identity, allowing customers to explore services, browse completed projects in a gallery, and conveniently make bookings.
 
 ## Features
 
