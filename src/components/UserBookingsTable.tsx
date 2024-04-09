@@ -22,6 +22,9 @@ import {
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
+import { Popover, PopoverTrigger, PopoverContent } from './ui/popover';
+import { Label } from '@radix-ui/react-label';
+import { Input } from 'postcss';
 
 type Booking = {
     booking_id: string
@@ -87,6 +90,7 @@ export default function UserBookingsTable({ user }: any) {
     date.setMinutes(minutes);
     return date.toLocaleTimeString('en-US', options);
   }
+  
 
     return (
       <>
@@ -124,43 +128,55 @@ export default function UserBookingsTable({ user }: any) {
           </Button>
 
           </CardHeader>
+
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
+            <Table className='flex flex-col'>
+              <TableHeader className=''>
+                <TableRow className='flex justify-between'>
                   <TableHead>Booking</TableHead>
-                  {/* <TableHead className="hidden xl:table-column">Type</TableHead>
-                  <TableHead className="hidden xl:table-column">Status</TableHead>
-                  <TableHead className="hidden xl:table-column">Date</TableHead> */}
                   <TableHead className="text-right">Status</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody>
+              <TableBody className='flex flex-col'>
               {bookings.map((booking) => (
-                  <TableRow key={booking.booking_id} className='hover:bg-slate-200 cursor-pointer'>
-                    <TableCell>
-                      <div className="font-medium">{booking.booking_type} ({booking.car_info})</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">{formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}</div>
-                    </TableCell>
-                    {/* <TableCell className="hidden xl:table-column">{booking.type}</TableCell> */}
-                    {/* <TableCell className="hidden xl:table-column">
-                      <Badge className="text-xs" variant="outline">
-                        {booking.status}
-                      </Badge>
-                    </TableCell> */}
-                    {/* <TableCell className="hidden md:table-cell lg:hidden xl:table-column">{booking.date}</TableCell> */}
-                    <TableCell className="text-right">{booking.booking_status}</TableCell>
-                  </TableRow>
+                  <Popover key={booking.booking_id}>
+                  <PopoverTrigger>
+                    <TableRow className='flex justify-between hover:bg-slate-200 cursor-pointer'>
+                      <TableCell className='text-left'>
+                        <div className="font-medium">{booking.booking_type} ({booking.car_info})</div>
+                        <div className="text-sm text-muted-foreground md:inline">{formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}</div>  
+                      </TableCell>
+                      <TableCell className="text-right">{booking.booking_status}</TableCell>
+                    </TableRow>
+                  </PopoverTrigger>
+                                    
+                  <PopoverContent className="w-96">
+                    <div className="grid gap-4">
+                      <div className="space-y-2">
+                        <h4 className="font-medium leading-none">{booking.booking_type} ({booking.car_info})</h4>
+                        <p className="text-sm text-muted-foreground">
+                          {formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}
+                        </p>
+                      </div>
+                      <div className="grid gap-2">
+                        <div className='font-bold'>
+                          Additional Details:
+                        </div>
+                        <p className="">
+                          {booking.booking_notes}
+                        </p>
+                      </div>
+                    </div>
+                  </PopoverContent>
+                </Popover>
                 ))}
+
               </TableBody>
+
             </Table>
+
           </CardContent>
         </Card>
       ) )}
-      
-
       </>
-      
-      
-
     )}
