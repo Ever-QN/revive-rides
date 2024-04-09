@@ -204,7 +204,7 @@ export default function SignUp() {
                         <p className="text-green-600">{successMessage}</p>
                         <p className="mt-4">
                             You can login by clicking here:{" "}
-                            <Link href="/signin" className="underline text-red-600">Log in</Link>
+                            <Link href="/sign-in" className="underline text-red-600">Log in</Link>
                         </p>
                     </div>
                 </div>
