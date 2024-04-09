@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="flex flex-col items-center md:justify-around md:flex-row gap-8 py-12 text-white transition-colors duration-150 border-b lg:grid-cols-12 border-zinc-600 bg-slate-900">
         <div className="">
           <span className="mr-2 border-zinc-700">
-              <Image alt="S&D Autobody Logo" width={48} height={48} unoptimized={true} className="h-12 w-48 md:min-h-12 md:min-w-48 hover:scale-110 active:scale-125 hover:duration-200" src="/images/header-logo.png" />
+              <Image alt="S&D Autobody Logo" width={48} height={48} unoptimized={true} className="h-12 w-48 md:min-h-12 md:min-w-48" src="/images/header-logo.png" />
           </span>
         </div>
 
