@@ -9,6 +9,23 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { useForm } from "react-hook-form";
 
+type Booking = {
+    booking_id: string;
+    car_info: string;
+    booking_date: string;
+    booking_time: string;
+    booking_status: "pending" | "confirmed" | "completed" | "cancelled";
+    booking_notes: string;
+}
+
+type User = {
+    id: string;
+    email: string;
+    first_name: string;
+    last_name: string;
+    phone: string;
+}
+
 export default function NewAppointment() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [isLoading, setIsLoading] = useState(false);
@@ -20,17 +37,7 @@ export default function NewAppointment() {
     };
     
   return (
-    <div className="relative flex items-center justify-center bg-gray-300 py-12 h-screen pt-24 z-0">
-      <div className="absolute inset-0">
-        <Image
-          src="/images/new-appointment-bg.jpg"
-          alt="Background Image"
-          layout="fill"
-          objectFit="cover"
-          className="brightness-[0.4]"
-        />
-      </div>
-      <div className="pt-8 z-10">
+    <div className="relative flex items-center justify-center py-12 h-screen pt-24">
         <Card className="w-full max-w-3xl">
         <CardHeader>
             <CardTitle className="text-2xl text-center">Schedule an appointment</CardTitle>
@@ -76,8 +83,6 @@ export default function NewAppointment() {
             <Button>Submit</Button>
         </CardFooter>
         </Card>
-
-      </div>
     </div>
     
   )
