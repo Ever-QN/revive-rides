@@ -80,7 +80,7 @@ export default function NewAppointment() {
     };
 
   return (
-    <div className="relative flex items-center justify-center py-12 h-screen pt-24">
+    <div className="relative flex items-center justify-center p-4">
         <Card className="w-full max-w-3xl">
         <CardHeader>
             <CardTitle className="text-2xl text-center">Schedule an appointment</CardTitle>
