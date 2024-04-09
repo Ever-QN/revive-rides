@@ -11,6 +11,8 @@ import { useState } from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Toaster } from "@/components/ui/toaster"
+import { useToast } from "@/components/ui/use-toast";
 
 const NEXT_PUBLIC_SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const NEXT_PUBLIC_SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -30,10 +32,21 @@ const formSchema: any = z.object({
     path: ["confirmPassword"],
 })
 
+type User = {
+    id: string;
+    email: string;
+    password: string;
+    first_name: string;
+    last_name: string;
+}
+
 export default function SignUp() {
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [users, setUsers] = useState<User[]>([]);
+
+    const { toast } = useToast();
 
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -47,7 +60,27 @@ export default function SignUp() {
         },
     });
 
+    async function fetchUsers() {
+        const { data, error } = await supabase
+        .from('users')
+        .select('*');
+
+        if (error) {
+            console.log(error)
+        }
+        if (data) {
+            setUsers(data);
+        }
+
+    }
+
     async function handleSubmit() {
+        
+        if (users.some(user => user.email === formData.email)) {
+            setErrorMessage("Email already exists. Please use a different email address.");
+            return;
+        }
+
         const formData = form.getValues();
         const { data, error } = await supabase.auth.signUp({
             email: formData.email,
@@ -56,12 +89,20 @@ export default function SignUp() {
                 emailRedirectTo: window.location.origin
             }
         });
+
         if (error) {
-            setErrorMessage(error.message);
+            {toast({
+                title: "Error",
+                description: errorMessage,
+            })}
         }
         else if (data) {
             setSuccessMessage("Account created successfully! Please check your inbox to verify your account! If nothing is in your inbox, check your junk folder!");
             setIsSubmitted(true);
+            {toast({
+                title: "Success!",
+                description: successMessage,
+            })}
         }
     }
 
@@ -185,7 +226,11 @@ export default function SignUp() {
                                 </div>
                                 
                             <Button type="submit" className="w-full" >Sign Up</Button>
-                            {errorMessage && <div className="text-red-600">{errorMessage}</div>}
+                            {errorMessage && (
+                                <div className="bg-red-500">
+                                    <Toaster/>
+                                </div>
+                            )}
                             {successMessage && <div className="text-green-600">{successMessage}</div>}
                             <div className="text-center text-sm">
                                 Already have an account?{" "}
