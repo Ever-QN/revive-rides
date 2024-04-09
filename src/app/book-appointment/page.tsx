@@ -3,7 +3,7 @@ import Image from "next/image"
 
 export default function BookAppointment() {
   return (
-    <div className="bg-gradient-to-b from-gray-800 to-gray-200" style={{ background: "radial-gradient(circle, rgba(0,0,0,0.4), rgba(0,0,0,0.8))" }}>
+    <div className="">
         <div className="flex flex-col justify-center mx-auto max-w-3xl h-screen space-y-4 px-8 z-0">
             {/* <div className="absolute inset-0">
                 <Image
