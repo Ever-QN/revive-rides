@@ -24,13 +24,4 @@ describe('Input component', () => {
       render(<Input ref={ref} />);
       expect(ref.current).toBeInstanceOf(HTMLInputElement);
     });
-
-    // it('triggers onChange event handler when user types in the input', () => {
-    //     const handleChange = jest.fn();
-    //     render(<Input onChange={handleChange} />);
-    //     const inputElement = screen.getByRole('textbox');
-    //     userEvent.type(inputElement, 'Test');
-    //     expect(handleChange).toHaveBeenCalledTimes(4); // Adjust the expected number of calls as needed
-    //   });
-
 });
