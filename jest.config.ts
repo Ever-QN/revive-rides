@@ -5,11 +5,17 @@ const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
   dir: './',
 })
+
+// Define your moduleNameMapper configuration
+const moduleNameMapper = {
+  '^@/(.*)$': '<rootDir>/src/$1', // Example alias mapping
+}
  
 // Add any custom config to be passed to Jest
 const config: Config = {
   coverageProvider: 'v8',
   testEnvironment: 'jsdom',
+  moduleNameMapper: moduleNameMapper,
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 }
