@@ -140,4 +140,3 @@ export default function Navlinks({ user } : any) {
     </div>
   )
 }
-
