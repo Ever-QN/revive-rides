@@ -59,7 +59,7 @@ export default function SignIn() {
 
   return (
 
-    <div className="p-8 h-screen">
+    <div className="flex justify-center items-center p-8 h-screen">
       <Card className="w-full max-w-sm mx-auto border-2 border-black p-8">
         <CardHeader>
             <CardTitle className="text-xl">S&D Autobody Sign In</CardTitle>
@@ -110,9 +110,6 @@ export default function SignIn() {
                   <ChromeIcon className="h-6 w-6" />
               </Button>
               <Button variant="outline">
-                  <AppleIcon className="h-6 w-6" />
-              </Button>
-              <Button variant="outline">
                   <FacebookIcon className="h-6 w-6" />
               </Button>
             </div>
@@ -128,27 +125,6 @@ export default function SignIn() {
     </div>
   );
 }
-
-function AppleIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z" />
-      <path d="M10 2c1 .5 2 2 2 5" />
-    </svg>
-  )
-}
-
 
 function ChromeIcon(props: any) {
   return (

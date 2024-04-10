@@ -89,10 +89,10 @@ export default function SignUp() {
     }
 
     return (
-        <div className="p-8 h-screen">
+        <div className="flex flex-col items-center justify-center p-4 h-screen">
             {!isSubmitted ? (
                 
-                <Card className="w-full max-w-sm mx-auto border-2 border-black p-8">
+                <Card className="flex flex-col justify-center items-center w-full max-w-sm mx-auto border-2 border-black p-8">
                     <CardHeader>
                         <CardTitle className="text-xl">S&D Autobody Sign Up</CardTitle>
                         <CardDescription>
