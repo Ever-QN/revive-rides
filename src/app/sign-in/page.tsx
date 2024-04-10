@@ -59,11 +59,11 @@ export default function SignIn() {
 
   return (
 
-    <div className="flex justify-center items-center p-8 h-screen">
+    <div className="flex flex-col justify-center items-center p-8 h-screen">
       <Card className="w-full max-w-sm mx-auto border-2 border-black p-8">
         <CardHeader>
-            <CardTitle className="text-xl">S&D Autobody Sign In</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-xl text-center">S&D Autobody Sign In</CardTitle>
+            <CardDescription className="text-center">
                 Login to S&D Autobody to book an appointment
             </CardDescription>
         </CardHeader>
