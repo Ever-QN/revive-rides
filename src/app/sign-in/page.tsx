@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import Link from "next/link"
-import { login, signup } from './actions'
 import { Card, CardHeader, CardContent, CardFooter, CardDescription, CardTitle } from "@/components/ui/card"
 import { useState } from "react"
 import * as z from 'zod';
@@ -14,9 +13,12 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { createClient } from "../utils/supabase/client"
 import { redirect } from 'next/navigation';
-import { redirectToPath } from "../utils/auth-helpers/server"
+import { useToast } from "@/components/ui/use-toast"
+import { title } from "process"
 
 export default function SignIn() {
+
+  const { toast }  = useToast()
 
   const formSchema = z.object({
     email: z.string().email(),
@@ -31,7 +33,7 @@ export default function SignIn() {
     }
   })
 
-  async function handleSubmit (values: z.infer<typeof formSchema>) {
+  async function handleSubmit () {
     const formData = form.getValues();
     const supabase = createClient();
 
@@ -41,10 +43,13 @@ export default function SignIn() {
     });
 
     if (error) {
-      console.log(error)
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive"
+      })
     } else {
-      console.log(data)
-      redirectToPath("/dashboard")
+      redirect("/dashboard")
     }
   }
 

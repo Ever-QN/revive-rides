@@ -31,7 +31,6 @@ import {
 import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { createClient } from "@/app/utils/supabase/server"
-import { redirectToPath } from "@/app/utils/auth-helpers/server"
 
 export default async function DashboardOverview() {
 
@@ -42,7 +41,7 @@ export default async function DashboardOverview() {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return redirectToPath("/sign-in");
+    return redirect("/sign-in");
   }
 
   return (

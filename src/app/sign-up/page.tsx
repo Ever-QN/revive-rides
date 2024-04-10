@@ -60,27 +60,8 @@ export default function SignUp() {
         },
     });
 
-    async function fetchUsers() {
-        const { data, error } = await supabase
-        .from('users')
-        .select('*');
-
-        if (error) {
-            console.log(error)
-        }
-        if (data) {
-            setUsers(data);
-        }
-
-    }
-
     async function handleSubmit() {
         
-        if (users.some(user => user.email === formData.email)) {
-            setErrorMessage("Email already exists. Please use a different email address.");
-            return;
-        }
-
         const formData = form.getValues();
         const { data, error } = await supabase.auth.signUp({
             email: formData.email,
@@ -91,10 +72,11 @@ export default function SignUp() {
         });
 
         if (error) {
-            {toast({
+            toast({
                 title: "Error",
-                description: errorMessage,
-            })}
+                description: error.message,
+                variant: "destructive"
+              })
         }
         else if (data) {
             setSuccessMessage("Account created successfully! Please check your inbox to verify your account! If nothing is in your inbox, check your junk folder!");
@@ -234,7 +216,7 @@ export default function SignUp() {
                             {successMessage && <div className="text-green-600">{successMessage}</div>}
                             <div className="text-center text-sm">
                                 Already have an account?{" "}
-                                <Link className="underline text-red-600" href="/signin">
+                                <Link className="underline text-red-600" href="/sign-in">
                                     Log in
                                 </Link>
                             </div>

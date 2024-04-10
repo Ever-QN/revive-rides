@@ -6,9 +6,7 @@ import { Button } from "@/components/ui/button"
 import { PopoverTrigger, Popover, PopoverContent } from "@/components/ui/popover"
 import Image from 'next/image'
 import { createClient } from '@/app/utils/supabase/client';
-import { usePathname, useRouter } from 'next/navigation';
-import { handleRequest } from '@/app/utils/auth-helpers/client'
-import { SignOut, redirectToPath } from '@/app/utils/auth-helpers/server';
+import { redirect, usePathname, useRouter } from 'next/navigation';
 import UserDropdown from './UserDropdown'
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from './ui/sheet'
 import { Menu, Package2, Home, ShoppingCart, Badge, Package, SeparatorHorizontal } from 'lucide-react'
@@ -115,7 +113,7 @@ export default function Navlinks({ user } : any) {
                     size="icon"
                     onClick={ async () => {
                       await supabase.auth.signOut();
-                      redirectToPath("/home")
+                      redirect("/home")
                         }
                       }
                     >
