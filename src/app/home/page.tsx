@@ -15,30 +15,30 @@ import { DirectionAwareHover } from "@/components/ui/direction-aware-hover";
 const testimonials = [
   {
     quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "Exceptional service from start to finish! My car looked better than ever after their team worked their magic. I was impressed by their attention to detail and professionalism. Highly recommended!",
     name: "Quynh",
     title: "Student",
   },
   {
     quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "I can't thank S&D Autobody enough for the outstanding job they did on my vehicle. From the moment I dropped it off until the day I picked it up, they kept me informed and ensured everything went smoothly. The results exceeded my expectations!",
     name: "John",
     title: "Software Developer",
   },
   {
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    quote: "I had a minor accident and was worried about the damage to my car. However, S&D Autobody reassured me and took care of everything efficiently. They made the process stress-free, and my car looks as good as new!",
     name: "Lee",
     title: "Marketing Student",
   },
   {
     quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "s&d autobody came highly recommended, and now I know why! Their expertise and dedication to customer satisfaction are unmatched. They treated my car like their own, and the results were phenomenal.",
     name: "V",
     title: "Employee",
   },
   {
     quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "im thrilled with the quality of work done by S&D Autobody. Their team went above and beyond to restore my vehicle, and the results speak for themselves. I wouldn't hesitate to recommend them to anyone in need of autobody repairs.",
     name: "Quynh",
     title: "Student",
   },
@@ -54,7 +54,7 @@ export default function Home() {
   const ownerImageUrl = "/images/sukhbir-and-dalbir.jpg";
   return (
     <>
-      <div className="w-full pt-24">
+      <div className="w-full">
         <ImagesSlider className="h-[50rem]" images={sliderImages}>
           <motion.div
             initial={{
@@ -85,7 +85,7 @@ export default function Home() {
       </div>
 
       <div className="p-4 flex justify-around w-full py-12 md:py-24 scroll-mt-10" id="about">
-          <div className="flex flex-row-reverse gap-8 items-start">
+          <div className="flex flex-col-reverse items-center md:flex-row-reverse md:items-start gap-8 ">
             <div className="relative">
               <DirectionAwareHover imageUrl={ownerImageUrl}>
                 <p className="font-bold text-xl">Sukhbir and Dalbir</p>
@@ -93,7 +93,7 @@ export default function Home() {
               </DirectionAwareHover> 
           </div>  
           <div className="flex flex-col space-y-2">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Us</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-slate-900 border-b">About Us</h2>
               <p className="max-w-3xl text-gray-700 dark:text-gray-500 overflow-y-scroll lg:overflow-hidden max-h-52 md:max-h-72 lg:max-h-full">
                 Driven by a Vision, S&amp;D Autobody Takes Root <br/><br/>
 
@@ -220,7 +220,7 @@ export default function Home() {
                 Have a question? Contact us today!
               </p>
             </div>
-            <form className="grid max-w-sm gap-4 min-[400px]:grid-cols-2 md:gap-6 md:max-w-4xl lg:gap-8 lg:max-w-5xl xl:gap-10">
+            <form className="grid max-w-sm gap-4 min-[400px]:grid-cols-2 md:gap-6 md:max-w-4xl lg:gap-8 lg:max-w-5xl xl:gap-10 p-4">
               <div className="flex flex-col space-y-1">
                 <label
                   className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
