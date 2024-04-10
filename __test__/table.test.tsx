@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
-describe('Tabs Components', () => {
+describe('Tabs Component', () => {
   it('renders TabsList component correctly', () => {
     render(
       <Tabs>

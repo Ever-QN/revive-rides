@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { Input } from '@/components/ui/input';
 
-describe('Input', () => {
+describe('Input component', () => {
     it('renders input element with provided props', () => {
       render(<Input type="text" placeholder="Enter text" />);
       const inputElement = screen.getByRole('textbox');

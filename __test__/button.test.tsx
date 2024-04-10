@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Button } from '@/components/ui/button';
 
-describe('Button', () => {
+describe('Button component', () => {
   it('renders button with default variant and size', () => {
     render(<Button>Click me</Button>);
     const button = screen.getByRole('button', { name: 'Click me' });
