@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 describe('Tabs Component', () => {
-  it('renders TabsList component correctly', () => {
+  it('renders TabsList component properly', () => {
     render(
       <Tabs>
         <TabsList className="custom-class" />
