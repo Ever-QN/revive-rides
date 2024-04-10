@@ -11,10 +11,10 @@ import UserDropdown from './UserDropdown'
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from './ui/sheet'
 import { Menu, Package2, Home, ShoppingCart, Badge, Package, SeparatorHorizontal } from 'lucide-react'
 import { Separator } from './ui/separator'
+import { redirectToPath } from '@/app/utils/auth-helpers/server'
 
 
 export default function Navlinks({ user } : any) {
-
   const supabase = createClient();
 
   return (
@@ -113,7 +113,7 @@ export default function Navlinks({ user } : any) {
                     size="icon"
                     onClick={ async () => {
                       await supabase.auth.signOut();
-                      redirect("/home")
+                      redirectToPath("/home")
                         }
                       }
                     >

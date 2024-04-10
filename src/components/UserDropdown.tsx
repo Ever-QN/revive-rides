@@ -5,6 +5,7 @@ import { redirect, useRouter } from 'next/navigation';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
 import { Button } from './ui/button';
 import { CircleUser } from 'lucide-react';
+import { redirectToPath } from '@/app/utils/auth-helpers/server';
 
 export default function UserDropdown({ user }: any) {
     const supabase = createClient();
@@ -26,7 +27,7 @@ export default function UserDropdown({ user }: any) {
           <DropdownMenuItem 
           className="cursor-pointer hover:bg-slate-200"
           onClick={async () => {
-            redirect("/dashboard");
+            redirectToPath("/dashboard");
         }}
           >
             Dashboard
@@ -34,7 +35,7 @@ export default function UserDropdown({ user }: any) {
           <DropdownMenuItem 
           className="cursor-pointer hover:bg-slate-200"
           onClick={async () => {
-            redirect("/account/settings");
+            redirectToPath("/account/settings");
         }}
           >
             Settings
@@ -44,7 +45,7 @@ export default function UserDropdown({ user }: any) {
           className="cursor-pointer hover:bg-slate-200"
             onClick={async () => {
                 await supabase.auth.signOut();
-                redirect("/");
+                redirectToPath("/")
             }}
           >
             Logout

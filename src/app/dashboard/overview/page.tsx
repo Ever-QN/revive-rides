@@ -31,19 +31,22 @@ import {
 import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { createClient } from "@/app/utils/supabase/server"
+import { redirect } from "next/navigation"
+import { useEffect } from "react"
+import { redirectToPath } from "@/app/utils/auth-helpers/server"
+
 
 export default async function DashboardOverview() {
 
   const supabase = createClient();
-
   const {
-    data: { user },
-  } = await supabase.auth.getUser();
+      data: { user },
+    } = await supabase.auth.getUser();
 
   if (!user) {
-    return redirect("/sign-in");
+      return redirectToPath("/sign-in");
   }
-
+  
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">

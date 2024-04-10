@@ -12,13 +12,16 @@ import { useForm  } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { createClient } from "../utils/supabase/client"
-import { redirect } from 'next/navigation';
+import { permanentRedirect, redirect, useRouter }  from "next/navigation"
 import { useToast } from "@/components/ui/use-toast"
 import { title } from "process"
+import { redirectToPath } from "../utils/auth-helpers/server"
+
 
 export default function SignIn() {
 
   const { toast }  = useToast()
+  const router = useRouter()
 
   const formSchema = z.object({
     email: z.string().email(),
@@ -37,7 +40,7 @@ export default function SignIn() {
     const formData = form.getValues();
     const supabase = createClient();
 
-    const {error, data} = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email: formData.email,
       password: formData.password,
     });
@@ -49,7 +52,7 @@ export default function SignIn() {
         variant: "destructive"
       })
     } else {
-      redirect("/dashboard")
+      redirectToPath("/dashboard")
     }
   }
 
