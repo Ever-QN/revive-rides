@@ -1,4 +1,5 @@
 import { render, screen, waitFor, renderHook, act, getByLabelText, fireEvent, getByText } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { z, ZodType } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -8,9 +9,9 @@ import SignIn from '@/app/sign-in/page';
 
 
 jest.mock('@/app/utils/supabase/client', () => ({
-    createClient: jest.fn(() => ({
+    createClient: () => ({
         auth: { signInWithPassword: jest.fn() }
-    })),
+    }),
 }));
 
 describe('SignIn component', () => {
@@ -39,4 +40,19 @@ describe('SignIn component', () => {
         expect(formState.errors.password).toBeUndefined();
 
     });
+
+    test('submits form and calls with email and password', async () => {
+        const { auth: { signInWithPassword } } = createClient();
+            render(<SignIn />);
+
+            await userEvent.type(screen.getByLabelText(/email/i), 'test@example.com');
+            await userEvent.type(screen.getByLabelText(/password/i), 'password');
+            userEvent.click(screen.getByRole('button', { name: 'Login' }));
+        
+            await waitFor(() => {
+                expect(screen.getByLabelText(/email/i)).toHaveValue('test@example.com');
+                expect(screen.getByLabelText(/password/i)).toHaveValue('password');
+            });
+    });
+
 });
