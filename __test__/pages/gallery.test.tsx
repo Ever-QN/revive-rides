@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import Gallery from '@/app/gallery/page';
 
 describe('Gallery component', () => {
-  test('renders images with correct alt text', () => {
+  test('renders images with proper alt text', () => {
     render(<Gallery />);
 
     const images = screen.getAllByRole('img');
