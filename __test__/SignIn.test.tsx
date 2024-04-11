@@ -1,6 +1,6 @@
 import { render, screen, waitFor, renderHook, act, getByLabelText, fireEvent, getByText } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { z, ZodType } from 'zod';
+import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import userEvent from '@testing-library/user-event';
