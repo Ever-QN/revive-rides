@@ -1,173 +1,192 @@
-'use client';
+"use client";
 
-import { CardTitle, CardDescription, CardHeader, CardContent, Card } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import Image from "next/image"
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { createClient } from "@/app/utils/supabase/client"
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { createClient } from '@/app/utils/supabase/client';
+import { CardHeader } from '@/components/ui/card';
+import { Card, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { SubmitHandler } from 'react-hook-form';
+
+type FormData = {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  carInfo: string;
+  bookingType: string;
+  date: string;
+  time: string;
+  message: string;
+  booking_id: string;
+};
 
 export default function EditAppointment() {
   const supabase = createClient();
-  const [appointmentID, setAppointmentID] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
-  const { register } = useForm();
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-  const [type, setType] = useState("");
-  const [email, setEmail] = useState("");
-  const [carInfo, setCarInfo] = useState("");
-  const [message, setMessage] = useState("");
-  const [isAppointmentIDEntered, setIsAppointmentIDEntered] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [carInfo, setCarInfo] = useState('');
+  const [bookingType, setBookingType] = useState('');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [message, setMessage] = useState('');
+  const [bookingId, setBookingId] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const { handleSubmit, formState: { errors } } = useForm();
 
-  const handleProceed = async () => {
+  const fetchBookingDetails = async (bookingId: string) => {
     setIsLoading(true);
     try {
-      if (!appointmentID.trim()) {
-        console.log("Appointment ID is required");
-        return;
-      }
-  
       const { data, error } = await supabase
         .from('user_bookings')
-        .select("*")
-        .eq("booking_id", appointmentID)
+        .select('*')
+        .eq('booking_id', bookingId)
         .single();
   
+      if (error) throw error;
+  
       if (data) {
-
-        // Update state with fetched data
+        setFirstName(data.firstName);
+        setLastName(data.lastName);
+        setEmail(data.email);
+        setPhone(data.phone);
+        setCarInfo(data.car_info);
+        setBookingType(data.booking_type);
         setDate(data.booking_date);
         setTime(data.booking_time);
-        setType(data.booking_type);
-        setEmail(data.email);
-        setCarInfo(data.car_info);
         setMessage(data.booking_notes);
-
-        // Set the state to indicate that the appointment ID has been entered and data has been fetched
-        setIsAppointmentIDEntered(true);
-        console.log("Appointment data:", data);
-      } else {
-        console.log("Appointment not found");
-
-        // Reset form fields and state variables
-        setDate("");
-        setTime("");
-        setType("");
-        setEmail("");
-        setCarInfo("");
-        setMessage("");
-        
-        // Set the state to indicate that the appointment ID has not been entered or the data fetch failed
-        setIsAppointmentIDEntered(false);
       }
     } catch (error) {
-      console.log(error);
+      console.error('Error fetching booking details:', error);
+      alert('Error fetching booking details.');
+    } finally {
+      setIsLoading(false);
     }
-  
-    setIsLoading(false);
   };
 
-  const handleUpdateAppointment = async () => {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     setIsLoading(true);
+    
     try {
-      const { data, error } = await supabase
-        .from('user_bookings')
-        .update({
-          booking_date: date,
-          booking_time: time,
-          booking_type: type,
-          email: email,
-          car_info: carInfo,
-          booking_notes: message
+      const { error: userError } = await supabase
+        .from('users')
+        .update({ 
+          first_name: data.firstName, 
+          last_name: data.lastName, 
+          phone: data.phone 
         })
-        .eq("booking_id", appointmentID);
-      
-      if (error) {
-        console.log("Error updating appointment", error);
-      } else {
-        console.log("Appointment updated successfully");
+        .eq('email', data.email);
+  
+      if (userError) {
+        throw new Error("Error updating user information");
       }
-
+  
+      const { error: bookingError } = await supabase
+        .from('user_bookings')
+        .update({ 
+          booking_date: data.date, 
+          booking_time: data.time, 
+          booking_type: data.bookingType, 
+          car_info: data.carInfo, 
+          booking_notes: data.message
+        })
+        .eq('booking_id', bookingId);
+  
+      if (bookingError) {
+        throw new Error("Error updating booking information");
+      }
+  
+      alert("Appointment updated successfully!");
+  
     } catch (error) {
-      console.log(error);
+      console.error("Error updating user or booking:", error);
+      alert("Failed to update appointment. Please try again later.");
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (
-    <div className="relative flex items-center justify-center bg-gray-300 h-screen">
-        {!isAppointmentIDEntered && (
-          <Card className="flex flex-col justify-center border-2 border-black scale-125">
-          <CardHeader>
-              <CardTitle>Enter Appointment ID</CardTitle>
-              <CardDescription>Please enter your appointment ID to proceed to editing it.</CardDescription>
-          </CardHeader>
-          <CardContent className="flex items-center space-y-4">
-              <form className="w-full space-y-4">
-                <Input placeholder="Enter appointment ID" type="text" value={appointmentID}/>
-                <Button className="w-full" onClick={handleProceed} disabled={isLoading}>
-                  {isLoading ? "Loading..." : "Proceed"}
-                </Button>
-              </form>
-          </CardContent>
-          </Card>
-        )}
-
-        {isAppointmentIDEntered && (
-          <Card className="flex flex-col justify-center border-2 border-black scale-125 mt-8">
-            <CardHeader>
-              <CardTitle>Edit Appointment</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
+    <div className="relative flex items-center justify-center p-4">
+      <Card className="w-full max-w-3xl">
+        <CardHeader>
+          <CardTitle className="text-2xl text-center">Edit Appointment</CardTitle>
+          <CardDescription className="text-center">Update your appointment details below.</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <Input
+            placeholder="Enter your booking ID"
+            type="text"
+            value={bookingId}
+            onChange={(e) => setBookingId(e.target.value)}
+          />
+          <Button onClick={() => fetchBookingDetails(bookingId)} disabled={!bookingId || isLoading}>
+            Fetch Booking
+          </Button>
+          {bookingId && (
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2 border-col">
+                  <Label htmlFor="first-name">First name</Label>
+                  <Input value={firstName} id="first-name" onChange={(e) => setFirstName(e.target.value)} className="border border-gray-500" placeholder="Enter your first name" required/>
+                </div>
                 <div className="space-y-2">
-                  <Label htmlFor="date">Date</Label>
-                  <Input {...register("date")} type="date" name="date" value={date} onChange={(e) => setDate(e.target.value)} />
+                  <Label htmlFor="last-name">Last name</Label>
+                  <Input value={lastName} id="last-name" onChange={(e) => setLastName(e.target.value)} className="border border-gray-500"  placeholder="Enter your last name" required/>
                 </div>
-
-                <div className="space-y-2">
-                  <Input {...register("time")} type="time" name="time" value={time} onChange={(e) => setTime(e.target.value)} />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="type">Type</Label>
-                  <Input {...register("type")} type="text" name="type" value={type} onChange={(e) => setType(e.target.value)} />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input {...register("email")} type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="carInfo">Car Info</Label>
-                  <Input {...register("carInfo")} type="text" name="carInfo" value={carInfo} onChange={(e) => setCarInfo(e.target.value)} />
-                </div>
-
-                <div className="space-y-2"> 
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea
-                      className="min-h-[100px] border border-gray-500 max-h-[150px]"
-                      {...register("message")}
-                      id="message"
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Enter a description of the issue that you want to update"
-                  />
-                </div>
-
-            </CardContent>
-            <CardContent className="flex justify-end">
-              <Button onClick={handleUpdateAppointment} disabled={isLoading}>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="phone">Phone</Label>
+                <Input value={phone} id="phone" onChange={(e) => setPhone(e.target.value)} className="border border-gray-500" placeholder="Enter your phone number" required/>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input value={email} id="email" onChange={(e) => setEmail(e.target.value)} className="border border-gray-500" placeholder="Enter your email" type="email" required/>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="car-info">Vehicle information</Label>
+                <Input value={carInfo} id="car-info" onChange={(e) => setCarInfo(e.target.value)} className="border border-gray-500" placeholder="Enter your vehicle's make, model, and year" required/>
+              </div>
+              <div className="space-y-2 space-x-4">
+                <Label htmlFor="booking-type">Booking type</Label>
+                <select value={bookingType} id="booking-type" onChange={(e) => setBookingType(e.target.value)} className="border border-gray-500" required>
+                  <option value="diagnostic">Diagnostic</option>
+                  <option value="repair">Repair</option>
+                  <option value="maintenance">Maintenance</option>
+                  <option value="painting">Painting</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="date">Preferred appointment date</Label>
+                <Input value={date} id="date" onChange={(e) => setDate(e.target.value)} className="border border-gray-500"  type="date" required/>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="time">Time</Label>
+                <Input value={time} id="time"  onChange={(e) => setTime(e.target.value)} className="border border-gray-500" type="time" min="08:00" max="19:00" required/>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="message">Issue description</Label>
+                <Textarea
+                    className="min-h-[100px] border border-gray-500 max-h-[150px]"
+                    value={message}
+                    id="message"
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Enter a description of the issue with your vehicle, as well details about the vehicle"
+                />
+              </div>
+              <Button type="submit" disabled={isLoading}>
                 {isLoading ? "Updating..." : "Update"}
               </Button>
-            </CardContent>
-          </Card>
-        )}
+            </form>
+          )}
+        </CardContent>
+      </Card>
     </div>
-  )
+  );
 }
