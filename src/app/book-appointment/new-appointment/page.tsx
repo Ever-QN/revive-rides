@@ -35,20 +35,6 @@ type Booking = {
     booking_details: string;
 }
 
-const formSchema = z.object({
-    firstName: z.string().email(),
-    lastName: z.string(),
-    phoneNumber: z.string(),
-    email: z.string(),
-    carInfo: z.string(),
-    bookingType: z.string(),
-    bookingDate: z.string(),
-    bookingTime: z.string(),
-    bookingDetails: z.string()
-});
-
-
-
 
 export default function NewAppointment() {
 
@@ -95,6 +81,7 @@ export default function NewAppointment() {
         setIsLoading(true);
     
         try {
+
             // Insert booking information into the "user_bookings" table
             const { data, error: bookingError } = await supabase
                 .from("user_bookings")
