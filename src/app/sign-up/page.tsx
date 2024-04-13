@@ -72,7 +72,6 @@ export default function SignUp() {
             options: {
                 emailRedirectTo: window.location.origin,
                 data: {
-                    email: formData.email,
                     first_name: formData.firstName,
                     last_name: formData.lastName,
                     phone_number: formData.phoneNumber
