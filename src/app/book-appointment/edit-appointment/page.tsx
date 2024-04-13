@@ -83,7 +83,7 @@ export default function EditAppointment() {
       alert('Please enter valid Booking ID');
       return;
     }
-
+  
     setIsLoading(true);
     const { error } = await supabase
       .from('user_bookings')
@@ -100,13 +100,13 @@ export default function EditAppointment() {
       })
       .eq('booking_id', bookingId);
     setIsLoading(false);
-
+  
     if (error) {
       alert('Failed to update appointment. Please try again later.');
       console.error('Error updating the booking:', error);
     } else {
       alert('Appointment updated successfully!');
-      // You might want to handle the success case, like redirecting to a different page
+      window.location.href = 'edit-appointment/confirm';
     }
   };
   
