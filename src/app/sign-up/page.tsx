@@ -38,6 +38,7 @@ type User = {
     password: string;
     first_name: string;
     last_name: string;
+    phone_number: string;
 }
 
 export default function SignUp() {
@@ -57,44 +58,35 @@ export default function SignUp() {
             email: "",
             password: "",
             confirmPassword: "",
+            phoneNumber: "",
         },
     });
 
-    async function fetchUsers() {
-        const { data, error } = await supabase
-        .from('users')
-        .select('*');
-
-        if (error) {
-            console.log(error)
-        }
-        if (data) {
-            setUsers(data);
-        }
-
-    }
-
     async function handleSubmit() {
         
-        if (users.some(user => user.email === formData.email)) {
-            setErrorMessage("Email already exists. Please use a different email address.");
-            return;
-        }
-
         const formData = form.getValues();
+
         const { data, error } = await supabase.auth.signUp({
             email: formData.email,
             password: formData.password,
             options: {
-                emailRedirectTo: window.location.origin
+                emailRedirectTo: window.location.origin,
+                data: {
+                    first_name: formData.firstName,
+                    last_name: formData.lastName,
+                    phone_number: formData.phoneNumber
+                },
             }
         });
 
+
         if (error) {
-            {toast({
+            console.log(error)
+            toast({
                 title: "Error",
-                description: errorMessage,
-            })}
+                description: error.message,
+                variant: "destructive"
+              })
         }
         else if (data) {
             setSuccessMessage("Account created successfully! Please check your inbox to verify your account! If nothing is in your inbox, check your junk folder!");
@@ -102,15 +94,16 @@ export default function SignUp() {
             {toast({
                 title: "Success!",
                 description: successMessage,
+                className: "bg-green-500",
             })}
         }
     }
 
     return (
-        <div className="p-8 h-screen">
+        <div className="flex flex-col items-center justify-center p-4 h-screen">
             {!isSubmitted ? (
                 
-                <Card className="w-full max-w-sm mx-auto border-2 border-black p-8">
+                <Card className="flex flex-col justify-center items-center w-full max-w-sm mx-auto border-2 border-black p-8">
                     <CardHeader>
                         <CardTitle className="text-xl">S&D Autobody Sign Up</CardTitle>
                         <CardDescription>
@@ -186,6 +179,25 @@ export default function SignUp() {
                                         />
                                     </div>
                                     <div className="grid gap-2">
+                                        <FormField control={form.control} name="phoneNumber" render={({field}) => {
+                                        return (
+                                        <FormItem>
+                                            <FormLabel>Phone Number</FormLabel>
+                                            <FormControl>
+                                            <Input 
+                                            placeholder="Enter your phone number" 
+                                            type="phoneNumber" 
+                                            {...field} 
+                                            onChange={(e) => field.onChange(e.target.value)}
+                                            />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                        )
+                                        }}
+                                        />
+                                    </div>
+                                    <div className="grid gap-2">
                                         <FormField control={form.control} name="password" render={({field}) => {
                                         return (
                                         <FormItem>
@@ -234,7 +246,7 @@ export default function SignUp() {
                             {successMessage && <div className="text-green-600">{successMessage}</div>}
                             <div className="text-center text-sm">
                                 Already have an account?{" "}
-                                <Link className="underline text-red-600" href="/signin">
+                                <Link className="underline text-red-600" href="/sign-in">
                                     Log in
                                 </Link>
                             </div>
