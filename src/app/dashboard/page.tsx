@@ -1,15 +1,28 @@
+'use client'
+
 import { useEffect } from "react";
-import { createClient } from "../utils/supabase/server";
-import { redirect } from "next/navigation";
+import { createClient } from "../utils/supabase/client";
+import { useRouter } from "next/navigation";
 
-export default async function Dashboard() {
+export default function Dashboard() {
 
-    const supabase = createClient();
+  const router = useRouter();
 
-    const {data : { user }} = await supabase.auth.getUser()
-
-    if (!user) { redirect('/signin') }
-    if (user) { redirect('/dashboard/overview') }
+    useEffect(() => {
+      async function checkUser() {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+  
+        if (!user) {
+          router.push("/sign-in");
+        }
+        if (user) {
+          router.push("/dashboard/overview");
+        
+        }
+      }
+      checkUser()
+    }, []);
 
     return (
         <div className='flex w-full justify-center items-center h-screen'>
