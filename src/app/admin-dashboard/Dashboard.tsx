@@ -7,6 +7,7 @@ import DashboardHome from '@/components/DashboardHome';
 const Dashboard: React.FC = () => {
  return (
     <Router>
+      <div className="App">
         <Nav />
         <Routes>
           <Route path="/dashboard/user-management" element={<UserManagement />} />
