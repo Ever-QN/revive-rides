@@ -1,7 +1,15 @@
 import Link from "next/link"
 import Image from "next/image"
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { createClient } from "../utils/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
+
 
 export default function BookAppointment() {
+  
+
+
   return (
     <div>
         <div className="flex flex-col justify-center mx-auto max-w-3xl h-screen space-y-4 px-8 z-0">
