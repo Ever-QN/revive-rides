@@ -30,7 +30,9 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar user={user}/>
-          <main>{children}</main>
+          <main>
+            {children}
+          </main>
           <Toaster />
         <Footer />
       </body>
