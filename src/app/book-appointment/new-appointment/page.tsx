@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { useForm } from "react-hook-form";
 import { createClient } from "@/app/utils/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
+import { Calendar } from "@/components/ui/calendar";
 
 type Booking = {
     first_name: string;
@@ -38,6 +40,32 @@ export default function NewAppointment() {
     const [time, setTime] = useState("");
     const [message, setMessage] = useState("");
 
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth();
+    const currentDate = today.getDate();
+
+    const disabledDays = [];
+
+    // Disable days before the current date
+    for (let day = 1; day < currentDate; day++) {
+    disabledDays.push(new Date(currentYear, currentMonth, day));
+    }
+
+    // Disable weekends
+    for (let day = currentDate; day <= 31; day++) {
+    const date = new Date(currentYear, currentMonth, day);
+    const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+    if (dayOfWeek === 0 || dayOfWeek === 6) {
+        disabledDays.push(date);
+    }
+    }
+
+
+    const { toast } = useToast();
+
+
+
 
     const onSubmit = async () => {
         setIsLoading(true);
@@ -59,14 +87,16 @@ export default function NewAppointment() {
                     booking_notes: message
                 }]);
             
-            if (bookingError) {
-                throw new Error("Error inserting booking data");
-            }
-    
-            alert("Appointment request submitted successfully!");
+                if (bookingError) {
+                    toast({
+                      title: "Error",
+                      description: bookingError.message,
+                      variant: "destructive"
+                    })
+                    return;
+                }
         } catch (error) {
-            console.error("Error submitting appointment request:", error);
-            alert("Failed to submit appointment request. Please try again later.");
+            console.error("Error submitting appointment request: ", error);
         } finally {
             setIsLoading(false);
         }
