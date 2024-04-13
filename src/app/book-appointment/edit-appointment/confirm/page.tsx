@@ -4,7 +4,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
 
-export default function Page() {
+export default function EditSuccess() {
   const handleDashboardRedirect = () => {
     window.location.href = '/dashboard'; // This will redirect the user to the dashboard.
   };
