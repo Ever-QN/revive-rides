@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
-
+import { User } from '@supabase/supabase-js';
 
 type FormData = {
   firstName: string;
@@ -25,72 +25,91 @@ type FormData = {
 };
 
 export default function EditAppointment() {
-  const supabase = createClient();
   const [bookingId, setBookingId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
   const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormData>();
+  const supabase = createClient();
+
+  useEffect(() => {
+    // Fetch the logged-in user's details
+    const fetchUser = async () => {
+      setIsLoading(true);
+      const { data, error } = await supabase.auth.getUser();
+      setIsLoading(false);
+      if (error) {
+        alert('Error fetching user information. Please try again later.');
+        console.error('Error fetching user information:', error);
+      } else {
+        setLoggedInUser(data.user);
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   const fetchBookingDetails = async (bookingId: string) => {
     setIsLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from('user_bookings')
-        .select('*')
-        .eq('booking_id', bookingId)
-        .single();
-  
-      if (error) throw error;
-  
-      if (data) {
-        setValue('firstName', data.first_name || ''); 
-        setValue('lastName', data.last_name || '');
-        setValue('phone', data.phone_number || ''); 
-        setValue('email', data.email || '');
-        setValue('carInfo', data.car_info || '');
-        setValue('bookingType', data.booking_type || '');
-        setValue('date', data.booking_date || '');
-        setValue('time', data.booking_time || '');
-        setValue('message', data.booking_notes || '');
+    const { data, error } = await supabase
+      .from('user_bookings')
+      .select('*')
+      .eq('booking_id', bookingId)
+      .single();
+    setIsLoading(false);
+
+    if (error) {
+      alert('Please enter valid Booking ID');
+      console.error('Please enter valid Booking ID', error);
+    } else if (data) {
+      if (loggedInUser && data.email !== loggedInUser.email) {
+        alert('Please enter valid Booking ID');
+        return;
       }
-    } catch (error) {
-      console.error('Error fetching booking details:', error);
-      alert('Error fetching booking details.');
-    } finally {
-      setIsLoading(false);
+      // Set form values here
+      setValue('firstName', data.first_name || '');
+      setValue('lastName', data.last_name || '');
+      setValue('phone', data.phone_number || ''); 
+      setValue('email', data.email || '');
+      setValue('carInfo', data.car_info || '');
+      setValue('bookingType', data.booking_type || '');
+      setValue('date', data.booking_date || '');
+      setValue('time', data.booking_time || '');
+      setValue('message', data.booking_notes || '');
     }
   };
-  
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (formData: FormData) => {
+    if (!loggedInUser || loggedInUser.email !== formData.email) {
+      alert('Please enter valid Booking ID');
+      return;
+    }
+
     setIsLoading(true);
     const { error } = await supabase
       .from('user_bookings')
       .update({
-        first_name: data.firstName,     // Assuming the column name in Supabase is 'first_name'
-        last_name: data.lastName,       // Assuming the column name in Supabase is 'last_name'
-        phone_number: data.phone,          // The correct column name is 'phone_num', as per your table screenshot
-        email: data.email,              // Column name is 'email' in Supabase
-        car_info: data.carInfo,         // Column name is 'car_info' in Supabase
-        booking_type: data.bookingType, // Column name is 'booking_type' in Supabase
-        booking_date: data.date,        // Column name is 'booking_date' in Supabase
-        booking_time: data.time,        // Column name is 'booking_time' in Supabase
-        booking_notes: data.message,    // Column name is 'booking_notes' in Supabase
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        phone_number: formData.phone,
+        email: formData.email,
+        car_info: formData.carInfo,
+        booking_type: formData.bookingType,
+        booking_date: formData.date,
+        booking_time: formData.time,
+        booking_notes: formData.message,
       })
       .eq('booking_id', bookingId);
-  
-    if (error) {
-      console.error("Error updating the booking:", error);
-      alert("Failed to update appointment. Please try again later.");
-    } else {
-      alert("Appointment updated successfully!");
-    }
-  
     setIsLoading(false);
+
+    if (error) {
+      alert('Failed to update appointment. Please try again later.');
+      console.error('Error updating the booking:', error);
+    } else {
+      alert('Appointment updated successfully!');
+      // You might want to handle the success case, like redirecting to a different page
+    }
   };
   
-  
-  
-
   return (
     <div className="relative flex items-center justify-center p-4">
       <Card className="w-full max-w-3xl">
