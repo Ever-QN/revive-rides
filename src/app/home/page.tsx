@@ -71,7 +71,7 @@ export default function Home() {
             className="z-50 flex flex-col justify-center items-center p-4"
           >
             <motion.p className="font-bold md:text-8xl text-6xl bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-cyan-700 via-neutral-100 to-sky-500 bg-clip-text text-transparent text-center py-4 dark:text-white">
-              S&D Autobody
+              <div className="dark:text-white">S&D Autobody</div>
             </motion.p>
             <motion.p className="text-4xl text-center md:text-4xl text-red-500 bg-clip-text dark:text-gray-300">
               Discover excellence in auto body repair services.
