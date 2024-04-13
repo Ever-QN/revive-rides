@@ -38,6 +38,7 @@ type User = {
     password: string;
     first_name: string;
     last_name: string;
+    phone_number: string;
 }
 
 export default function SignUp() {
@@ -57,21 +58,31 @@ export default function SignUp() {
             email: "",
             password: "",
             confirmPassword: "",
+            phoneNumber: "",
         },
     });
 
     async function handleSubmit() {
         
         const formData = form.getValues();
+
         const { data, error } = await supabase.auth.signUp({
             email: formData.email,
             password: formData.password,
             options: {
-                emailRedirectTo: window.location.origin
+                emailRedirectTo: window.location.origin,
+                data: {
+                    email: formData.email,
+                    first_name: formData.firstName,
+                    last_name: formData.lastName,
+                    phone_number: formData.phoneNumber
+                },
             }
         });
 
+
         if (error) {
+            console.log(error)
             toast({
                 title: "Error",
                 description: error.message,
@@ -158,6 +169,25 @@ export default function SignUp() {
                                             <Input 
                                             placeholder="Enter your email" 
                                             type="email" 
+                                            {...field} 
+                                            onChange={(e) => field.onChange(e.target.value)}
+                                            />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                        )
+                                        }}
+                                        />
+                                    </div>
+                                    <div className="grid gap-2">
+                                        <FormField control={form.control} name="phoneNumber" render={({field}) => {
+                                        return (
+                                        <FormItem>
+                                            <FormLabel>Phone Number</FormLabel>
+                                            <FormControl>
+                                            <Input 
+                                            placeholder="Enter your phone number" 
+                                            type="phoneNumber" 
                                             {...field} 
                                             onChange={(e) => field.onChange(e.target.value)}
                                             />
