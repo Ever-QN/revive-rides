@@ -81,9 +81,42 @@ export default function NewAppointment() {
         setIsLoading(true);
     
         try {
+            // Calculate the start and end time of the appointment within a 2-hour window
+            const selectedTime = new Date(`${date}T${time}`);
+            const startTime = new Date(selectedTime.getTime() - 2 * 60 * 60 * 1000);
+            const endTime = new Date(selectedTime.getTime() + 2 * 60 * 60 * 1000);
+
+            // Check for existing overlapping appointments within the 2-hour window
+            const { data:existingBooking, error: existingBookingError} = await supabase
+                .from("user_bookings")
+                .select("booking_time")
+                .eq("booking_date", date)
+                .gte("booking_time", startTime.toTimeString().slice(0, 5))
+                .lte("booking_time", endTime.toTimeString().slice(0, 5));
+
+            if (existingBooking && existingBooking.length > 0) {
+                const existingBookingTime =existingBooking.map(booking => {
+                    // Split the time string into hours and minutes
+                    const [hours, minutes] = booking.booking_time.split(':');
+                    
+                    // Construct a new date object with today's date and the provided time
+                    const bookingTime = new Date();
+                    bookingTime.setHours(parseInt(hours, 10));
+                    bookingTime.setMinutes(parseInt(minutes, 10));
+
+                    return bookingTime.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+                }).join(", ");
+                
+                toast({
+                    title: "OVERLAPPING APPOINTMENT SCHEDULED", 
+                    description: `Please select a different time within 2 hours of this time (${existingBookingTime}).`,
+                    variant: "destructive",
+                });
+                return;
+            }
 
             // Insert booking information into the "user_bookings" table
-            const { data, error: bookingError } = await supabase
+            const { data: newBooking, error: newBookingError } = await supabase
                 .from("user_bookings")
                 .insert([{ 
                     first_name: firstName,
@@ -98,22 +131,34 @@ export default function NewAppointment() {
                     booking_details: details
                 }]);
             
-                if (bookingError) {
+                if (newBookingError) {
                     toast({
                       title: "Error",
-                      description: bookingError.message,
+                      description: newBookingError.message,
                       variant: "destructive"
                     })
                     return;
                 }
+
+                toast ({
+                    title: "APPOINTMENT SUCCESSFULLY SCHEDULED",
+                    description: "Your appointment request has been submitted. We will contact you shortly to confirm your appointment.",
+                    variant: "default"
+                });
+
+                reset();
         } catch (error) {
-            console.error("Error submitting appointment request: ", error);
+            toast({
+                title: "Error",
+                description: "Failed to submit appointment request. Please try again later.",
+                variant: "destructive"
+            });
         } finally {
             setIsLoading(false);
         }
     };
 
-  return (
+    return (
         <div className="relative flex flex-col items-center justify-center p-4">
             <Card className="flex flex-col">
             <CardHeader>
@@ -179,7 +224,7 @@ export default function NewAppointment() {
                         className="min-h-[100px] border border-gray-500 max-h-[150px]"
                         {...register("details")}
                         value={details}
-                        name="message"
+                        name="details"
                         onChange={(e) => setDetails(e.target.value)}
                         placeholder="Enter a description of the issue with your vehicle, as well as any notes about the vehicle"
                         required
@@ -191,7 +236,7 @@ export default function NewAppointment() {
                     {isLoading ? "Submitting..." : "Submit"}
                 </Button>
             </CardFooter>
-        </Card>
+            </Card>
         </div>
   )
 }
