@@ -41,7 +41,7 @@ type Booking = {
     car_info: string
   }
 
-export default function UserBookingsTable({ user }: any) {
+export default function AdminPendingBookingsTable({ user }: any) {
 
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
@@ -75,7 +75,6 @@ export default function UserBookingsTable({ user }: any) {
       if (bookings) {
         setBookings(bookings);
         setLoading(false);
-        console.log(bookings)
       }
 
   }
@@ -99,10 +98,10 @@ export default function UserBookingsTable({ user }: any) {
     return (
       <>
       {loading ? (
-        <p className="flex justify-center font-bold">Loading Appointments...</p>
+        <p className="flex justify-center font-bold">Loading Pending Appointments...</p>
       ) : (  
       bookings.length === 0 ? (
-        <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
+        <div className="mt-4 flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm h-screen">
           <div className="flex flex-col items-center gap-1 text-center">
             <h3 className="text-2xl font-bold tracking-tight">
               No pending appointments found.
@@ -113,7 +112,7 @@ export default function UserBookingsTable({ user }: any) {
           </div>
         </div>
       ) : (
-        <Card>
+        <Card className='mt-4'>
           <CardHeader className="flex flex-col justify-center">
           <div className="flex flex-col gap-2">
             <CardTitle className=''>
