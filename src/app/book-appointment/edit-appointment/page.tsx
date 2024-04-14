@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
 import { User } from '@supabase/supabase-js';
+import { toast, useToast } from '@/components/ui/use-toast';
 
 type FormData = {
   firstName: string;
@@ -30,6 +31,7 @@ export default function EditAppointment() {
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
   const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormData>();
   const supabase = createClient();
+  const { toast } = useToast();
 
   useEffect(() => {
     // Fetch the logged-in user's details
@@ -58,11 +60,19 @@ export default function EditAppointment() {
     setIsLoading(false);
 
     if (error) {
-      alert('Please enter valid Booking ID');
+      toast({
+        title: "Error",
+        description: "Please enter a valid booking ID. Try again.",
+        variant: "destructive"
+        })
       console.error('Please enter valid Booking ID', error);
     } else if (data) {
       if (loggedInUser && data.email !== loggedInUser.email) {
-        alert('Please enter valid Booking ID');
+        toast({
+          title: "Error",
+          description: "You must be signed in to edit an appointment",
+          variant: "destructive"
+          })
         return;
       }
       // Set form values here
@@ -80,7 +90,11 @@ export default function EditAppointment() {
 
   const onSubmit = async (formData: FormData) => {
     if (!loggedInUser || loggedInUser.email !== formData.email) {
-      alert('Please enter valid Booking ID');
+      toast({
+        title: "Error",
+        description: "Invalid booking ID. Try again",
+        variant: "destructive"
+        })
       return;
     }
   
@@ -102,10 +116,18 @@ export default function EditAppointment() {
     setIsLoading(false);
   
     if (error) {
-      alert('Failed to update appointment. Please try again later.');
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive"
+        })
       console.error('Error updating the booking:', error);
     } else {
-      alert('Appointment updated successfully!');
+      toast({
+        title: "Success!",
+        description: "Successfully updated the appointment.",
+        className: "bg-green-500 text-white"
+        })
       window.location.href = 'edit-appointment/confirm';
     }
   };
@@ -153,11 +175,13 @@ export default function EditAppointment() {
             <div className="space-y-2">
               <Label htmlFor="booking-type">Booking type</Label>
               <select {...register('bookingType')} id="booking-type" className="border border-gray-500" required>
-                <option value="diagnostic">Diagnostic</option>
-                <option value="repair">Repair</option>
-                <option value="maintenance">Maintenance</option>
-                <option value="painting">Painting</option>
-                <option value="other">Other</option>
+                <option value="Auto Body Repair">Auto Body Repair</option>
+                <option value="Paintless Dent Repair">Paintless Dent Repair</option>
+                <option value="Auto Detailing">Auto Detailing</option>
+                <option value="Frame Straightening">Frame Straightening</option>
+                <option value="Graphics and Decals">Graphics and Decals</option>
+                <option value="Graphics and Decals">Custom Paint Jobs</option>
+                <option value="Other">Other</option>
               </select>
             </div>
             <div className="space-y-2">
