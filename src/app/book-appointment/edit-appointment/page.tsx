@@ -1,6 +1,5 @@
 "use client";
 
-<<<<<<< Updated upstream
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { createClient } from '@/app/utils/supabase/client';
@@ -24,19 +23,6 @@ type FormData = {
   message: string;
   booking_id: string;
 };
-=======
-import { CardTitle, CardDescription, CardHeader, CardContent, Card } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import Image from "next/image"
-import { useEffect, useState } from "react"
-import { useForm } from "react-hook-form"
-import { createClient } from "@/app/utils/supabase/client"
-import { useToast } from "@/components/ui/use-toast";
-import { useRouter } from "next/navigation";
->>>>>>> Stashed changes
 
 export default function EditAppointment() {
   const [bookingId, setBookingId] = useState('');
@@ -45,7 +31,6 @@ export default function EditAppointment() {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormData>();
   const supabase = createClient();
 
-<<<<<<< Updated upstream
   useEffect(() => {
     // Fetch the logged-in user's details
     const fetchUser = async () => {
@@ -64,28 +49,6 @@ export default function EditAppointment() {
   }, []);
 
   const fetchBookingDetails = async (bookingId: string) => {
-=======
-  const { toast } = useToast();
-  const router = useRouter();
-
-  useEffect(() => {
-    async function checkUser() {
-        const { data: { user } } = await supabase.auth.getUser();
-    
-        if (!user) {
-            router.push("/sign-in");
-            toast({
-            title: "Error",
-            description: "You must be signed in to book new appointments",
-            variant: "destructive"
-            })
-        }
-        }
-        checkUser()
-  }, []);
-
-  const handleProceed = async () => {
->>>>>>> Stashed changes
     setIsLoading(true);
     const { data, error } = await supabase
       .from('user_bookings')
@@ -102,7 +65,6 @@ export default function EditAppointment() {
         alert('Please enter valid Booking ID');
         return;
       }
-<<<<<<< Updated upstream
       // Set form values here
       setValue('firstName', data.first_name || '');
       setValue('lastName', data.last_name || '');
@@ -113,78 +75,6 @@ export default function EditAppointment() {
       setValue('date', data.booking_date || '');
       setValue('time', data.booking_time || '');
       setValue('message', data.booking_notes || '');
-=======
-
-      // Calculate the start and end time of the appointment within a 2-hour window
-      const selectedTime = new Date(`${date}T${time}`);
-      const startTime = new Date(selectedTime.getTime() - 2 * 60 * 60 * 1000);
-      const endTime = new Date(selectedTime.getTime() + 2 * 60 * 60 * 1000);
-
-      // Check for existing overlapping appointments within the 2-hour window
-      const { data:existingBooking, error: existingBookingError} = await supabase
-          .from("user_bookings")
-          .select("booking_time")
-          .eq("booking_date", date)
-          .gte("booking_time", startTime.toTimeString().slice(0, 5))
-          .lte("booking_time", endTime.toTimeString().slice(0, 5));
-
-      if (existingBooking && existingBooking.length > 0) {
-          const existingBookingTime =existingBooking.map(booking => {
-              // Split the time string into hours and minutes
-              const [hours, minutes] = booking.booking_time.split(':');
-              
-              // Construct a new date object with today's date and the provided time
-              const bookingTime = new Date();
-              bookingTime.setHours(parseInt(hours, 10));
-              bookingTime.setMinutes(parseInt(minutes, 10));
-
-              return bookingTime.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
-          }).join(", ");
-          
-          toast({
-              title: "OVERLAPPING APPOINTMENT SCHEDULED", 
-              description: `Please select a different time within 2 hours of this time (${existingBookingTime}).`,
-              variant: "destructive",
-          });
-          return;
-      }
-  
-      const { data, error } = await supabase
-        .from('user_bookings')
-        .select("*")
-        .eq("booking_id", appointmentID)
-        .single();
-  
-      if (data) {
-
-        // Update state with fetched data
-        setDate(data.booking_date);
-        setTime(data.booking_time);
-        setType(data.booking_type);
-        setEmail(data.email);
-        setCarInfo(data.car_info);
-        setMessage(data.booking_notes);
-
-        // Set the state to indicate that the appointment ID has been entered and data has been fetched
-        setIsAppointmentIDEntered(true);
-        console.log("Appointment data:", data);
-      } else {
-        console.log("Appointment not found");
-
-        // Reset form fields and state variables
-        setDate("");
-        setTime("");
-        setType("");
-        setEmail("");
-        setCarInfo("");
-        setMessage("");
-        
-        // Set the state to indicate that the appointment ID has not been entered or the data fetch failed
-        setIsAppointmentIDEntered(false);
-      }
-    } catch (error) {
-      console.log(error);
->>>>>>> Stashed changes
     }
   };
 
@@ -195,7 +85,6 @@ export default function EditAppointment() {
     }
   
     setIsLoading(true);
-<<<<<<< Updated upstream
     const { error } = await supabase
       .from('user_bookings')
       .update({
@@ -210,35 +99,6 @@ export default function EditAppointment() {
         booking_notes: formData.message,
       })
       .eq('booking_id', bookingId);
-=======
-    try {
-      const { data, error } = await supabase
-        .from('user_bookings')
-        .update({
-          booking_date: date,
-          booking_time: time,
-          booking_type: type,
-          email: email,
-          car_info: carInfo,
-          booking_notes: message
-        })
-        .eq("booking_id", appointmentID);
-      
-      if (error) {
-        console.log("Error updating appointment", error);
-      } else {
-        toast({
-          title: "Success", 
-          description: `Appointment Successfully Changed.`,
-          className: "bg-green-500",
-        });
-      }
-
-    } catch (error) {
-      console.log(error);
-    }
-
->>>>>>> Stashed changes
     setIsLoading(false);
   
     if (error) {
