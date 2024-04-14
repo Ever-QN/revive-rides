@@ -1,173 +1,183 @@
-'use client';
+"use client";
 
-import { CardTitle, CardDescription, CardHeader, CardContent, Card } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import Image from "next/image"
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { createClient } from "@/app/utils/supabase/client"
+import { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { createClient } from '@/app/utils/supabase/client';
+import { CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Card } from '@/components/ui/card';
+import { User } from '@supabase/supabase-js';
+
+type FormData = {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  carInfo: string;
+  bookingType: string;
+  date: string;
+  time: string;
+  message: string;
+  booking_id: string;
+};
 
 export default function EditAppointment() {
+  const [bookingId, setBookingId] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormData>();
   const supabase = createClient();
-  const [appointmentID, setAppointmentID] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
-  const { register } = useForm();
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-  const [type, setType] = useState("");
-  const [email, setEmail] = useState("");
-  const [carInfo, setCarInfo] = useState("");
-  const [message, setMessage] = useState("");
-  const [isAppointmentIDEntered, setIsAppointmentIDEntered] = useState(false);
 
-  const handleProceed = async () => {
+  useEffect(() => {
+    // Fetch the logged-in user's details
+    const fetchUser = async () => {
+      setIsLoading(true);
+      const { data, error } = await supabase.auth.getUser();
+      setIsLoading(false);
+      if (error) {
+        alert('Error fetching user information. Please try again later.');
+        console.error('Error fetching user information:', error);
+      } else {
+        setLoggedInUser(data.user);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  const fetchBookingDetails = async (bookingId: string) => {
     setIsLoading(true);
-    try {
-      if (!appointmentID.trim()) {
-        console.log("Appointment ID is required");
+    const { data, error } = await supabase
+      .from('user_bookings')
+      .select('*')
+      .eq('booking_id', bookingId)
+      .single();
+    setIsLoading(false);
+
+    if (error) {
+      alert('Please enter valid Booking ID');
+      console.error('Please enter valid Booking ID', error);
+    } else if (data) {
+      if (loggedInUser && data.email !== loggedInUser.email) {
+        alert('Please enter valid Booking ID');
         return;
       }
-  
-      const { data, error } = await supabase
-        .from('user_bookings')
-        .select("*")
-        .eq("booking_id", appointmentID)
-        .single();
-  
-      if (data) {
-
-        // Update state with fetched data
-        setDate(data.booking_date);
-        setTime(data.booking_time);
-        setType(data.booking_type);
-        setEmail(data.email);
-        setCarInfo(data.car_info);
-        setMessage(data.booking_notes);
-
-        // Set the state to indicate that the appointment ID has been entered and data has been fetched
-        setIsAppointmentIDEntered(true);
-        console.log("Appointment data:", data);
-      } else {
-        console.log("Appointment not found");
-
-        // Reset form fields and state variables
-        setDate("");
-        setTime("");
-        setType("");
-        setEmail("");
-        setCarInfo("");
-        setMessage("");
-        
-        // Set the state to indicate that the appointment ID has not been entered or the data fetch failed
-        setIsAppointmentIDEntered(false);
-      }
-    } catch (error) {
-      console.log(error);
+      // Set form values here
+      setValue('firstName', data.first_name || '');
+      setValue('lastName', data.last_name || '');
+      setValue('phone', data.phone_number || ''); 
+      setValue('email', data.email || '');
+      setValue('carInfo', data.car_info || '');
+      setValue('bookingType', data.booking_type || '');
+      setValue('date', data.booking_date || '');
+      setValue('time', data.booking_time || '');
+      setValue('message', data.booking_notes || '');
     }
-  
-    setIsLoading(false);
   };
 
-  const handleUpdateAppointment = async () => {
+  const onSubmit = async (formData: FormData) => {
+    if (!loggedInUser || loggedInUser.email !== formData.email) {
+      alert('Please enter valid Booking ID');
+      return;
+    }
+  
     setIsLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from('user_bookings')
-        .update({
-          booking_date: date,
-          booking_time: time,
-          booking_type: type,
-          email: email,
-          car_info: carInfo,
-          booking_notes: message
-        })
-        .eq("booking_id", appointmentID);
-      
-      if (error) {
-        console.log("Error updating appointment", error);
-      } else {
-        console.log("Appointment updated successfully");
-      }
-
-    } catch (error) {
-      console.log(error);
-    }
-
+    const { error } = await supabase
+      .from('user_bookings')
+      .update({
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        phone_number: formData.phone,
+        email: formData.email,
+        car_info: formData.carInfo,
+        booking_type: formData.bookingType,
+        booking_date: formData.date,
+        booking_time: formData.time,
+        booking_notes: formData.message,
+      })
+      .eq('booking_id', bookingId);
     setIsLoading(false);
+  
+    if (error) {
+      alert('Failed to update appointment. Please try again later.');
+      console.error('Error updating the booking:', error);
+    } else {
+      alert('Appointment updated successfully!');
+      window.location.href = 'edit-appointment/confirm';
+    }
   };
-
+  
   return (
-    <div className="relative flex items-center justify-center bg-gray-300 h-screen">
-        {!isAppointmentIDEntered && (
-          <Card className="flex flex-col justify-center border-2 border-black scale-125">
-          <CardHeader>
-              <CardTitle>Enter Appointment ID</CardTitle>
-              <CardDescription>Please enter your appointment ID to proceed to editing it.</CardDescription>
-          </CardHeader>
-          <CardContent className="flex items-center space-y-4">
-              <form className="w-full space-y-4">
-                <Input placeholder="Enter appointment ID" type="text" value={appointmentID}/>
-                <Button className="w-full" onClick={handleProceed} disabled={isLoading}>
-                  {isLoading ? "Loading..." : "Proceed"}
-                </Button>
-              </form>
-          </CardContent>
-          </Card>
-        )}
-
-        {isAppointmentIDEntered && (
-          <Card className="flex flex-col justify-center border-2 border-black scale-125 mt-8">
-            <CardHeader>
-              <CardTitle>Edit Appointment</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="date">Date</Label>
-                  <Input {...register("date")} type="date" name="date" value={date} onChange={(e) => setDate(e.target.value)} />
-                </div>
-
-                <div className="space-y-2">
-                  <Input {...register("time")} type="time" name="time" value={time} onChange={(e) => setTime(e.target.value)} />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="type">Type</Label>
-                  <Input {...register("type")} type="text" name="type" value={type} onChange={(e) => setType(e.target.value)} />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input {...register("email")} type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="carInfo">Car Info</Label>
-                  <Input {...register("carInfo")} type="text" name="carInfo" value={carInfo} onChange={(e) => setCarInfo(e.target.value)} />
-                </div>
-
-                <div className="space-y-2"> 
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea
-                      className="min-h-[100px] border border-gray-500 max-h-[150px]"
-                      {...register("message")}
-                      id="message"
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Enter a description of the issue that you want to update"
-                  />
-                </div>
-
-            </CardContent>
-            <CardContent className="flex justify-end">
-              <Button onClick={handleUpdateAppointment} disabled={isLoading}>
-                {isLoading ? "Updating..." : "Update"}
-              </Button>
-            </CardContent>
-          </Card>
-        )}
+    <div className="relative flex items-center justify-center p-4">
+      <Card className="w-full max-w-3xl">
+        <CardHeader>
+          <CardTitle className="text-2xl text-center">Edit Appointment</CardTitle>
+          <CardDescription className="text-center">Update your appointment details below.</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <Input
+            placeholder="Enter your booking ID"
+            type="text"
+            value={bookingId}
+            onChange={(e) => setBookingId(e.target.value)}
+          />
+          <Button onClick={() => fetchBookingDetails(bookingId)} disabled={!bookingId || isLoading}>
+            Fetch Booking
+          </Button>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="first-name">First name</Label>
+                <Input {...register('firstName')} id="first-name" className="border border-gray-500" required/>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="last-name">Last name</Label>
+                <Input {...register('lastName')} id="last-name" className="border border-gray-500" required/>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="phone">Phone</Label>
+              <Input {...register('phone')} id="phone" className="border border-gray-500" required/>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input {...register('email')} id="email" className="border border-gray-500" type="email" required/>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="car-info">Vehicle information</Label>
+              <Input {...register('carInfo')} id="car-info" className="border border-gray-500" required/>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="booking-type">Booking type</Label>
+              <select {...register('bookingType')} id="booking-type" className="border border-gray-500" required>
+                <option value="diagnostic">Diagnostic</option>
+                <option value="repair">Repair</option>
+                <option value="maintenance">Maintenance</option>
+                <option value="painting">Painting</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="date">Preferred appointment date</Label>
+              <Input {...register('date')} id="date" className="border border-gray-500" type="date" required/>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="time">Time</Label>
+              <Input {...register('time')} id="time" className="border border-gray-500" type="time" min="08:00" max="19:00" required/>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="message">Issue description</Label>
+              <Textarea {...register('message')} id="message" className="border border-gray-500" required/>
+            </div>
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? "Updating..." : "Update"}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
     </div>
-  )
+  );
 }
