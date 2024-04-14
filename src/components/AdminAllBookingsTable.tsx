@@ -133,7 +133,7 @@ export default function AdminAllBookingsTable({ user }: any) {
               <TableHeader className=''>
                 <TableRow className='flex justify-between'>
                   <TableHead>Booking</TableHead>
-                  <TableHead className="text-right">Action</TableHead>
+                  <TableHead className="text-right">Status</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody className='flex flex-col'>
@@ -146,7 +146,7 @@ export default function AdminAllBookingsTable({ user }: any) {
                         <div className="text-sm text-muted-foreground md:inline">{formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}</div>
                         <div className='text-sm text-muted-foreground'>{booking.first_name} {booking.last_name}</div>
                       </TableCell>
-                      <TableCell className="text-right"><AdminPendingDropdown /></TableCell>
+                      <TableCell className="text-right">{booking.booking_status}</TableCell>
                     </TableRow>
                   </PopoverTrigger>
                                     
