@@ -41,6 +41,7 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { Shield } from "lucide-react"
+import AdminPendingBookingsTable from "@/components/AdminPendingBookingsTable"
 
 
 export default async function AdminDashboard() {
@@ -105,15 +106,13 @@ export default async function AdminDashboard() {
         </div>
       </div>
       <div className="flex flex-col">
-        <header className="flex flex-row-reverse justify-center md:justify-start md:flex-row h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-          <div className="flex items-center">
-            <h1 className="text-lg font-semibold md:text-2xl">Welcome back, {user.email} (Admin View)</h1>
-          </div>
+        <header className="flex justify-center md:justify-start md:flex-row h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+            <h1 className="text-lg text-center font-semibold md:text-2xl">Welcome back, {user.email} (Admin View)</h1>
         </header>
 
-        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-          <Tabs defaultValue="pending-appointments" className="w-full">
-            <TabsList>
+        <main className="flex flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+          <Tabs defaultValue="pending-appointments" className="">
+            <TabsList className="flex flex-col py-12 md:pt-0 md:flex-row">
               <TabsTrigger value="pending-appointments">
                 Pending Appointments
               </TabsTrigger>
@@ -129,7 +128,7 @@ export default async function AdminDashboard() {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="pending-appointments">
-              pa
+              <AdminPendingBookingsTable />
             </TabsContent>
             <TabsContent value="confirmed-appointments">
               ca
