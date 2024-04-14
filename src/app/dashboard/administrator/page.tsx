@@ -117,6 +117,9 @@ export default async function AdminDashboard() {
               <TabsTrigger value="pending-appointments">
                 Pending Appointments
               </TabsTrigger>
+              <TabsTrigger value="confirmed-appointments">
+                Confirmed Appointments
+              </TabsTrigger>
               <TabsTrigger value="appointments">
                 All Appointments
               </TabsTrigger>
@@ -125,11 +128,17 @@ export default async function AdminDashboard() {
                 Customers
               </TabsTrigger>
             </TabsList>
+            <TabsContent value="pending-appointments">
+              pa
+            </TabsContent>
+            <TabsContent value="confirmed-appointments">
+              ca
+            </TabsContent>
             <TabsContent value="appointments">
-              Make changes to your account here.
+              a
             </TabsContent>
             <TabsContent value="customers">
-              Change your password here.
+              c
             </TabsContent>
           </Tabs>
         </main>
