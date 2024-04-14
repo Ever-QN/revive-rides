@@ -50,7 +50,7 @@ export default function Navlinks({ user } : any) {
           </nav>
       </div>
         
-      <div className="lg:hidden flex items-center bg-white">
+      <div className="lg:hidden flex items-center">
       <Sheet>
             <SheetTrigger asChild>
               <Button
@@ -95,6 +95,7 @@ export default function Navlinks({ user } : any) {
                   </Link>
                 </SheetClose>
                 {user && (
+                  
                   <SheetClose asChild>
                     <Link
                     href="#"
