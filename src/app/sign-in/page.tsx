@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import Link from "next/link"
 import { Card, CardHeader, CardContent, CardFooter, CardDescription, CardTitle } from "@/components/ui/card"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import * as z from 'zod';
 import { useForm  } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -27,6 +27,23 @@ export default function SignIn() {
     email: z.string().email(),
     password: z.string(),
   });
+
+  useEffect(() => {
+    async function checkUser() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (user) {
+        router.push("/dashboard");
+          toast({
+              title: "You are already logged in!",
+              description: "You will be redirected to the dashboard.",
+              variant: "destructive"
+          })
+      }
+    }
+    checkUser()
+  }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

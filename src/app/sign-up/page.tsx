@@ -4,20 +4,20 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@/app/utils/supabase/client';
 import { Card, CardHeader, CardContent, CardFooter, CardDescription, CardTitle } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
+
 
 const NEXT_PUBLIC_SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const NEXT_PUBLIC_SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-const supabase = createClient(NEXT_PUBLIC_SUPABASE_URL!, NEXT_PUBLIC_SUPABASE_ANON_KEY!);
 
 const formSchema: any = z.object({
     firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -42,13 +42,33 @@ type User = {
 }
 
 export default function SignUp() {
+
+    const router = useRouter();
+    const { toast } = useToast();
+
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [users, setUsers] = useState<User[]>([]);
 
-    const { toast } = useToast();
 
+    
+    useEffect(() => {
+        async function checkUser() {
+          const supabase = createClient();
+          const { data: { user } } = await supabase.auth.getUser();
+    
+          if (user) {
+            router.push("/dashboard");
+              toast({
+                  title: "You are already logged in!",
+                  description: "You will be redirected to the dashboard.",
+                  variant: "destructive"
+              })
+          }
+        }
+        checkUser()
+      }, []);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
