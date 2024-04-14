@@ -68,7 +68,7 @@ export default async function DashboardAppointments() {
               </Link>
               <Link
                 href="/dashboard/appointments"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 bg-mutedhover:text-primary"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 bg-muted hover:text-primary"
               >
                 <Users className="h-4 w-4" />
                 Your Appointments
