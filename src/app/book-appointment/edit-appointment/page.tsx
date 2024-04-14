@@ -175,17 +175,17 @@ export default function EditAppointment() {
               <Label htmlFor="car-info">Vehicle information</Label>
               <Input {...register('carInfo')} id="car-info" className="border border-gray-500" required/>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="booking-type">Booking type</Label>
-              <select {...register('bookingType')} id="booking-type" className="border border-gray-500" required>
-                <option value="Auto Body Repair">Auto Body Repair</option>
-                <option value="Paintless Dent Repair">Paintless Dent Repair</option>
-                <option value="Auto Detailing">Auto Detailing</option>
-                <option value="Frame Straightening">Frame Straightening</option>
-                <option value="Graphics and Decals">Graphics and Decals</option>
-                <option value="Custom Paint Jobs">Custom Paint Jobs</option>
-                <option value="Other">Other</option>
-              </select>
+            <div className="space-y-2 my-2">
+              <Label htmlFor="booking-type">Booking type: </Label>
+                <select {...register('bookingType')} id="booking-type" className="border border-gray-500" required>
+                  <option value="Auto Body Repair">Auto Body Repair</option>
+                  <option value="Paintless Dent Repair">Paintless Dent Repair</option>
+                  <option value="Auto Detailing">Auto Detailing</option>
+                  <option value="Frame Straightening">Frame Straightening</option>
+                  <option value="Graphics and Decals">Graphics and Decals</option>
+                  <option value="Custom Paint Jobs">Custom Paint Jobs</option>
+                  <option value="Other">Other</option>
+                </select>
             </div>
             <div className="space-y-2">
               <Label htmlFor="date">Preferred appointment date</Label>
@@ -199,9 +199,12 @@ export default function EditAppointment() {
               <Label htmlFor="message">Issue description</Label>
               <Textarea {...register('message')} id="message" className="border border-gray-500" required/>
             </div>
-            <Button type="submit" disabled={isLoading}>
-              {isLoading ? "Updating..." : "Update"}
-            </Button>
+            <div className='flex justify-end items-end '>
+              <Button type="submit" disabled={isLoading} className='mt-4'>
+                {isLoading ? "Updating..." : "Update"}
+              </Button>
+            </div>
+            
           </form>
         </CardContent>
       </Card>
