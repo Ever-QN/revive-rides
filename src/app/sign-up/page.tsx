@@ -94,7 +94,7 @@ export default function SignUp() {
             {toast({
                 title: "Success!",
                 description: successMessage,
-                className: "bg-green-500",
+                className: "bg-green-500 text-white",
             })}
         }
     }
