@@ -85,7 +85,8 @@ export default function SignUp() {
     async function handleSubmit() {
         
         const formData = form.getValues();
-
+        const supabase = createClient();
+        
         const { data, error } = await supabase.auth.signUp({
             email: formData.email,
             password: formData.password,
