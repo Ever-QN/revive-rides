@@ -32,7 +32,7 @@ type Booking = {
     booking_date: string
     booking_time: string
     booking_status: "pending" | "confirmed" | "completed" | "cancelled"
-    booking_notes: string
+    booking_details: string
     email: string
     car_info: string
   }
@@ -110,7 +110,7 @@ export default function UserBookingsTable({ user }: any) {
           </div>
         </div>
       ) : (
-        <Card>
+        <Card className='mt-4'>
           <CardHeader className="flex flex-col justify-center">
           <div className="flex flex-col gap-2">
             <CardTitle>
@@ -163,7 +163,7 @@ export default function UserBookingsTable({ user }: any) {
                           Additional Details:
                         </div>
                         <p className="">
-                          {booking.booking_notes}
+                          {booking.booking_details}
                         </p>
                       </div>
                     </div>
