@@ -134,21 +134,24 @@ export default function EditAppointment() {
   
   return (
     <div className="relative flex items-center justify-center p-4">
-      <Card className="w-full max-w-3xl">
+      <Card className="w-full max-w-3xl border-black">
         <CardHeader>
           <CardTitle className="text-2xl text-center">Edit Appointment</CardTitle>
           <CardDescription className="text-center">Update your appointment details below.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          <div className='flex flex-col items-center'>
           <Input
             placeholder="Enter your booking ID"
             type="text"
             value={bookingId}
             onChange={(e) => setBookingId(e.target.value)}
+            className='border border-black mb-4'
           />
           <Button onClick={() => fetchBookingDetails(bookingId)} disabled={!bookingId || isLoading}>
             Fetch Booking
           </Button>
+          </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
