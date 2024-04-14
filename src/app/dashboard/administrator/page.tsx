@@ -44,6 +44,7 @@ import { Shield } from "lucide-react"
 import AdminPendingBookingsTable from "@/components/AdminPendingBookingsTable"
 import AdminConfirmedBookingsTable from "@/components/AdminConfirmedBookingsTable"
 import AdminAllBookingsTable from "@/components/AdminAllBookingsTable"
+import AdminCustomerTable from "@/components/AdminCustomerTable"
 
 
 export default async function AdminDashboard() {
@@ -139,7 +140,7 @@ export default async function AdminDashboard() {
               <AdminAllBookingsTable />
             </TabsContent>
             <TabsContent value="customers">
-              c
+              <AdminCustomerTable />
             </TabsContent>
           </Tabs>
         </main>
