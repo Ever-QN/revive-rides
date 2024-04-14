@@ -115,7 +115,7 @@ export default async function AdminDashboard() {
 
         <main className="flex flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           <Tabs defaultValue="pending-appointments" className="">
-            <TabsList className="flex flex-col py-12 md:pt-0 md:flex-row">
+            <TabsList className="flex flex-col py-12 md:pt-0 md:flex-row bg-white">
               <TabsTrigger value="pending-appointments">
                 Pending Appointments
               </TabsTrigger>
