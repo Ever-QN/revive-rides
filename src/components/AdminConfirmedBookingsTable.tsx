@@ -116,10 +116,10 @@ export default function AdminConfirmedBookingsTable({ user }: any) {
           <CardHeader className="flex flex-col justify-center">
           <div className="flex flex-col gap-2">
             <CardTitle className=''>
-              Pending Appointments
+              Confirmed Appointments
             </CardTitle>
             <CardDescription>
-              Click on the appointment to view more details and take action.
+              Click on the appointment to view more details. Use the dropdown to cancel an appointment.
             </CardDescription>
           </div>
 
