@@ -111,7 +111,7 @@ export default function AdminAllBookingsTable({ user }: any) {
           </div>
         </div>
       ) : (
-        <Card>
+        <Card className='mt-4'>
         <CardHeader className="flex flex-col justify-center">
         <div className="flex flex-col gap-2">
             <CardTitle className=''>
