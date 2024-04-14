@@ -145,7 +145,8 @@ export default function UserBookingsTable({ user }: any) {
                     <TableRow className='flex justify-between hover:bg-slate-200 cursor-pointer'>
                       <TableCell className='text-left'>
                         <div className="font-medium">{booking.booking_type} ({booking.car_info})</div>
-                        <div className="text-sm text-muted-foreground md:inline">{formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}</div>  
+                        <div className="text-sm text-muted-foreground md:inline">{formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}</div>
+                        <div className='text-sm text-muted-foreground'>{booking.first_name} {booking.last_name}</div>
                       </TableCell>
                       <TableCell className="text-right"><AdminPendingDropdown /></TableCell>
                     </TableRow>
@@ -157,6 +158,9 @@ export default function UserBookingsTable({ user }: any) {
                         <h4 className="font-medium leading-none">{booking.booking_type} ({booking.car_info})</h4>
                         <p className="text-sm text-muted-foreground">
                           {formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          {booking.email} | {booking.phone_number}
                         </p>
                       </div>
                       <div className="grid gap-2">
