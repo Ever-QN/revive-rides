@@ -180,7 +180,7 @@ export default function EditAppointment() {
                 <option value="Auto Detailing">Auto Detailing</option>
                 <option value="Frame Straightening">Frame Straightening</option>
                 <option value="Graphics and Decals">Graphics and Decals</option>
-                <option value="Graphics and Decals">Custom Paint Jobs</option>
+                <option value="Custom Paint Jobs">Custom Paint Jobs</option>
                 <option value="Other">Other</option>
               </select>
             </div>
