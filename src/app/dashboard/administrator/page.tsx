@@ -42,6 +42,8 @@ import {
 } from "@/components/ui/tabs"
 import { Shield } from "lucide-react"
 import AdminPendingBookingsTable from "@/components/AdminPendingBookingsTable"
+import AdminConfirmedBookingsTable from "@/components/AdminConfirmedBookingsTable"
+import AdminAllBookingsTable from "@/components/AdminAllBookingsTable"
 
 
 export default async function AdminDashboard() {
@@ -131,10 +133,10 @@ export default async function AdminDashboard() {
               <AdminPendingBookingsTable />
             </TabsContent>
             <TabsContent value="confirmed-appointments">
-              ca
+              <AdminConfirmedBookingsTable />
             </TabsContent>
             <TabsContent value="appointments">
-              a
+              <AdminAllBookingsTable />
             </TabsContent>
             <TabsContent value="customers">
               c
