@@ -9,9 +9,6 @@ import { redirectToPath } from '@/app/utils/auth-helpers/server';
 
 export default function UserDropdown({ user }: any) {
     const supabase = createClient();
-    const [isOpen, setIsOpen] = useState(false);
-    const userDropdownRef = useRef<HTMLDivElement>(null);
-    const router = useRouter();
 
     return (
         <DropdownMenu>
