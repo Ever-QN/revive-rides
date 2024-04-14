@@ -160,7 +160,7 @@ export default function NewAppointment() {
 
     return (
         <div className="relative flex flex-col items-center justify-center p-4">
-            <Card className="flex flex-col">
+            <Card className="flex flex-col border border-black">
             <CardHeader>
                 <CardTitle className="text-2xl text-center">Schedule an appointment</CardTitle>
                 <CardDescription className="text-center">
