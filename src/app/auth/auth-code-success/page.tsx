@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function SuccessEmail() {
     const router = useRouter();
@@ -22,8 +23,11 @@ export default function SuccessEmail() {
     }, [secondsLeft, router]); // Empty dependency array to run effect only once
 
     return (
-        <div className='flex w-full justify-center items-center h-screen'>
-            <h1 className='text-green-600 font-bold'>Your email has been successfully verified! Redirecting you to the dashboard in {secondsLeft} seconds...</h1>
+        <div className='flex flex-col w-full justify-center items-center h-screen'>
+            <div className='text-green-600 font-bold'>Your email has been successfully verified! Redirecting you to the dashboard in {secondsLeft} seconds...</div>
+            <div>
+                <Link href="/dashboard" className="text-red-500 underline">Click here if you are not redirected</Link>
+            </div>
         </div>
     )
 }
