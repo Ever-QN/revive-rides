@@ -32,21 +32,45 @@ import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { createClient } from "@/app/utils/supabase/server"
 import { redirect } from "next/navigation"
-import { useEffect } from "react"
+import { use, useEffect } from "react"
 import { redirectToPath } from "@/app/utils/auth-helpers/server"
 
+type usersType = {
+  id: string
+  email: string
+  first_name: string
+  last_name: string
+  phone_number: string
+}
 
 export default async function DashboardOverview() {
 
   const supabase = createClient();
+  let currentUser = {} as usersType
   const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!user) {
-      return redirectToPath("/sign-in");
+    return redirectToPath("/sign-in");
   }
-  
+
+  if (user) {
+    const { data: users, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('id', user.id)
+      .single()
+
+    if (error) {
+      console.error(error)
+    }
+
+    if (users) {
+      currentUser = users
+    }
+  }
+
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
@@ -87,7 +111,7 @@ export default async function DashboardOverview() {
       <div className="flex flex-col">
         <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
           <div className="flex items-center">
-            <h1 className="text-lg font-semibold md:text-2xl">Welcome back, {user.email}</h1>
+            <h1 className="text-lg font-semibold md:text-2xl">Welcome back, {currentUser.first_name} {currentUser.last_name}</h1>
           </div>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">

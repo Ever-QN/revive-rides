@@ -35,9 +35,18 @@ import { createClient } from "@/app/utils/supabase/server"
 import UserBookingsTable from "@/components/UserBookingsTable"
 import { redirectToPath } from "@/app/utils/auth-helpers/server"
 
+type usersType = {
+  id: string
+  email: string
+  first_name: string
+  last_name: string
+  phone_number: string
+}
+
 export default async function DashboardAppointments() {
 
   const supabase = createClient();
+  let currentUser = {} as usersType
 
   const {
     data: { user },
@@ -46,6 +55,23 @@ export default async function DashboardAppointments() {
   if (!user) {
     return redirectToPath("/sign-in");
   }
+
+  if (user) {
+    const { data: users, error } = await supabase
+    .from('users')
+    .select('*')
+    .eq('id', user.id)
+    .single()
+
+    if (error) {
+      console.error(error)
+    }
+
+    if (users) {
+      currentUser = users
+    }
+  }
+  
 
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] pt-4">
@@ -87,7 +113,7 @@ export default async function DashboardAppointments() {
       <div className="flex flex-col">
         <header className="flex flex-row-reverse justify-center md:justify-start md:flex-row h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
           <div className="flex items-center">
-            <h1 className="text-lg font-semibold md:text-2xl">Welcome back, {user.email}</h1>
+            <h1 className="text-lg font-semibold md:text-2xl">Welcome back, {currentUser.first_name} {currentUser.last_name}</h1>
           </div>
         </header>
 

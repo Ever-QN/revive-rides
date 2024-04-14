@@ -46,10 +46,18 @@ import AdminConfirmedBookingsTable from "@/components/AdminConfirmedBookingsTabl
 import AdminAllBookingsTable from "@/components/AdminAllBookingsTable"
 import AdminCustomerTable from "@/components/AdminCustomerTable"
 
+type usersType = {
+  id: string
+  email: string
+  first_name: string
+  last_name: string
+  phone_number: string
+}
 
 export default async function AdminDashboard() {
 
   const supabase = createClient();
+  let currentUser = {} as usersType
 
   const {
     data: { user },
@@ -57,6 +65,22 @@ export default async function AdminDashboard() {
 
   if (!user) {
     return redirectToPath("/sign-in");
+  }
+
+  if (user) {
+    const { data: users, error } = await supabase
+    .from('users')
+    .select('*')
+    .eq('id', user.id)
+    .single()
+
+    if (error) {
+      console.error(error)
+    }
+
+    if (users) {
+      currentUser = users
+    }
   }
 
   return (
@@ -110,7 +134,7 @@ export default async function AdminDashboard() {
       </div>
       <div className="flex flex-col">
         <header className="flex justify-center md:justify-start md:flex-row h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-            <h1 className="text-lg text-center font-semibold md:text-2xl">Welcome back, {user.email} (Admin View)</h1>
+            <h1 className="text-lg text-center font-semibold md:text-2xl">Welcome back, {currentUser.first_name} {currentUser.last_name} (Admin View)</h1>
         </header>
 
         <main className="flex flex-col gap-4 p-4 lg:gap-6 lg:p-6">
