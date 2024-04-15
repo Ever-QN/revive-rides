@@ -152,7 +152,7 @@ export default function NewAppointment() {
                     first_name: firstName,
                     last_name: lastName,
                     phone_number: phone,
-                    email: email,
+                    email: email.toLowerCase(),
                     booking_date: date,
                     booking_type: type,
                     booking_time: time,

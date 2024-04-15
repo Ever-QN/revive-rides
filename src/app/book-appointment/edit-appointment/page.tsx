@@ -183,7 +183,7 @@ export default function EditAppointment() {
           first_name: firstName,
           last_name: lastName,
           phone_number: phone,
-          email: email,
+          email: email.toLowerCase(),
           car_info: carInfo,
           booking_type: type,
           booking_date: date,
