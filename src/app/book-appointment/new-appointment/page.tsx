@@ -30,6 +30,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
+import { redirectToPath } from "@/app/utils/auth-helpers/server";
 
 type Booking = {
     first_name: string;
@@ -173,9 +174,9 @@ export default function NewAppointment() {
                 toast ({
                     title: "APPOINTMENT SUCCESSFULLY SCHEDULED",
                     description: "Your appointment request has been submitted. We will contact you shortly to confirm your appointment.",
-                    variant: "default"
+                    className: "bg-green-500 text-white",
                 });
-
+                redirectToPath('/new-appointment/confirm');
                 reset();
         } catch (error) {
             toast({
