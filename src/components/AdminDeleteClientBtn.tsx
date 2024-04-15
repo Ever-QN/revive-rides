@@ -1,9 +1,8 @@
 import { Trash2 } from "lucide-react";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog";
 import { Button } from "./ui/button";
-import { createClient } from "@/app/utils/supabase/client";
 import { useToast } from "./ui/use-toast";
-import { SupabaseClient } from "@supabase/supabase-js";
+import { createClient } from '@supabase/supabase-js'
 
 type customerType = {
     id: string
@@ -13,14 +12,24 @@ type customerType = {
     email: string
 }
 
+const supabase_url = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const service_role_key = process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
+
 export default function AdminDeleteClientBtn({ customer }: { customer: customerType }) {
 
-    const supabase = createClient();
+    const supabase = createClient(supabase_url, service_role_key, {
+        auth: {
+          autoRefreshToken: false,
+          persistSession: false
+        }
+      })
+      
     const { toast } = useToast()
+    const adminAuthClient = supabase.auth.admin
 
 
     async function confirmAction() {
-       const { error } = await supabase.auth.admin.deleteUser(customer.id)
+       const { error } = await adminAuthClient.deleteUser(customer.id)
 
         if (error) {
             toast({
