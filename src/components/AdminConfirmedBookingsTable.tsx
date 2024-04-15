@@ -65,6 +65,8 @@ export default function AdminConfirmedBookingsTable({ user }: any) {
     const { data: bookings, error } = await supabase
       .from('user_bookings')
       .select('*')
+      .order('booking_date', { ascending: true })
+      .order('booking_time', { ascending: true })
       .eq('booking_status', 'Confirmed');
 
     if (error) {
@@ -119,7 +121,7 @@ export default function AdminConfirmedBookingsTable({ user }: any) {
               Confirmed Appointments
             </CardTitle>
             <CardDescription>
-              Click on the appointment to view more details. Use the dropdown to cancel an appointment.
+              Click on the appointment to view more details. Use the dropdown to cancel an appointment. Sorted by earliest appointment at the top.
             </CardDescription>
           </div>
 
