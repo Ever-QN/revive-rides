@@ -25,7 +25,7 @@ import { RotateCw } from 'lucide-react';
 import { Popover, PopoverTrigger, PopoverContent } from './ui/popover';
 import { Label } from '@radix-ui/react-label';
 import { Input } from 'postcss';
-import { AdminPendingDropdown } from './AdminPendingDropdown';
+import { AdminConfirmDropdown } from './AdminConfirmDropdown';
 
 type Booking = {
     booking_id: string
@@ -146,8 +146,9 @@ export default function AdminConfirmedBookingsTable({ user }: any) {
                         <div className="font-medium">{booking.booking_type} ({booking.car_info})</div>
                         <div className="text-sm text-muted-foreground md:inline">{formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}</div>
                         <div className='text-sm text-muted-foreground'>{booking.first_name} {booking.last_name}</div>
+                        
                       </TableCell>
-                      <TableCell className="text-right"><AdminPendingDropdown /></TableCell>
+                      <TableCell className="text-right"><AdminConfirmDropdown booking={booking} /></TableCell>
                     </TableRow>
                   </PopoverTrigger>
                                     
@@ -160,6 +161,9 @@ export default function AdminConfirmedBookingsTable({ user }: any) {
                         </p>
                         <p className="text-sm text-muted-foreground">
                           {booking.email} | {booking.phone_number}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          Booking ID: {booking.booking_id}
                         </p>
                       </div>
                       <div className="grid gap-2">
