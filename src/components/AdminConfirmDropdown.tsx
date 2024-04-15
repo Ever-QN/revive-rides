@@ -81,6 +81,32 @@ type booking = {
       }
     }
 
+    async function onComplete() {
+      const { error } = await supabase
+      .schema('public')
+      .from('user_bookings')
+      .update({ booking_status: 'Complete' })
+      .eq('booking_id', booking.booking_id)
+
+      if (!error) {
+        toast({
+          title: "Booking Completed",
+          description: `${booking.first_name} ${booking.last_name}'s appointment has been completed. (Booking ID: ${booking.booking_id})`,
+          className: "bg-green-500 text-white",
+        
+        })
+      }
+
+      if (error) {
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+        })
+        return;
+      }
+    }
+
     return (
       <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -94,7 +120,7 @@ type booking = {
             <DropdownMenuItem
             onClick={
               () => {
-                onCancel();
+                onComplete();
               }
             }>
               Complete Appointment
