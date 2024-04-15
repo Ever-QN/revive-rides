@@ -25,7 +25,8 @@ import { RotateCw } from 'lucide-react';
 import { Popover, PopoverTrigger, PopoverContent } from './ui/popover';
 import { Label } from '@radix-ui/react-label';
 import { Input } from 'postcss';
-import { AdminCustomerDropdown } from './AdminCustomerDropdown';
+import { AdminEditClientBtn } from './AdminEditClientBtn';
+import AdminDeleteClientBtn from './AdminDeleteClientBtn';
 
 type User = {
     id: string
@@ -71,21 +72,6 @@ export default function AdminCustomerTable({ user }: any) {
       }
 
   }
-
-  function formatDate(dateString: string): string {
-    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', options);
-  }
-
-  function formatTime(timeString: string): string {
-    const options: Intl.DateTimeFormatOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
-    const [hours, minutes] = timeString.split(':').map(Number);
-    const date = new Date();
-    date.setHours(hours);
-    date.setMinutes(minutes);
-    return date.toLocaleTimeString('en-US', options);
-  }
   
 
     return (
@@ -112,7 +98,7 @@ export default function AdminCustomerTable({ user }: any) {
               Existing Clients
             </CardTitle>
             <CardDescription>
-              A list of existing clients who have an account with S&D Autobody in the database
+              A list of existing clients who have an account with S&D Autobody in the database.
             </CardDescription>
           </div>
 
@@ -127,41 +113,25 @@ export default function AdminCustomerTable({ user }: any) {
               <TableHeader className=''>
                 <TableRow className='flex justify-between'>
                   <TableHead>Client</TableHead>
-                  <TableHead className="text-right">Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody className='flex flex-col'>
               {customers.map((customer) => (
-                  <Popover key={customer.id}>
-                  <PopoverTrigger>
-                    <TableRow className='flex justify-between hover:bg-slate-200 cursor-pointer'>
+                    <TableRow key={customer.id} className='flex justify-between'>
                       <TableCell className='text-left'>
-                        <div className="font-medium">{customer.first_name} {customer.last_name}</div>
-                        <div className='text-sm text-muted-foreground md:inline'>{customer.email} | {customer.phone_number}</div>
-                      </TableCell>
-                      <TableCell className="text-right"><AdminCustomerDropdown customer={customer}/></TableCell>
-                    </TableRow>
-                  </PopoverTrigger>
-                                    
-                  <PopoverContent className="w-96">
-                    <div className="grid gap-4">
-                      <div className="space-y-2">
-                        <h4 className="font-medium leading-none">Account ID</h4>
-                        <p className="text-sm text-muted-foreground">
-                            {customer.id}
-                        </p>
-                      </div>
-                      <div className="grid gap-2">
-                        <div className='font-bold'>
-                          Additional Details:
+                        <div className="font-medium">{customer.first_name} {customer.last_name} | ({customer.email}, {customer.phone_number})</div>
+                        <div className='text-sm text-muted-foreground md:inline'>
+                          {customer.id}
                         </div>
-                        <p className="">
-                          test
-                        </p>
-                      </div>
-                    </div>
-                  </PopoverContent>
-                </Popover>
+                      </TableCell>
+                      <TableCell className="flex flex-row text-right p-0 md:p-2">
+                        <div className='flex flex-col md:flex-row'>
+                          <AdminEditClientBtn customer={customer}/>
+                          <AdminDeleteClientBtn customer={customer} />
+                        </div>
+                        </TableCell>
+                    </TableRow>
+                    
                 ))}
 
               </TableBody>
