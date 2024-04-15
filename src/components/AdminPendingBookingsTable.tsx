@@ -93,6 +93,10 @@ export default function AdminPendingBookingsTable({ user }: any) {
     date.setMinutes(minutes);
     return date.toLocaleTimeString('en-US', options);
   }
+
+  async function refreshTable() {
+    const supabase = createClient();
+  }
   
 
     return (
@@ -112,7 +116,7 @@ export default function AdminPendingBookingsTable({ user }: any) {
           </div>
         </div>
       ) : (
-        <Card className='mt-4 h-screen'>
+        <Card className='mt-4'>
           <CardHeader className="flex flex-col justify-center">
           <div className="flex flex-col gap-2">
             <CardTitle className=''>
@@ -123,14 +127,14 @@ export default function AdminPendingBookingsTable({ user }: any) {
             </CardDescription>
           </div>
 
-          <Button size="sm" className="ml-auto">
+          <Button onClick={refreshTable} size="sm" className="ml-auto">
             <RotateCw size={20} />
           </Button>
 
           </CardHeader>
 
           <CardContent>
-          <Table className='flex flex-col'>
+          <Table className='flex flex-col h-screen'>
               <TableHeader className=''>
                 <TableRow className='flex justify-between'>
                   <TableHead>Booking</TableHead>
