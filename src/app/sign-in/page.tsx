@@ -22,6 +22,7 @@ export default function SignIn() {
 
   const { toast }  = useToast()
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false);
 
   const formSchema = z.object({
     email: z.string().email(),
@@ -56,6 +57,7 @@ export default function SignIn() {
   async function handleSubmit () {
     const formData = form.getValues();
     const supabase = createClient();
+    setIsLoading(true);
 
     const { error } = await supabase.auth.signInWithPassword({
       email: formData.email,
@@ -68,7 +70,13 @@ export default function SignIn() {
         description: error.message,
         variant: "destructive"
       })
+      setIsLoading(false);
     } else {
+      toast({
+        title: "Success!",
+        description: "Succesfully logged in. Redirecting to dashboard.",
+        className: "bg-green-500 text-white",
+    })
       redirectToPath("/dashboard")
     }
   }
