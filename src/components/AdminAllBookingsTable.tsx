@@ -111,7 +111,7 @@ export default function AdminAllBookingsTable({ user }: any) {
           </div>
         </div>
       ) : (
-        <Card className='mt-4 h-screen'>
+        <Card className='mt-4'>
         <CardHeader className="flex flex-col justify-center">
         <div className="flex flex-col gap-2">
             <CardTitle className=''>
@@ -128,15 +128,15 @@ export default function AdminAllBookingsTable({ user }: any) {
 
         </CardHeader>
 
-          <CardContent>
-          <Table className='flex flex-col'>
+          <CardContent className=''>
+          <Table className='flex flex-col h-screen'>
               <TableHeader className=''>
                 <TableRow className='flex justify-between'>
                   <TableHead>Booking</TableHead>
                   <TableHead className="text-right">Status</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody className='flex flex-col'>
+              <TableBody className='flex flex-col flex-1'>
               {bookings.map((booking) => (
                   <Popover key={booking.booking_id}>
                   <PopoverTrigger>
