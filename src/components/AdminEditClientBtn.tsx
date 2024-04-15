@@ -34,10 +34,10 @@ const service_role_key = process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
   export function AdminEditClientBtn({ customer }: { customer: customerType }) {
 
     const { toast } = useToast();
-    let [newEmail, setNewEmail] = useState("")
-    let [newPhone, setNewPhone] = useState("")
-    let [newName, setNewName] = useState("")
-    let [newSurname, setNewSurname] = useState("")
+    let [newEmail, setNewEmail] = useState(customer.email)
+    let [newPhone, setNewPhone] = useState(customer.phone_number)
+    let [newName, setNewName] = useState(customer.first_name)
+    let [newSurname, setNewSurname] = useState(customer.last_name)
 
     const supabase = createClient(supabase_url, service_role_key, {
       auth: {
@@ -46,9 +46,10 @@ const service_role_key = process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
       }
     })
     
+    const adminAuthClient = supabase.auth.admin
     
     async function editClient() {
-      const { data: authUser, error} = await supabase.auth.admin.updateUserById(
+      const { error} = await adminAuthClient.updateUserById(
         customer.id,
         { 
           email: newEmail,
