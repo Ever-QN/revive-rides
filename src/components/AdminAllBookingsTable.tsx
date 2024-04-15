@@ -81,7 +81,7 @@ export default function AdminAllBookingsTable({ user }: any) {
   function formatDate(dateString: string): string {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', options);
+    return date.toLocaleDateString(undefined, { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric'});
   }
 
   function formatTime(timeString: string): string {
