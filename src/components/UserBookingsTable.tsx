@@ -79,6 +79,7 @@ export default function UserBookingsTable({ user }: any) {
   function formatDate(dateString: string): string {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     const date = new Date(dateString);
+    date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
     return date.toLocaleDateString('en-US', options);
   }
 
