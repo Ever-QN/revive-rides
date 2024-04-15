@@ -18,7 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { cn } from "@/lib/utils"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { SelectGroup, SelectLabel } from "@radix-ui/react-select"
+import { SelectGroup, SelectLabel } from "@/components/ui/select"
 import {
     Popover,
     PopoverContent,
