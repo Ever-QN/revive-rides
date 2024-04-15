@@ -38,8 +38,8 @@ type customerType = {
 
       if (!error) {
         toast({
-          title: "Booking Confirmed",
-          description: ``,
+          title: "Succesfully edited client!",
+          description: `The client has been edited successfully.`,
           className: "bg-green-500 text-white",
         
         })
@@ -70,13 +70,13 @@ type customerType = {
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
-              First Name
+              Name
             </Label>
             <Input id="name" value="" className="col-span-3" placeholder="John" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
-              Last Name
+              Surname
             </Label>
             <Input id="username" value="" className="col-span-3" placeholder="Doe" />
           </div>
