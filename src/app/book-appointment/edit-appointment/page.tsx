@@ -147,9 +147,21 @@ export default function EditAppointment() {
       if (!date) {
         throw new Error("Please select a date for the appointment.");
       }
-    
-      // Convert time to HH:mm format for comparison
-      const formattedTime = time.slice(0, 5);
+
+      const selectedTime = new Date();
+      selectedTime.setHours(Number(time.slice(0, 2)), Number(time.slice(3))); // Set the selected time
+
+      const selectedHour = selectedTime.getHours();
+      const selectedMinute = selectedTime.getMinutes();
+
+      if (selectedHour >= 22 || selectedHour <= 7 || (selectedHour === 21 && selectedMinute > 0)) {
+          toast({
+              title: "WORKSHOP CLOSED",
+              description: "Workshop Opening Hours: 8:00 AM - 11:00 PM. Please reselect a time slot within the working hours and 2 hours before closing.",
+              variant: "destructive"
+          });
+          return;
+      }
     
       // Calculate time range for overlapping appointments (2 hours before and after the new appointment)
       const startTime = new Date(date);
@@ -161,13 +173,13 @@ export default function EditAppointment() {
       const formattedEndTime = `${endTime.getHours().toString().padStart(2, '0')}:${endTime.getMinutes().toString().padStart(2, '0')}`;
     
       const { data: existingBooking, error: existingBookingError } = await supabase
-      .from("user_bookings")
-      .select("booking_time")
-      .eq("booking_date", date.toISOString().slice(0, 10)) // Convert date to ISO string for comparison
-      .lte("booking_time", formattedEndTime) // Check if existing appointment ends before the new appointment starts
-      .gte("booking_time", formattedStartTime) // Check if existing appointment starts after calculated start time
-      .neq("booking_status", "Cancelled") // Exclude cancelled appointments
-      .neq("booking_id", bookingId); // Exclude the current appointment being edited
+        .from("user_bookings")
+        .select("booking_time")
+        .eq("booking_date", date.toISOString().slice(0, 10)) // Convert date to ISO string for comparison
+        .lte("booking_time", formattedEndTime) // Check if existing appointment ends before the new appointment starts
+        .gte("booking_time", formattedStartTime) // Check if existing appointment starts after calculated start time
+        .neq("booking_status", "Cancelled") // Exclude cancelled appointments
+        .neq("booking_id", bookingId); // Exclude the current appointment being edited
 
       if (existingBookingError) {
         throw existingBookingError;
@@ -188,7 +200,7 @@ export default function EditAppointment() {
     
         toast({
           title: "OVERLAPPING APPOINTMENT SCHEDULED", 
-          description: `Overlapping appointment at (${existingAppointments}). Please select a different time slot within 2 hours of the existing appointment`,
+          description: `Overlapping appointment at (${existingAppointments}). Please reselect a time slot within 2 hours of the existing appointment`,
           variant: "destructive",
         });
         return;
@@ -318,12 +330,13 @@ export default function EditAppointment() {
 
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar 
-                  mode="single" 
-                  selected={date} 
-                  onSelect={setDate} 
-                  disabled={(date) => date < new Date("1900-01-01") || date.getDay() === 0 || date.getDay() === 6} 
-                  initialFocus/>
-              </PopoverContent>
+                mode="single" 
+                selected={date} 
+                onSelect={setDate} 
+                disabled={(date) => date < new Date("1900-01-01") || date.getDay() === 0 || date.getDay() === 6} 
+                initialFocus
+              />
+            </PopoverContent>
           </Popover>
 
           <div className="space-y-2 pb-2 md:pb-2 mt-4">

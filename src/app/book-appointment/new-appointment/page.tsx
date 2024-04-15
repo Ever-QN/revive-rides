@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { createClient } from "@/app/utils/supabase/client"
 import { useToast } from "@/components/ui/use-toast"
 import { Calendar } from "@/components/ui/calendar"
-import { CalendarIcon } from "lucide-react"
+import { CalendarIcon } from "@radix-ui/react-icons"
 import { useRouter } from "next/navigation"
 import * as z from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -53,11 +53,6 @@ export default function NewAppointment() {
     const [date, setDate] = React.useState<Date | undefined>();
     const [time, setTime] = useState("");
     const [details, setDetails] = useState("");
-
-    const today = new Date();
-    const currentYear = today.getFullYear();
-    const currentMonth = today.getMonth();
-    const currentDate = today.getDate();
 
     const router = useRouter();
     const { toast } = useToast();
@@ -108,8 +103,20 @@ export default function NewAppointment() {
                 throw new Error("Please select a date for the appointment.");
             }
 
-            // Convert time to HH:mm format for comparison
-            const formattedTime = time.slice(0, 5);
+            const selectedTime = new Date();
+            selectedTime.setHours(Number(time.slice(0, 2)), Number(time.slice(3))); // Set the selected time
+
+            const selectedHour = selectedTime.getHours();
+            const selectedMinute = selectedTime.getMinutes();
+
+            if (selectedHour >= 22 || selectedHour <= 7 || (selectedHour === 21 && selectedMinute > 0)) {
+                toast({
+                    title: "WORKSHOP CLOSED",
+                    description: "Workshop Opening Hours: 8:00 AM - 11:00 PM. Please reselect a time slot within the working hours and 2 hours before closing.",
+                    variant: "destructive"
+                });
+                return;
+            }
 
             // Calculate time range for overlapping appointments (2 hours before and after the new appointment)
             const startTime = new Date(date);
@@ -119,15 +126,15 @@ export default function NewAppointment() {
             const endTime = new Date(date);
             endTime.setHours(Number(time.slice(0, 2)) + 2, Number(time.slice(3))); // 2 hours after the new appointment
             const formattedEndTime = `${endTime.getHours().toString().padStart(2, '0')}:${endTime.getMinutes().toString().padStart(2, '0')}`;
-
+            
             const { data: existingBooking, error: existingBookingError } = await supabase
-            .from("user_bookings")
-            .select("booking_time")
-            .eq("booking_date", date.toISOString().slice(0, 10)) // Convert date to ISO string for comparison
-            .lte("booking_time", formattedEndTime) // Check if existing appointment ends before the new appointment starts
-            .gte("booking_time", formattedStartTime) // Check if existing appointment starts after calculated start time
-            .neq("booking_status", "Cancelled"); // Exclude cancelled appointments
-
+                .from("user_bookings")
+                .select("booking_time")
+                .eq("booking_date", date.toISOString().slice(0, 10)) // Convert date to ISO string for comparison
+                .lte("booking_time", formattedEndTime) // Check if existing appointment ends before the new appointment starts
+                .gte("booking_time", formattedStartTime) // Check if existing appointment starts after calculated start time
+                .neq("booking_status", "Cancelled"); // Exclude cancelled appointments
+                
             if (existingBookingError) {
                 throw existingBookingError;
             }
@@ -147,14 +154,14 @@ export default function NewAppointment() {
 
                 toast({
                     title: "OVERLAPPING APPOINTMENT SCHEDULED", 
-                    description: `Overlapping appointment at (${existingAppointments}). Please select a different time slot within 2 hours of the existing appointment`,
+                    description: `Overlapping appointment at (${existingAppointments}). Please reselect a time slot within 2 hours of the existing appointment`,
                     variant: "destructive",
                 });
                 return;
             }
 
             // Insert booking information into the "user_bookings" table
-            const { data: newBooking, error: newBookingError } = await supabase
+            const { data, error: newBookingError } = await supabase
                 .from("user_bookings")
                 .insert([{
                     first_name: firstName,
@@ -168,23 +175,24 @@ export default function NewAppointment() {
                     booking_status: "Pending",
                     booking_details: details
                 }]);
-    
+
                 if (newBookingError) {
                     toast({
-                      title: "ERROR",
-                      description: newBookingError.message,
-                      variant: "destructive"
+                        title: "ERROR",
+                        description: newBookingError.message,
+                        variant: "destructive"
                     })
                     return;
                 }
 
-                toast ({
+                toast({
                     title: "APPOINTMENT SUCCESSFULLY SCHEDULED",
                     description: "Your appointment request has been submitted. We will contact you shortly to confirm your appointment.",
                     variant: "default"
                 });
 
                 reset();
+
         } catch (error) {
             toast({
                 title: "ERROR",
@@ -268,15 +276,16 @@ export default function NewAppointment() {
                             <Calendar 
                                 mode="single" 
                                 selected={date} 
-                                onSelect={setDate} 
+                                onSelect={setDate}
                                 disabled={(date) => date < new Date("1900-01-01") || date.getDay() === 0 || date.getDay() === 6} 
-                                initialFocus/>
+                                initialFocus
+                            />
                         </PopoverContent>
                     </Popover>
 
                     <div className="space-y-2 pb-2 md:pb-4 mt-4">
                         <Label htmlFor="time">Time</Label>
-                        <Input {...register("time")} type="time" name="time" value={time} onChange={(e) => setTime(e.target.value)} className="border border-gray-500" min="10:00" max="18:00" required/>
+                        <Input {...register("time")} type="time" name="time" value={time} onChange={(e) => setTime(e.target.value)} className="border border-gray-500" required />
                     </div>
 
                     <div className="space-y-2 pb-2 md:pb-4">
