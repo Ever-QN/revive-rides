@@ -10,6 +10,27 @@ import { redirectToPath } from '@/app/utils/auth-helpers/server';
 export default function UserDropdown({ user }: any) {
     const supabase = createClient();
 
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    async function getUserRole() {
+      const supabase = createClient();
+      
+      const { data: userRole, error } = await supabase
+      .from('user_roles')
+      .select('is_admin')
+      .eq('id', user.id).single();
+
+      if (error) {
+        console.error(error)
+        return null
+      }
+      if (userRole.is_admin) {
+        setIsAdmin(true);
+      }
+    }
+
+    getUserRole();
+
     return (
         <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -29,6 +50,16 @@ export default function UserDropdown({ user }: any) {
           >
             Dashboard
           </DropdownMenuItem>
+          {isAdmin && (
+          <DropdownMenuItem 
+            className="cursor-pointer hover:bg-slate-200"
+            onClick={async () => {
+              redirectToPath("/dashboard/administrator");
+            }}
+          >
+            Admin Dashboard
+          </DropdownMenuItem>
+           )}
           <DropdownMenuItem 
           className="cursor-pointer hover:bg-slate-200"
           onClick={async () => {
