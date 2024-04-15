@@ -87,7 +87,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
       return (
         <AlertDialog>
             <AlertDialogTrigger asChild>
-                <Button variant="outline"><X className="h-4 w-4"/></Button>
+                <Button variant="outline" className='scale-90'><X className="h-4 w-4"/></Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
             <AlertDialogHeader>
