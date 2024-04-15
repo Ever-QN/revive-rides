@@ -207,7 +207,7 @@ export default function SignUp() {
                                             <FormControl>
                                             <Input 
                                             placeholder="Enter your phone number" 
-                                            type="phoneNumber" 
+                                            type="tel" 
                                             {...field} 
                                             onChange={(e) => field.onChange(e.target.value)}
                                             />
