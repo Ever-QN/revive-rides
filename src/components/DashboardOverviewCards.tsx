@@ -17,10 +17,10 @@ export const projects = [
     link: "/dashboard/appointments",
   },
   {
-    title: "Netflix",
+    title: "FAQ",
     description:
-      "A streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.",
-    link: "https://netflix.com",
+      "Find answers to common questions about our services.",
+    link: "/home#services",
   },
   {
     title: "Settings",
