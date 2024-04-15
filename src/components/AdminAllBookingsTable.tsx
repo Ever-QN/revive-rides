@@ -160,6 +160,9 @@ export default function AdminAllBookingsTable({ user }: any) {
                         <p className="text-sm text-muted-foreground">
                           {booking.email} | {booking.phone_number}
                         </p>
+                        <p className="text-sm text-muted-foreground">
+                          Booking ID: {booking.booking_id}
+                        </p>
                       </div>
                       <div className="grid gap-2">
                         <div className='font-bold'>
