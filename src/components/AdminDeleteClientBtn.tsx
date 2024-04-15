@@ -58,7 +58,7 @@ export default function AdminDeleteClientBtn({ customer }: { customer: customerT
         <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete {customer.first_name} {customer.last_name}&apos;s account and remove your data from our servers.
+            This action cannot be undone. This will permanently delete {customer.first_name} {customer.last_name}&apos;s account and remove their data from our database.
             </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
