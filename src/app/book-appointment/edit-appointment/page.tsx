@@ -1,36 +1,69 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { createClient } from '@/app/utils/supabase/client';
-import { CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
 import { User } from '@supabase/supabase-js';
-import { toast, useToast } from '@/components/ui/use-toast';
+import { CalendarIcon } from "lucide-react";
+import { Calendar } from '@/components/ui/calendar';
+import { cn } from "@/lib/utils"
+import { useRouter } from "next/navigation"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+} from "@/components/ui/select"
+import { SelectGroup, SelectLabel } from "@radix-ui/react-select"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { useToast } from '@/components/ui/use-toast';
 
-type FormData = {
-  firstName: string;
-  lastName: string;
-  phone: string;
+type Booking = {
+  first_name: string;
+  last_name: string;
   email: string;
-  carInfo: string;
-  bookingType: string;
-  date: string;
-  time: string;
-  message: string;
-  booking_id: string;
-};
+  phone: string;
+  car_info: string;
+  booking_date: string;
+  booking_time: string;
+  booking_status: "Pending" | "Confirmed" | "Completed" | "Cancelled";
+  booking_details: string;
+}
 
 export default function EditAppointment() {
-  const [bookingId, setBookingId] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormData>();
+
   const supabase = createClient();
+  const { register } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
+  const [bookingId, setBookingId] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [carInfo, setCarInfo] = useState("");
+  const [type, setType] = useState("");
+  const [date, setDate] = React.useState<Date | undefined>();
+  const [time, setTime] = useState("");
+  const [details, setDetails] = useState("");
+
+  const today = new Date();
+  const currentYear = today.getFullYear();
+  const currentMonth = today.getMonth();
+  const currentDate = today.getDate();
+
+  const router = useRouter();
   const { toast } = useToast();
 
   useEffect(() => {
@@ -39,9 +72,13 @@ export default function EditAppointment() {
       setIsLoading(true);
       const { data, error } = await supabase.auth.getUser();
       setIsLoading(false);
+
       if (error) {
-        alert('Error fetching user information. Please try again later.');
-        console.error('Error fetching user information:', error);
+        toast({
+          title: "ERROR",
+          description: "Failed fetching user information. Please try again later.",
+          variant: "destructive"
+        });
       } else {
         setLoggedInUser(data.user);
       }
@@ -52,46 +89,50 @@ export default function EditAppointment() {
 
   const fetchBookingDetails = async (bookingId: string) => {
     setIsLoading(true);
-    const { data, error } = await supabase
+
+    const { data: bookingDetails, error: bookingDetailsError } = await supabase
       .from('user_bookings')
       .select('*')
       .eq('booking_id', bookingId)
       .single();
+   
     setIsLoading(false);
 
-    if (error) {
+    if (bookingDetailsError) {
       toast({
-        title: "Error",
+        title: "INVALID BOOKING ID",
         description: "Please enter a valid booking ID. Try again.",
         variant: "destructive"
-        })
-      console.error('Please enter valid Booking ID', error);
-    } else if (data) {
-      if (loggedInUser && data.email !== loggedInUser.email) {
+      });
+
+    } else if (bookingDetails) {
+      if (loggedInUser && bookingDetails.email !== loggedInUser.email) {
+        router.push("/sign-in");
         toast({
-          title: "Error",
+          title: "ERROR",
           description: "You must be signed in to edit an appointment",
           variant: "destructive"
           })
         return;
       }
-      // Set form values here
-      setValue('firstName', data.first_name || '');
-      setValue('lastName', data.last_name || '');
-      setValue('phone', data.phone_number || ''); 
-      setValue('email', data.email || '');
-      setValue('carInfo', data.car_info || '');
-      setValue('bookingType', data.booking_type || '');
-      setValue('date', data.booking_date || '');
-      setValue('time', data.booking_time || '');
-      setValue('message', data.booking_notes || '');
+
+      // Update the state with fetched booking details
+      setFirstName(bookingDetails.first_name);
+      setLastName(bookingDetails.last_name);
+      setEmail(bookingDetails.email);
+      setPhone(bookingDetails.phone_number);
+      setCarInfo(bookingDetails.car_info);
+      setType(bookingDetails.booking_type);
+      setDate(new Date(bookingDetails.booking_date));
+      setTime(bookingDetails.booking_time);
+      setDetails(bookingDetails.booking_details);
     }
   };
 
-  const onSubmit = async (formData: FormData) => {
-    if (!loggedInUser || loggedInUser.email !== formData.email) {
+  const onSubmit = async () => {
+    if (!loggedInUser || loggedInUser.email !== email) {
       toast({
-        title: "Error",
+        title: "ERROR",
         description: "Invalid booking ID. Try again",
         variant: "destructive"
         })
@@ -99,114 +140,198 @@ export default function EditAppointment() {
     }
   
     setIsLoading(true);
-    const { error } = await supabase
-      .from('user_bookings')
-      .update({
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        phone_number: formData.phone,
-        email: formData.email,
-        car_info: formData.carInfo,
-        booking_type: formData.bookingType,
-        booking_date: formData.date,
-        booking_time: formData.time,
-        booking_notes: formData.message,
-      })
-      .eq('booking_id', bookingId);
-    setIsLoading(false);
-  
-    if (error) {
+
+    try {
+      // Calculate the start and end time of the appointment within a 2-hour window
+      const selectedTime = new Date(`${date}T${time}`);
+      const startTime = new Date(selectedTime.getTime() - 2 * 60 * 60 * 1000);
+      const endTime = new Date(selectedTime.getTime() + 2 * 60 * 60 * 1000);
+
+      // Check for existing overlapping appointments within the 2-hour window
+      const { data:existingBooking, error: existingBookingError} = await supabase
+        .from("user_bookings")
+        .select("booking_time")
+        .eq("booking_date", date)
+        .gte("booking_time", startTime.toTimeString().slice(0, 5))
+        .lte("booking_time", endTime.toTimeString().slice(0, 5));
+
+      if (existingBooking && existingBooking.length > 0) {
+        const existingBookingTime = existingBooking.map(booking => {
+          // Split the time string into hours and minutes
+          const [hours, minutes] = booking.booking_time.split(':');
+              
+          // Construct a new date object with today's date and the provided time
+          const bookingTime = new Date();
+          bookingTime.setHours(hours, 10);
+          bookingTime.setMinutes(minutes, 10);
+
+          return bookingTime.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+        }).join(", ");
+          
+        toast({
+          title: "OVERLAPPING APPOINTMENT SCHEDULED", 
+          description: `Please select a different time within 2 hours of this time (${existingBookingTime}).`,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Update booking information into the user_bookings table
+      const { data: updateBooking, error: updateBookingError } = await supabase
+        .from('user_bookings')
+        .update([{
+          first_name: firstName,
+          last_name: lastName,
+          phone_number: phone,
+          email: email,
+          car_info: carInfo,
+          booking_type: type,
+          booking_date: date,
+          booking_time: time,
+          booking_details: details
+        }])
+        .eq('booking_id', bookingId);
+    
+        if (updateBookingError) {
+          toast({
+            title: "ERROR",
+            description: updateBookingError.message,
+            variant: "destructive"
+          })
+          return;
+        }
+
+        toast({
+            title: "APPOINTMENT SUCCESSFULLY UPDATED",
+            description: "Your appointment has been updated.",
+            className: "bg-green-500 text-white",
+            variant: "default"
+        });
+        
+        window.location.href = 'edit-appointment/confirm';
+      
+    } catch (error) {
       toast({
-        title: "Error",
-        description: error.message,
+        title: "ERROR",
+        description: "Failed to submit appointment request. Please try again later.",
         variant: "destructive"
-        })
-      console.error('Error updating the booking:', error);
-    } else {
-      toast({
-        title: "Success!",
-        description: "Successfully updated the appointment.",
-        className: "bg-green-500 text-white"
-        })
-      window.location.href = 'edit-appointment/confirm';
-    }
+      });
+    } finally {
+      setIsLoading(false);
+    };
   };
   
   return (
     <div className="relative flex items-center justify-center p-4">
-      <Card className="w-full max-w-3xl border-black">
+      <Card className="w-full max-w-3xl">
         <CardHeader>
           <CardTitle className="text-2xl text-center">Edit Appointment</CardTitle>
           <CardDescription className="text-center">Update your appointment details below.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className='flex flex-col items-center'>
           <Input
             placeholder="Enter your booking ID"
             type="text"
             value={bookingId}
             onChange={(e) => setBookingId(e.target.value)}
-            className='border border-black mb-4'
           />
           <Button onClick={() => fetchBookingDetails(bookingId)} disabled={!bookingId || isLoading}>
             Fetch Booking
           </Button>
+          <div className="md:grid grid-cols-2 gap-8">
+            <div className="space-y-2 pb-2 md:pb-2">
+              <Label htmlFor="firstName">First Name</Label>
+              <Input {...register("firstName")} type="text" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="border border-gray-500" placeholder="Enter your first name" required/>
+            </div>
+
+            <div className="space-y-2 pb-2 md:pb-2">
+              <Label htmlFor="lastName">Last Name</Label>
+              <Input {...register("lastName")} type="text" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} className="border border-gray-500"  placeholder="Enter your last name" required/>
+            </div>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="first-name">First name</Label>
-                <Input {...register('firstName')} id="first-name" className="border border-gray-500" required/>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="last-name">Last name</Label>
-                <Input {...register('lastName')} id="last-name" className="border border-gray-500" required/>
-              </div>
+
+          <div className="space-y-2 pb-2 md:pb-2">
+            <Label htmlFor="phone">Phone</Label>
+            <Input {...register("phone")} type="text" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} className="border border-gray-500" placeholder="Enter your phone number" required/>
+          </div>
+
+          <div className="space-y-2 pb-2 md:pb-2">
+            <Label htmlFor="email">Email</Label>
+            <Input {...register("email")} type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} className="border border-gray-500" placeholder="Enter your email" required/>
+          </div>
+
+          <div className="space-y-2 pb-2 md:pb-2">
+            <Label htmlFor="carInfo">Vehicle Information</Label>
+            <Input {...register("carInfo")} type="text" name="carInfo" value={carInfo} onChange={(e) => setCarInfo(e.target.value)} className="border border-gray-500" placeholder="Year, make and model (i.e 2007 Honda Civic)" required/>
+          </div>
+
+          <div className="space-y-2 pb-2 md:pb-6">
+            <Label htmlFor="type">Service Type</Label>
+            <Select onValueChange={(value) => setType(value)}>
+              <SelectTrigger className="w-[200px]">
+                <span>{type || "Select a service type"}</span>
+              </SelectTrigger>
+
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Service Type</SelectLabel>
+                  <SelectItem value="Auto Body Repair">Auto Body Repair</SelectItem>
+                  <SelectItem value="Paintless Dent Repair">Paintless Dent Repair</SelectItem>
+                  <SelectItem value="Auto Detailing">Auto Detailing</SelectItem>
+                  <SelectItem value="Frame Straightening">Frame Straightening</SelectItem>
+                  <SelectItem value="Graphics and Decals">Graphics and Decals</SelectItem>
+                  <SelectItem value="Custom Paint Jobs">Custom Paint Jobs</SelectItem>
+                  <SelectItem value="Other">Other</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+                    
+          <Popover>
+            <Label htmlFor="date">Preferred Appointment Date</Label>
+            <div>
+              <PopoverTrigger asChild className="w-[200px]">
+                <Button variant={"outline"} className={cn("w-[200px] pl-3 text-left font-normal", !date && "text-muted-foreground")}>
+                  {date ? (date.toLocaleDateString(undefined, { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' }) ) : ( <span className="font-normal">Pick a date</span>)}
+                  <CalendarIcon className="ml-auto h-4 w-4 opacity-70" />
+                </Button>
+              </PopoverTrigger>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="phone">Phone</Label>
-              <Input {...register('phone')} id="phone" className="border border-gray-500" required/>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input {...register('email')} id="email" className="border border-gray-500" type="email" required/>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="car-info">Vehicle information</Label>
-              <Input {...register('carInfo')} id="car-info" className="border border-gray-500" required/>
-            </div>
-            <div className="space-y-2 my-2">
-              <Label htmlFor="booking-type">Booking type: </Label>
-                <select {...register('bookingType')} id="booking-type" className="border border-gray-500" required>
-                  <option value="Auto Body Repair">Auto Body Repair</option>
-                  <option value="Paintless Dent Repair">Paintless Dent Repair</option>
-                  <option value="Auto Detailing">Auto Detailing</option>
-                  <option value="Frame Straightening">Frame Straightening</option>
-                  <option value="Graphics and Decals">Graphics and Decals</option>
-                  <option value="Custom Paint Jobs">Custom Paint Jobs</option>
-                  <option value="Other">Other</option>
-                </select>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="date">Preferred appointment date</Label>
-              <Input {...register('date')} id="date" className="border border-gray-500" type="date" required/>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="time">Time</Label>
-              <Input {...register('time')} id="time" className="border border-gray-500" type="time" min="08:00" max="19:00" required/>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="message">Issue description</Label>
-              <Textarea {...register('message')} id="message" className="border border-gray-500" required/>
-            </div>
-            <div className='flex justify-end items-end '>
-              <Button type="submit" disabled={isLoading} className='mt-4'>
-                {isLoading ? "Updating..." : "Update"}
-              </Button>
-            </div>
-            
-          </form>
+
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar 
+                  mode="single" 
+                  selected={date} 
+                  onSelect={setDate} 
+                  disabled={(date) => date < new Date("1900-01-01") || date.getDay() === 0 || date.getDay() === 6} 
+                  initialFocus/>
+              </PopoverContent>
+          </Popover>
+
+          <div className="space-y-2 pb-2 md:pb-2 mt-4">
+            <Label htmlFor="time">Time</Label>
+            <Input {...register("time")} type="time" name="time" value={time} onChange={(e) => setTime(e.target.value)} className="border border-gray-500" min="10:00" max="18:00" required/>
+          </div>
+
+          <div className="space-y-2 pb-2 md:pb-2">
+            <Label htmlFor="details">Booking Details</Label>
+            <Textarea
+              className="min-h-[100px] border border-gray-500 max-h-[150px]"
+              {...register("details")}
+              value={details}
+              name="details"
+              onChange={(e) => setDetails(e.target.value)}
+              placeholder="Update a description of the issue with your vehicle, as well as any notes about the vehicle"
+              required
+            />
+          </div>
+
         </CardContent>
+        <CardFooter className="flex justify-end">
+          <Button onClick={onSubmit} disabled={isLoading}>
+            {isLoading ? "Updating..." : "Update"}
+          </Button>
+        </CardFooter>
       </Card>
     </div>
   );

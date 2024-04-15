@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"
 import { CardTitle, CardDescription, CardHeader, CardContent, CardFooter, Card } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
@@ -8,13 +8,15 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { useForm } from "react-hook-form";
-import { createClient } from "@/app/utils/supabase/client";
-import { useToast } from "@/components/ui/use-toast";
-import { Calendar } from "@/components/ui/calendar";
-import { useRouter } from "next/navigation";
+import { createClient } from "@/app/utils/supabase/client"
+import { useToast } from "@/components/ui/use-toast"
+import { Calendar } from "@/components/ui/calendar"
+import { CalendarIcon } from "lucide-react"
+import { useRouter } from "next/navigation"
 import * as z from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { cn } from "@/lib/utils"
 import {
     Select,
     SelectContent,
@@ -22,6 +24,12 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { SelectGroup, SelectLabel } from "@radix-ui/react-select"
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
 
 type Booking = {
     first_name: string;
@@ -35,6 +43,10 @@ type Booking = {
     booking_details: string;
 }
 
+type User = {
+    email: string;
+    phone: string;
+}
 
 export default function NewAppointment() {
 
@@ -44,11 +56,11 @@ export default function NewAppointment() {
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState<string>("");
+    const [phone, setPhone] = useState<string>("");
     const [carInfo, setCarInfo] = useState("");
     const [type, setType] = useState("");
-    const [date, setDate] = useState("");
+    const [date, setDate] = React.useState<Date | undefined>();
     const [time, setTime] = useState("");
     const [details, setDetails] = useState("");
 
@@ -72,10 +84,28 @@ export default function NewAppointment() {
                 variant: "destructive"
                 })
             }
-            }
-            checkUser()
+        }
+        checkUser()
       }, []);
-
+    
+      useEffect(() => {
+        async function fetchUser() {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+                const { data: userData, error } = await supabase
+                    .from("users")
+                    .select("email, phone_number")
+                    .eq("id", user.id)
+                    .single();
+        
+                if (userData) {
+                    setEmail(userData.email);
+                    setPhone(userData.phone_number);
+                }
+            }
+        }
+        fetchUser();
+    }, []);
 
     const onSubmit = async () => {
         setIsLoading(true);
@@ -95,14 +125,14 @@ export default function NewAppointment() {
                 .lte("booking_time", endTime.toTimeString().slice(0, 5));
 
             if (existingBooking && existingBooking.length > 0) {
-                const existingBookingTime =existingBooking.map(booking => {
+                const existingBookingTime = existingBooking.map(booking => {
                     // Split the time string into hours and minutes
                     const [hours, minutes] = booking.booking_time.split(':');
                     
                     // Construct a new date object with today's date and the provided time
                     const bookingTime = new Date();
-                    bookingTime.setHours(parseInt(hours, 10));
-                    bookingTime.setMinutes(parseInt(minutes, 10));
+                    bookingTime.setHours(hours, 10);
+                    bookingTime.setMinutes(minutes, 10);
 
                     return bookingTime.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
                 }).join(", ");
@@ -118,19 +148,19 @@ export default function NewAppointment() {
             // Insert booking information into the "user_bookings" table
             const { data: newBooking, error: newBookingError } = await supabase
                 .from("user_bookings")
-                .insert([{ 
+                .insert([{
                     first_name: firstName,
                     last_name: lastName,
                     phone_number: phone,
                     email: email,
-                    booking_date: date, 
-                    booking_type: type, 
-                    booking_time: time, 
-                    car_info: carInfo, 
+                    booking_date: date,
+                    booking_type: type,
+                    booking_time: time,
+                    car_info: carInfo,
                     booking_status: "Pending",
                     booking_details: details
                 }]);
-            
+    
                 if (newBookingError) {
                     toast({
                       title: "Error",
@@ -160,83 +190,107 @@ export default function NewAppointment() {
 
     return (
         <div className="relative flex flex-col items-center justify-center p-4">
-            <Card className="flex flex-col border border-black">
-            <CardHeader>
-                <CardTitle className="text-2xl text-center">Schedule an appointment</CardTitle>
-                <CardDescription className="text-center">
-                    Enter your information below to request an appointment.
-                </CardDescription>
-            </CardHeader>
-            <CardContent className="flex flex-col justify-center">
-                <div className="md:grid grid-cols-2 gap-8">
-                    <div className="space-y-2 pb-2 md:pb-4">
-                        <Label htmlFor="firstName">First name</Label>
-                        <Input {...register("firstName")} type="text" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="border border-gray-500" placeholder="Enter your first name" required/>
+            <Card className="w-full max-w-3xl">
+                <CardHeader>
+                    <CardTitle className="text-2xl text-center">Schedule an Appointment</CardTitle>
+                    <CardDescription className="text-center">
+                        Enter your information below to request an appointment.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent className="flex flex-col justify-center">
+                    <div className="md:grid grid-cols-2 gap-8">
+                        <div className="space-y-2 pb-2 md:pb-4">
+                            <Label htmlFor="firstName">First Name</Label>
+                            <Input {...register("firstName")} type="text" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="border border-gray-500" placeholder="Enter your first name" required/>
+                        </div>
+
+                        <div className="space-y-2 pb-2 md:pb-4">
+                            <Label htmlFor="lastName">Last Name</Label>
+                            <Input {...register("lastName")} type="text" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} className="border border-gray-500"  placeholder="Enter your last name" required/>
+                        </div>
                     </div>
 
                     <div className="space-y-2 pb-2 md:pb-4">
-                        <Label htmlFor="lastName">Last name</Label>
-                        <Input {...register("lastName")} type="text" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} className="border border-gray-500"  placeholder="Enter your last name" required/>
+                        <Label htmlFor="phone">Phone</Label>
+                        <Input {...register("phone")} type="text" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} className="border border-gray-500" placeholder="Enter your phone number" required/>
                     </div>
-                </div>
 
-                <div className="space-y-2 pb-2 md:pb-4">
-                    <Label htmlFor="phone">Phone</Label>
-                    <Input {...register("phone")} type="tel" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} className="border border-gray-500" placeholder="Enter your phone number" required/>
-                </div>
+                    <div className="space-y-2 pb-2 md:pb-4">
+                        <Label htmlFor="email">Email</Label>
+                        <Input {...register("email")} type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} className="border border-gray-500" placeholder="Enter your email" required/>
+                    </div>
 
-                <div className="space-y-2 pb-2 md:pb-4">
-                    <Label htmlFor="email">Email</Label>
-                    <Input {...register("email")} type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} className="border border-gray-500" placeholder="Enter your email" required/>
-                </div>
+                    <div className="space-y-2 pb-2 md:pb-4">
+                        <Label htmlFor="carInfo">Vehicle Information</Label>
+                        <Input {...register("carInfo")} type="text" name="carInfo" value={carInfo} onChange={(e) => setCarInfo(e.target.value)} className="border border-gray-500" placeholder="Year, make and model (i.e 2007 Honda Civic)" required/>
+                    </div>
 
-                <div className="space-y-2 pb-2 md:pb-4">
-                    <Label htmlFor="carInfo">Vehicle Information</Label>
-                    <Input {...register("carInfo")} type="text" name="carInfo" value={carInfo} onChange={(e) => setCarInfo(e.target.value)} className="border border-gray-500" placeholder="Year, make and model (i.e 2007 Honda Civic)" required/>
-                </div>
+                    <div className="space-y-2 pb-2 md:pb-6">
+                        <Label htmlFor="type">Service Type</Label>
+                        <Select onValueChange={(value) => setType(value)}>
+                            <SelectTrigger className="w-[200px]">
+                                <SelectValue placeholder="Select a service type"></SelectValue>
+                            </SelectTrigger>
 
-                <div className="space-y-2 space-x-4 pb-2 md:pb-4">
-                    <Label htmlFor="type">Booking type</Label>
-                    <select {...register("type")} name="type" value={type} onChange={(e) => setType(e.target.value)} className="border border-gray-500" required>
-                        <option value="Auto Body Repair">Auto Body Repair</option>
-                        <option value="Paintless Dent Repair">Paintless Dent Repair</option>
-                        <option value="Auto Detailing">Auto Detailing</option>
-                        <option value="Frame Straightening">Frame Straightening</option>
-                        <option value="Graphics and Decals">Graphics and Decals</option>
-                        <option value="Custom Paint Jobs">Custom Paint Jobs</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
+                            <SelectContent>
+                                <SelectGroup>
+                                    <SelectLabel>Service Type</SelectLabel>
+                                    <SelectItem value="Auto Body Repair">Auto Body Repair</SelectItem>
+                                    <SelectItem value="Paintless Dent Repair">Paintless Dent Repair</SelectItem>
+                                    <SelectItem value="Auto Detailing">Auto Detailing</SelectItem>
+                                    <SelectItem value="Frame Straightening">Frame Straightening</SelectItem>
+                                    <SelectItem value="Graphics and Decals">Graphics and Decals</SelectItem>
+                                    <SelectItem value="Custom Paint Jobs">Custom Paint Jobs</SelectItem>
+                                    <SelectItem value="Other">Other</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </div>
+                    
+                    <Popover>
+                        <Label htmlFor="date" className="md:pb-3">Preferred Appointment Date</Label>
+                        <PopoverTrigger asChild className="w-[200px]">
+                            <Button variant={"outline"} className={cn("w-[200px] pl-3 text-left font-normal", !date && "text-muted-foreground")}>
+                                {date ? (date.toLocaleDateString(undefined, { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' }) ) : ( <span className="font-normal">Pick a date</span>)}
+                                <CalendarIcon className="ml-auto h-4 w-4 opacity-70" />
+                            </Button>
+                        </PopoverTrigger>
 
-                <div className="space-y-2 pb-2 md:pb-4">
-                    <Label htmlFor="date">Preferred appointment date</Label>
-                    <Input {...register("date")} type="date" name="date" value={date} onChange={(e) => setDate(e.target.value)} className="border border-gray-500" required/>
-                </div>
+                        <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar 
+                                mode="single" 
+                                selected={date} 
+                                onSelect={setDate} 
+                                disabled={(date) => date < new Date("1900-01-01") || date.getDay() === 0 || date.getDay() === 6} 
+                                initialFocus/>
+                        </PopoverContent>
+                    </Popover>
 
-                <div className="space-y-2 pb-2 md:pb-4">
-                    <Label htmlFor="time">Time</Label>
-                    <Input {...register("time")} type="time" name="time" value={time} onChange={(e) => setTime(e.target.value)} className="border border-gray-500" min="10:00" max="18:00" required/>
-                </div>
+                    <div className="space-y-2 pb-2 md:pb-4 mt-4">
+                        <Label htmlFor="time">Time</Label>
+                        <Input {...register("time")} type="time" name="time" value={time} onChange={(e) => setTime(e.target.value)} className="border border-gray-500" min="10:00" max="18:00" required/>
+                    </div>
 
-                <div className="space-y-2 pb-2 md:pb-4">
-                    <Label htmlFor="details">Booking details</Label>
-                    <Textarea
-                        className="min-h-[100px] border border-gray-500 max-h-[150px]"
-                        {...register("details")}
-                        value={details}
-                        name="details"
-                        onChange={(e) => setDetails(e.target.value)}
-                        placeholder="Enter a description of the issue with your vehicle, as well as any notes about the vehicle"
-                        required
-                    />
-                </div>
-            </CardContent>
-            <CardFooter className="flex justify-end">
-                <Button onClick={onSubmit} disabled={isLoading}>
-                    {isLoading ? "Submitting..." : "Submit"}
-                </Button>
-            </CardFooter>
+                    <div className="space-y-2 pb-2 md:pb-4">
+                        <Label htmlFor="details">Booking Details</Label>
+                        <Textarea
+                            className="min-h-[100px] border border-gray-500 max-h-[150px]"
+                            {...register("details")}
+                            value={details}
+                            name="details"
+                            onChange={(e) => setDetails(e.target.value)}
+                            placeholder="Enter a description of the issue with your vehicle, as well as any notes about the vehicle"
+                            required
+                        />
+                    </div>
+
+                </CardContent>
+                <CardFooter className="flex justify-end">
+                    <Button onClick={onSubmit} disabled={isLoading}>
+                        {isLoading ? "Submitting..." : "Submit"}
+                    </Button>
+                </CardFooter>
             </Card>
         </div>
-  )
+    );
 }
