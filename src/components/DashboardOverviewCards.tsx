@@ -17,10 +17,10 @@ export const projects = [
     link: "/dashboard/appointments",
   },
   {
-    title: "FAQ",
+    title: "Book an Appointment",
     description:
-      "Find answers to common questions about our services.",
-    link: "/home#services",
+      "Book a new appointment with us.",
+    link: "/book-appointment",
   },
   {
     title: "Settings",
