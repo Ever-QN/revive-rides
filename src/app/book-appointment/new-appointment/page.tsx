@@ -176,7 +176,7 @@ export default function NewAppointment() {
                     description: "Your appointment request has been submitted. We will contact you shortly to confirm your appointment.",
                     className: "bg-green-500 text-white",
                 });
-                redirectToPath('/new-appointment/confirm');
+                redirectToPath('/book-appointment/new-appointment/confirm');
                 reset();
         } catch (error) {
             toast({
