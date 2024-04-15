@@ -4,20 +4,20 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@/app/utils/supabase/client';
 import { Card, CardHeader, CardContent, CardFooter, CardDescription, CardTitle } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
+
 
 const NEXT_PUBLIC_SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const NEXT_PUBLIC_SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-const supabase = createClient(NEXT_PUBLIC_SUPABASE_URL!, NEXT_PUBLIC_SUPABASE_ANON_KEY!);
 
 const formSchema: any = z.object({
     firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -38,16 +38,37 @@ type User = {
     password: string;
     first_name: string;
     last_name: string;
+    phone_number: string;
 }
 
 export default function SignUp() {
+
+    const router = useRouter();
+    const { toast } = useToast();
+
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [users, setUsers] = useState<User[]>([]);
 
-    const { toast } = useToast();
 
+    
+    useEffect(() => {
+        async function checkUser() {
+          const supabase = createClient();
+          const { data: { user } } = await supabase.auth.getUser();
+    
+          if (user) {
+            router.push("/dashboard");
+              toast({
+                  title: "You are already logged in!",
+                  description: "You will be redirected to the dashboard.",
+                  variant: "destructive"
+              })
+          }
+        }
+        checkUser()
+      }, []);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -57,44 +78,36 @@ export default function SignUp() {
             email: "",
             password: "",
             confirmPassword: "",
+            phoneNumber: "",
         },
     });
 
-    async function fetchUsers() {
-        const { data, error } = await supabase
-        .from('users')
-        .select('*');
-
-        if (error) {
-            console.log(error)
-        }
-        if (data) {
-            setUsers(data);
-        }
-
-    }
-
     async function handleSubmit() {
         
-        if (users.some(user => user.email === formData.email)) {
-            setErrorMessage("Email already exists. Please use a different email address.");
-            return;
-        }
-
         const formData = form.getValues();
+        const supabase = createClient();
+        
         const { data, error } = await supabase.auth.signUp({
-            email: formData.email,
+            email: formData.email.toLowerCase(),
             password: formData.password,
             options: {
-                emailRedirectTo: window.location.origin
+                emailRedirectTo: window.location.origin,
+                data: {
+                    first_name: formData.firstName,
+                    last_name: formData.lastName,
+                    phone_number: formData.phoneNumber
+                },
             }
         });
 
+
         if (error) {
-            {toast({
+            console.log(error)
+            toast({
                 title: "Error",
-                description: errorMessage,
-            })}
+                description: error.message,
+                variant: "destructive"
+              })
         }
         else if (data) {
             setSuccessMessage("Account created successfully! Please check your inbox to verify your account! If nothing is in your inbox, check your junk folder!");
@@ -102,15 +115,16 @@ export default function SignUp() {
             {toast({
                 title: "Success!",
                 description: successMessage,
+                className: "bg-green-500 text-white",
             })}
         }
     }
 
     return (
-        <div className="p-8 h-screen">
+        <div className="flex flex-col items-center justify-center p-4 h-screen">
             {!isSubmitted ? (
                 
-                <Card className="w-full max-w-sm mx-auto border-2 border-black p-8">
+                <Card className="flex flex-col justify-center items-center w-full max-w-sm mx-auto border-2 border-black p-8">
                     <CardHeader>
                         <CardTitle className="text-xl">S&D Autobody Sign Up</CardTitle>
                         <CardDescription>
@@ -186,6 +200,25 @@ export default function SignUp() {
                                         />
                                     </div>
                                     <div className="grid gap-2">
+                                        <FormField control={form.control} name="phoneNumber" render={({field}) => {
+                                        return (
+                                        <FormItem>
+                                            <FormLabel>Phone Number</FormLabel>
+                                            <FormControl>
+                                            <Input 
+                                            placeholder="Enter your phone number" 
+                                            type="tel" 
+                                            {...field} 
+                                            onChange={(e) => field.onChange(e.target.value)}
+                                            />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                        )
+                                        }}
+                                        />
+                                    </div>
+                                    <div className="grid gap-2">
                                         <FormField control={form.control} name="password" render={({field}) => {
                                         return (
                                         <FormItem>
@@ -234,7 +267,7 @@ export default function SignUp() {
                             {successMessage && <div className="text-green-600">{successMessage}</div>}
                             <div className="text-center text-sm">
                                 Already have an account?{" "}
-                                <Link className="underline text-red-600" href="/signin">
+                                <Link className="underline text-red-600" href="/sign-in">
                                     Log in
                                 </Link>
                             </div>

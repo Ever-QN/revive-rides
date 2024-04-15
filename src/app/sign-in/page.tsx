@@ -5,23 +5,46 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import Link from "next/link"
-import { login, signup } from './actions'
 import { Card, CardHeader, CardContent, CardFooter, CardDescription, CardTitle } from "@/components/ui/card"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import * as z from 'zod';
 import { useForm  } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { createClient } from "../utils/supabase/client"
-import { redirect } from 'next/navigation';
+import { permanentRedirect, redirect, useRouter }  from "next/navigation"
+import { useToast } from "@/components/ui/use-toast"
+import { title } from "process"
 import { redirectToPath } from "../utils/auth-helpers/server"
 
+
 export default function SignIn() {
+
+  const { toast }  = useToast()
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false);
 
   const formSchema = z.object({
     email: z.string().email(),
     password: z.string(),
   });
+
+  useEffect(() => {
+    async function checkUser() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (user) {
+        router.push("/dashboard");
+          toast({
+              title: "You are already logged in!",
+              description: "You will be redirected to the dashboard.",
+              variant: "destructive"
+          })
+      }
+    }
+    checkUser()
+  }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -31,19 +54,29 @@ export default function SignIn() {
     }
   })
 
-  async function handleSubmit (values: z.infer<typeof formSchema>) {
+  async function handleSubmit () {
     const formData = form.getValues();
     const supabase = createClient();
+    setIsLoading(true);
 
-    const {error, data} = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email: formData.email,
       password: formData.password,
     });
 
     if (error) {
-      console.log(error)
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive"
+      })
+      setIsLoading(false);
     } else {
-      console.log(data)
+      toast({
+        title: "Success!",
+        description: "Succesfully logged in. Redirecting to dashboard.",
+        className: "bg-green-500 text-white",
+    })
       redirectToPath("/dashboard")
     }
   }
@@ -51,11 +84,11 @@ export default function SignIn() {
 
   return (
 
-    <div className="p-8 h-screen">
+    <div className="flex flex-col justify-center items-center p-8 h-screen">
       <Card className="w-full max-w-sm mx-auto border-2 border-black p-8">
         <CardHeader>
-            <CardTitle className="text-xl">S&D Autobody Sign In</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-xl text-center">S&D Autobody Sign In</CardTitle>
+            <CardDescription className="text-center">
                 Login to S&D Autobody to book an appointment
             </CardDescription>
         </CardHeader>
@@ -102,9 +135,6 @@ export default function SignIn() {
                   <ChromeIcon className="h-6 w-6" />
               </Button>
               <Button variant="outline">
-                  <AppleIcon className="h-6 w-6" />
-              </Button>
-              <Button variant="outline">
                   <FacebookIcon className="h-6 w-6" />
               </Button>
             </div>
@@ -120,27 +150,6 @@ export default function SignIn() {
     </div>
   );
 }
-
-function AppleIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z" />
-      <path d="M10 2c1 .5 2 2 2 5" />
-    </svg>
-  )
-}
-
 
 function ChromeIcon(props: any) {
   return (

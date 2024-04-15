@@ -6,17 +6,15 @@ import { Button } from "@/components/ui/button"
 import { PopoverTrigger, Popover, PopoverContent } from "@/components/ui/popover"
 import Image from 'next/image'
 import { createClient } from '@/app/utils/supabase/client';
-import { usePathname, useRouter } from 'next/navigation';
-import { handleRequest } from '@/app/utils/auth-helpers/client'
-import { SignOut, redirectToPath } from '@/app/utils/auth-helpers/server';
+import { redirect, usePathname, useRouter } from 'next/navigation';
 import UserDropdown from './UserDropdown'
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from './ui/sheet'
 import { Menu, Package2, Home, ShoppingCart, Badge, Package, SeparatorHorizontal } from 'lucide-react'
 import { Separator } from './ui/separator'
+import { redirectToPath } from '@/app/utils/auth-helpers/server'
 
 
 export default function Navlinks({ user } : any) {
-
   const supabase = createClient();
 
   return (
@@ -67,13 +65,13 @@ export default function Navlinks({ user } : any) {
 
             <SheetContent side="top" className="flex flex-col">
               {user && (
-                <div className='flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 border border-b-2'>Signed in as {user.email}</div>
+                <div className='flex items-center space-x-2 font-medium rounded-md dark:bg-gray-800'>Signed in as {user.email}</div>
               )}
               <nav className="grid gap-2 text-lg font-medium">
                 <SheetClose asChild>
                   <Link
                     href="/home"
-                    className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
+                    className="flex items-center space-x-2 font-medium rounded-md dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
                   >
                     Home
                   </Link>
@@ -81,7 +79,7 @@ export default function Navlinks({ user } : any) {
                 {user && (
                   <SheetClose asChild>
                     <Link
-                    className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
+                    className="flex items-center space-x-2 font-medium rounded-md dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
                     href="/dashboard"
                     >
                       Dashboard
@@ -91,16 +89,17 @@ export default function Navlinks({ user } : any) {
                 <SheetClose asChild>
                   <Link
                     href="/gallery"
-                    className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
+                    className="flex items-center space-x-2 font-medium rounded-md dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
                   >
                     Gallery
                   </Link>
                 </SheetClose>
                 {user && (
+                  
                   <SheetClose asChild>
                     <Link
                     href="#"
-                    className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
+                    className="flex items-center space-x-2 font-medium rounded-md dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
                     >
                     Settings
                     </Link>
@@ -110,7 +109,7 @@ export default function Navlinks({ user } : any) {
                 {user ? (
                 <SheetClose asChild>
                     <Button
-                    className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
+                    className="flex items-center space-x-2 font-medium rounded-md dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
                     variant="secondary"
                     size="icon"
                     onClick={ async () => {
@@ -125,7 +124,7 @@ export default function Navlinks({ user } : any) {
               ) : (
                 <SheetClose asChild>
                   <Link
-                  className="flex items-center space-x-2 font-medium rounded-md bg-gray-100 dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
+                  className="flex items-center space-x-2 font-medium rounded-md dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
                     href={"/sign-in"}
                   >
                   Sign in or Sign up

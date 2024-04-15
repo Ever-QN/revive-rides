@@ -21,17 +21,17 @@ import {
 } from "@/components/ui/table"
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import { RotateCw } from 'lucide-react';
 import { Popover, PopoverTrigger, PopoverContent } from './ui/popover';
 import { Label } from '@radix-ui/react-label';
 import { Input } from 'postcss';
-import { UserCancelAppointmentBtn } from './UserCancelAppointmentBtn';
+import { AdminPendingDropdown } from './AdminPendingDropdown';
 
 type Booking = {
+    booking_id: string
     first_name: string
     last_name: string
     phone_number: string
-    booking_id: string
     booking_type: string
     booking_date: string
     booking_time: string
@@ -41,7 +41,7 @@ type Booking = {
     car_info: string
   }
 
-export default function UserBookingsTable({ user }: any) {
+export default function AdminPendingBookingsTable({ user }: any) {
 
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
@@ -65,7 +65,7 @@ export default function UserBookingsTable({ user }: any) {
     const { data: bookings, error } = await supabase
       .from('user_bookings')
       .select('*')
-      .eq('email', user.email);
+      .eq('booking_status', 'Pending');
 
     if (error) {
       console.error(error);
@@ -75,7 +75,6 @@ export default function UserBookingsTable({ user }: any) {
       if (bookings) {
         setBookings(bookings);
         setLoading(false);
-        console.log(bookings)
       }
 
   }
@@ -94,67 +93,65 @@ export default function UserBookingsTable({ user }: any) {
     date.setMinutes(minutes);
     return date.toLocaleTimeString('en-US', options);
   }
+
+  async function refreshTable() {
+    const supabase = createClient();
+  }
   
 
     return (
       <>
       {loading ? (
-        <p className="flex justify-center font-bold">Loading Appointments...</p>
+        <p className="flex justify-center font-bold">Loading Pending Appointments...</p>
       ) : (  
       bookings.length === 0 ? (
-        <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
+        <div className="mt-4 flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm h-screen">
           <div className="flex flex-col items-center gap-1 text-center">
             <h3 className="text-2xl font-bold tracking-tight">
-              You have no appointments
+              No pending appointments found.
             </h3>
             <p className="text-sm text-muted-foreground">
-              Book an appointment to get started
+              Looks like you are all caught up!
             </p>
-            <Button className="mt-4">New Appointment</Button>
           </div>
         </div>
       ) : (
         <Card className='mt-4'>
           <CardHeader className="flex flex-col justify-center">
           <div className="flex flex-col gap-2">
-            <CardTitle>
-              Your Appointments
+            <CardTitle className=''>
+              Pending Appointments
             </CardTitle>
             <CardDescription>
-              Click on the appointment to view additional details.
+              Click on the appointment to view more details and take action.
             </CardDescription>
           </div>
-          <Button asChild size="sm" className="ml-auto">
-            <Link href="/book-appointment">
-              New Appointment
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
+
+          <Button onClick={refreshTable} size="sm" className="ml-auto">
+            <RotateCw size={20} />
           </Button>
 
           </CardHeader>
 
           <CardContent>
-            <Table className='flex flex-col'>
+          <Table className='flex flex-col h-screen'>
               <TableHeader className=''>
                 <TableRow className='flex justify-between'>
                   <TableHead>Booking</TableHead>
-                  <TableHead className="text-right">Cancel Booking</TableHead>
+                  <TableHead className="text-right">Action</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody className='flex flex-col h-screen'>
+              <TableBody className='flex flex-col'>
               {bookings.map((booking) => (
                   <Popover key={booking.booking_id}>
                   <PopoverTrigger>
                     <TableRow className='flex justify-between hover:bg-slate-200 cursor-pointer'>
                       <TableCell className='text-left'>
                         <div className="font-medium">{booking.booking_type} ({booking.car_info})</div>
-                        <div className="text-sm text-muted-foreground md:inline">{formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}</div>  
-                        <div className="text-sm text-muted-foreground">{booking.booking_status}</div>  
-                        
+                        <div className="text-sm text-muted-foreground md:inline">{formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}</div>
+                        <div className='text-sm text-muted-foreground'>{booking.first_name} {booking.last_name}</div>
                       </TableCell>
-                      <TableCell className="flex flex-col items-center gap-4 text-right">
-                      <UserCancelAppointmentBtn booking={booking} />
-                      </TableCell>
+                      <TableCell className="text-right"><AdminPendingDropdown booking={booking} /></TableCell>
                     </TableRow>
                   </PopoverTrigger>
                                     
@@ -164,6 +161,12 @@ export default function UserBookingsTable({ user }: any) {
                         <h4 className="font-medium leading-none">{booking.booking_type} ({booking.car_info})</h4>
                         <p className="text-sm text-muted-foreground">
                           {formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          {booking.email} | {booking.phone_number}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          Booking ID: {booking.booking_id}
                         </p>
                       </div>
                       <div className="grid gap-2">
@@ -182,7 +185,6 @@ export default function UserBookingsTable({ user }: any) {
               </TableBody>
 
             </Table>
-
           </CardContent>
         </Card>
       ) )}

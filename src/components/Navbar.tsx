@@ -12,7 +12,7 @@ export default async function Navbar({ user } : NavlinksProps) {
   return (
     <nav className='bg-primary text-primary-foreground z-50 text-nowrap'>
       <div className="max-w-6xl px-6 mx-auto">
-        <Navlinks user={user} />
+        <Navlinks user={user}/>
       </div>
     </nav>
   );

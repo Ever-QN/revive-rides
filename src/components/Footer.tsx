@@ -77,7 +77,7 @@ export default function Footer() {
 
         <div className="flex items-start text-white lg:justify-end">
           <div className="flex items-center h-10 space-x-6">
-              <Image alt="Menu" width={250} height={250} src="../svg/sait-logo_horz.svg" />
+              <Image alt="Menu" width={250} height={250} src="../../svg/sait-logo_horz.svg" />
           </div>
         </div>
       </div>

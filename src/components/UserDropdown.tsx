@@ -1,17 +1,35 @@
-import { redirectToPath } from '@/app/utils/auth-helpers/server';
 import { createClient } from '@/app/utils/supabase/client';
 import React, { useState, useRef, useEffect } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
 import { Button } from './ui/button';
 import { CircleUser } from 'lucide-react';
+import { redirectToPath } from '@/app/utils/auth-helpers/server';
 
 export default function UserDropdown({ user }: any) {
     const supabase = createClient();
-    const [isOpen, setIsOpen] = useState(false);
-    const userDropdownRef = useRef<HTMLDivElement>(null);
-    const router = useRouter();
+
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    async function getUserRole() {
+      const supabase = createClient();
+      
+      const { data: userRole, error } = await supabase
+      .from('user_roles')
+      .select('is_admin')
+      .eq('id', user.id).single();
+
+      if (error) {
+        console.error(error)
+        return null
+      }
+      if (userRole.is_admin) {
+        setIsAdmin(true);
+      }
+    }
+
+    getUserRole();
 
     return (
         <DropdownMenu>
@@ -32,6 +50,16 @@ export default function UserDropdown({ user }: any) {
           >
             Dashboard
           </DropdownMenuItem>
+          {isAdmin && (
+          <DropdownMenuItem 
+            className="cursor-pointer hover:bg-slate-200"
+            onClick={async () => {
+              redirectToPath("/dashboard/administrator");
+            }}
+          >
+            Administrator
+          </DropdownMenuItem>
+           )}
           <DropdownMenuItem 
           className="cursor-pointer hover:bg-slate-200"
           onClick={async () => {
@@ -45,7 +73,7 @@ export default function UserDropdown({ user }: any) {
           className="cursor-pointer hover:bg-slate-200"
             onClick={async () => {
                 await supabase.auth.signOut();
-                redirectToPath("/");
+                redirectToPath("/")
             }}
           >
             Logout
