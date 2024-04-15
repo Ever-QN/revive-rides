@@ -147,7 +147,7 @@ export default function AdminPendingBookingsTable({ user }: any) {
                         <div className="text-sm text-muted-foreground md:inline">{formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}</div>
                         <div className='text-sm text-muted-foreground'>{booking.first_name} {booking.last_name}</div>
                       </TableCell>
-                      <TableCell className="text-right"><AdminPendingDropdown /></TableCell>
+                      <TableCell className="text-right"><AdminPendingDropdown booking={booking} /></TableCell>
                     </TableRow>
                   </PopoverTrigger>
                                     
@@ -160,6 +160,9 @@ export default function AdminPendingBookingsTable({ user }: any) {
                         </p>
                         <p className="text-sm text-muted-foreground">
                           {booking.email} | {booking.phone_number}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          Booking ID: {booking.booking_id}
                         </p>
                       </div>
                       <div className="grid gap-2">

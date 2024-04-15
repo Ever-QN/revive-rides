@@ -17,23 +17,96 @@ import {
     Users,
   } from "lucide-react"
   
-  import { Button } from "@/components/ui/button"
-  import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuGroup,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuPortal,
-    DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
-    DropdownMenuTrigger,
-  } from "@/components/ui/dropdown-menu"
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+import { useToast } from "@/components/ui/use-toast";
+import { createClient } from "@/app/utils/supabase/client";
+
+type booking = {
+  booking_id: string
+  first_name: string
+  last_name: string
+  phone_number: string
+  booking_type: string
+  booking_date: string
+  booking_time: string
+  booking_status: "Pending" | "Confirmed" | "Completed" | "Cancelled"
+  booking_details: string
+  email: string
+  car_info: string
+}
   
-  export function AdminPendingDropdown() {
+  export function AdminPendingDropdown({ booking }: { booking: booking }) {
+
+    const { toast } = useToast();
+    const supabase = createClient();
+    
+    async function onConfirm() {
+      const { error } = await supabase
+      .schema('public')
+      .from('user_bookings')
+      .update({ booking_status: 'Confirmed' })
+      .eq('booking_id', booking.booking_id)
+
+      if (!error) {
+        toast({
+          title: "Booking Confirmed",
+          description: `Booking for ${booking.first_name} ${booking.last_name} has been confirmed. (Booking ID: ${booking.booking_id})`,
+          className: "bg-green-500 text-white",
+        
+        })
+      }
+
+      if (error) {
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+        })
+        return;
+      }
+    }
+
+    async function onCancel() {
+      const { error } = await supabase
+      .schema('public')
+      .from('user_bookings')
+      .update({ booking_status: 'Cancelled' })
+      .eq('booking_id', booking.booking_id)
+
+      if (!error) {
+        toast({
+          title: "Booking Cancelled Successfully",
+          description: `Booking for ${booking.first_name} ${booking.last_name} has been Cancelled. (Booking ID: ${booking.booking_id})`,
+          className: "bg-green-500 text-white",
+        
+        })
+      }
+
+      if (error) {
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+        })
+        return;
+      }
+    }
+
     return (
       <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -44,8 +117,22 @@ import {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>Confirm</DropdownMenuItem>
-            <DropdownMenuItem>Cancel</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                onConfirm();
+              }
+              }
+            > 
+              Confirm
+            </DropdownMenuItem>
+            <DropdownMenuItem
+            onClick={
+              () => {
+                onCancel();
+              }
+            }>
+              Cancel
+              </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
     )
