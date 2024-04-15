@@ -97,6 +97,14 @@ type booking = {
                 onCancel();
               }
             }>
+              Complete Appointment
+              </DropdownMenuItem>
+            <DropdownMenuItem
+            onClick={
+              () => {
+                onCancel();
+              }
+            }>
               Cancel Appointment
               </DropdownMenuItem>
           </DropdownMenuContent>
