@@ -88,7 +88,7 @@ export default function SignUp() {
         const supabase = createClient();
         
         const { data, error } = await supabase.auth.signUp({
-            email: formData.email,
+            email: formData.email.toLowerCase(),
             password: formData.password,
             options: {
                 emailRedirectTo: window.location.origin,
