@@ -25,13 +25,17 @@ import { ArrowUpRight } from 'lucide-react';
 import { Popover, PopoverTrigger, PopoverContent } from './ui/popover';
 import { Label } from '@radix-ui/react-label';
 import { Input } from 'postcss';
+import { UserCancelAppointmentBtn } from './UserCancelAppointmentBtn';
 
 type Booking = {
+    first_name: string
+    last_name: string
+    phone_number: string
     booking_id: string
     booking_type: string
     booking_date: string
     booking_time: string
-    booking_status: "pending" | "confirmed" | "completed" | "cancelled"
+    booking_status: "Pending" | "Confirmed" | "Completed" | "Cancelled"
     booking_details: string
     email: string
     car_info: string
@@ -110,7 +114,7 @@ export default function UserBookingsTable({ user }: any) {
           </div>
         </div>
       ) : (
-        <Card className='mt-4 h-screen'>
+        <Card className='mt-4'>
           <CardHeader className="flex flex-col justify-center">
           <div className="flex flex-col gap-2">
             <CardTitle>
@@ -137,7 +141,7 @@ export default function UserBookingsTable({ user }: any) {
                   <TableHead className="text-right">Status</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody className='flex flex-col'>
+              <TableBody className='flex flex-col h-screen'>
               {bookings.map((booking) => (
                   <Popover key={booking.booking_id}>
                   <PopoverTrigger>
@@ -146,7 +150,7 @@ export default function UserBookingsTable({ user }: any) {
                         <div className="font-medium">{booking.booking_type} ({booking.car_info})</div>
                         <div className="text-sm text-muted-foreground md:inline">{formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}</div>  
                       </TableCell>
-                      <TableCell className="text-right">{booking.booking_status}</TableCell>
+                      <TableCell className="text-right">{booking.booking_status} <UserCancelAppointmentBtn booking={booking} /></TableCell>
                     </TableRow>
                   </PopoverTrigger>
                                     

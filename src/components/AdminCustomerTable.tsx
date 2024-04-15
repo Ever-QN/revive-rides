@@ -91,7 +91,7 @@ export default function AdminCustomerTable({ user }: any) {
           </div>
         </div>
       ) : (
-        <Card className='mt-4 h-screen'>
+        <Card className='mt-4'>
           <CardHeader className="flex flex-col justify-center">
           <div className="flex flex-col gap-2">
             <CardTitle className=''>
@@ -109,7 +109,7 @@ export default function AdminCustomerTable({ user }: any) {
           </CardHeader>
 
           <CardContent>
-          <Table className='flex flex-col'>
+          <Table className='flex flex-col h-screen'>
               <TableHeader className=''>
                 <TableRow className='flex justify-between'>
                   <TableHead>Client</TableHead>
