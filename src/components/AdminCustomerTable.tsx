@@ -127,7 +127,7 @@ export default function AdminCustomerTable({ user }: any) {
               <TableHeader className=''>
                 <TableRow className='flex justify-between'>
                   <TableHead>Customer</TableHead>
-                  <TableHead className="text-right">Action</TableHead>
+                  <TableHead className="text-right">Status</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody className='flex flex-col'>
@@ -139,7 +139,7 @@ export default function AdminCustomerTable({ user }: any) {
                         <div className="font-medium">{customer.first_name} {customer.last_name}</div>
                         <div className='text-sm text-muted-foreground md:inline'>{customer.email} | {customer.phone_number}</div>
                       </TableCell>
-                      <TableCell className="text-right"><AdminPendingDropdown /></TableCell>
+                      <TableCell className="text-right"></TableCell>
                     </TableRow>
                   </PopoverTrigger>
                                     
