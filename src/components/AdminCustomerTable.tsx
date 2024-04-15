@@ -25,7 +25,7 @@ import { RotateCw } from 'lucide-react';
 import { Popover, PopoverTrigger, PopoverContent } from './ui/popover';
 import { Label } from '@radix-ui/react-label';
 import { Input } from 'postcss';
-import { AdminPendingDropdown } from './AdminPendingDropdown';
+import { AdminCustomerDropdown } from './AdminCustomerDropdown';
 
 type User = {
     id: string
@@ -109,10 +109,10 @@ export default function AdminCustomerTable({ user }: any) {
           <CardHeader className="flex flex-col justify-center">
           <div className="flex flex-col gap-2">
             <CardTitle className=''>
-              Existing Customers
+              Existing Clients
             </CardTitle>
             <CardDescription>
-              A list of existing customers in the database
+              A list of existing clients who have an account with S&D Autobody in the database
             </CardDescription>
           </div>
 
@@ -126,8 +126,8 @@ export default function AdminCustomerTable({ user }: any) {
           <Table className='flex flex-col'>
               <TableHeader className=''>
                 <TableRow className='flex justify-between'>
-                  <TableHead>Customer</TableHead>
-                  <TableHead className="text-right">Status</TableHead>
+                  <TableHead>Client</TableHead>
+                  <TableHead className="text-right">Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody className='flex flex-col'>
@@ -139,7 +139,7 @@ export default function AdminCustomerTable({ user }: any) {
                         <div className="font-medium">{customer.first_name} {customer.last_name}</div>
                         <div className='text-sm text-muted-foreground md:inline'>{customer.email} | {customer.phone_number}</div>
                       </TableCell>
-                      <TableCell className="text-right"></TableCell>
+                      <TableCell className="text-right"><AdminCustomerDropdown customer={customer}/></TableCell>
                     </TableRow>
                   </PopoverTrigger>
                                     
