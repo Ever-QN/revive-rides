@@ -267,7 +267,7 @@ export default function NewAppointment() {
                     </Popover>
 
                     <div className="space-y-2 pb-2 md:pb-4 mt-4">
-                        <Label htmlFor="time">Time</Label>
+                        <Label htmlFor="time">Time (Shop hours are between 10:00AM - 6:00PM)</Label>
                         <Input {...register("time")} type="time" name="time" value={time} onChange={(e) => setTime(e.target.value)} className="border border-gray-500" min="10:00" max="18:00" required/>
                     </div>
 
