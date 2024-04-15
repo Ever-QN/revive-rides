@@ -138,7 +138,7 @@ export default function UserBookingsTable({ user }: any) {
               <TableHeader className=''>
                 <TableRow className='flex justify-between'>
                   <TableHead>Booking</TableHead>
-                  <TableHead className="text-right">Status</TableHead>
+                  <TableHead className="text-right">Cancel Booking</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody className='flex flex-col h-screen'>
@@ -149,8 +149,12 @@ export default function UserBookingsTable({ user }: any) {
                       <TableCell className='text-left'>
                         <div className="font-medium">{booking.booking_type} ({booking.car_info})</div>
                         <div className="text-sm text-muted-foreground md:inline">{formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}</div>  
+                        <div className="text-sm text-muted-foreground">{booking.booking_status}</div>  
+                        
                       </TableCell>
-                      <TableCell className="text-right">{booking.booking_status} <UserCancelAppointmentBtn booking={booking} /></TableCell>
+                      <TableCell className="flex flex-col items-center gap-4 text-right">
+                      <UserCancelAppointmentBtn booking={booking} />
+                      </TableCell>
                     </TableRow>
                   </PopoverTrigger>
                                     
