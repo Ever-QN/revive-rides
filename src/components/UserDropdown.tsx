@@ -57,7 +57,7 @@ export default function UserDropdown({ user }: any) {
               redirectToPath("/dashboard/administrator");
             }}
           >
-            Admin Dashboard
+            Administrator
           </DropdownMenuItem>
            )}
           <DropdownMenuItem 
