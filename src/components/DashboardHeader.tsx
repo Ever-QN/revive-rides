@@ -29,6 +29,6 @@ export default async function DashboardHeader() {
       }
     
     return (
-        <h1 className="text-lg font-semibold md:text-2xl">Welcome back, {currentUser.first_name} {currentUser.last_name}</h1>
+        <h1 className="text-lg font-semibold text-center md:text-2xl">Welcome back, {currentUser.first_name} {currentUser.last_name}</h1>
     )
 }
