@@ -30,23 +30,24 @@ type customerType = {
 
 const supabase_url = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const service_role_key = process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
+
+
+const supabase = createClient(supabase_url, service_role_key, {
+  auth: {
+    autoRefreshToken: false,
+    persistSession: false
+  }
+})
+
+const adminAuthClient = supabase.auth.admin
   
-  export function AdminEditClientBtn({ customer }: { customer: customerType }) {
+export function AdminEditClientBtn({ customer }: { customer: customerType }) {
 
     const { toast } = useToast();
     let [newEmail, setNewEmail] = useState(customer.email)
     let [newPhone, setNewPhone] = useState(customer.phone_number)
     let [newName, setNewName] = useState(customer.first_name)
     let [newSurname, setNewSurname] = useState(customer.last_name)
-
-    const supabase = createClient(supabase_url, service_role_key, {
-      auth: {
-        autoRefreshToken: false,
-        persistSession: false
-      }
-    })
-    
-    const adminAuthClient = supabase.auth.admin
     
     async function editClient() {
       const { error} = await adminAuthClient.updateUserById(
@@ -67,7 +68,7 @@ const service_role_key = process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
 
       if (!error && !error2) {
         toast({
-          title: "Succesfully edited client!",
+          title: "Successfully edited client!",
           description: `The client has been edited successfully.`,
           className: "bg-green-500 text-white",
         
@@ -133,7 +134,13 @@ const service_role_key = process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
         </div>
         <SheetFooter>
           <SheetClose asChild>
-            <Button type="submit" onClick={editClient}>Save changes</Button>
+            <Button type="submit" onClick={() => {
+              editClient()
+ 
+              }}
+            >
+              Save changes
+              </Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

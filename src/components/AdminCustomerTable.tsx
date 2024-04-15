@@ -23,7 +23,6 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { RotateCw } from 'lucide-react';
 import { Popover, PopoverTrigger, PopoverContent } from './ui/popover';
-import { Label } from '@radix-ui/react-label';
 import { Input } from 'postcss';
 import { AdminEditClientBtn } from './AdminEditClientBtn';
 import AdminDeleteClientBtn from './AdminDeleteClientBtn';
@@ -36,17 +35,21 @@ type User = {
     phone_number: string
   }
 
+
+
 export default function AdminCustomerTable({ user }: any) {
 
   const [customers, setCustomers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
+  const supabase = createClient();
 
   useEffect(() => {
+
     fetchData();
-  }, [user]);
+
+  }, []);
 
   async function fetchData() {
-    const supabase = createClient();
 
     const {
       data: { user },
@@ -73,6 +76,10 @@ export default function AdminCustomerTable({ user }: any) {
 
   }
   
+  async function refreshTable() {
+    setLoading(true);
+    await fetchData();
+  }
 
     return (
       <>
@@ -102,7 +109,7 @@ export default function AdminCustomerTable({ user }: any) {
             </CardDescription>
           </div>
 
-          <Button size="sm" className="ml-auto">
+          <Button onClick={refreshTable} size="sm" className="ml-auto">
             <RotateCw size={20} />
           </Button>
 
