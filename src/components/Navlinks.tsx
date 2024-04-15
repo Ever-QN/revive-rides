@@ -17,6 +17,31 @@ import { redirectToPath } from '@/app/utils/auth-helpers/server'
 export default function Navlinks({ user } : any) {
   const supabase = createClient();
 
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    async function getUserRole() {
+      const supabase = createClient();
+      
+      const { data: userRole, error } = await supabase
+      .from('user_roles')
+      .select('is_admin')
+      .eq('id', user.id).single();
+
+      if (error) {
+        console.error(error)
+        return null
+      }
+      if (userRole.is_admin) {
+        setIsAdmin(true);
+      }
+    }
+
+    
+    if (user) {
+      getUserRole();
+    }
+
+
   return (
     <div className="relative flex flex-row py-4 align-center md:py-6">
       <div className="flex justify-between items-center flex-1">
@@ -86,6 +111,16 @@ export default function Navlinks({ user } : any) {
                     </Link>
                   </SheetClose>
                 )}
+                {isAdmin && (
+                  <SheetClose asChild>
+                    <Link 
+                    href="/dashboard/administrator"
+                    className="flex items-center space-x-2 font-medium rounded-md dark:bg-gray-800 transform transition duration-400 active:text-red-500 hover:text-blue-500 dark:hover:text-blue-500"
+                    >
+                      Administrator
+                    </Link>
+                  </SheetClose>
+                )}
                 <SheetClose asChild>
                   <Link
                     href="/gallery"
@@ -105,7 +140,6 @@ export default function Navlinks({ user } : any) {
                     </Link>
                   </SheetClose>
                 )}
-
                 {user ? (
                 <SheetClose asChild>
                     <Button
