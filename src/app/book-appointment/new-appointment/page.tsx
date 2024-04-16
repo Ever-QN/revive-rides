@@ -11,15 +11,20 @@ import { useForm } from "react-hook-form";
 import { createClient } from "@/app/utils/supabase/client"
 import { useToast } from "@/components/ui/use-toast"
 import { Calendar } from "@/components/ui/calendar"
-import { CalendarIcon } from "@radix-ui/react-icons"
+import { CalendarIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
 import * as z from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { cn } from "@/lib/utils"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { SelectGroup, SelectLabel } from "@radix-ui/react-select"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { SelectGroup, SelectLabel } from "@/components/ui/select"
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
+import { redirectToPath } from "@/app/utils/auth-helpers/server";
 
 type Booking = {
     first_name: string;
@@ -53,6 +58,11 @@ export default function NewAppointment() {
     const [date, setDate] = React.useState<Date | undefined>();
     const [time, setTime] = useState("");
     const [details, setDetails] = useState("");
+
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth();
+    const currentDate = today.getDate();
 
     const router = useRouter();
     const { toast } = useToast();
@@ -91,42 +101,79 @@ export default function NewAppointment() {
             }
         }
         fetchUser();
+
     }, []);
+
+    const validateName = (name: string | undefined, field: string) => {
+        if (!name || name.trim().length === 0) {
+            toast({
+                title: 'Error',
+                description: `${field} is required.`,
+                variant: 'destructive'
+            });
+            return false;
+        } else if (name.trim().length > 20) {
+            toast({
+                title: 'Error',
+                description: `${field} must be 20 characters or less.`,
+                variant: 'destructive'
+            });
+            return false;
+        } else if (!/^[A-Za-z\s\-']+$/u.test(name)) {
+            toast({
+                title: 'Error',
+                description: `${field} must only contain alphabetic characters, spaces, hyphens, and apostrophes.`,
+                variant: 'destructive'
+            });
+            return false;
+        }
+        return true;
+    };
 
     const onSubmit = async () => {
         setIsLoading(true);
     
         try {
-
+            // Validate first name
+            if (!validateName(firstName, 'First Name')) {
+                setIsLoading(false);
+                return;
+            }
+    
+            // Validate last name
+            if (!validateName(lastName, 'Last Name')) {
+                setIsLoading(false);
+                return;
+            }
+    
+            // Validate car info
+            if (!carInfo || carInfo.trim().length === 0) {
+                toast({
+                    title: 'Error',
+                    description: 'Car Information is required.',
+                    variant: 'destructive'
+                });
+                setIsLoading(false);
+                return;
+            }
+    
             // Define date before proceeding
             if (!date) {
                 throw new Error("Please select a date for the appointment.");
             }
-
-            const selectedTime = new Date();
-            selectedTime.setHours(Number(time.slice(0, 2)), Number(time.slice(3))); // Set the selected time
-
-            const selectedHour = selectedTime.getHours();
-            const selectedMinute = selectedTime.getMinutes();
-
-            if ( selectedHour <= 9 || selectedHour >= 19 || (selectedHour === 18 && selectedMinute > 0)) {
-                toast({
-                    title: "WORKSHOP CLOSED",
-                    description: "Accepted Booking Hours: 10:00 AM - 6:00 PM. Please reselect a time slot within the working hours.",
-                    variant: "destructive"
-                });
-                return;
-            }
-
+    
+            // Convert time to HH:mm format for comparison
+            const formattedTime = time.slice(0, 5);
+    
             // Calculate time range for overlapping appointments (2 hours before and after the new appointment)
             const startTime = new Date(date);
             startTime.setHours(Number(time.slice(0, 2)) - 2, Number(time.slice(3))); // 2 hours before the new appointment
             const formattedStartTime = `${startTime.getHours().toString().padStart(2, '0')}:${startTime.getMinutes().toString().padStart(2, '0')}`;
-
+    
             const endTime = new Date(date);
             endTime.setHours(Number(time.slice(0, 2)) + 2, Number(time.slice(3))); // 2 hours after the new appointment
             const formattedEndTime = `${endTime.getHours().toString().padStart(2, '0')}:${endTime.getMinutes().toString().padStart(2, '0')}`;
-            
+    
             const { data: existingBooking, error: existingBookingError } = await supabase
                 .from("user_bookings")
                 .select("booking_time")
@@ -134,40 +181,40 @@ export default function NewAppointment() {
                 .lte("booking_time", formattedEndTime) // Check if existing appointment ends before the new appointment starts
                 .gte("booking_time", formattedStartTime) // Check if existing appointment starts after calculated start time
                 .neq("booking_status", "Cancelled"); // Exclude cancelled appointments
-                
+    
             if (existingBookingError) {
                 throw existingBookingError;
             }
-
+    
             if (existingBooking.length > 0) {
                 const existingAppointments = existingBooking.map(booking => {
                     // Split the time string into hours and minutes
                     const [hours, minutes] = booking.booking_time.split(':');
-
+    
                     // Construct a new date object with today's date and the provided time
                     const bookingTime = new Date();
                     bookingTime.setHours(hours, 10);
                     bookingTime.setMinutes(minutes, 10);
-
+    
                     return bookingTime.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
                 }).join(", ");
-
+    
                 toast({
-                    title: "OVERLAPPING APPOINTMENT SCHEDULED", 
-                    description: `Overlapping appointment at (${existingAppointments}). Please reselect a time slot within 2 hours of the existing appointment`,
+                    title: "OVERLAPPING APPOINTMENT SCHEDULED",
+                    description: `Overlapping appointment at (${existingAppointments}). Please select a different time slot within 2 hours of the existing appointment`,
                     variant: "destructive",
                 });
                 return;
             }
-
+    
             // Insert booking information into the "user_bookings" table
-            const { data, error: newBookingError } = await supabase
+            const { data: newBooking, error: newBookingError } = await supabase
                 .from("user_bookings")
                 .insert([{
                     first_name: firstName,
                     last_name: lastName,
                     phone_number: phone,
-                    email: email,
+                    email: email.toLowerCase(),
                     booking_date: date,
                     booking_type: type,
                     booking_time: time,
@@ -175,25 +222,23 @@ export default function NewAppointment() {
                     booking_status: "Pending",
                     booking_details: details
                 }]);
-
-                if (newBookingError) {
-                    toast({
-                        title: "ERROR",
-                        description: newBookingError.message,
-                        variant: "destructive"
-                    })
-                    return;
-                }
-
+    
+            if (newBookingError) {
                 toast({
-                    title: "APPOINTMENT SUCCESSFULLY SCHEDULED",
-                    description: "Your appointment request has been submitted. We will contact you shortly to confirm your appointment.",
-                    className: "bg-green-500 text-white",
-                    variant: "default"
-                });
-
-                reset();
-
+                    title: "ERROR",
+                    description: newBookingError.message,
+                    variant: "destructive"
+                })
+                return;
+            }
+    
+            toast({
+                title: "APPOINTMENT SUCCESSFULLY SCHEDULED",
+                description: "Your appointment request has been submitted. We will contact you shortly to confirm your appointment.",
+                className: "bg-green-500 text-white",
+            });
+            redirectToPath('/book-appointment/new-appointment/newconfirm');
+            reset();
         } catch (error) {
             toast({
                 title: "ERROR",
@@ -204,6 +249,7 @@ export default function NewAppointment() {
             setIsLoading(false);
         }
     };
+    
 
     return (
         <div className="relative flex flex-col items-center justify-center p-4">
@@ -277,16 +323,15 @@ export default function NewAppointment() {
                             <Calendar 
                                 mode="single" 
                                 selected={date} 
-                                onSelect={setDate}
-                                disabled={(date) => date < new Date("1900-01-01") || date.getDay() === 0 || date.getDay() === 6} 
-                                initialFocus
-                            />
+                                onSelect={setDate} 
+                                disabled={(date) => date < new Date() || date.getDay() === 0 || date.getDay() === 6} 
+                                initialFocus/>
                         </PopoverContent>
                     </Popover>
 
                     <div className="space-y-2 pb-2 md:pb-4 mt-4">
-                        <Label htmlFor="time">Time</Label>
-                        <Input {...register("time")} type="time" name="time" value={time} onChange={(e) => setTime(e.target.value)} className="border border-gray-500" required />
+                        <Label htmlFor="time">Time (Shop hours are between 10:00AM - 6:00PM)</Label>
+                        <Input {...register("time")} type="time" name="time" value={time} onChange={(e) => setTime(e.target.value)} className="border border-gray-500" min="10:00" max="18:00" required/>
                     </div>
 
                     <div className="space-y-2 pb-2 md:pb-4">
