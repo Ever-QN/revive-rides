@@ -63,6 +63,7 @@ export default function EditAppointment() {
   const currentMonth = today.getMonth();
   const currentDate = today.getDate();
 
+  const { reset } = useForm();
   const router = useRouter();
   const { toast } = useToast();
 
@@ -130,104 +131,100 @@ export default function EditAppointment() {
   };
 
   const onSubmit = async () => {
-    if (!loggedInUser || loggedInUser.email !== email) {
-      toast({
-        title: "ERROR",
-        description: "Invalid booking ID. Try again",
-        variant: "destructive"
-        })
-      return;
-    }
-  
     setIsLoading(true);
-
+  
     try {
-      
       // Define date before proceeding
       if (!date) {
         throw new Error("Please select a date for the appointment.");
       }
-    
-      // Convert time to HH:mm format for comparison
-      const formattedTime = time.slice(0, 5);
-    
+  
+      const selectedTime = new Date();
+      selectedTime.setHours(Number(time.slice(0, 2)), Number(time.slice(3))); // Set the selected time
+  
+      const selectedHour = selectedTime.getHours();
+      const selectedMinute = selectedTime.getMinutes();
+  
+      if (selectedHour <= 9 || selectedHour >= 19 || (selectedHour === 18 && selectedMinute > 0)) {
+        toast({
+          title: "WORKSHOP CLOSED",
+          description: "Accepted Booking Hours: 10:00 AM - 6:00 PM. Please reselect a time slot within the working hours.",
+          variant: "destructive"
+        });
+        return;
+      }
+  
       // Calculate time range for overlapping appointments (2 hours before and after the new appointment)
       const startTime = new Date(date);
       startTime.setHours(Number(time.slice(0, 2)) - 2, Number(time.slice(3))); // 2 hours before the new appointment
       const formattedStartTime = `${startTime.getHours().toString().padStart(2, '0')}:${startTime.getMinutes().toString().padStart(2, '0')}`;
-    
+  
       const endTime = new Date(date);
       endTime.setHours(Number(time.slice(0, 2)) + 2, Number(time.slice(3))); // 2 hours after the new appointment
       const formattedEndTime = `${endTime.getHours().toString().padStart(2, '0')}:${endTime.getMinutes().toString().padStart(2, '0')}`;
-    
+  
       const { data: existingBooking, error: existingBookingError } = await supabase
-      .from("user_bookings")
-      .select("booking_time")
-      .eq("booking_date", date.toISOString().slice(0, 10)) // Convert date to ISO string for comparison
-      .lte("booking_time", formattedEndTime) // Check if existing appointment ends before the new appointment starts
-      .gte("booking_time", formattedStartTime) // Check if existing appointment starts after calculated start time
-      .neq("booking_status", "Cancelled") // Exclude cancelled appointments
-      .neq("booking_id", bookingId); // Exclude the current appointment being edited
-
+        .from("user_bookings")
+        .select("booking_time")
+        .eq("booking_date", date.toISOString().slice(0, 10)) // Convert date to ISO string for comparison
+        .lte("booking_time", formattedEndTime) // Check if existing appointment ends before the new appointment starts
+        .gte("booking_time", formattedStartTime) // Check if existing appointment starts after calculated start time
+        .neq("booking_status", "Cancelled"); // Exclude cancelled appointments
+  
       if (existingBookingError) {
         throw existingBookingError;
       }
-    
+  
       if (existingBooking.length > 0) {
         const existingAppointments = existingBooking.map(booking => {
           // Split the time string into hours and minutes
           const [hours, minutes] = booking.booking_time.split(':');
-    
+  
           // Construct a new date object with today's date and the provided time
           const bookingTime = new Date();
           bookingTime.setHours(hours, 10);
           bookingTime.setMinutes(minutes, 10);
-    
+  
           return bookingTime.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
         }).join(", ");
-    
+  
         toast({
-          title: "OVERLAPPING APPOINTMENT SCHEDULED", 
-          description: `Overlapping appointment at (${existingAppointments}). Please select a different time slot within 2 hours of the existing appointment`,
+          title: "OVERLAPPING APPOINTMENT SCHEDULED",
+          description: `Overlapping appointment at (${existingAppointments}). Please reselect a time slot within 2 hours of the existing appointment`,
           variant: "destructive",
         });
         return;
       }
-
-      // Update booking information into the user_bookings table
-      const { data: updateBooking, error: updateBookingError } = await supabase
-        .from('user_bookings')
-        .update([{
+  
+      // Insert booking information into the "user_bookings" table
+      const { data, error: newBookingError } = await supabase
+        .from("user_bookings")
+        .insert([{
           first_name: firstName,
           last_name: lastName,
           phone_number: phone,
-          email: email.toLowerCase(),
-          car_info: carInfo,
-          booking_type: type,
+          email: email,
           booking_date: date,
+          booking_type: type,
           booking_time: time,
+          car_info: carInfo,
+          booking_status: "Pending",
           booking_details: details
-        }])
-        .eq('booking_id', bookingId);
-    
-        if (updateBookingError) {
-          toast({
-            title: "ERROR",
-            description: updateBookingError.message,
-            variant: "destructive"
-          })
-          return;
-        }
-
-        toast({
-            title: "APPOINTMENT SUCCESSFULLY UPDATED",
-            description: "Your appointment has been updated.",
-            className: "bg-green-500 text-white",
-            variant: "default"
-        });
-        
-        window.location.href = 'edit-appointment/confirm';
-      
+        }]);
+  
+      if (newBookingError) {
+        throw newBookingError;
+      }
+  
+      toast({
+        title: "APPOINTMENT SUCCESSFULLY SCHEDULED",
+        description: "Your appointment request has been submitted. We will contact you shortly to confirm your appointment.",
+        className: "bg-green-500 text-white",
+        variant: "default"
+      });
+  
+      reset();
+  
     } catch (error) {
       toast({
         title: "ERROR",
@@ -236,9 +233,9 @@ export default function EditAppointment() {
       });
     } finally {
       setIsLoading(false);
-    };
+    }
   };
-  
+
   return (
     <div className="relative flex items-center justify-center p-4">
       <Card className="w-full max-w-3xl">
@@ -321,7 +318,7 @@ export default function EditAppointment() {
                   mode="single" 
                   selected={date} 
                   onSelect={setDate} 
-                  disabled={(date) => date < new Date("1900-01-01") || date.getDay() === 0 || date.getDay() === 6} 
+                  disabled={(date) => date < new Date() || date.getDay() === 0 || date.getDay() === 6} 
                   initialFocus/>
               </PopoverContent>
           </Popover>
