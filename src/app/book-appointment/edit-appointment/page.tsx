@@ -14,18 +14,9 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from '@/components/ui/calendar';
 import { cn } from "@/lib/utils"
 import { useRouter } from "next/navigation"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-} from "@/components/ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select"
 import { SelectGroup, SelectLabel } from "@radix-ui/react-select"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useToast } from '@/components/ui/use-toast';
 
 type Booking = {
@@ -43,7 +34,7 @@ type Booking = {
 export default function EditAppointment() {
 
   const supabase = createClient();
-  const { register } = useForm();
+  const { register, reset } = useForm();
   const [isLoading, setIsLoading] = useState(false);
 
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
@@ -58,12 +49,6 @@ export default function EditAppointment() {
   const [time, setTime] = useState("");
   const [details, setDetails] = useState("");
 
-  const today = new Date();
-  const currentYear = today.getFullYear();
-  const currentMonth = today.getMonth();
-  const currentDate = today.getDate();
-
-  const { reset } = useForm();
   const router = useRouter();
   const { toast } = useToast();
 
@@ -189,59 +174,63 @@ const onSubmit = async () => {
       throw new Error("Please select a date for the appointment.");
     }
 
-    // Validate time (ensure within business hours)
-    const appointmentTime = new Date(date);
-    appointmentTime.setHours(parseInt(time.split(":")[0]), parseInt(time.split(":")[1]));
-    if (appointmentTime.getHours() < 10 || appointmentTime.getHours() > 18 || (appointmentTime.getHours() === 18 && appointmentTime.getMinutes() > 0)) {
+    const selectedTime = new Date();
+    selectedTime.setHours(Number(time.slice(0, 2)), Number(time.slice(3))); // Set the selected time
+
+    const selectedHour = selectedTime.getHours();
+    const selectedMinute = selectedTime.getMinutes();
+
+    if ( selectedHour <= 9 || selectedHour >= 19 || (selectedHour === 18 && selectedMinute > 0)) {
+        toast({
+            title: "WORKSHOP CLOSED",
+            description: "Accepted Booking Hours: 10:00 AM - 6:00 PM. Please reselect a time slot within the working hours.",
+            variant: "destructive"
+        });
+        return;
+    }
+  
+    // Calculate time range for overlapping appointments (2 hours before and after the new appointment)
+    const startTime = new Date(date);
+    startTime.setHours(Number(time.slice(0, 2)) - 2, Number(time.slice(3))); // 2 hours before the new appointment
+    const formattedStartTime = `${startTime.getHours().toString().padStart(2, '0')}:${startTime.getMinutes().toString().padStart(2, '0')}`;
+  
+    const endTime = new Date(date);
+    endTime.setHours(Number(time.slice(0, 2)) + 2, Number(time.slice(3))); // 2 hours after the new appointment
+    const formattedEndTime = `${endTime.getHours().toString().padStart(2, '0')}:${endTime.getMinutes().toString().padStart(2, '0')}`;
+  
+    const { data: existingBooking, error: existingBookingError } = await supabase
+      .from("user_bookings")
+      .select("booking_time")
+      .eq("booking_date", date.toISOString().slice(0, 10)) // Convert date to ISO string for comparison
+      .lte("booking_time", formattedEndTime) // Check if existing appointment ends before the new appointment starts
+      .gte("booking_time", formattedStartTime) // Check if existing appointment starts after calculated start time
+      .neq("booking_status", "Cancelled") // Exclude cancelled appointments
+      .neq("booking_id", bookingId); // Exclude the current appointment being edited
+
+    if (existingBookingError) {
+      throw existingBookingError;
+    }
+  
+    if (existingBooking.length > 0) {
+      const existingAppointments = existingBooking.map(booking => {
+        // Split the time string into hours and minutes
+        const [hours, minutes] = booking.booking_time.split(':');
+  
+        // Construct a new date object with today's date and the provided time
+        const bookingTime = new Date();
+        bookingTime.setHours(hours, 10);
+        bookingTime.setMinutes(minutes, 10);
+  
+        return bookingTime.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+      }).join(", ");
+  
       toast({
-        title: 'WORKSHOP CLOSED',
-        description: 'Accepted Booking Hours: 10:00 AM - 6:00 PM. Please reselect a time slot within the working hours.',
-        variant: 'destructive'
+        title: "OVERLAPPING APPOINTMENT SCHEDULED", 
+        description: `Overlapping appointment at (${existingAppointments}). Please reselect a time slot within 2 hours of the existing appointment`,
+        variant: "destructive",
       });
-      setIsLoading(false);
       return;
     }
-
-    // Calculate time range for overlapping and double bookings
-    const startTime = new Date(date);
-    startTime.setHours(Number(time.slice(0, 2)) - 2, Number(time.slice(3)));
-    const endTime = new Date(date);
-    endTime.setHours(Number(time.slice(0, 2)) + 2, Number(time.slice(3)));
-
-    const formattedTime = `${appointmentTime.getHours().toString().padStart(2, '0')}:${appointmentTime.getMinutes().toString().padStart(2, '0')}`;
-
-    const { data: existingBookings, error: bookingError } = await supabase
-  .from("user_bookings")
-  .select("booking_time, booking_date")  // Ensure you have the right fields
-  .gte("booking_date", startTime.toISOString().slice(0, 10))
-  .lte("booking_date", endTime.toISOString().slice(0, 10))
-  .neq("booking_status", "Cancelled");
-
-if (bookingError) {
-  throw new Error("Failed to check for existing bookings.");
-}
-
-// Assume booking_time is stored in HH:MM format
-const overlappingBookings = existingBookings.filter(booking => {
-  const existingBookingDateTime = new Date(booking.booking_date + 'T' + booking.booking_time);
-  return existingBookingDateTime >= startTime && existingBookingDateTime <= endTime;
-});
-
-const isDoubleBooked = overlappingBookings.length > 0;
-
-if (isDoubleBooked) {
-  const existingAppointments = overlappingBookings.map(booking =>
-    `${new Date(booking.booking_date + 'T' + booking.booking_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`
-  ).join(", ");
-
-  toast({
-    title: "OVERLAPPING APPOINTMENT SCHEDULED",
-    description: `Overlapping appointment at (${existingAppointments}). Please select a different time slot within 2 hours of the existing appointment`,
-    variant: "destructive"
-  });
-  setIsLoading(false);
-  return;
-}
 
     // Proceed to update the booking in the database
     const { data, error: updateError } = await supabase
