@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/table"
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Edit } from 'lucide-react';
 import { Popover, PopoverTrigger, PopoverContent } from './ui/popover';
 import { Label } from '@radix-ui/react-label';
 import { Input } from 'postcss';
@@ -138,7 +138,6 @@ export default function UserBookingsTable({ user }: any) {
               <TableHeader className=''>
                 <TableRow className='flex justify-between'>
                   <TableHead>Booking</TableHead>
-                  <TableHead className="text-right">Cancel Booking</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody className='flex flex-col h-screen'>
@@ -147,12 +146,16 @@ export default function UserBookingsTable({ user }: any) {
                   <PopoverTrigger>
                     <TableRow className='flex justify-between hover:bg-slate-200 cursor-pointer'>
                       <TableCell className='text-left'>
-                        <div className="font-medium">{booking.booking_type} ({booking.car_info})</div>
+                        <div className="font-medium">{booking.booking_type} ({booking.car_info}) | {booking.booking_status}</div>
                         <div className="text-sm text-muted-foreground md:inline">{formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}</div>  
-                        <div className="text-sm text-muted-foreground">{booking.booking_status}</div>  
                         
                       </TableCell>
-                      <TableCell className="flex flex-col items-center gap-4 text-right">
+                      <TableCell className="flex flex-col md:flex-row items-center text-right">
+                        <Button variant="outline" className='scale-90' asChild>
+                          <Link href="/book-appointment/edit-appointment">
+                            <Edit className='h-4 w-4' />
+                          </Link>
+                        </Button>
                       <UserCancelAppointmentBtn booking={booking} />
                       </TableCell>
                     </TableRow>
@@ -160,10 +163,13 @@ export default function UserBookingsTable({ user }: any) {
                                     
                   <PopoverContent className="w-96">
                     <div className="grid gap-4">
-                      <div className="space-y-2">
-                        <h4 className="font-medium leading-none">{booking.booking_type} ({booking.car_info})</h4>
+                      <div className="space-y-1">
+                        <h4 className="font-medium leading-none">{booking.booking_type} ({booking.car_info}) | {booking.booking_status}</h4>
                         <p className="text-sm text-muted-foreground">
                           {formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          {booking.booking_id}
                         </p>
                       </div>
                       <div className="grid gap-2">
