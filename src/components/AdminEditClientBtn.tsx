@@ -156,7 +156,7 @@ export function AdminEditClientBtn({ customer, refreshTable }: { customer: User;
       </div>
       <SheetFooter>
         <SheetClose asChild>
-          <Button type="submit" onClick={() => {
+          <Button type="button" onClick={() => {
             editClient()
             refreshTable()
             }}
