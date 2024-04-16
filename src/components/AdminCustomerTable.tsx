@@ -148,7 +148,7 @@ export default function AdminCustomerTable({ user }: any) {
                       <TableCell className="flex flex-row text-right p-0 md:p-2">
                         <div className='flex flex-col md:flex-row'>
                           <AdminEditClientBtn customer={customer} refreshTable={refreshTable} />
-                          <AdminDeleteClientBtn customer={customer} />
+                          <AdminDeleteClientBtn customer={customer} refreshTable={refreshTable} />
                         </div>
                         </TableCell>
                     </TableRow>
