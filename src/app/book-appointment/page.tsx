@@ -15,7 +15,7 @@ export default function BookAppointment() {
         <div className="flex flex-col justify-center mx-auto max-w-3xl h-screen space-y-4 px-8 z-0">
             <div className="z-10 p-3">
                 <div className="flex items-center space-x-4">
-                    <h1 className="text-3xl font-bold tracking-tighter p-4">Book an Appointment</h1>
+                    <h1 className="text-3xl font-bold tracking-tighter p-4">Book / Edit an Appointment</h1>
                 </div>
                 <div className="grid gap-4">
                     <Link

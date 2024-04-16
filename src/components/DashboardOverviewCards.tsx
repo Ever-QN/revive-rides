@@ -17,7 +17,7 @@ export const projects = [
     link: "/dashboard/appointments",
   },
   {
-    title: "Book an Appointment",
+    title: "Book / Edit an Appointment",
     description:
       "Book a new appointment with us.",
     link: "/book-appointment",

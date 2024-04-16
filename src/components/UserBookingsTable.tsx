@@ -101,7 +101,7 @@ export default function UserBookingsTable({ user }: any) {
     return date.toLocaleTimeString('en-US', options);
   }
   
-  const copyToClipboard = (text) => {
+  const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
       .then(() => {
         // Show a success message or perform any other action
@@ -178,13 +178,16 @@ export default function UserBookingsTable({ user }: any) {
                         <div className="text-sm text-muted-foreground md:inline">{formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}</div>            
                       </TableCell>
                       <TableCell className="flex flex-col md:flex-row items-center text-right">
-                      <Button variant="outline" className='scale-90' asChild onClick={() => copyToClipboard(booking.booking_id)}>
-                          <Link href="/book-appointment/edit-appointment">
-                            <Edit className='h-4 w-4' />
-                          </Link>
-                        </Button>
                       {booking.booking_status === 'Pending' && (
-                      <UserCancelAppointmentBtn booking={booking} refreshTable={refreshTable}  />)
+                      <>
+                      <Button variant="outline" className='scale-90' asChild onClick={() => copyToClipboard(booking.booking_id)}>
+                      <Link href="/book-appointment/edit-appointment">
+                        <Edit className='h-4 w-4' />
+                      </Link>
+                      </Button>
+                      <UserCancelAppointmentBtn booking={booking} refreshTable={refreshTable}  />
+                      </>
+                      )
                       }
                       </TableCell>
                     </TableRow>

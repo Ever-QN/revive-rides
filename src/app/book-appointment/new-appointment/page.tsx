@@ -101,12 +101,51 @@ export default function NewAppointment() {
             }
         }
         fetchUser();
+
     }, []);
 
     const onSubmit = async () => {
         setIsLoading(true);
     
         try {
+            
+        const validateName = (name: string | undefined, field: string) => {
+            if (!name || name.trim().length === 0) {
+                toast({
+                    title: 'Error',
+                    description: `${field} is required.`,
+                    variant: 'destructive'
+                });
+                return false;
+            } else if (name.trim().length > 20) {
+                toast({
+                    title: 'Error',
+                    description: `${field} must be 20 characters or less.`,
+                    variant: 'destructive'
+                });
+                return false;
+            } else if (!/^[A-Za-z\s\-']+$/u.test(name)) {
+                toast({
+                    title: 'Error',
+                    description: `${field} must only contain alphabetic characters, spaces, hyphens, and apostrophes.`,
+                    variant: 'destructive'
+                });
+                return false;
+            }
+            return true;
+        };
+            // Validate first name
+            if (!validateName(firstName, 'First Name')) {
+                setIsLoading(false);
+                return;
+            }
+
+            // Validate last name
+            if (!validateName(lastName, 'Last Name')) {
+                setIsLoading(false);
+                return;
+            }
+            
 
             // Define date before proceeding
             if (!date) {
@@ -190,16 +229,16 @@ export default function NewAppointment() {
                 });
                 redirectToPath('/book-appointment/new-appointment/confirm');
                 reset();
-        } catch (error) {
-            toast({
-                title: "ERROR",
-                description: "Failed to submit appointment request. Please try again later.",
-                variant: "destructive"
-            });
-        } finally {
-            setIsLoading(false);
-        }
-    };
+            } catch (error) {
+                toast({
+                    title: "ERROR",
+                    description: "Failed to submit appointment request. Please try again later.",
+                    variant: "destructive"
+                });
+            } finally {
+                setIsLoading(false);
+            }
+        };
 
     return (
         <div className="relative flex flex-col items-center justify-center p-4">
