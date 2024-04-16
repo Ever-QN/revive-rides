@@ -220,38 +220,7 @@ export default function Home() {
                 Have a question? Contact us today!
               </p>
             </div>
-            <form className="grid max-w-sm gap-4 min-[400px]:grid-cols-2 md:gap-6 md:max-w-4xl lg:gap-8 lg:max-w-5xl xl:gap-10 p-4">
-              <div className="flex flex-col space-y-1">
-                <label
-                  className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
-                  htmlFor="name"
-                >
-                  Full Name
-                </label>
-                <Input className="h-10 peer-accent-0" id="name" placeholder="Enter your full name" type="text" />
-              </div>
-              <div className="flex flex-col space-y-1">
-                <label
-                  className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
-                  htmlFor="email"
-                >
-                  Email Address
-                </label>
-                <Input className="h-10 peer-accent-0" id="email" placeholder="Enter your email" type="email" />
-              </div>
-              <div className="flex flex-col space-y-1 col-span-2 gap-4">
-                <label
-                  className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
-                  htmlFor="message"
-                >
-                  Your Message
-                </label>
-                <Textarea className="min-h-[100px] max-h-[300px] peer-accent-0" id="message" placeholder="Enter your message" />
-                <Button className="w-full justify-center" type="submit">
-                  Submit
-                </Button>
-              </div>
-            </form>
+            <div>For any customer inquiries, send an email to Sdautobody@hotmail.com</div>
           </div>
         </div>
     </>
