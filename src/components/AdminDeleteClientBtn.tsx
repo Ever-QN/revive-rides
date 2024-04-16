@@ -1,5 +1,5 @@
 import { Trash2 } from "lucide-react";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Button } from "./ui/button";
 import { useToast } from "./ui/use-toast";
 import { createClient } from '@supabase/supabase-js'
@@ -15,7 +15,7 @@ type customerType = {
 const supabase_url = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const service_role_key = process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
 
-export default function AdminDeleteClientBtn({ customer }: { customer: customerType }) {
+export default function AdminDeleteClientBtn({ customer, refreshTable }: { customer: customerType; refreshTable: () => Promise<void>; }) {
 
     const supabase = createClient(supabase_url, service_role_key, {
         auth: {
@@ -63,7 +63,10 @@ export default function AdminDeleteClientBtn({ customer }: { customer: customerT
         </AlertDialogHeader>
         <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={confirmAction}>
+            <AlertDialogAction onClick={() => {
+                confirmAction()
+                refreshTable()
+            }}>
                 Continue
             </AlertDialogAction>
         </AlertDialogFooter>

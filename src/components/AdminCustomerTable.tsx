@@ -23,10 +23,25 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { RotateCw } from 'lucide-react';
 import { Popover, PopoverTrigger, PopoverContent } from './ui/popover';
-import { Label } from '@radix-ui/react-label';
-import { Input } from 'postcss';
-import { AdminEditClientBtn } from './AdminEditClientBtn';
+import { Input } from './ui/input';
 import AdminDeleteClientBtn from './AdminDeleteClientBtn';
+import { createClient as CreateAdminClient } from "@supabase/supabase-js"
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import { Edit } from "lucide-react";
+
+import { useToast } from "@/components/ui/use-toast";
+import { Label } from './ui/label';
+import { AdminEditClientBtn } from './AdminEditClientBtn';
+
 
 type User = {
     id: string
@@ -40,13 +55,15 @@ export default function AdminCustomerTable({ user }: any) {
 
   const [customers, setCustomers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
+  const supabase = createClient();
 
   useEffect(() => {
+
     fetchData();
-  }, [user]);
+
+  }, []);
 
   async function fetchData() {
-    const supabase = createClient();
 
     const {
       data: { user },
@@ -73,6 +90,10 @@ export default function AdminCustomerTable({ user }: any) {
 
   }
   
+  async function refreshTable() {
+    setLoading(true);
+    await fetchData();
+  }
 
     return (
       <>
@@ -102,7 +123,7 @@ export default function AdminCustomerTable({ user }: any) {
             </CardDescription>
           </div>
 
-          <Button size="sm" className="ml-auto">
+          <Button onClick={refreshTable} size="sm" className="ml-auto">
             <RotateCw size={20} />
           </Button>
 
@@ -126,8 +147,8 @@ export default function AdminCustomerTable({ user }: any) {
                       </TableCell>
                       <TableCell className="flex flex-row text-right p-0 md:p-2">
                         <div className='flex flex-col md:flex-row'>
-                          <AdminEditClientBtn customer={customer}/>
-                          <AdminDeleteClientBtn customer={customer} />
+                          <AdminEditClientBtn customer={customer} refreshTable={refreshTable} />
+                          <AdminDeleteClientBtn customer={customer} refreshTable={refreshTable} />
                         </div>
                         </TableCell>
                     </TableRow>

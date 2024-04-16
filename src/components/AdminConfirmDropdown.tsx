@@ -50,22 +50,22 @@ type booking = {
   car_info: string
 }
   
-  export function AdminConfirmDropdown({ booking }: { booking: booking }) {
+  export function AdminConfirmDropdown({ booking, refreshTable }: { booking: booking; refreshTable: () => Promise<void>}) {
 
     const { toast } = useToast();
     const supabase = createClient();
 
-    async function onCancel() {
+    async function onComplete() {
       const { error } = await supabase
       .schema('public')
       .from('user_bookings')
-      .update({ booking_status: 'Cancelled' })
+      .update({ booking_status: 'Completed' })
       .eq('booking_id', booking.booking_id)
 
       if (!error) {
         toast({
-          title: "Booking Cancelled Successfully",
-          description: `Booking for ${booking.first_name} ${booking.last_name} has been Cancelled. (Booking ID: ${booking.booking_id})`,
+          title: "Booking Completed",
+          description: `${booking.first_name} ${booking.last_name}'s appointment has been completed. (Booking ID: ${booking.booking_id})`,
           className: "bg-green-500 text-white",
         
         })
@@ -81,17 +81,17 @@ type booking = {
       }
     }
 
-    async function onComplete() {
+    async function onCancel() {
       const { error } = await supabase
       .schema('public')
       .from('user_bookings')
-      .update({ booking_status: 'Complete' })
+      .update({ booking_status: 'Cancelled' })
       .eq('booking_id', booking.booking_id)
 
       if (!error) {
         toast({
-          title: "Booking Completed",
-          description: `${booking.first_name} ${booking.last_name}'s appointment has been completed. (Booking ID: ${booking.booking_id})`,
+          title: "Booking Cancelled Successfully",
+          description: `Booking for ${booking.first_name} ${booking.last_name} has been Cancelled. (Booking ID: ${booking.booking_id})`,
           className: "bg-green-500 text-white",
         
         })
@@ -121,14 +121,16 @@ type booking = {
             onClick={
               () => {
                 onComplete();
-              }
-            }>
+                refreshTable();
+              }}
+            >
               Complete Appointment
               </DropdownMenuItem>
             <DropdownMenuItem
             onClick={
               () => {
                 onCancel();
+                refreshTable();
               }
             }>
               Cancel Appointment

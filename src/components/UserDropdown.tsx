@@ -63,7 +63,7 @@ export default function UserDropdown({ user }: any) {
           <DropdownMenuItem 
           className="cursor-pointer hover:bg-slate-200"
           onClick={async () => {
-            redirectToPath("/account/settings");
+            redirectToPath("/dashboard/settings");
         }}
           >
             Settings

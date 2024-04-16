@@ -52,7 +52,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
     car_info: string
   }
     
-    export function UserCancelAppointmentBtn({ booking }: { booking: booking }) {
+    export function UserCancelAppointmentBtn({ booking, refreshTable }: { booking: booking; refreshTable: () => Promise<void> }) {
   
       const { toast } = useToast();
       const supabase = createClient();
@@ -98,7 +98,12 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
             </AlertDialogHeader>
             <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={onCancel}>
+                <AlertDialogAction 
+                onClick={() => {
+                  onCancel()
+                  refreshTable()
+                }}
+                >
                     Continue
                 </AlertDialogAction>
             </AlertDialogFooter>

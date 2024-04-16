@@ -95,6 +95,11 @@ export default function AdminConfirmedBookingsTable({ user }: any) {
     date.setMinutes(minutes);
     return date.toLocaleTimeString('en-US', options);
   }
+
+  async function refreshTable() {
+    setLoading(true);
+    await fetchData();
+  }
   
 
     return (
@@ -104,6 +109,7 @@ export default function AdminConfirmedBookingsTable({ user }: any) {
       ) : (  
       bookings.length === 0 ? (
         <div className="mt-4 flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm h-screen">
+          
           <div className="flex flex-col items-center gap-1 text-center">
             <h3 className="text-2xl font-bold tracking-tight">
               No upcoming appointments
@@ -112,6 +118,7 @@ export default function AdminConfirmedBookingsTable({ user }: any) {
                 You have no confirmed appointments at this time.
             </p>
           </div>
+          
         </div>
       ) : (
         <Card className='mt-4'>
@@ -125,7 +132,7 @@ export default function AdminConfirmedBookingsTable({ user }: any) {
             </CardDescription>
           </div>
 
-          <Button size="sm" className="ml-auto">
+          <Button onClick={refreshTable} size="sm" className="ml-auto">
             <RotateCw size={20} />
           </Button>
 
@@ -150,7 +157,9 @@ export default function AdminConfirmedBookingsTable({ user }: any) {
                         <div className='text-sm text-muted-foreground'>{booking.first_name} {booking.last_name}</div>
                         
                       </TableCell>
-                      <TableCell className="text-right"><AdminConfirmDropdown booking={booking} /></TableCell>
+                      <TableCell className="text-right">
+                        <AdminConfirmDropdown booking={booking} refreshTable={refreshTable} />
+                      </TableCell>
                     </TableRow>
                   </PopoverTrigger>
                                     
