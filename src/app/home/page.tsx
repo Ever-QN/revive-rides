@@ -213,6 +213,7 @@ export default function Home() {
       </div>
       
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <div className="w-full py-12 md:py-24 bg-gray-300 " id="contact">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
@@ -256,16 +257,25 @@ export default function Home() {
 =======
 
    <div className="w-full py-12 md:py-24 bg-gray-300 " id="contact">
+=======
+      <div className="w-full py-12 md:py-24 bg-gray-300 " id="contact">
+>>>>>>> Stashed changes
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Contact Us</h2>
             <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
               Have a question? Contact us today!
             </p>
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
           </div>
           {/* Use the ContactForm component here */}
           <ContactForm />
+=======
+          </div>
+          {/* Use the ContactForm component here */}
+          <ContactForm></ContactForm>
+>>>>>>> Stashed changes
         </div>
       </div>
     </>
