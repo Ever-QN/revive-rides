@@ -6,24 +6,16 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
-import Image from "next/image"
 import { useForm } from "react-hook-form";
 import { createClient } from "@/app/utils/supabase/client"
 import { useToast } from "@/components/ui/use-toast"
 import { Calendar } from "@/components/ui/calendar"
 import { CalendarIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
-import * as z from 'zod';
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { cn } from "@/lib/utils"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { SelectGroup, SelectLabel } from "@/components/ui/select"
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { redirectToPath } from "@/app/utils/auth-helpers/server";
 
 type Booking = {
@@ -58,11 +50,6 @@ export default function NewAppointment() {
     const [date, setDate] = React.useState<Date | undefined>();
     const [time, setTime] = useState("");
     const [details, setDetails] = useState("");
-
-    const today = new Date();
-    const currentYear = today.getFullYear();
-    const currentMonth = today.getMonth();
-    const currentDate = today.getDate();
 
     const router = useRouter();
     const { toast } = useToast();
@@ -101,7 +88,6 @@ export default function NewAppointment() {
             }
         }
         fetchUser();
-
     }, []);
 
     const validateName = (name: string | undefined, field: string) => {
@@ -161,9 +147,21 @@ export default function NewAppointment() {
             if (!date) {
                 throw new Error("Please select a date for the appointment.");
             }
-    
-            // Convert time to HH:mm format for comparison
-            const formattedTime = time.slice(0, 5);
+
+            const selectedTime = new Date();
+            selectedTime.setHours(Number(time.slice(0, 2)), Number(time.slice(3))); // Set the selected time
+
+            const selectedHour = selectedTime.getHours();
+            const selectedMinute = selectedTime.getMinutes();
+
+            if ( selectedHour <= 9 || selectedHour >= 19 || (selectedHour === 18 && selectedMinute > 0)) {
+                toast({
+                    title: "WORKSHOP CLOSED",
+                    description: "Accepted Booking Hours: 10:00 AM - 6:00 PM. Please reselect a time slot within the working hours.",
+                    variant: "destructive"
+                });
+                return;
+            }
     
             // Calculate time range for overlapping appointments (2 hours before and after the new appointment)
             const startTime = new Date(date);
@@ -236,8 +234,9 @@ export default function NewAppointment() {
                 title: "APPOINTMENT SUCCESSFULLY SCHEDULED",
                 description: "Your appointment request has been submitted. We will contact you shortly to confirm your appointment.",
                 className: "bg-green-500 text-white",
+                variant: "default"
             });
-            redirectToPath('/book-appointment/new-appointment/newconfirm');
+            redirectToPath('/book-appointment/new-appointment/confirm');
             reset();
         } catch (error) {
             toast({
@@ -250,7 +249,6 @@ export default function NewAppointment() {
         }
     };
     
-
     return (
         <div className="relative flex flex-col items-center justify-center p-4">
             <Card className="w-full max-w-3xl">

@@ -14,18 +14,9 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from '@/components/ui/calendar';
 import { cn } from "@/lib/utils"
 import { useRouter } from "next/navigation"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-} from "@/components/ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select"
 import { SelectGroup, SelectLabel } from "@radix-ui/react-select"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useToast } from '@/components/ui/use-toast';
 
 type Booking = {
@@ -57,11 +48,6 @@ export default function EditAppointment() {
   const [date, setDate] = React.useState<Date | undefined>();
   const [time, setTime] = useState("");
   const [details, setDetails] = useState("");
-
-  const today = new Date();
-  const currentYear = today.getFullYear();
-  const currentMonth = today.getMonth();
-  const currentDate = today.getDate();
 
   const router = useRouter();
   const { toast } = useToast();
@@ -154,10 +140,10 @@ export default function EditAppointment() {
       const selectedHour = selectedTime.getHours();
       const selectedMinute = selectedTime.getMinutes();
 
-      if (selectedHour >= 22 || selectedHour <= 7 || (selectedHour === 21 && selectedMinute > 0)) {
+      if ( selectedHour <= 9 || selectedHour >= 19 || (selectedHour === 18 && selectedMinute > 0)) {
           toast({
               title: "WORKSHOP CLOSED",
-              description: "Workshop Opening Hours: 8:00 AM - 11:00 PM. Please reselect a time slot within the working hours and 2 hours before closing.",
+              description: "Accepted Booking Hours: 10:00 AM - 6:00 PM. Please reselect a time slot within the working hours.",
               variant: "destructive"
           });
           return;
