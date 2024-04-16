@@ -26,7 +26,7 @@ export const projects = [
     title: "Settings",
     description:
       "Manage your account settings.",
-    link: "/settings",
+    link: "/dashboard/settings",
   },
   {
     title: "Help & Support",

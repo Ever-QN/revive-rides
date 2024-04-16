@@ -115,7 +115,12 @@ export default function UserBookingsTable({ user }: any) {
             <p className="text-sm text-muted-foreground">
               Book an appointment to get started
             </p>
-            <Button className="mt-4">New Appointment</Button>
+            <Button asChild size="sm" className="mt-4 h-10">
+              <Link href="/book-appointment">
+                New Appointment
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </Button>
           </div>
         </div>
       ) : (
