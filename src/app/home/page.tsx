@@ -15,30 +15,30 @@ import ContactForm from "@/components/ContactForm.client";
 const testimonials = [
   {
     quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "Exceptional service from start to finish! My car looked better than ever after their team worked their magic. I was impressed by their attention to detail and professionalism. Highly recommended!",
     name: "Quynh",
     title: "Student",
   },
   {
     quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "I can't thank S&D Autobody enough for the outstanding job they did on my vehicle. From the moment I dropped it off until the day I picked it up, they kept me informed and ensured everything went smoothly. The results exceeded my expectations!",
     name: "John",
     title: "Software Developer",
   },
   {
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    quote: "I had a minor accident and was worried about the damage to my car. However, S&D Autobody reassured me and took care of everything efficiently. They made the process stress-free, and my car looks as good as new!",
     name: "Lee",
     title: "Marketing Student",
   },
   {
     quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "s&d autobody came highly recommended, and now I know why! Their expertise and dedication to customer satisfaction are unmatched. They treated my car like their own, and the results were phenomenal.",
     name: "V",
     title: "Employee",
   },
   {
     quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "im thrilled with the quality of work done by S&D Autobody. Their team went above and beyond to restore my vehicle, and the results speak for themselves. I wouldn't hesitate to recommend them to anyone in need of autobody repairs.",
     name: "Quynh",
     title: "Student",
   },
@@ -54,7 +54,7 @@ export default function Home() {
   const ownerImageUrl = "/images/sukhbir-and-dalbir.jpg";
   return (
     <>
-      <div className="w-full pt-24">
+      <div className="w-full">
         <ImagesSlider className="h-[50rem]" images={sliderImages}>
           <motion.div
             initial={{
@@ -71,12 +71,12 @@ export default function Home() {
             className="z-50 flex flex-col justify-center items-center p-4"
           >
             <motion.p className="font-bold md:text-8xl text-6xl bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-cyan-700 via-neutral-100 to-sky-500 bg-clip-text text-transparent text-center py-4 dark:text-white">
-              S&D Autobody
+              <div className="dark:text-white">S&D Autobody</div>
             </motion.p>
             <motion.p className="text-4xl text-center md:text-4xl text-red-500 bg-clip-text dark:text-gray-300">
               Discover excellence in auto body repair services.
             </motion.p>
-            <Link className="px-4 py-2 border border-red-400 bg-red-700 text-white mx-auto text-center rounded-full relative mt-4 hover:scale-110 active:scale-125 transition-all duration-100" href="/booking">
+            <Link className="px-4 py-2 hover:animate-shimmer border border-red-400 bg-[linear-gradient(110deg,#FF0000,45%,#8B0000,55%,#FF0000)] bg-[length:200%_100%] text-white mx-auto text-center rounded-full relative mt-4 hover:scale-110 active:scale-125 transition-all duration-100" href="/book-appointment">
               <span>Book an Appointment →</span>
             </Link>
 
@@ -85,7 +85,7 @@ export default function Home() {
       </div>
 
       <div className="p-4 flex justify-around w-full py-12 md:py-24 scroll-mt-10" id="about">
-          <div className="flex flex-row-reverse gap-8 items-start">
+          <div className="flex flex-col-reverse items-center md:flex-row-reverse md:items-start gap-8 ">
             <div className="relative">
               <DirectionAwareHover imageUrl={ownerImageUrl}>
                 <p className="font-bold text-xl">Sukhbir and Dalbir</p>
@@ -93,7 +93,7 @@ export default function Home() {
               </DirectionAwareHover> 
           </div>  
           <div className="flex flex-col space-y-2">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Us</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl border-b-slate-900 border-b">About Us</h2>
               <p className="max-w-3xl text-gray-700 dark:text-gray-500 overflow-y-scroll lg:overflow-hidden max-h-52 md:max-h-72 lg:max-h-full">
                 Driven by a Vision, S&amp;D Autobody Takes Root <br/><br/>
 
@@ -212,70 +212,16 @@ export default function Home() {
         </div>
       </div>
       
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        <div className="w-full py-12 md:py-24 bg-gray-300 " id="contact">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Contact Us</h2>
-              <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
-                Have a question? Contact us today!
-              </p>
-            </div>
-            <form className="grid max-w-sm gap-4 min-[400px]:grid-cols-2 md:gap-6 md:max-w-4xl lg:gap-8 lg:max-w-5xl xl:gap-10">
-              <div className="flex flex-col space-y-1">
-                <label
-                  className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
-                  htmlFor="name"
-                >
-                  Full Name
-                </label>
-                <Input className="h-10 peer-accent-0" id="name" placeholder="Enter your full name" type="text" />
-              </div>
-              <div className="flex flex-col space-y-1">
-                <label
-                  className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
-                  htmlFor="email"
-                >
-                  Email Address
-                </label>
-                <Input className="h-10 peer-accent-0" id="email" placeholder="Enter your email" type="email" />
-              </div>
-              <div className="flex flex-col space-y-1 col-span-2 gap-4">
-                <label
-                  className="text-sm font-medium tracking-wide text-gray-500 peer-placeholder-shown:translate-y-[-1.5em] peer-placeholder-shown:text-xs transition-all"
-                  htmlFor="message"
-                >
-                  Your Message
-                </label>
-                <Textarea className="min-h-[100px] peer-accent-0" id="message" placeholder="Enter your message" />
-                <Button className="w-full justify-center" type="submit">
-                  Submit
-                </Button>
-              </div>
-            </form>
-=======
-
-   <div className="w-full py-12 md:py-24 bg-gray-300 " id="contact">
-=======
       <div className="w-full py-12 md:py-24 bg-gray-300 " id="contact">
->>>>>>> Stashed changes
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Contact Us</h2>
             <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
               Have a question? Contact us today!
             </p>
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-          </div>
-          {/* Use the ContactForm component here */}
-          <ContactForm />
-=======
           </div>
           {/* Use the ContactForm component here */}
           <ContactForm></ContactForm>
->>>>>>> Stashed changes
         </div>
       </div>
     </>
