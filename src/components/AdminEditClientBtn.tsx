@@ -159,6 +159,7 @@ export function AdminEditClientBtn({ customer, refreshTable }: { customer: User;
           <Button type="button" onClick={() => {
             editClient()
             refreshTable()
+            refreshTable()
             }}
           >
             Save changes

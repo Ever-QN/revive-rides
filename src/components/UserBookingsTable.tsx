@@ -167,7 +167,9 @@ export default function UserBookingsTable({ user }: any) {
                             <Edit className='h-4 w-4' />
                           </Link>
                         </Button>
-                      <UserCancelAppointmentBtn booking={booking} refreshTable={refreshTable}  />
+                      {booking.booking_status === 'Pending' && (
+                      <UserCancelAppointmentBtn booking={booking} refreshTable={refreshTable}  />)
+                      }
                       </TableCell>
                     </TableRow>
                   </PopoverTrigger>

@@ -121,6 +121,7 @@ type booking = {
               onClick={() => {
                 onConfirm();
                 refreshTable();
+                refreshTable();
               }
               }
             > 
@@ -130,6 +131,7 @@ type booking = {
             onClick={
               () => {
                 onCancel();
+                refreshTable();
                 refreshTable();
               }
             }>
