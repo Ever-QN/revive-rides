@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { createClient } from "../utils/supabase/client";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { Home, LayoutDashboard, LogOut, Users } from "lucide-react";
+import { Home, LayoutDashboard, LogOut, Users, Settings } from "lucide-react";
 import { DashboardOverviewCards } from "@/components/DashboardOverviewCards";
 import DashboardHeader from "@/components/DashboardHeader";
 
 export default function Dashboard() {
 
-    return (
-      <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+  return (
+    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
@@ -35,6 +35,13 @@ export default function Dashboard() {
                 Your Appointments
               </Link>
               <Link
+                href="/dashboard/settings"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+              >
+                <Settings className="h-4 w-4" />
+                Settings
+              </Link>
+              <Link
                 href="#"
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               >
@@ -56,6 +63,5 @@ export default function Dashboard() {
         </main>
       </div>
     </div>
-
-    )
+  )
 }

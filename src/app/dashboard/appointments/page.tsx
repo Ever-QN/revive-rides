@@ -10,6 +10,7 @@ import {
   ShoppingCart,
   Users,
   User,
+  Settings
 } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -72,7 +73,6 @@ export default async function DashboardAppointments() {
     }
   }
   
-
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] pt-4">
       <div className="hidden border-r bg-muted/40 md:block">
@@ -99,6 +99,13 @@ export default async function DashboardAppointments() {
                 <Users className="h-4 w-4" />
                 Your Appointments
               </Link>
+              <Link
+                href="/dashboard/settings"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+              >
+                <Settings className="h-4 w-4" />
+                  Settings
+               </Link>
               <Link
                 href="#"
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
