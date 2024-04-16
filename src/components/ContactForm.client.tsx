@@ -47,8 +47,6 @@ const ContactForm: React.FC = () => {
  );
 };
 
-<<<<<<< Updated upstream
+
 export default ContactForm;
-=======
-export default ContactForm;
->>>>>>> Stashed changes
+
