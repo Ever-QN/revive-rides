@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react"
 import { useToast } from '@/components/ui/use-toast';
 import { createClient } from "@supabase/supabase-js"
 import { set } from "date-fns";
+import { redirectToPath } from "@/app/utils/auth-helpers/server";
 
 const supabase_url = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const service_role_key = process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
@@ -133,6 +134,7 @@ export default function SettingsPage({ customer }: { customer: User }) {
                     <Button variant="secondary" type="reset" onClick={resetForm}>Cancel</Button>
                     <Button type="submit" disabled={loading} onClick={() => {
                         updateUserInfo()
+                        redirectToPath("/dashboard")
                         }}
                     >
                         {loading ? "Updating..." : "Update"}
