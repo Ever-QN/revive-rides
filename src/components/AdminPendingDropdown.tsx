@@ -120,7 +120,7 @@ type booking = {
             <DropdownMenuItem
               onClick={() => {
                 onConfirm();
-                refreshTable()
+                refreshTable();
               }
               }
             > 
@@ -130,7 +130,7 @@ type booking = {
             onClick={
               () => {
                 onCancel();
-                refreshTable()
+                refreshTable();
               }
             }>
               Cancel
