@@ -188,6 +188,7 @@ export default function NewAppointment() {
                 toast({
                     title: "APPOINTMENT SUCCESSFULLY SCHEDULED",
                     description: "Your appointment request has been submitted. We will contact you shortly to confirm your appointment.",
+                    className: "bg-green-500 text-white",
                     variant: "default"
                 });
 

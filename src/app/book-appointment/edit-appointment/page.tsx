@@ -232,8 +232,8 @@ export default function EditAppointment() {
         }
 
         toast({
-            title: "APPOINTMENT SUCCESSFULLY UPDATED",
-            description: "Your appointment has been updated.",
+            title: "APPOINTMENT UPDATED",
+            description: "Your appointment has been successfully updated.",
             className: "bg-green-500 text-white",
             variant: "default"
         });
