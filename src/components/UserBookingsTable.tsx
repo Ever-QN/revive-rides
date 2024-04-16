@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/table"
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowUpRight, Edit } from 'lucide-react';
+import { ArrowUpRight, Edit, RotateCw } from 'lucide-react';
 import { Popover, PopoverTrigger, PopoverContent } from './ui/popover';
 import { Label } from '@radix-ui/react-label';
 import { Input } from 'postcss';
@@ -80,6 +80,11 @@ export default function UserBookingsTable({ user }: any) {
 
   }
 
+  async function refreshTable() {
+    setLoading(true);
+    await fetchData();
+  }
+
   function formatDate(dateString: string): string {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     const date = new Date(dateString);
@@ -124,15 +129,16 @@ export default function UserBookingsTable({ user }: any) {
               Click on the appointment to view additional details.
             </CardDescription>
           </div>
-          <Button asChild size="sm" className="ml-auto">
-            <Link href="/book-appointment">
-              New Appointment
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
-          </Button>
-
+            <Button asChild size="sm" className="ml-auto">
+              <Link href="/book-appointment">
+                New Appointment
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </Button>
+            <Button onClick={refreshTable} size="sm" className="ml-auto">
+              <RotateCw size={20} />
+            </Button>
           </CardHeader>
-
           <CardContent>
             <Table className='flex flex-col'>
               <TableHeader className=''>
@@ -156,7 +162,7 @@ export default function UserBookingsTable({ user }: any) {
                             <Edit className='h-4 w-4' />
                           </Link>
                         </Button>
-                      <UserCancelAppointmentBtn booking={booking} />
+                      <UserCancelAppointmentBtn booking={booking} refreshTable={refreshTable}  />
                       </TableCell>
                     </TableRow>
                   </PopoverTrigger>
