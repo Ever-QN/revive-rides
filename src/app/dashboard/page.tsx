@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { createClient } from "../utils/supabase/client";
+import { createClient } from "../utils/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Home, LayoutDashboard, LogOut, Users, Settings } from "lucide-react";
@@ -16,7 +16,7 @@ export default async function Dashboard() {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return redirectToPath("/sign-in");
+    return redirectToPath("/sign-in")
   }
 
   return (

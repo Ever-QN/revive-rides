@@ -14,6 +14,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
+import { redirectToPath } from "../utils/auth-helpers/server";
 
 
 const NEXT_PUBLIC_SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -59,10 +60,10 @@ export default function SignUp() {
           const { data: { user } } = await supabase.auth.getUser();
     
           if (user) {
-            router.push("/dashboard");
+            redirectToPath("/");
               toast({
                   title: "You are already logged in!",
-                  description: "You will be redirected to the dashboard.",
+                  description: "You will be redirected to the home page",
                   variant: "destructive"
               })
           }

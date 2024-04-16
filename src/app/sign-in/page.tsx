@@ -35,10 +35,10 @@ export default function SignIn() {
       const { data: { user } } = await supabase.auth.getUser();
 
       if (user) {
-        router.push("/dashboard");
+        redirectToPath("/");
           toast({
               title: "You are already logged in!",
-              description: "You will be redirected to the dashboard.",
+              description: "No need to login again. Redirecting to home page.",
               variant: "destructive"
           })
       }
