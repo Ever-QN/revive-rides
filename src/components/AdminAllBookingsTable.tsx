@@ -92,6 +92,11 @@ export default function AdminAllBookingsTable({ user }: any) {
     date.setMinutes(minutes);
     return date.toLocaleTimeString('en-US', options);
   }
+
+  async function refreshTable() {
+    setLoading(true);
+    await fetchData();
+  }
   
 
     return (
@@ -122,7 +127,7 @@ export default function AdminAllBookingsTable({ user }: any) {
             </CardDescription>
         </div>
 
-        <Button size="sm" className="ml-auto">
+        <Button onClick={refreshTable} size="sm" className="ml-auto">
             <RotateCw size={20} />
         </Button>
 
