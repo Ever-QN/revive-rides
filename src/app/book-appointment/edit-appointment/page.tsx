@@ -78,6 +78,7 @@ export default function EditAppointment() {
     }
   };
 
+<<<<<<< Updated upstream
   const onSubmit = async (formData: FormData) => {
     if (!loggedInUser || loggedInUser.email !== formData.email) {
       alert('Please enter valid Booking ID');
@@ -107,6 +108,92 @@ export default function EditAppointment() {
     } else {
       alert('Appointment updated successfully!');
       window.location.href = 'edit-appointment/confirm';
+=======
+  const onSubmit = async () => {
+    setIsLoading(true);
+  
+    try {
+      // Define date before proceeding
+      if (!date) {
+        throw new Error("Please select a date for the appointment.");
+      }
+  
+      // Convert time to HH:mm format for comparison
+      const formattedTime = time.slice(0, 5);
+  
+      // Calculate time range for overlapping appointments (2 hours before and after the selected time)
+      const startTime = new Date(date);
+      startTime.setHours(Number(time.slice(0, 2)) - 2, Number(time.slice(3))); // 2 hours before the selected time
+      const formattedStartTime = startTime.toISOString().slice(11, 16); // Format as HH:mm string
+  
+      const endTime = new Date(date);
+      endTime.setHours(Number(time.slice(0, 2)) + 2, Number(time.slice(3))); // 2 hours after the selected time
+      const formattedEndTime = endTime.toISOString().slice(11, 16); // Format as HH:mm string
+  
+      // Check for overlapping appointments
+      const { data: existingBooking, error: existingBookingError } = await supabase
+        .from("user_bookings")
+        .select("booking_time")
+        .eq("booking_date", date.toISOString().slice(0, 10)) // Convert date to ISO string for comparison
+        .lte("booking_time", formattedEndTime) // Check if existing appointment ends before the new appointment starts
+        .gte("booking_time", formattedStartTime) // Check if existing appointment starts after calculated start time
+        .neq("booking_status", "Cancelled") // Exclude cancelled appointments
+        .neq("booking_id", bookingId); // Exclude the current appointment being edited
+  
+      if (existingBookingError) {
+        throw existingBookingError;
+      }
+  
+      if (existingBooking.length > 0) {
+        // Handle overlapping appointments
+        const existingAppointments = existingBooking.map(booking => {
+          const [hours, minutes] = booking.booking_time.split(':');
+          const bookingTime = new Date(date);
+          bookingTime.setHours(Number(hours), Number(minutes));
+          return bookingTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }).join(", ");
+  
+        throw new Error(`There is already an appointment scheduled at ${existingAppointments} for ${date.toDateString()}. Please select a different time.`);
+      }
+  
+      // Update booking information into the user_bookings table
+      const { data: updatedBooking, error: updateError } = await supabase
+        .from('user_bookings')
+        .update({
+          first_name: firstName,
+          last_name: lastName,
+          phone_number: phone,
+          email: email.toLowerCase(),
+          car_info: carInfo,
+          booking_date: date.toISOString().slice(0, 10),
+          booking_time: formattedTime,
+          booking_details: details
+        })
+        .eq('booking_id', bookingId);
+  
+      if (updateError) {
+        throw updateError;
+      }
+  
+      // Show success message
+      toast({
+        title: "SUCCESS",
+        description: "Appointment updated successfully.",
+        variant: "default"
+      });
+  
+      // Redirect to confirmation page
+      window.location.href = 'edit-appointment/confirm';
+    } catch (error: any) {
+      // Handle errors
+      toast({
+        title: "ERROR",
+        description: (error as Error).message || "Failed to update appointment. Please try again later.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+>>>>>>> Stashed changes
     }
   };
   
