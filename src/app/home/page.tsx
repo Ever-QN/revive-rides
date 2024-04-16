@@ -15,6 +15,7 @@ import ContactForm from "@/components/ContactForm.client";
 const testimonials = [
   {
     quote:
+
       "Exceptional service from start to finish! My car looked better than ever after their team worked their magic. I was impressed by their attention to detail and professionalism. Highly recommended!",
     name: "Quynh",
     title: "Student",
@@ -41,6 +42,34 @@ const testimonials = [
       "im thrilled with the quality of work done by S&D Autobody. Their team went above and beyond to restore my vehicle, and the results speak for themselves. I wouldn't hesitate to recommend them to anyone in need of autobody repairs.",
     name: "Quynh",
     title: "Student",
+
+      "Exceptional service from start to finish! My taxi car's looked better than ever after their team worked their magic. I was impressed by their attention to detail and professionalism. Highly recommended!",
+    name: "Shivi Barich",
+    title: "Cab Driver",
+  },
+  {
+    quote:
+      "I can't thank S&D Autobody enough for the outstanding job they did on my vehicle after I got into an accident. From the moment I dropped it off until the day I picked it up, they kept me informed and ensured everything went smoothly. The results exceeded my expectations!",
+    name: "Conner Heathren",
+    title: "Hospital Administrator",
+  },
+  {
+    quote: "I had a minor accident and was worried about the damage to my Toyota RAV4. However, S&D Autobody reassured me and took care of everything efficiently. They made the process stress-free, and my car looks as good as new!",
+    name: "Zantares Dominicus",
+    title: "Accounting Student",
+  },
+  {
+    quote:
+      "S&D autobody came highly recommended, and now I know why! Their expertise and dedication to customer satisfaction are unmatched. They treated my car like their own, and the results were phenomenal.",
+    name: "Kevin Ngu",
+    title: "IT Specialist",
+  },
+  {
+    quote:
+      "I'm thrilled with the quality of work done by S&D Autobody. Their team went above and beyond to restore my vehicle after it was T-Boned, and the results speak for themselves. I wouldn't hesitate to recommend them to anyone in need of autobody repairs.",
+    name: "Jean Matthias",
+    title: "Electrician",
+>>>>>>> main
   },
 ];
 
@@ -212,6 +241,7 @@ export default function Home() {
         </div>
       </div>
       
+
       <div className="w-full py-12 md:py-24 bg-gray-300 " id="contact">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
@@ -219,6 +249,17 @@ export default function Home() {
             <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
               Have a question? Contact us today!
             </p>
+
+        <div className="w-full py-12 md:py-24 bg-gray-300 " id="contact">
+          <div className="flex flex-col items-center justify-center space-y-4 text-center">
+            <div className="space-y-2">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Contact Us</h2>
+              <p className="max-w-3xl text-gray-500 md:text-xl/95 dark:text-gray-400">
+                Have a question? Contact us today!
+              </p>
+            </div>
+            <div>For any customer inquiries, send an email to Sdautobody@hotmail.com</div>
+
           </div>
           {/* Use the ContactForm component here */}
           <ContactForm></ContactForm>
