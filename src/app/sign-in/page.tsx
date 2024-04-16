@@ -35,10 +35,10 @@ export default function SignIn() {
       const { data: { user } } = await supabase.auth.getUser();
 
       if (user) {
-        router.push("/dashboard");
+        redirectToPath("/");
           toast({
               title: "You are already logged in!",
-              description: "You will be redirected to the dashboard.",
+              description: "No need to login again. Redirecting to home page.",
               variant: "destructive"
           })
       }
@@ -130,18 +130,16 @@ export default function SignIn() {
               }}
             />
             <Button type="submit" className="w-full mt-4" >Login</Button>
-            <div className="flex justify-center space-x-4">
-              <Button variant="outline">
-                  <ChromeIcon className="h-6 w-6" />
-              </Button>
-              <Button variant="outline">
-                  <FacebookIcon className="h-6 w-6" />
-              </Button>
-            </div>
             <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
                 <Link className="underline text-red-600" href="/sign-up">
                     Sign up
+                </Link>
+            </div>
+            <div className="text-center text-sm">
+                Forgot your password?{" "}
+                <Link className="underline text-red-600" href="/forgot-password">
+                    Reset Password
                 </Link>
             </div>
           </form>

@@ -10,18 +10,20 @@ import { createClient } from "../utils/supabase/client"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useToast } from "@/components/ui/use-toast"
-import { headers } from "next/headers"
 
-export default function ForgotPassword() {
-    const [emailInput, setEmailInput] = useState("")
+
+export default function ResetPassword() {
+
+    
+    const [passwordInput, setPasswordInput] = useState("")
     const [isSubmitted, setIsSubmitted] = useState(false)
     const { toast } = useToast()
 
-    async function sendResetEmail() {
+    async function UpdatePassword() {
         event?.preventDefault();
         const supabase = createClient();
-        const { data, error } = await supabase.auth.resetPasswordForEmail(emailInput, {
-            redirectTo: `${window.location.origin}/reset-password`,
+        const { data, error } = await supabase.auth.updateUser({
+            password: passwordInput
           })
         if (error) {
             toast({
@@ -31,11 +33,10 @@ export default function ForgotPassword() {
             })
             console.error(error)
         }
-
         if (!error) {
             toast({
-                title: "Password reset email sent!",
-                description: `If the account exists, a password reset email has been sent to ${emailInput}. Please check your inbox/junk for the reset link.`,
+                title: "Success",
+                description: "Successfully reset your password!",
                 className: "bg-green-500 text-white"
             })
         }
@@ -47,7 +48,7 @@ export default function ForgotPassword() {
     {isSubmitted ? (
         <div className='flex flex-col w-full justify-center items-center h-screen'>
             <div className='font-bold'>
-                If the account exists, a password reset email has been sent to {emailInput}. Please check your inbox/junk for the reset link.
+               Successfully reset your password!
             </div>
             <div>
                 <Link href="/" className="text-red-500 underline">Click here to go back home</Link>
@@ -56,24 +57,24 @@ export default function ForgotPassword() {
             ): <div className="relative flex items-center justify-center h-screen">
             <Card className="flex flex-col border-2 border-black">
                 <CardHeader className="text-center space-y-1">
-                    <CardTitle>Forgot Password</CardTitle>
-                    <CardDescription>Enter your email below to reset your password</CardDescription>
+                    <CardTitle>Update Password</CardTitle>
+                    <CardDescription>Enter a new password for you account</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                    <form onSubmit={sendResetEmail} className="space-y-4">
+                    <form onSubmit={UpdatePassword} className="space-y-4">
                         <div className="">
-                            <Label htmlFor="email">Email</Label>
+                            <Label htmlFor="password">Password</Label>
                             <Input 
                             id="email" 
-                            value={emailInput} 
+                            value={passwordInput} 
                             placeholder="m@example.com" 
                             onChange={(e) => {
-                                setEmailInput(e.target.value)
+                                setPasswordInput(e.target.value)
                             }} 
                             required type="email" 
                             className="border border-gray-500" />
                         </div>
-                        <Button type='submit' className="w-full">Reset Password</Button>
+                        <Button type='submit' className="w-full">Update Password</Button>
                     </form>
                 </CardContent>
                 <CardFooter className="flex justify-around">

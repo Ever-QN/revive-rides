@@ -52,13 +52,13 @@ type usersType = {
   first_name: string
   last_name: string
   phone_number: string
+  is_admin: boolean
 }
 
 export default async function AdminDashboard() {
 
   const supabase = createClient();
   let currentUser = {} as usersType
-
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -68,6 +68,7 @@ export default async function AdminDashboard() {
   }
 
   if (user) {
+
     const { data: users, error } = await supabase
     .from('users')
     .select('*')
@@ -79,7 +80,20 @@ export default async function AdminDashboard() {
     }
 
     if (users) {
-      currentUser = users
+      const { data: userRole, error } = await supabase
+      .from('user_roles')
+      .select('*')
+      .eq('id', user.id)
+      .single()
+
+      if (!userRole.is_admin) {
+        return redirectToPath("/dashboard")
+      }
+
+      if (userRole.is_admin)
+        {
+          currentUser = users
+        }
     }
   }
 
