@@ -107,6 +107,7 @@ export default function AdminPendingBookingsTable({ user }: any) {
       ) : (  
       bookings.length === 0 ? (
         <div className="mt-4 flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm h-screen">
+          
           <div className="flex flex-col items-center gap-1 text-center">
             <h3 className="text-2xl font-bold tracking-tight">
               No pending appointments found.
@@ -152,7 +153,9 @@ export default function AdminPendingBookingsTable({ user }: any) {
                         <div className="text-sm text-muted-foreground md:inline">{formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}</div>
                         <div className='text-sm text-muted-foreground'>{booking.first_name} {booking.last_name}</div>
                       </TableCell>
-                      <TableCell className="text-right"><AdminPendingDropdown booking={booking} refreshTable={refreshTable} /></TableCell>
+                      <TableCell className="text-right">
+                        <AdminPendingDropdown booking={booking} refreshTable={refreshTable} />
+                      </TableCell>
                     </TableRow>
                   </PopoverTrigger>
                                     
