@@ -126,7 +126,7 @@ export default function UserBookingsTable({ user }: any) {
           </div>
           <Button asChild size="sm" className="ml-auto">
             <Link href="/book-appointment">
-              New Appointment
+              New / Edit Appointment
               <ArrowUpRight className="h-4 w-4" />
             </Link>
           </Button>
