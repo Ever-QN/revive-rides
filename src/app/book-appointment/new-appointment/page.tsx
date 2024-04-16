@@ -109,10 +109,10 @@ export default function NewAppointment() {
             const selectedHour = selectedTime.getHours();
             const selectedMinute = selectedTime.getMinutes();
 
-            if (selectedHour >= 22 || selectedHour <= 7 || (selectedHour === 21 && selectedMinute > 0)) {
+            if ( selectedHour <= 9 || selectedHour >= 19 || (selectedHour === 18 && selectedMinute > 0)) {
                 toast({
                     title: "WORKSHOP CLOSED",
-                    description: "Workshop Opening Hours: 8:00 AM - 11:00 PM. Please reselect a time slot within the working hours and 2 hours before closing.",
+                    description: "Accepted Booking Hours: 10:00 AM - 6:00 PM. Please reselect a time slot within the working hours.",
                     variant: "destructive"
                 });
                 return;
