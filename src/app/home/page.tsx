@@ -15,32 +15,32 @@ import { DirectionAwareHover } from "@/components/ui/direction-aware-hover";
 const testimonials = [
   {
     quote:
-      "Exceptional service from start to finish! My car looked better than ever after their team worked their magic. I was impressed by their attention to detail and professionalism. Highly recommended!",
-    name: "Quynh",
-    title: "Student",
+      "Exceptional service from start to finish! My taxi car's looked better than ever after their team worked their magic. I was impressed by their attention to detail and professionalism. Highly recommended!",
+    name: "Shivi Barich",
+    title: "Cab Driver",
   },
   {
     quote:
-      "I can't thank S&D Autobody enough for the outstanding job they did on my vehicle. From the moment I dropped it off until the day I picked it up, they kept me informed and ensured everything went smoothly. The results exceeded my expectations!",
-    name: "John",
-    title: "Software Developer",
+      "I can't thank S&D Autobody enough for the outstanding job they did on my vehicle after I got into an accident. From the moment I dropped it off until the day I picked it up, they kept me informed and ensured everything went smoothly. The results exceeded my expectations!",
+    name: "Conner Heathren",
+    title: "Hospital Administrator",
   },
   {
-    quote: "I had a minor accident and was worried about the damage to my car. However, S&D Autobody reassured me and took care of everything efficiently. They made the process stress-free, and my car looks as good as new!",
-    name: "Lee",
-    title: "Marketing Student",
-  },
-  {
-    quote:
-      "s&d autobody came highly recommended, and now I know why! Their expertise and dedication to customer satisfaction are unmatched. They treated my car like their own, and the results were phenomenal.",
-    name: "V",
-    title: "Employee",
+    quote: "I had a minor accident and was worried about the damage to my Toyota RAV4. However, S&D Autobody reassured me and took care of everything efficiently. They made the process stress-free, and my car looks as good as new!",
+    name: "Zantares Dominicus",
+    title: "Accounting Student",
   },
   {
     quote:
-      "im thrilled with the quality of work done by S&D Autobody. Their team went above and beyond to restore my vehicle, and the results speak for themselves. I wouldn't hesitate to recommend them to anyone in need of autobody repairs.",
-    name: "Quynh",
-    title: "Student",
+      "S&D autobody came highly recommended, and now I know why! Their expertise and dedication to customer satisfaction are unmatched. They treated my car like their own, and the results were phenomenal.",
+    name: "Kevin Ngu",
+    title: "IT Specialist",
+  },
+  {
+    quote:
+      "I'm thrilled with the quality of work done by S&D Autobody. Their team went above and beyond to restore my vehicle after it was T-Boned, and the results speak for themselves. I wouldn't hesitate to recommend them to anyone in need of autobody repairs.",
+    name: "Jean Matthias",
+    title: "Electrician",
   },
 ];
 
