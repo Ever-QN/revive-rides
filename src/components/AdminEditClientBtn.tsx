@@ -28,6 +28,10 @@ type customerType = {
   email: string
 }
 
+type Props = {
+  refreshTable: () => void; // Add refreshTable prop
+};
+
 const supabase_url = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const service_role_key = process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
 
@@ -41,7 +45,7 @@ const supabase = createClient(supabase_url, service_role_key, {
 
 const adminAuthClient = supabase.auth.admin
   
-export function AdminEditClientBtn({ customer }: { customer: customerType }) {
+export function AdminEditClientBtn({ customer }: { customer: customerType }, {refreshTable}: Props) {
 
     const { toast } = useToast();
     let [newEmail, setNewEmail] = useState(customer.email)
@@ -136,7 +140,7 @@ export function AdminEditClientBtn({ customer }: { customer: customerType }) {
           <SheetClose asChild>
             <Button type="submit" onClick={() => {
               editClient()
- 
+
               }}
             >
               Save changes

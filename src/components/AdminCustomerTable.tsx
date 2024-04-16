@@ -35,8 +35,6 @@ type User = {
     phone_number: string
   }
 
-
-
 export default function AdminCustomerTable({ user }: any) {
 
   const [customers, setCustomers] = useState<User[]>([]);
@@ -149,3 +147,5 @@ export default function AdminCustomerTable({ user }: any) {
       ) )}
       </>
     )}
+
+    
