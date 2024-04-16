@@ -3,6 +3,14 @@ import '@testing-library/jest-dom';
 import ForgotPassword from '@/app/forgot-password/page';
 
 describe('ForgotPassword component', () => {
+  beforeAll(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
+  afterAll(() => {
+    jest.clearAllMocks();
+  });
+
   test('renders properly', () => {
     render(<ForgotPassword />);
     

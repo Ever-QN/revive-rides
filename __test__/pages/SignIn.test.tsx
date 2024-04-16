@@ -1,4 +1,4 @@
-import { render, screen, waitFor, renderHook, act, getByLabelText, fireEvent, getByText } from '@testing-library/react';
+import { render, screen, waitFor, renderHook, act} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -43,16 +43,18 @@ describe('SignIn component', () => {
 
     test('submits form and calls with email and password', async () => {
         const { auth: { signInWithPassword } } = createClient();
-            render(<SignIn />);
 
-            await userEvent.type(screen.getByLabelText(/email/i), 'test@example.com');
-            await userEvent.type(screen.getByLabelText(/password/i), 'password');
-            userEvent.click(screen.getByRole('button', { name: 'Login' }));
-        
-            await waitFor(() => {
-                expect(screen.getByLabelText(/email/i)).toHaveValue('test@example.com');
-                expect(screen.getByLabelText(/password/i)).toHaveValue('password');
-            });
+        render(<SignIn />);
+
+        await userEvent.type(screen.getByLabelText(/email/i), 'test@example.com');
+        await userEvent.type(screen.getByLabelText(/password/i), 'password');
+        userEvent.click(screen.getByRole('button', { name: 'Login' }));
+
+
+        await waitFor(() => {
+            expect(screen.getByLabelText(/email/i)).toHaveValue('test@example.com');
+            expect(screen.getByLabelText(/password/i)).toHaveValue('password');
+        });
     });
 
 });
