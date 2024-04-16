@@ -122,6 +122,7 @@ type booking = {
               () => {
                 onComplete();
                 refreshTable();
+                refreshTable();
               }}
             >
               Complete Appointment
@@ -130,6 +131,7 @@ type booking = {
             onClick={
               () => {
                 onCancel();
+                refreshTable();
                 refreshTable();
               }
             }>
