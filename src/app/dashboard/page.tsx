@@ -5,8 +5,19 @@ import Link from "next/link";
 import { Home, LayoutDashboard, LogOut, Users, Settings } from "lucide-react";
 import { DashboardOverviewCards } from "@/components/DashboardOverviewCards";
 import DashboardHeader from "@/components/DashboardHeader";
+import { redirectToPath } from "../utils/auth-helpers/server";
 
-export default function Dashboard() {
+export default async function Dashboard() {
+
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirectToPath("/sign-in");
+  }
 
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
