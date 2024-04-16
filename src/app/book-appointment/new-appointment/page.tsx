@@ -313,7 +313,7 @@ export default function NewAppointment() {
                                 mode="single" 
                                 selected={date} 
                                 onSelect={setDate} 
-                                disabled={(date) => date < new Date("1900-01-01") || date.getDay() === 0 || date.getDay() === 6} 
+                                disabled={(date) => date < new Date() || date.getDay() === 0 || date.getDay() === 6} 
                                 initialFocus/>
                         </PopoverContent>
                     </Popover>
