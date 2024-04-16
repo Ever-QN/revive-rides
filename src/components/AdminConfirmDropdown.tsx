@@ -50,7 +50,7 @@ type booking = {
   car_info: string
 }
   
-  export function AdminConfirmDropdown({ booking }: { booking: booking }) {
+  export function AdminConfirmDropdown({ booking, refreshTable }: { booking: booking; refreshTable: () => Promise<void>}) {
 
     const { toast } = useToast();
     const supabase = createClient();
@@ -121,6 +121,7 @@ type booking = {
             onClick={
               () => {
                 onComplete();
+                refreshTable();
               }
             }>
               Complete Appointment
@@ -129,6 +130,7 @@ type booking = {
             onClick={
               () => {
                 onCancel();
+                refreshTable();
               }
             }>
               Cancel Appointment

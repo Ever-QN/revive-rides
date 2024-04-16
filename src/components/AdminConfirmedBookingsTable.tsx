@@ -95,6 +95,11 @@ export default function AdminConfirmedBookingsTable({ user }: any) {
     date.setMinutes(minutes);
     return date.toLocaleTimeString('en-US', options);
   }
+
+  async function refreshTable() {
+    setLoading(true);
+    await fetchData();
+  }
   
 
     return (
@@ -150,7 +155,7 @@ export default function AdminConfirmedBookingsTable({ user }: any) {
                         <div className='text-sm text-muted-foreground'>{booking.first_name} {booking.last_name}</div>
                         
                       </TableCell>
-                      <TableCell className="text-right"><AdminConfirmDropdown booking={booking} /></TableCell>
+                      <TableCell className="text-right"><AdminConfirmDropdown booking={booking} refreshTable={refreshTable} /></TableCell>
                     </TableRow>
                   </PopoverTrigger>
                                     

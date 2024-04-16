@@ -98,7 +98,12 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
             </AlertDialogHeader>
             <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={onCancel}>
+                <AlertDialogAction 
+                onClick={() => {
+                  onCancel()
+                  refreshTable()
+                }}
+                >
                     Continue
                 </AlertDialogAction>
             </AlertDialogFooter>
