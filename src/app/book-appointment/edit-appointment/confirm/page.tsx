@@ -13,8 +13,8 @@ export default function EditSuccess() {
     <div className="flex items-center justify-center h-screen p-4">
       <Card className="w-full max-w-md">
         <CardContent className="flex flex-col items-center justify-center p-8">
-          <CardTitle className="text-2xl mb-4">Booking Successfully Edited</CardTitle>
-          <CardDescription className="mb-6">Your booking details have been updated successfully.</CardDescription>
+          <CardTitle className="text-2xl mb-4">Appointment Successfully Edited</CardTitle>
+          <CardDescription className="mb-6">Your appointment details have been updated successfully.</CardDescription>
           <Button onClick={handleDashboardRedirect} className="mt-4">
             Go to Dashboard
           </Button>

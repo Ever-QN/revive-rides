@@ -26,6 +26,7 @@ import { Popover, PopoverTrigger, PopoverContent } from './ui/popover';
 import { Label } from '@radix-ui/react-label';
 import { Input } from 'postcss';
 import { UserCancelAppointmentBtn } from './UserCancelAppointmentBtn';
+import { toast } from './ui/use-toast';
 
 type Booking = {
     first_name: string
@@ -100,6 +101,22 @@ export default function UserBookingsTable({ user }: any) {
     return date.toLocaleTimeString('en-US', options);
   }
   
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        // Show a success message or perform any other action
+        toast({
+          title: "BOOKING ID RECEIVED",
+          description: `Booking ID has been copied to your clipboard. Paste it in the field provided.`,
+          className: "bg-green-500 text-white",
+          variant: "default"
+        });
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error('Failed to copy to clipboard:', error);
+      });
+  };
 
     return (
       <>
@@ -126,14 +143,14 @@ export default function UserBookingsTable({ user }: any) {
       ) : (
         <Card className='mt-4'>
           <CardHeader className="flex flex-col justify-center">
-          <div className="flex flex-col gap-2">
-            <CardTitle>
-              Your Appointments
-            </CardTitle>
-            <CardDescription>
-              Click on the appointment to view additional details.
-            </CardDescription>
-          </div>
+            <div className="flex flex-col gap-2">
+              <CardTitle>
+                Your Appointments
+              </CardTitle>
+              <CardDescription>
+                Click on the appointment to view additional details.
+              </CardDescription>
+            </div>
             <Button asChild size="sm" className="ml-auto">
               <Link href="/book-appointment">
                 New Appointment
@@ -158,11 +175,10 @@ export default function UserBookingsTable({ user }: any) {
                     <TableRow className='flex justify-between hover:bg-slate-200 cursor-pointer'>
                       <TableCell className='text-left'>
                         <div className="font-medium">{booking.booking_type} ({booking.car_info}) | {booking.booking_status}</div>
-                        <div className="text-sm text-muted-foreground md:inline">{formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}</div>  
-                        
+                        <div className="text-sm text-muted-foreground md:inline">{formatDate(booking.booking_date)} @ {formatTime(booking.booking_time)}</div>            
                       </TableCell>
                       <TableCell className="flex flex-col md:flex-row items-center text-right">
-                        <Button variant="outline" className='scale-90' asChild>
+                      <Button variant="outline" className='scale-90' asChild onClick={() => copyToClipboard(booking.booking_id)}>
                           <Link href="/book-appointment/edit-appointment">
                             <Edit className='h-4 w-4' />
                           </Link>
